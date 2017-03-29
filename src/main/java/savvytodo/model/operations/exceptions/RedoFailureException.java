@@ -1,6 +1,6 @@
-package savvytodo.model.undoredo.exceptions;
+package savvytodo.model.operations.exceptions;
 
-//@@A0124863A
+//author @@A0124863A
 /**
  * @author A0124863A
  * Signals that redo cannot be performed

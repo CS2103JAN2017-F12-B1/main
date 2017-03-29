@@ -16,19 +16,19 @@ import savvytodo.commons.util.CollectionUtil;
 import savvytodo.commons.util.DateTimeUtil;
 import savvytodo.commons.util.StringUtil;
 import savvytodo.logic.commands.exceptions.CommandException;
+import savvytodo.model.operations.UndoAddOperation;
+import savvytodo.model.operations.UndoClearOperation;
+import savvytodo.model.operations.UndoDeleteOperation;
+import savvytodo.model.operations.UndoEditOperation;
+import savvytodo.model.operations.UndoOperation;
+import savvytodo.model.operations.exceptions.RedoFailureException;
+import savvytodo.model.operations.exceptions.UndoFailureException;
 import savvytodo.model.task.DateTime;
 import savvytodo.model.task.ReadOnlyTask;
 import savvytodo.model.task.Status;
 import savvytodo.model.task.Task;
 import savvytodo.model.task.UniqueTaskList;
 import savvytodo.model.task.UniqueTaskList.TaskNotFoundException;
-import savvytodo.model.undoredo.UndoAddCommand;
-import savvytodo.model.undoredo.UndoClearCommand;
-import savvytodo.model.undoredo.UndoCommand;
-import savvytodo.model.undoredo.UndoDeleteCommand;
-import savvytodo.model.undoredo.UndoEditCommand;
-import savvytodo.model.undoredo.exceptions.RedoFailureException;
-import savvytodo.model.undoredo.exceptions.UndoFailureException;
 
 /**
  * Represents the in-memory model of the task manager data.
@@ -61,10 +61,10 @@ public class ModelManager extends ComponentManager implements Model {
         this(new TaskManager(), new UserPrefs());
     }
 
-    //@@A0124863A
+    //author @@A0124863A
     @Override
     public void resetData(ReadOnlyTaskManager newData) {
-        UndoClearCommand undoClear = new UndoClearCommand(taskManager, newData);
+        UndoClearOperation undoClear = new UndoClearOperation(taskManager, newData);
         undoRedoManager.storeUndoCommand(undoClear);
         undoRedoManager.resetRedo();
 
@@ -82,24 +82,24 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new TaskManagerChangedEvent(taskManager));
     }
 
-    //@@A0124863A
+    //author @@A0124863A
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         taskManager.removeTask(target);
 
-        UndoDeleteCommand undoDelete = new UndoDeleteCommand(target);
+        UndoDeleteOperation undoDelete = new UndoDeleteOperation(target);
         undoRedoManager.storeUndoCommand(undoDelete);
         undoRedoManager.resetRedo();
 
         indicateTaskManagerChanged();
     }
 
-    //@@A0124863A
+    //author @@A0124863A
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         taskManager.addTask(task);
 
-        UndoAddCommand undoAdd = new UndoAddCommand(task);
+        UndoAddOperation undoAdd = new UndoAddOperation(task);
         undoRedoManager.storeUndoCommand(undoAdd);
         undoRedoManager.resetRedo();
 
@@ -107,7 +107,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskManagerChanged();
     }
 
-    //@@A0124863A
+    //author @@A0124863A
     @Override
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException {
@@ -115,7 +115,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         Task originalTask = new Task(filteredTasks.get(filteredTaskListIndex));
-        UndoEditCommand undoEdit = new UndoEditCommand(filteredTaskListIndex, originalTask, editedTask);
+        UndoEditOperation undoEdit = new UndoEditOperation(filteredTaskListIndex, originalTask, editedTask);
         undoRedoManager.storeUndoCommand(undoEdit);
         undoRedoManager.resetRedo();
 
@@ -123,11 +123,11 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskManagerChanged();
     }
 
-    //@@A0124863A
+    //author @@A0124863A
     @Override
     public void undo() throws UndoFailureException {
         try {
-            UndoCommand undo = undoRedoManager.getUndoCommand();
+            UndoOperation undo = undoRedoManager.getUndoCommand();
             undo.setTaskManager(taskManager);
             undo.execute();
             indicateTaskManagerChanged();
@@ -138,11 +138,11 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
-    //@@A0124863A
+    //author @@A0124863A
     @Override
     public void redo() throws RedoFailureException {
         try {
-            UndoCommand redo = undoRedoManager.getRedoCommand();
+            UndoOperation redo = undoRedoManager.getRedoCommand();
             redo.setTaskManager(taskManager);
             redo.execute();
             indicateTaskManagerChanged();
@@ -153,7 +153,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
-    //@@author A0140016B
+    //author @@author A0140016B
     /**
      * @author A0140016B
      * Returns a string of conflicting datetimes within a specified datetime
@@ -206,7 +206,7 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
     }
 
-    //@@A0124863A
+    //author @@A0124863A
     public void updateFilteredTaskList(Predicate<ReadOnlyTask> predicate) {
         filteredTasks.setPredicate(predicate);
 
