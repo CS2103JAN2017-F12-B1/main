@@ -1,16 +1,15 @@
-package savvytodo.model;
+package savvytodo.model.operations;
 
 import java.util.EmptyStackException;
 import java.util.Stack;
 
-import savvytodo.model.operations.UndoOperation;
 
 //author @@A0124863A
 /**
  * @author A0124863A
  * Class that stores the undo and redo commands
  */
-public class UndoRedoManager {
+public class UndoRedoOperationCentre {
     private Stack<UndoOperation> undoStack = new Stack<UndoOperation>();
     private Stack<UndoOperation> redoStack = new Stack<UndoOperation>();
 

@@ -21,6 +21,7 @@ import savvytodo.model.operations.UndoClearOperation;
 import savvytodo.model.operations.UndoDeleteOperation;
 import savvytodo.model.operations.UndoEditOperation;
 import savvytodo.model.operations.UndoOperation;
+import savvytodo.model.operations.UndoRedoOperationCentre;
 import savvytodo.model.operations.exceptions.RedoFailureException;
 import savvytodo.model.operations.exceptions.UndoFailureException;
 import savvytodo.model.task.DateTime;
@@ -41,7 +42,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final TaskManager taskManager;
     private final FilteredList<ReadOnlyTask> filteredTasks;
-    private final UndoRedoManager undoRedoManager;
+    private final UndoRedoOperationCentre undoRedoManager;
 
     /**
      * Initializes a ModelManager with the given taskManager and userPrefs.
@@ -53,7 +54,7 @@ public class ModelManager extends ComponentManager implements Model {
         logger.fine("Initializing with task manager: " + taskManager + " and user prefs " + userPrefs);
 
         this.taskManager = new TaskManager(taskManager);
-        this.undoRedoManager = new UndoRedoManager();
+        this.undoRedoManager = new UndoRedoOperationCentre();
         filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
     }
 
