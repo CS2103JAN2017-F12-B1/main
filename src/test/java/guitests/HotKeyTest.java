@@ -26,7 +26,9 @@ public class HotKeyTest extends TaskManagerGuiTest {
     @Test
     public void triggerHelpShortcut() {
         KeyCodeCombination helpKeys = (KeyCodeCombination) HotKeysCombinations.KEYS_HELP;
-        new GuiRobot().push(helpKeys);
+        GuiRobot helpRobot = new GuiRobot();
+        helpRobot.push(helpKeys);
+        helpRobot.sleep(2000);
         assertHelpWindowOpen();
     }
 
@@ -74,13 +76,13 @@ public class HotKeyTest extends TaskManagerGuiTest {
     }
 
     private void assertUndoSuccess() {
-        //nothing to undo in test
-        assertResultMessage(UndoCommand.MESSAGE_FAILURE);
+        //result will either be undo success or fail to undo
+        assertTrue(resultDisplay.getText().equals(UndoCommand.MESSAGE_FAILURE) || resultDisplay.getText().equals(UndoCommand.MESSAGE_SUCCESS));
     }
 
     private void assertRedoSuccess() {
-        //nothing to redo in test
-        assertResultMessage(RedoCommand.MESSAGE_FAILURE);
+        //result will either be redo success or fail to redo
+        assertTrue(resultDisplay.getText().equals(RedoCommand.MESSAGE_FAILURE) || resultDisplay.getText().equals(RedoCommand.MESSAGE_SUCCESS));
     }
 
 }
