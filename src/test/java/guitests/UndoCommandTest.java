@@ -12,7 +12,7 @@ import savvytodo.testutil.TestUtil;
 //@@author A0124863A
 public class UndoCommandTest extends TaskManagerGuiTest {
 
-    TestTask[] currentList = td.getTypicalTasks();
+    private TestTask[] currentList = td.getTypicalTasks();
 
     @Test
     public void undoAfterAdd() {

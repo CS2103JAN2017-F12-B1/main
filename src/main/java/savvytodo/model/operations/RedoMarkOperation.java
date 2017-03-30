@@ -31,7 +31,7 @@ public class RedoMarkOperation extends Operation {
         try {
             for (int i = 0; i < numToUnmark; i++) {
                 Operation redo = undoRedoOpCentre.getRedoOperation();
-                assert redo.getClass().isAssignableFrom(UndoEditOperation.class) == true;
+                assert redo.getClass().isAssignableFrom(UndoEditOperation.class);
                 redo.setTaskManager(taskManager);
                 redo.execute();
             }

@@ -10,8 +10,6 @@ import savvytodo.testutil.TestTask;
 //@@author A0124863A
 public class RedoCommandTest extends TaskManagerGuiTest {
 
-    TestTask[] currentList = td.getTypicalTasks();
-
     @Test
     public void redo() throws Exception {
 
