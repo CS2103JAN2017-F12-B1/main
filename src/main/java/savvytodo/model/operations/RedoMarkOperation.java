@@ -4,7 +4,7 @@ import java.util.EmptyStackException;
 
 import savvytodo.logic.commands.exceptions.CommandException;
 
-//author @@A0124863A
+//@@author A0124863A
 /**
 * @author A0124863A
 * Redo a mark operation by restoring the marked or unmarked task to its original

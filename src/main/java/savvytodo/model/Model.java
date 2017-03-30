@@ -52,21 +52,22 @@ public interface Model {
     /** Updates the filter of the filtered task list to show all tasks */
     void updateFilteredListToShowAll();
 
-    //author @@A0124863A
+    //@@author A0124863A
     /** Updates the filter of the filtered task list to filter by the given predicate*/
     void updateFilteredTaskList(Predicate<ReadOnlyTask> predicate);
 
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredTaskList(Set<String> keywords);
 
-    //author @@A0124863A
+    //@@author A0124863A
     /** Undo an operation */
     void undo() throws UndoFailureException;
 
-    //author @@A0124863A
+    //@@author A0124863A
     /** Redo an operation */
     void redo() throws RedoFailureException;
 
+    //@@author A0124863A
     void recordMark(int index);
 
 

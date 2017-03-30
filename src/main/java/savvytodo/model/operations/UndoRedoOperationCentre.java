@@ -4,7 +4,7 @@ import java.util.EmptyStackException;
 import java.util.Stack;
 
 
-//author @@A0124863A
+//@@author A0124863A
 /**
  * @author A0124863A
  * Class that stores the undo and redo commands

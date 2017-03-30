@@ -64,7 +64,7 @@ public class ModelManager extends ComponentManager implements Model {
         this(new TaskManager(), new UserPrefs());
     }
 
-    //author @@A0124863A
+    //@@author A0124863A
     @Override
     public void resetData(ReadOnlyTaskManager newData) {
         UndoClearOperation undoClear = new UndoClearOperation(taskManager, newData);
@@ -85,7 +85,7 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new TaskManagerChangedEvent(taskManager));
     }
 
-    //author @@A0124863A
+    //@@author A0124863A
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         taskManager.removeTask(target);
@@ -97,7 +97,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskManagerChanged();
     }
 
-    //author @@A0124863A
+    //@@author A0124863A
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         taskManager.addTask(task);
@@ -110,7 +110,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskManagerChanged();
     }
 
-    //author @@A0124863A
+    //@@author A0124863A
     @Override
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException {
@@ -126,7 +126,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskManagerChanged();
     }
 
-    //author @@A0124863A
+    //@@author A0124863A
     @Override
     public void recordMark(int numToUnmark) {
         UndoMarkOperation undoMark = new UndoMarkOperation(numToUnmark);
@@ -134,7 +134,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
 
-    //author @@A0124863A
+    //@@author A0124863A
     @Override
     public void undo() throws UndoFailureException {
         try {
@@ -158,7 +158,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
-    //author @@A0124863A
+    //@@author A0124863A
     @Override
     public void redo() throws RedoFailureException {
         try {
@@ -235,7 +235,7 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
     }
 
-    //author @@A0124863A
+    //@@author A0124863A
     public void updateFilteredTaskList(Predicate<ReadOnlyTask> predicate) {
         filteredTasks.setPredicate(predicate);
 
