@@ -4,6 +4,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 
+//@@author A0147827U
 /**
  * Pre-defined hotkeys for specific commands. See UserGuide for definitions.
  * @author jingloon
