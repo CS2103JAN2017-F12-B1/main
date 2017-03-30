@@ -51,8 +51,8 @@ We are a team based in the [School of Computing, National University of Singapor
 **Responsibilities**:
 * Aspects/tools in charge of:
 * Components in charge of:
-	*Logic
-	*Model
+	* Logic
+	* Model
 * Features implemented:
 	* Undo command
 	* Redo command
