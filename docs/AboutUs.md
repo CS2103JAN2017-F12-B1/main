@@ -26,6 +26,10 @@ We are a team based in the [School of Computing, National University of Singapor
 * Aspects/tools in charge of: UI Element designs
 * Components in charge of:
 * Features implemented:
+    * Hotkeys/shortcuts implementation
+    * Load command event trigger
+    * Auto-complete textfield with command dictionary
+    * UI (in progress, to be updated)
 * Code written:
 * Other major contributions:
     * UI mockup and prototyping
