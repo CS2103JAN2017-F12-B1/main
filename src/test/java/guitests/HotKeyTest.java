@@ -77,7 +77,7 @@ public class HotKeyTest extends TaskManagerGuiTest {
 
     private void assertUndoSuccess() {
         //result will either be undo success or fail to undo
-        assertTrue(resultDisplay.getText().equals(UndoCommand.MESSAGE_FAILURE) || 
+        assertTrue(resultDisplay.getText().equals(UndoCommand.MESSAGE_FAILURE) ||
                 resultDisplay.getText().equals(UndoCommand.MESSAGE_SUCCESS));
     }
 
