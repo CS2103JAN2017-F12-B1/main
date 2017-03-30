@@ -8,7 +8,7 @@ import savvytodo.model.TaskManager;
  * @author A0124863A
  * Represents undo command with hidden internal logic and the ability to be executed.
  */
-public abstract class UndoOperation {
+public abstract class Operation {
     protected TaskManager taskManager;
 
     /**
@@ -17,9 +17,9 @@ public abstract class UndoOperation {
     public abstract void execute() throws CommandException;
 
     /**
-     * @return a redo operation that does the opposite of an undo operation just performed
+     * @return the reverse operation just performed
      */
-    public abstract UndoOperation reverseUndo();
+    public abstract Operation reverse();
 
     /**
      * Provides any needed dependencies to the command.

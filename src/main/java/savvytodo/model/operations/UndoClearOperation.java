@@ -9,7 +9,7 @@ import savvytodo.model.TaskManager;
  * Undo an clear operation by restoring the original
  */
 
-public class UndoClearOperation extends UndoOperation {
+public class UndoClearOperation extends Operation {
     private TaskManager currTaskManager;
     private TaskManager newTaskManager;
     public UndoClearOperation(ReadOnlyTaskManager currTaskManager, ReadOnlyTaskManager newTaskManager) {
@@ -25,7 +25,7 @@ public class UndoClearOperation extends UndoOperation {
     }
 
     @Override
-    public UndoOperation reverseUndo() {
+    public Operation reverse() {
         return new UndoClearOperation(newTaskManager, currTaskManager);
     }
 

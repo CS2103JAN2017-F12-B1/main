@@ -16,11 +16,13 @@ import savvytodo.commons.util.CollectionUtil;
 import savvytodo.commons.util.DateTimeUtil;
 import savvytodo.commons.util.StringUtil;
 import savvytodo.logic.commands.exceptions.CommandException;
+import savvytodo.model.operations.Operation;
+import savvytodo.model.operations.RedoMarkOperation;
 import savvytodo.model.operations.UndoAddOperation;
 import savvytodo.model.operations.UndoClearOperation;
 import savvytodo.model.operations.UndoDeleteOperation;
 import savvytodo.model.operations.UndoEditOperation;
-import savvytodo.model.operations.UndoOperation;
+import savvytodo.model.operations.UndoMarkOperation;
 import savvytodo.model.operations.UndoRedoOperationCentre;
 import savvytodo.model.operations.exceptions.RedoFailureException;
 import savvytodo.model.operations.exceptions.UndoFailureException;
@@ -42,7 +44,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final TaskManager taskManager;
     private final FilteredList<ReadOnlyTask> filteredTasks;
-    private final UndoRedoOperationCentre undoRedoManager;
+    private final UndoRedoOperationCentre undoRedoOpCentre;
 
     /**
      * Initializes a ModelManager with the given taskManager and userPrefs.
@@ -54,7 +56,7 @@ public class ModelManager extends ComponentManager implements Model {
         logger.fine("Initializing with task manager: " + taskManager + " and user prefs " + userPrefs);
 
         this.taskManager = new TaskManager(taskManager);
-        this.undoRedoManager = new UndoRedoOperationCentre();
+        this.undoRedoOpCentre = new UndoRedoOperationCentre();
         filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
     }
 
@@ -66,8 +68,8 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void resetData(ReadOnlyTaskManager newData) {
         UndoClearOperation undoClear = new UndoClearOperation(taskManager, newData);
-        undoRedoManager.storeUndoCommand(undoClear);
-        undoRedoManager.resetRedo();
+        undoRedoOpCentre.storeUndoOperation(undoClear);
+        undoRedoOpCentre.resetRedo();
 
         taskManager.resetData(newData);
         indicateTaskManagerChanged();
@@ -89,8 +91,8 @@ public class ModelManager extends ComponentManager implements Model {
         taskManager.removeTask(target);
 
         UndoDeleteOperation undoDelete = new UndoDeleteOperation(target);
-        undoRedoManager.storeUndoCommand(undoDelete);
-        undoRedoManager.resetRedo();
+        undoRedoOpCentre.storeUndoOperation(undoDelete);
+        undoRedoOpCentre.resetRedo();
 
         indicateTaskManagerChanged();
     }
@@ -101,8 +103,8 @@ public class ModelManager extends ComponentManager implements Model {
         taskManager.addTask(task);
 
         UndoAddOperation undoAdd = new UndoAddOperation(task);
-        undoRedoManager.storeUndoCommand(undoAdd);
-        undoRedoManager.resetRedo();
+        undoRedoOpCentre.storeUndoOperation(undoAdd);
+        undoRedoOpCentre.resetRedo();
 
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
@@ -117,8 +119,8 @@ public class ModelManager extends ComponentManager implements Model {
         int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         Task originalTask = new Task(filteredTasks.get(filteredTaskListIndex));
         UndoEditOperation undoEdit = new UndoEditOperation(filteredTaskListIndex, originalTask, editedTask);
-        undoRedoManager.storeUndoCommand(undoEdit);
-        undoRedoManager.resetRedo();
+        undoRedoOpCentre.storeUndoOperation(undoEdit);
+        undoRedoOpCentre.resetRedo();
 
         taskManager.updateTask(taskManagerIndex, editedTask);
         indicateTaskManagerChanged();
@@ -126,12 +128,29 @@ public class ModelManager extends ComponentManager implements Model {
 
     //author @@A0124863A
     @Override
+    public void recordMark(int numToUnmark) {
+        UndoMarkOperation undoMark = new UndoMarkOperation(numToUnmark);
+        undoRedoOpCentre.storeUndoOperation(undoMark);
+    }
+
+
+    //author @@A0124863A
+    @Override
     public void undo() throws UndoFailureException {
         try {
-            UndoOperation undo = undoRedoManager.getUndoCommand();
-            undo.setTaskManager(taskManager);
-            undo.execute();
-            indicateTaskManagerChanged();
+            Operation undo = undoRedoOpCentre.getUndoOperation();
+            if (undo.getClass().isAssignableFrom(UndoMarkOperation.class)) {
+                UndoMarkOperation undoMark = (UndoMarkOperation) undo;
+                undoMark.setTaskManager(taskManager);
+                undoMark.setUndoRedoOperationCentre(undoRedoOpCentre);
+                undoMark.execute();
+                indicateTaskManagerChanged();
+
+            } else {
+                undo.setTaskManager(taskManager);
+                undo.execute();
+                indicateTaskManagerChanged();
+            }
         } catch (EmptyStackException e) {
             throw new UndoFailureException(e.getMessage());
         } catch (CommandException e) {
@@ -143,10 +162,19 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void redo() throws RedoFailureException {
         try {
-            UndoOperation redo = undoRedoManager.getRedoCommand();
-            redo.setTaskManager(taskManager);
-            redo.execute();
-            indicateTaskManagerChanged();
+            Operation redo = undoRedoOpCentre.getRedoOperation();
+            if (redo.getClass().isAssignableFrom(RedoMarkOperation.class)) {
+                RedoMarkOperation redoMark = (RedoMarkOperation) redo;
+                redoMark.setTaskManager(taskManager);
+                redoMark.setUndoRedoOperationCentre(undoRedoOpCentre);
+                redoMark.execute();
+                indicateTaskManagerChanged();
+
+            } else {
+                redo.setTaskManager(taskManager);
+                redo.execute();
+                indicateTaskManagerChanged();
+            }
         } catch (EmptyStackException e) {
             throw new RedoFailureException(e.getMessage());
         } catch (CommandException e) {
@@ -271,6 +299,7 @@ public class ModelManager extends ComponentManager implements Model {
             return "name=" + String.join(", ", nameKeyWords);
         }
     }
+
 
 
 }

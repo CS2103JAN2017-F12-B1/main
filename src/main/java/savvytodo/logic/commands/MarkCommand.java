@@ -53,6 +53,7 @@ public class MarkCommand extends Command {
                     resultSb.append(String.format(MESSAGE_MARK_TASK_FAIL, targettedIndices.peekFirst()));
                 } else {
                     numOfSuccessfulMark++;
+                    taskToMark = new Task(taskToMark);
                     taskToMark.setStatus(new Status(true));
                     model.updateTask(targettedIndices.peekFirst() - 1, taskToMark);
                     resultSb.append(String.format(MESSAGE_MARK_TASK_SUCCESS, targettedIndices.peekFirst()));
@@ -62,7 +63,11 @@ public class MarkCommand extends Command {
         } catch (DuplicateTaskException e) {
             //ignore for completed
         }
-        model.updateFilteredListToShowAll();
+
+        if (numOfSuccessfulMark > 0) {
+            model.recordMark(numOfSuccessfulMark);
+        }
+
         return new CommandResult(resultSb.toString());
     }
 

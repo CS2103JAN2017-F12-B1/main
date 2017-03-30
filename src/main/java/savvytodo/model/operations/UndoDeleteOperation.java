@@ -10,7 +10,7 @@ import savvytodo.model.task.UniqueTaskList.DuplicateTaskException;
  * @author A0124863A
  * Undo an delete operation by adding back the deleted task
  */
-public class UndoDeleteOperation extends UndoOperation {
+public class UndoDeleteOperation extends Operation {
     private Task task;
 
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
@@ -31,7 +31,7 @@ public class UndoDeleteOperation extends UndoOperation {
     }
 
     @Override
-    public UndoOperation reverseUndo() {
+    public Operation reverse() {
         return new UndoAddOperation(task);
     }
 

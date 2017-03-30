@@ -10,7 +10,7 @@ import savvytodo.model.task.UniqueTaskList.DuplicateTaskException;
  * @author A0124863A
  * Undo an edit operation by restoring the edited task to its original
  */
-public class UndoEditOperation extends UndoOperation {
+public class UndoEditOperation extends Operation {
     private Task undoTask;
     private Task redoTask;
     private int index;
@@ -36,7 +36,7 @@ public class UndoEditOperation extends UndoOperation {
     }
 
     @Override
-    public UndoOperation reverseUndo() {
+    public Operation reverse() {
         return new UndoEditOperation(index, redoTask, undoTask);
     }
 

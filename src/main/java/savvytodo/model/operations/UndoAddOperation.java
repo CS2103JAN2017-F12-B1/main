@@ -9,7 +9,7 @@ import savvytodo.model.task.UniqueTaskList.TaskNotFoundException;
  * @author A0124863A
  * Undo an add operation by deleting the added task
  */
-public class UndoAddOperation extends UndoOperation {
+public class UndoAddOperation extends Operation {
     private Task task;
 
     public UndoAddOperation(Task task) {
@@ -26,7 +26,7 @@ public class UndoAddOperation extends UndoOperation {
     }
 
     @Override
-    public UndoOperation reverseUndo() {
+    public Operation reverse() {
         return new UndoDeleteOperation(task);
     }
 

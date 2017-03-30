@@ -67,6 +67,8 @@ public interface Model {
     /** Redo an operation */
     void redo() throws RedoFailureException;
 
+    void recordMark(int index);
+
 
 
 }

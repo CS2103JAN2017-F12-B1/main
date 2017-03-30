@@ -10,29 +10,41 @@ import java.util.Stack;
  * Class that stores the undo and redo commands
  */
 public class UndoRedoOperationCentre {
-    private Stack<UndoOperation> undoStack = new Stack<UndoOperation>();
-    private Stack<UndoOperation> redoStack = new Stack<UndoOperation>();
+    private Stack<Operation> undoStack = new Stack<Operation>();
+    private Stack<Operation> redoStack = new Stack<Operation>();
 
-    public void storeUndoCommand(UndoOperation undoCommand) {
-        undoStack.push(undoCommand);
+    public void storeUndoOperation(Operation undoOperation) {
+        undoStack.push(undoOperation);
+    }
+
+    public void storeRedoOperation(Operation redoOperation) {
+        redoStack.push(redoOperation);
     }
 
     public void resetRedo() {
         redoStack.clear();
     }
 
-    public UndoOperation getUndoCommand() throws EmptyStackException {
-        UndoOperation undo = undoStack.pop();
-        UndoOperation redo = undo.reverseUndo();
-        redoStack.push(redo);
-        return undo;
+    public Operation getUndoOperation() throws EmptyStackException {
+        Operation undo = undoStack.pop();
+        if (undo.getClass().isAssignableFrom(UndoMarkOperation.class)) {
+            return undo;
+        } else {
+            Operation redo = undo.reverse();
+            redoStack.push(redo);
+            return undo;
+        }
     }
 
-    public UndoOperation getRedoCommand() throws EmptyStackException {
-        UndoOperation redo = redoStack.pop();
-        UndoOperation undo = redo.reverseUndo();
-        undoStack.push(undo);
-        return redo;
+    public Operation getRedoOperation() throws EmptyStackException {
+        Operation redo = redoStack.pop();
+        if (redo.getClass().isAssignableFrom(UndoMarkOperation.class)) {
+            return redo;
+        } else {
+            Operation undo = redo.reverse();
+            undoStack.push(undo);
+            return redo;
+        }
     }
 
 }
