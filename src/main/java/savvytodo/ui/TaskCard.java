@@ -54,6 +54,6 @@ public class TaskCard extends UiPart<Region> {
     }
 
     private void initCategories(ReadOnlyTask task) {
-        task.getCategories().forEach(category -> categories.getChildren().add(new Label(category.categoryName)));
+        task.getCategories().forEach(category -> categories.getChildren().add(new Label(category.categoryName + " ")));
     }
 }
