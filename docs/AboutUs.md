@@ -10,7 +10,14 @@ We are a team based in the [School of Computing, National University of Singapor
 **Responsibilities**:
 * Aspects/tools in charge of: Managing GitHub organization page
 * Components in charge of:
+	* Model
+	* Logic
+	* Parser
 * Features implemented:
+	* [Add](UserGuide.md#22-adding-a-task-add)
+ 	* [Edit](UserGuide.md#24-editing-a-task--edit)
+	* [Mark](UserGuide.md)
+	* [Unmark](UserGuide.md)
 * Code written:
 * Other major contributions:
   * Initial refactoring from AddressBook-Level-4 to SavvyTo-Do
