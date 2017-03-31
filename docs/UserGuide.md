@@ -228,6 +228,7 @@ Key Codes | Function | Command Box Input
 <kbd>Ctrl</kbd> + <kbd>L</kbd> | [List](#listing-all-tasks-list) all unmarked task by date, earliest task first | `list`
 <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Z</kbd> | [Undo](#undo-the-most-recent-operation--undo) the most recent task | `undo`
 <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Y</kbd> | [Redo](#redo-the-most-recent-operation--redo) the previously undo-ed task | `redo`
+
 <!-- Not supported yet //jing loon
 <kbd>Ctrl</kbd> + <kbd>P</kbd> | [List](#listing-all-tasks-list) all unmarked task by priority level, highest to lowest | `list priorityLevel`
 <kbd>Ctrl</kbd> + <kbd>S</kbd> | [Storage](#storage-location) Popups a directory chooser dialog box to choose a new filepath | `storage NEW_FILEPATH`
