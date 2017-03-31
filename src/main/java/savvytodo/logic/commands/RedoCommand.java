@@ -1,9 +1,9 @@
 package savvytodo.logic.commands;
 
 import savvytodo.logic.commands.exceptions.CommandException;
-import savvytodo.model.undoredo.exceptions.RedoFailureException;
+import savvytodo.model.operations.exceptions.RedoFailureException;
 
-//@@A0124863A
+//@@author A0124863A
 /**
  * @author A0124863A
  * Redo an operation to the task manager

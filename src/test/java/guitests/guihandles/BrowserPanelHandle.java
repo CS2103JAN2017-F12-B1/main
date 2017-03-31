@@ -9,7 +9,7 @@ import savvytodo.TestApp;
  */
 public class BrowserPanelHandle extends GuiHandle {
 
-    private static final String BROWSER_ID = "#browser";
+    private static final String BROWSER_ID = "#browserDisplay";
 
     public BrowserPanelHandle(GuiRobot guiRobot, Stage primaryStage) {
         super(guiRobot, primaryStage, TestApp.APP_TITLE);
@@ -18,7 +18,7 @@ public class BrowserPanelHandle extends GuiHandle {
     /**
      * Clicks on the WebView.
      */
-    public void clickOnWebView() {
+    public void clickOnTextView() {
         guiRobot.clickOn(BROWSER_ID);
     }
 

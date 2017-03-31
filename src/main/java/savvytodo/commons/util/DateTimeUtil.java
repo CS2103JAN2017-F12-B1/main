@@ -57,8 +57,8 @@ public class DateTimeUtil {
 
     /**
      * Extracts the new task's dateTime from the string arguments.
-     * @return String[] with first index being the startDate time and second index being the end
-     *         date time
+     * @return String[] with first index being the start DateTime and second index being the end
+     *         date Time
      */
     public static String[] parseStringToDateTime(String dateTimeArgs) {
         return NattyDateTimeParserUtil.parseStringToDateTime(dateTimeArgs);
@@ -87,7 +87,7 @@ public class DateTimeUtil {
     }
 
     /**
-     * Checks if given endDateTime is before the end of today
+     * Checks if given event's endDateTime is before the end of today
      */
     public static boolean isOverDue(LocalDateTime endDateTime) {
         if (endDateTime == null) {
@@ -99,10 +99,10 @@ public class DateTimeUtil {
     }
 
     /**
-     * Checks whether the dateTimeQuery falls within the range of the dateTimeSource i.e.
-     * dateTimeQuery startDateTime is equals to or before the dateTimeSource endDateTime &&
-     * dateTimeQuery endDateTime is equals to or after the dateTimeSource startDateTime
-     * Return false if task is a floating task (i.e. no start or end dateTime)
+     * Checks whether the dateTimeQuery falls within the range of the dateTimeSource
+     * i.e. dateTimeQuery start is equals to or before the dateTimeSource end
+     * && dateTimeQuery end is equals to or after the dateTimeSource start
+     * Return false if task is a deadline or floating task (i.e. no start or end)
      * @param dateTimeSource
      * @param dateTimeQuery
      * @throws IllegalValueException
@@ -110,87 +110,111 @@ public class DateTimeUtil {
      */
     public static boolean isDateTimeWithinRange(DateTime dateTimeSource, DateTime dateTimeQuery)
             throws DateTimeException, IllegalValueException {
-        if (dateTimeSource.endValue == null) {
+        if (!areEvents(dateTimeSource, dateTimeQuery)) {
             return false;
         }
 
-        DateTime dateTime1 = fillDateTime(dateTimeSource);
-        DateTime dateTime2 = fillDateTime(dateTimeQuery);
+        DateTime dateTimeOriginal = fillDateTime(dateTimeSource);
+        DateTime dateTimeCompare = fillDateTime(dateTimeQuery);
 
-        return !parseStringToLocalDateTime(dateTime1.endValue)
-                .isBefore(parseStringToLocalDateTime(dateTime2.startValue))
-                && !parseStringToLocalDateTime(dateTime1.startValue)
-                        .isAfter(parseStringToLocalDateTime(dateTime2.endValue));
+        return !dateTimeOriginal.getEndDate().isBefore(dateTimeCompare.getStartDate())
+                && !dateTimeOriginal.getStartDate().isAfter(dateTimeCompare.getEndDate());
     }
 
     /**
-     * Checks whether the dateTimeQuery conflicts with the dateTimeSource i.e. dateTimeQuery
-     * endDateTime occurs after the dateTimeSource startDateTime && dateTimeQuery startDateTime
-     * occurs before the dateTimeSource endDateTime
-     * Return false if task is a floating task (i.e. no start or end dateTime)
+     * Checks whether the dateTimeQuery conflicts with the dateTimeSource
+     * i.e. dateTimeQuery end should occur after the dateTimeSource start
+     * and dateTimeQuery start should occur before the dateTimeSource end
+     * Return false if task is a deadline or floating task (i.e. no start or end)
      * @throws IllegalValueException
      * @throws DateTimeException
      */
     public static boolean isDateTimeConflict(DateTime dateTimeSource, DateTime dateTimeQuery)
             throws DateTimeException, IllegalValueException {
-        if (dateTimeSource.startValue.equalsIgnoreCase(StringUtil.EMPTY_STRING)
-                || dateTimeSource.endValue.equalsIgnoreCase(StringUtil.EMPTY_STRING)) {
+        if (!areEvents(dateTimeSource, dateTimeQuery)) {
             return false;
         }
 
-        if (dateTimeQuery.startValue.equalsIgnoreCase(StringUtil.EMPTY_STRING)
-                || dateTimeQuery.endValue.equalsIgnoreCase(StringUtil.EMPTY_STRING)) {
-            return false;
-        }
+        DateTime dateTimeOriginal = fillDateTime(dateTimeSource);
+        DateTime dateTimeCompare = fillDateTime(dateTimeQuery);
 
-        DateTime dateTime1 = fillDateTime(dateTimeSource);
-        DateTime dateTime2 = fillDateTime(dateTimeQuery);
-
-        return parseStringToLocalDateTime(dateTime1.endValue).isAfter(parseStringToLocalDateTime(dateTime2.startValue))
-                && parseStringToLocalDateTime(dateTime1.startValue)
-                        .isBefore(parseStringToLocalDateTime(dateTime2.endValue));
+        return dateTimeOriginal.getEndDate().isAfter(dateTimeCompare.getStartDate())
+                && dateTimeOriginal.getStartDate().isBefore(dateTimeCompare.getEndDate());
     }
 
     private static DateTime fillDateTime(DateTime filledDateTime) throws IllegalValueException {
-        DateTime dateTimeToFill = filledDateTime;
 
-        dateTimeToFill.setEnd(parseStringToLocalDateTime(filledDateTime.endValue));
-        dateTimeToFill.setStart(parseStringToLocalDateTime(filledDateTime.startValue));
+        filledDateTime.setEnd(parseStringToLocalDateTime(filledDateTime.endValue));
+        filledDateTime.setStart(parseStringToLocalDateTime(filledDateTime.startValue));
 
-        return dateTimeToFill;
+        return filledDateTime;
     }
 
+    /**
+     * Check whether eventDateTime is an event
+     * @param eventDateTime
+     * @return whether task is an event
+     */
+    private static boolean isEvent(DateTime eventDateTime) {
+        if (eventDateTime.getStartDate() == null
+                || eventDateTime.getEndDate() == null) {
+            return false;
+        }
+
+        return true;
+    }
 
     /**
-     * Returns an arraylist of free datetime slots in a specified date
+     * Check whether dateTimeSource and dateTimeQuery are events before they can be compared
+     * @param dateTimeSource
+     * @param dateTimeQuery
+     * @return whether the task compared to and with are events
+     */
+    private static boolean areEvents(DateTime dateTimeSource, DateTime dateTimeQuery) {
+        if (!isEvent(dateTimeSource)) {
+            return false;
+        }
+
+        if (!isEvent(dateTimeQuery)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * @param dateToCheck cannot be null and it must be an event
+     * @return an ArrayList<DateTime> of free slots in a specified date
+     * else return an empty ArrayList
      */
     public static ArrayList<DateTime> getListOfFreeTimeSlotsInDate(
             DateTime dateToCheck,
             ArrayList<DateTime> listOfFilledTimeSlotsInDate) {
         ArrayList<DateTime> listOfFreeTimeSlots = new ArrayList<DateTime>();
-        LocalDateTime startDateTime = parseStringToLocalDateTime(dateToCheck.startValue);
-        LocalDateTime endDateTime;
+        if (isEvent(dateToCheck)) {
+            LocalDateTime startDateTime = dateToCheck.getStartDate();
+            LocalDateTime endDateTime = dateToCheck.getEndDate();
 
-        for (DateTime dt : listOfFilledTimeSlotsInDate) {
-            if (dt.startValue == null) {
-                continue;
-            } else {
-                endDateTime = parseStringToLocalDateTime(dt.startValue);
+            for (DateTime dateTime : listOfFilledTimeSlotsInDate) {
+                if (dateTime.getStartDate() == null) {
+                    continue;
+                } else {
+                    endDateTime = dateTime.getStartDate();
+                }
+
+                if (startDateTime.isBefore(endDateTime)) {
+                    listOfFreeTimeSlots
+                            .add(new DateTime(startDateTime, endDateTime));
+                }
+
+                if (startDateTime.isBefore(dateTime.getEndDate())) {
+                    startDateTime = dateTime.getEndDate();
+                }
             }
 
-            if (startDateTime.isBefore(endDateTime)) {
-                listOfFreeTimeSlots
-                        .add(new DateTime(startDateTime, endDateTime));
+            if (startDateTime.isBefore(dateToCheck.getEndDate())) {
+                listOfFreeTimeSlots.add(new DateTime(startDateTime, dateToCheck.getEndDate()));
             }
-
-            if (startDateTime.isBefore(parseStringToLocalDateTime(dt.endValue))) {
-                startDateTime = parseStringToLocalDateTime(dt.endValue);
-            }
-        }
-
-        if (startDateTime.isBefore(parseStringToLocalDateTime(dateToCheck.endValue))) {
-            listOfFreeTimeSlots
-                    .add(new DateTime(startDateTime, parseStringToLocalDateTime(dateToCheck.endValue)));
         }
 
         return listOfFreeTimeSlots;
@@ -200,14 +224,16 @@ public class DateTimeUtil {
     public static String getDayAndDateString(DateTime dateTime) {
         StringBuilder sb = new StringBuilder();
 
-        sb.append(parseStringToLocalDateTime(dateTime.endValue).getDayOfWeek()
+        sb.append(dateTime.getEndDate().getDayOfWeek()
                 .getDisplayName(TextStyle.FULL, Locale.ENGLISH)).append(",")
-                .append(parseStringToLocalDateTime(dateTime.endValue).format(DATE_ONLY_FORMATTER));
+                .append(dateTime.getEndDate().format(DATE_ONLY_FORMATTER));
 
         return sb.toString();
     }
 
-
+    /**
+     * @return String of Free DateTime In Date
+     */
     public static String getStringOfFreeDateTimeInDate(DateTime dateToCheck,
             ArrayList<DateTime> listOfFreeTimeSlotsInDate) {
         StringBuilder sb = new StringBuilder();
@@ -217,18 +243,23 @@ public class DateTimeUtil {
 
         int counter = 1;
 
-        for (DateTime dt : listOfFreeTimeSlotsInDate) {
+        for (DateTime dateTime : listOfFreeTimeSlotsInDate) {
             sb.append(String.format(MESSAGE_FREE_TIME_SLOT, counter,
-                    parseStringToLocalDateTime(dt.startValue).format(TIME_ONLY_FORMATTER),
-                    parseStringToLocalDateTime(dt.endValue).format(TIME_ONLY_FORMATTER),
-                    getDurationBetweenTwoLocalDateTime(parseStringToLocalDateTime(dt.startValue),
-                            parseStringToLocalDateTime(dt.endValue))));
+                    dateTime.getStartDate().format(TIME_ONLY_FORMATTER),
+                    dateTime.getEndDate().format(TIME_ONLY_FORMATTER),
+                    getDurationBetweenTwoLocalDateTime(dateTime.getStartDate(), dateTime.getEndDate())));
             counter++;
         }
 
         return sb.toString();
     }
 
+    /**
+     * Calculate the duration between 2 dates
+     * @param startDateTime is not null
+     * @param endDateTime is not null
+     * @return String duration between 2 dates
+     */
     public static String getDurationBetweenTwoLocalDateTime(
             LocalDateTime startDateTime, LocalDateTime endDateTime) {
         Duration duration = Duration.between(startDateTime, endDateTime);
@@ -240,6 +271,7 @@ public class DateTimeUtil {
 
     /**
      * Modify the date based on the new hour, min and sec
+     * @return Date
      */
     public static Date setDateTime(Date toBeEdit, int hour, int min, int sec) {
         Calendar calendar = Calendar.getInstance();
@@ -254,10 +286,11 @@ public class DateTimeUtil {
 
     /**
      * @param recurDate usually is the start date of an event
+     * @param freqType is the frequency based on recurrance
      * Modifies the recurDate based on the frequency for recurring tasks.
      * freqType cannot be null or None
      */
-    public static String getRecurDate(String recurDate, String freqType) {
+    private static String getRecurDate(String recurDate, String freqType) {
         LocalDateTime date = LocalDateTime.parse(recurDate, DATE_FORMATTER);
 
         switch (freqType.toLowerCase()) {
@@ -277,6 +310,23 @@ public class DateTimeUtil {
 
         recurDate = date.format(DATE_STRING_FORMATTER);
         return recurDate;
+    }
+
+    /**
+     * @param recurDates usually is the start date of an event
+     * @param freqType is the frequency based on recurrance
+     * @param noOfRecurr is the number of recurrance
+     * Modifies the recurDates based on the frequency for recurring tasks.
+     * freqType cannot be null or None
+     */
+    public static ArrayList<String> getRecurDates(String recurDate, String freqType, int noOfRecurr) {
+        ArrayList<String> recurrDates = new ArrayList<String>();
+
+        for (int i = 0; i < noOfRecurr; i++) {
+            recurrDates.add(getRecurDate(recurDate, freqType));
+        }
+
+        return recurrDates;
     }
 
     public static LocalDateTime setLocalTime(LocalDateTime dateTime, int hour, int min, int sec) {

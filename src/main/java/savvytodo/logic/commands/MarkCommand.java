@@ -45,12 +45,15 @@ public class MarkCommand extends Command {
             tasksToMark.add((Task) lastShownList.get(filteredTaskListIndex));
         }
 
+        int numOfSuccessfulMark = 0;
         StringBuilder resultSb = new StringBuilder();
         try {
             for (Task taskToMark : tasksToMark) {
                 if (taskToMark.isCompleted().value) {
                     resultSb.append(String.format(MESSAGE_MARK_TASK_FAIL, targettedIndices.peekFirst()));
                 } else {
+                    numOfSuccessfulMark++;
+                    taskToMark = new Task(taskToMark);
                     taskToMark.setStatus(new Status(true));
                     model.updateTask(targettedIndices.peekFirst() - 1, taskToMark);
                     resultSb.append(String.format(MESSAGE_MARK_TASK_SUCCESS, targettedIndices.peekFirst()));
@@ -60,7 +63,11 @@ public class MarkCommand extends Command {
         } catch (DuplicateTaskException e) {
             //ignore for completed
         }
-        model.updateFilteredListToShowAll();
+
+        if (numOfSuccessfulMark > 0) {
+            model.recordMark(numOfSuccessfulMark);
+        }
+
         return new CommandResult(resultSb.toString());
     }
 

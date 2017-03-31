@@ -83,7 +83,7 @@ Examples:
 ### 2.3. Listing all tasks : `list`
 
 Shows a list of tasks in the Savvy To-Do by category or by priority or everything.<br>
-Examples: 
+Examples:
 * `list c/CS2103`<br>
 * `list p/high`<br>
 * `list`<br>
@@ -174,17 +174,37 @@ Format: `redo`
 
 > Can only be used after an undo operation.<br>
 
-### 2.10. Clearing all entries : `clear`
+### 2.10. Marking a task as completed : `mark`
+
+Marks the specified task(s) from the Savvy To-Do.<br>
+Format: `mark INDICES`
+
+> Marks the task at the specified `INDEX`. <br>
+> The index refers to the index number shown in the most recent listing.<br>
+> The index **must be a positive integer** 1, 2, 3, ...
+> Number of indices must be at least 1
+
+### 2.11. Umarking a task as not completed : `unmark`
+
+Unmarks the specified task(s) from the Savvy To-Do.<br>
+Format: `unmark INDICES`
+
+> Unmarks the task at the specified `INDEX`. <br>
+> The index refers to the index number shown in the most recent listing.<br>
+> The index **must be a positive integer** 1, 2, 3, ...
+> Number of indices must be at least 1
+
+### 2.12. Clearing all entries : `clear`
 
 Clears all displayed entries from the interface<br>
 Format: `clear`
 
-### 2.11. Exiting the program : `exit`
+### 2.13. Exiting the program : `exit`
 
 Exits the program.<br>
 Format: `exit`
 
-### 2.12. Saving the data
+### 2.14. Saving the data
 
 Savvy To-Do data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
@@ -213,6 +233,10 @@ There is no need to save manually.
 
 * **Redo** : `redo` <br>
 
+* **Mark** : `mark INDICES` <br>
+
+* **Unmark** : `unmark INDICES` <br>
+
 * **Help** : `help` <br>
 
 * **Select** : `select INDEX` <br>
@@ -226,6 +250,10 @@ Key Codes | Function | Command Box Input
 <kbd>Ctrl</kbd> + <kbd>Q</kbd> | [Exit](#exiting-the-program--exit) | `exit`
 <kbd>Ctrl</kbd> + <kbd>D</kbd> | [Clear](#clearing-all-entries--clear) all entries | `clear`
 <kbd>Ctrl</kbd> + <kbd>L</kbd> | [List](#listing-all-tasks-list) all unmarked task by date, earliest task first | `list`
+<kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Z</kbd> | [Undo](#undo-the-most-recent-operation--undo) the most recent task | `undo`
+<kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Y</kbd> | [Redo](#redo-the-most-recent-operation--redo) the previously undo-ed task | `redo`
+
+<!-- Not supported yet //jing loon
 <kbd>Ctrl</kbd> + <kbd>P</kbd> | [List](#listing-all-tasks-list) all unmarked task by priority level, highest to lowest | `list priorityLevel`
 <kbd>Ctrl</kbd> + <kbd>S</kbd> | [Storage](#storage-location) Popups a directory chooser dialog box to choose a new filepath | `storage NEW_FILEPATH`
-<kbd>Ctrl</kbd> + <kbd>Z</kbd> | [Undo](#undo-the-most-recent-operation--undo) | `undo`
+-->

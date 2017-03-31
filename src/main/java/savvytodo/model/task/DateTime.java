@@ -149,6 +149,14 @@ public class DateTime implements Comparable<DateTime> {
         return COMPARE_TO_EQUAL;
     }
 
+    public LocalDateTime getStartDate() {
+        return start;
+    }
+
+    public LocalDateTime getEndDate() {
+        return end;
+    }
+
     /**
      * Set method for start
      * @param LocalDateTime

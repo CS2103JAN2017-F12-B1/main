@@ -8,7 +8,7 @@ import savvytodo.logic.commands.exceptions.CommandException;
 import savvytodo.model.category.Category;
 import savvytodo.model.task.Priority;
 
-//@@A0124863A
+//@@author A0124863A
 /**
  * Lists all tasks in the task manager to the user.
  */

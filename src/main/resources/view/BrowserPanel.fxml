@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.web.WebView?>
-
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1">
-    <WebView fx:id="browser"/>
+<?import java.net.URL?>
+<?import javafx.scene.control.TextArea?>
+<AnchorPane fx:id="placeHolder" styleClass="anchor-pane-with-border" xmlns="http://javafx.com/javafx/8"
+            xmlns:fx="http://javafx.com/fxml/1">
+    <stylesheets>
+        <URL value="@DarkTheme.css"/>
+        <URL value="@Extensions.css"/>
+    </stylesheets>
+    <AnchorPane fx:id="browser">
+        <TextArea fx:id="browserDisplay" editable="false" styleClass="browser-display"/>
+    </AnchorPane>
 </AnchorPane>

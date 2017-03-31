@@ -1,18 +1,18 @@
-package savvytodo.model.undoredo;
+package savvytodo.model.operations;
 
 import savvytodo.logic.commands.exceptions.CommandException;
 import savvytodo.model.task.Task;
 import savvytodo.model.task.UniqueTaskList.TaskNotFoundException;
 
-//@@A0124863A
+//@@author A0124863A
 /**
  * @author A0124863A
  * Undo an add operation by deleting the added task
  */
-public class UndoAddCommand extends UndoCommand {
+public class UndoAddOperation extends Operation {
     private Task task;
 
-    public UndoAddCommand(Task task) {
+    public UndoAddOperation(Task task) {
         this.task = task;
     }
     @Override
@@ -26,8 +26,8 @@ public class UndoAddCommand extends UndoCommand {
     }
 
     @Override
-    public UndoCommand reverseUndo() {
-        return new UndoDeleteCommand(task);
+    public Operation reverse() {
+        return new UndoDeleteOperation(task);
     }
 
 

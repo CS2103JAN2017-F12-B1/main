@@ -10,7 +10,14 @@ We are a team based in the [School of Computing, National University of Singapor
 **Responsibilities**:
 * Aspects/tools in charge of: Managing GitHub organization page
 * Components in charge of:
+	* Model
+	* Logic
+	* Parser
 * Features implemented:
+	* [Add](UserGuide.md#22-adding-a-task-add)
+ 	* [Edit](UserGuide.md#24-editing-a-task--edit)
+	* [Mark](UserGuide.md)
+	* [Unmark](UserGuide.md)
 * Code written:
 * Other major contributions:
   * Initial refactoring from AddressBook-Level-4 to SavvyTo-Do
@@ -26,6 +33,10 @@ We are a team based in the [School of Computing, National University of Singapor
 * Aspects/tools in charge of: UI Element designs
 * Components in charge of:
 * Features implemented:
+    * Hotkeys/shortcuts implementation
+    * Load command event trigger
+    * Auto-complete textfield with command dictionary
+    * UI (in progress, to be updated)
 * Code written:
 * Other major contributions:
     * UI mockup and prototyping
@@ -51,9 +62,12 @@ We are a team based in the [School of Computing, National University of Singapor
 **Responsibilities**:
 * Aspects/tools in charge of:
 * Components in charge of:
+	* Logic
+	* Model
 * Features implemented:
-	* Undo operation
-	* Redo operation
+	* Undo command
+	* Redo command
+	* List command
 * Code written:
 * Other major contributions:
     * Initial refactoring from AddressBook-Level-4 to SavvyTo-Do
