@@ -6,7 +6,6 @@ import org.junit.Test;
 
 import javafx.scene.input.KeyCodeCombination;
 import savvytodo.logic.commands.ClearCommand;
-import savvytodo.logic.commands.HelpCommand;
 import savvytodo.logic.commands.ListCommand;
 import savvytodo.logic.commands.RedoCommand;
 import savvytodo.logic.commands.UndoCommand;
