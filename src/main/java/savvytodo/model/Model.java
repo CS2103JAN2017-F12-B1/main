@@ -7,13 +7,13 @@ import java.util.function.Predicate;
 
 import savvytodo.commons.core.UnmodifiableObservableList;
 import savvytodo.commons.exceptions.IllegalValueException;
+import savvytodo.model.operations.exceptions.RedoFailureException;
+import savvytodo.model.operations.exceptions.UndoFailureException;
 import savvytodo.model.task.DateTime;
 import savvytodo.model.task.ReadOnlyTask;
 import savvytodo.model.task.Task;
 import savvytodo.model.task.UniqueTaskList;
 import savvytodo.model.task.UniqueTaskList.DuplicateTaskException;
-import savvytodo.model.undoredo.exceptions.RedoFailureException;
-import savvytodo.model.undoredo.exceptions.UndoFailureException;
 
 /**
  * The API of the Model component.
@@ -52,20 +52,23 @@ public interface Model {
     /** Updates the filter of the filtered task list to show all tasks */
     void updateFilteredListToShowAll();
 
-    //@@A0124863A
+    //@@author A0124863A
     /** Updates the filter of the filtered task list to filter by the given predicate*/
     void updateFilteredTaskList(Predicate<ReadOnlyTask> predicate);
 
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredTaskList(Set<String> keywords);
 
-    //@@A0124863A
+    //@@author A0124863A
     /** Undo an operation */
     void undo() throws UndoFailureException;
 
-    //@@A0124863A
+    //@@author A0124863A
     /** Redo an operation */
     void redo() throws RedoFailureException;
+
+    //@@author A0124863A
+    void recordMark(int index);
 
 
 

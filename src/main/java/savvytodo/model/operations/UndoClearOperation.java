@@ -1,18 +1,18 @@
-package savvytodo.model.undoredo;
+package savvytodo.model.operations;
 
 import savvytodo.model.ReadOnlyTaskManager;
 import savvytodo.model.TaskManager;
 
-//@@A0124863A
+//@@author A0124863A
 /**
  * @author A0124863A
  * Undo an clear operation by restoring the original
  */
 
-public class UndoClearCommand extends UndoCommand {
+public class UndoClearOperation extends Operation {
     private TaskManager currTaskManager;
     private TaskManager newTaskManager;
-    public UndoClearCommand(ReadOnlyTaskManager currTaskManager, ReadOnlyTaskManager newTaskManager) {
+    public UndoClearOperation(ReadOnlyTaskManager currTaskManager, ReadOnlyTaskManager newTaskManager) {
         this.currTaskManager = new TaskManager(currTaskManager);
         this.newTaskManager = new TaskManager(newTaskManager);
     }
@@ -25,8 +25,8 @@ public class UndoClearCommand extends UndoCommand {
     }
 
     @Override
-    public UndoCommand reverseUndo() {
-        return new UndoClearCommand(newTaskManager, currTaskManager);
+    public Operation reverse() {
+        return new UndoClearOperation(newTaskManager, currTaskManager);
     }
 
 }

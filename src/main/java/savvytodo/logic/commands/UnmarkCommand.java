@@ -45,13 +45,16 @@ public class UnmarkCommand extends Command {
             tasksToMark.add((Task) lastShownList.get(filteredTaskListIndex));
         }
 
+        int numOfSuccessfulUnmark = 0;
         StringBuilder resultSb = new StringBuilder();
         try {
             for (Task taskToUnmark : tasksToMark) {
                 if (!taskToUnmark.isCompleted().value) {
                     resultSb.append(String.format(MESSAGE_UNMARK_TASK_FAIL, targettedIndices.peekFirst()));
                 } else {
-                    taskToUnmark.setStatus(new Status());
+                    numOfSuccessfulUnmark++;
+                    taskToUnmark = new Task(taskToUnmark);
+                    taskToUnmark.setStatus(new Status(false));
                     model.updateTask(targettedIndices.peekFirst() - 1, taskToUnmark);
                     resultSb.append(String.format(MESSAGE_UNMARK_TASK_SUCCESS, targettedIndices.peekFirst()));
                 }
@@ -59,7 +62,11 @@ public class UnmarkCommand extends Command {
             }
         } catch (DuplicateTaskException e) {
         }
-        model.updateFilteredListToShowAll();
+
+        if (numOfSuccessfulUnmark > 0) {
+            model.recordMark(numOfSuccessfulUnmark);
+        }
+
         return new CommandResult(resultSb.toString());
     }
 

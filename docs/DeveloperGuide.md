@@ -127,11 +127,19 @@ _Figure 2.1.3a : Component interactions for `delete 1` command (part 1)_
 
 >Note how the `Model` simply raises a `TaskManagerChangedEvent` when the Task Manager data are changed,
  instead of asking the `Storage` to save the updates to the hard disk.
+ 
+Author: Wang Si Qi
+
+The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the
+command `undo`.
+
+<img src="images\SDforUndo.png" width="800"><br>
+_Figure 2.1.3b : Component interactions for `undo` command (part 2)_
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
 being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time. <br>
 <img src="images\SDforDeleteTaskEventHandling.png" width="800"><br>
-_Figure 2.1.3b : Component interactions for `delete 1` command (part 2)_
+_Figure 2.1.3c : Component interactions for `delete 1` command (part 3)_
 
 > Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having
   to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct
@@ -183,9 +191,9 @@ _Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Comma
 
 ### 2.4. Model component
 
-Author: Yee Jian Feng, Eric
+Author: Wang Si Qi
 
-<img src="images/ModelClassDiagram.png" width="800"><br>
+<img src="images/ModelClassDiagram.png" width="1000"><br>
 _Figure 2.4.1 : Structure of the Model Component_
 
 **API** : [`Model.java`](../src/main/java/savvytodo/model/Model.java)
@@ -194,6 +202,14 @@ The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
 * stores the Task Manager data.
+* stores a UndoRedoOperationCentre that stores undo and redo operations.
+
+> An undo operation is first stored in a stack in the undoRedoOperationCentre when the user calls for a command that changes the task list. For
+example, a user that adds a new task, an undoAddOperation will be stored in the undoRedoOperationCentre's undo stack. When undo is called by
+the user, undoRedoOperationCentre will pop the undoAddOperation and execute it to restore back the original state. The reverse operation 
+of undoAddOperation will be stored in the redo stack of UndoRedoOperationCentre after the undo stack pop, so that redo can be called after undo. 
+Redo works the same way as undo.
+
 * exposes a `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed' e.g. the UI can be bound to this list
   so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
