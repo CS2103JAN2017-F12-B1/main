@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import javafx.scene.input.KeyCodeCombination;
 import savvytodo.logic.commands.ClearCommand;
+import savvytodo.logic.commands.HelpCommand;
 import savvytodo.logic.commands.ListCommand;
 import savvytodo.logic.commands.RedoCommand;
 import savvytodo.logic.commands.UndoCommand;
@@ -21,7 +22,6 @@ import savvytodo.ui.hotkeys.HotKeysCombinations;
  *
  */
 public class HotKeyTest extends TaskManagerGuiTest {
-    private static final String HELP_WINDOW_ROOT_FIELD_ID = "#helpWindowRoot";
 
     @Test
     public void triggerHelpShortcut() {
@@ -29,7 +29,7 @@ public class HotKeyTest extends TaskManagerGuiTest {
         GuiRobot helpRobot = new GuiRobot();
         helpRobot.push(helpKeys);
         helpRobot.sleep(2000);
-        assertHelpWindowOpen();
+        assertHelpCommandSuccess();
     }
 
     @Test
@@ -61,8 +61,8 @@ public class HotKeyTest extends TaskManagerGuiTest {
     }
 
 
-    private void assertHelpWindowOpen() {
-        assertTrue(new GuiRobot().lookup(HELP_WINDOW_ROOT_FIELD_ID).tryQuery().isPresent());
+    private void assertHelpCommandSuccess() {
+        assertTrue(mainMenu.getHelpWindowHandle().isWindowOpen());
     }
 
     private void assertListSuccess() {

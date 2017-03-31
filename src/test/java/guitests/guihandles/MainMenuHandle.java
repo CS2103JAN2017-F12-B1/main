@@ -29,9 +29,13 @@ public class MainMenuHandle extends GuiHandle {
         useF1Accelerator();
         return new HelpWindowHandle(guiRobot, primaryStage);
     }
-
+    
     private void useF1Accelerator() {
         guiRobot.push(KeyCode.F1);
         guiRobot.sleep(1);
+    }
+
+    public HelpWindowHandle getHelpWindowHandle() {
+        return new HelpWindowHandle(guiRobot, primaryStage);
     }
 }
