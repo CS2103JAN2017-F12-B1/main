@@ -174,17 +174,37 @@ Format: `redo`
 
 > Can only be used after an undo operation.<br>
 
-### 2.10. Clearing all entries : `clear`
+### 2.10. Marking a task as completed : `mark`
+
+Marks the specified task(s) from the Savvy To-Do.<br>
+Format: `mark INDICES`
+
+> Marks the task at the specified `INDEX`. <br>
+> The index refers to the index number shown in the most recent listing.<br>
+> The index **must be a positive integer** 1, 2, 3, ...
+> Number of indices must be at least 1
+
+### 2.11. Umarking a task as not completed : `unmark`
+
+Unmarks the specified task(s) from the Savvy To-Do.<br>
+Format: `unmark INDICES`
+
+> Unmarks the task at the specified `INDEX`. <br>
+> The index refers to the index number shown in the most recent listing.<br>
+> The index **must be a positive integer** 1, 2, 3, ...
+> Number of indices must be at least 1
+
+### 2.12. Clearing all entries : `clear`
 
 Clears all displayed entries from the interface<br>
 Format: `clear`
 
-### 2.11. Exiting the program : `exit`
+### 2.13. Exiting the program : `exit`
 
 Exits the program.<br>
 Format: `exit`
 
-### 2.12. Saving the data
+### 2.14. Saving the data
 
 Savvy To-Do data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
@@ -212,6 +232,10 @@ There is no need to save manually.
 * **Undo** : `undo` <br>
 
 * **Redo** : `redo` <br>
+
+* **Mark** : `mark INDICES` <br>
+
+* **Unmark** : `unmark INDICES` <br>
 
 * **Help** : `help` <br>
 

@@ -1,7 +1,9 @@
 package guitests;
 
 import static org.junit.Assert.assertTrue;
+import static savvytodo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static savvytodo.logic.commands.UnmarkCommand.MESSAGE_UNMARK_TASK_SUCCESS;
+import static savvytodo.logic.commands.UnmarkCommand.MESSAGE_USAGE;
 
 import java.util.LinkedList;
 
@@ -18,6 +20,12 @@ public class UnmarkCommandTest extends TaskManagerGuiTest {
     // The list of tasks in the task list panel is expected to match this list.
     // This list is updated with every successful call to assertMarkSuccess().
     TestTask[] expectedTasksList = td.getTypicalTasks();
+
+    @Test
+    public void unmarkInvalidCommand() {
+        commandBox.runCommand("unmark ");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
+    }
 
     @Test
     public void umark() {

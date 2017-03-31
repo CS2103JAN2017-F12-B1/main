@@ -12,6 +12,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import savvytodo.commons.exceptions.IllegalValueException;
+import savvytodo.commons.util.DateTimeUtil;
 import savvytodo.commons.util.StringUtil;
 import savvytodo.model.category.Category;
 import savvytodo.model.category.UniqueCategoryList;
@@ -113,11 +114,11 @@ public class ParserUtil {
     public static String[] getDateTimeFromArgs(Optional<String> dateTime) {
         assert dateTime != null;
         if (dateTime.isPresent()) {
-            String [] dateTimeValues = dateTime.get().split(DateTime.DATETIME_STRING_CONNECTOR);
+            String [] dateTimeValues = DateTimeUtil.parseStringToDateTime(dateTime.get());
             if (dateTimeValues.length == SIZE_OF_DATE_TIME_INPUT) {
                 return new String[] {StringUtil.EMPTY_STRING, dateTimeValues[ARRAY_FIELD_1]};
             } else {
-                return dateTime.get().split(DateTime.DATETIME_STRING_CONNECTOR);
+                return dateTimeValues;
             }
         } else {
             return DateTime.DEFAULT_VALUES;
@@ -165,7 +166,7 @@ public class ParserUtil {
     public static Optional<DateTime> parseDateTime(Optional<String> dateTime) throws IllegalValueException {
         assert dateTime != null;
         if (dateTime.isPresent()) {
-            String [] dateTimeValues = dateTime.get().split(DateTime.DATETIME_STRING_CONNECTOR);
+            String [] dateTimeValues = DateTimeUtil.parseStringToDateTime(dateTime.get());
             if (dateTimeValues.length == SIZE_OF_DATE_TIME_INPUT) {
                 return Optional.of(new DateTime(StringUtil.EMPTY_STRING, dateTimeValues[ARRAY_FIELD_1]));
             } else {
