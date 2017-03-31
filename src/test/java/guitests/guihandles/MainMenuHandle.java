@@ -34,4 +34,13 @@ public class MainMenuHandle extends GuiHandle {
         guiRobot.push(KeyCode.F1);
         guiRobot.sleep(1);
     }
+
+    //@@author A0147827U
+    /**
+     * Accessor method for HelpWindowHandle (does not open a help window)
+     * @author jingloon
+     */
+    public HelpWindowHandle getHelpWindowHandle() {
+        return new HelpWindowHandle(guiRobot, primaryStage);
+    }
 }

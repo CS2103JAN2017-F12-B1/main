@@ -60,7 +60,7 @@ public class CommandBox extends UiPart<Region> {
         }
     }
 
-    //@@authoer A0147827U
+    //@@author A0147827U
     /**
      * Executes the given string as a command as though it was from the text input
      * @author jingloon
