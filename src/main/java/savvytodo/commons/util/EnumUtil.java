@@ -16,4 +16,3 @@ public class EnumUtil {
         return Arrays.stream(e.getEnumConstants()).map(Enum::name).toArray(String[]::new);
     }
 }
-//@@author A0140016B

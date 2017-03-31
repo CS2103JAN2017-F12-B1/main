@@ -76,4 +76,3 @@ public class BrowserPanel extends UiPart<Region> {
     }
 
 }
-// @@author A0140016B

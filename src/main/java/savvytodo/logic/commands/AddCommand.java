@@ -96,5 +96,3 @@ public class AddCommand extends Command {
         return summary;
     }
 }
-//@@author A0140016B
-

@@ -13,6 +13,7 @@ import savvytodo.model.task.Status;
 import savvytodo.model.task.Task;
 import savvytodo.model.task.UniqueTaskList;
 
+//@@author A0140016B
 /**
  *
  */
@@ -88,9 +89,10 @@ public class TypicalTestTasks {
         return ab;
     }
 
+    //@@author A0140036X
     /**
      * generates a list of tasks with random details
-     * @author A0140036x
+     * @author A0140036X
      * @return
      */
     public TestTask[] getGeneratedTasks(int numberOfTasks) {

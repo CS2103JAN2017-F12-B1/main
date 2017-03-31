@@ -23,7 +23,6 @@ public class Task implements ReadOnlyTask {
 
     private UniqueCategoryList categories;
 
-    //@@author A0140016B
     /**
      * Every field must be present and not null.
      */
@@ -53,7 +52,6 @@ public class Task implements ReadOnlyTask {
         this.recurrence = recurrence;
         this.isCompleted = status;
     }
-    //@@author A0140016B
 
     /**
      * Creates a copy of the given ReadOnlyTask.
@@ -180,4 +178,3 @@ public class Task implements ReadOnlyTask {
     }
 
 }
-//@@author A0140016B

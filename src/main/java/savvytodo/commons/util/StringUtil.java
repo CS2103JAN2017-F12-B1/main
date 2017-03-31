@@ -72,6 +72,5 @@ public class StringUtil {
     public static String firstCharUpperCaseRestLowerCase(String string) {
         return string.substring(0, 1).toUpperCase() + string.substring(1).toLowerCase();
     }
-    //@@author A0140016B
 
 }

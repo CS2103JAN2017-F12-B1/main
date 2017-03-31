@@ -202,6 +202,7 @@ public class ModelManager extends ComponentManager implements Model {
         return conflictingTasksStringBuilder.toString();
     }
 
+    //@@author A0140016B
     private void appendConflictingTasks(
             StringBuilder conflictingTasksStringBuilder,
             DateTime dateTimeToCheck) throws DateTimeException, IllegalValueException {
@@ -216,7 +217,6 @@ public class ModelManager extends ComponentManager implements Model {
             }
         }
     }
-    //@@author A0140016B
 
     //=========== Filtered Task List Accessors =============================================================
 

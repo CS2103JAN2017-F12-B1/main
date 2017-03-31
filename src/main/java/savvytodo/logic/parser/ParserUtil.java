@@ -84,7 +84,6 @@ public class ParserUtil {
         }
         return Optional.of(indicesArray);
     }
-    //@@author A0140016B
 
     /**
      * Returns a new Set populated by all elements in the given list of strings
@@ -125,6 +124,7 @@ public class ParserUtil {
         }
     }
 
+    //@@author A0140016B
     /**
      * Extract a {@code Optional<String> recurrence} into an {@code String[]} if {@code recurrence} is present.
      */
@@ -132,7 +132,6 @@ public class ParserUtil {
         assert recurrence != null;
         return recurrence.isPresent() ? recurrence.get().split(StringUtil.WHITESPACE_REGEX) : Recurrence.DEFAULT_VALUES;
     }
-    //@@author A0140016B
 
     /**
      * Parses a {@code Optional<String> name} into an {@code Optional<Name>} if {@code name} is present.
@@ -177,6 +176,7 @@ public class ParserUtil {
         }
     }
 
+    //@@author A0140016B
     /**
      * Parses a {@code Optional<String> recurrence} into an {@code Optional<Recurrence>}
      * if {@code recurrence} is present.
@@ -191,7 +191,6 @@ public class ParserUtil {
             return Optional.empty();
         }
     }
-    //@@author A0140016B
 
     /**
      * Parses a {@code Optional<String> description} into an {@code Optional<Description>}

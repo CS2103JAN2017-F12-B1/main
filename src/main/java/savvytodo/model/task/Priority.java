@@ -105,6 +105,7 @@ public class Priority implements Comparable<Priority> {
         return value.hashCode();
     }
 
+    //@@author A0140016B
     @Override
     public int compareTo(Priority o) {
         if (this.level > o.level) {
@@ -117,4 +118,3 @@ public class Priority implements Comparable<Priority> {
     }
 
 }
-//@@author A0140016B

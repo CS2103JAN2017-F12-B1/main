@@ -27,5 +27,3 @@ public class MarkCommandParser {
     }
 
 }
-//@@author A0140016B
-

@@ -180,4 +180,3 @@ public class NattyDateTimeParserUtil {
         return arg.toLowerCase().contains(WORD_NOW.toLowerCase());
     }
 }
-//@@author A0140016B
