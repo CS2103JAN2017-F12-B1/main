@@ -1,7 +1,6 @@
 package savvytodo.commons.util;
 
 import java.text.SimpleDateFormat;
-import java.time.DateTimeException;
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
@@ -10,6 +9,7 @@ import com.joestelmach.natty.DateGroup;
 import com.joestelmach.natty.Parser;
 
 import savvytodo.commons.core.Messages;
+import savvytodo.commons.exceptions.IllegalValueException;
 
 //@@author A0140016B
 /**
@@ -58,7 +58,7 @@ public class NattyDateTimeParserUtil {
      * @return String[] with first index being the startDate time and second index being the end
      *         date time
      */
-    public static String[] parseStringToDateTime(String dateTimeArgs) {
+    public static String[] parseStringToDateTime(String dateTimeArgs) throws IllegalValueException {
         String endDateTime = StringUtil.EMPTY_STRING;
         String startDateTime = StringUtil.EMPTY_STRING;
         String formattedDateTimeArg = convertToUSDateFormat(dateTimeArgs);
@@ -67,7 +67,7 @@ public class NattyDateTimeParserUtil {
         List<DateGroup> groups = parser.parse(formattedDateTimeArg);
 
         if (isInvalidDateTimeArg(dateTimeArgs, groups)) {
-            throw new DateTimeException(Messages.MESSAGE_INVALID_DATETIME);
+            throw new IllegalValueException(Messages.MESSAGE_INVALID_DATETIME);
         }
 
         if (groups.size() > EMPTY_GROUP_SIZE) {

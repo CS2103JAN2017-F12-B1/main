@@ -60,7 +60,7 @@ public class DateTimeUtil {
      * @return String[] with first index being the start DateTime and second index being the end
      *         date Time
      */
-    public static String[] parseStringToDateTime(String dateTimeArgs) {
+    public static String[] parseStringToDateTime(String dateTimeArgs) throws IllegalValueException {
         return NattyDateTimeParserUtil.parseStringToDateTime(dateTimeArgs);
     }
 
