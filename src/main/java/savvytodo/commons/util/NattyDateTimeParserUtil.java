@@ -38,6 +38,20 @@ public class NattyDateTimeParserUtil {
     private static final String WORD_NOW = "NOW";
     private static final String NATTY_EXPLICT_TIME_PREFIX = "EXPLICIT_TIME";
 
+    private static Parser parser;
+
+    /**
+     * To create one instance of parser so that computation would be relatively faster
+     * @return Parser instance if it exist else return a new Parser with TimeZone
+     */
+    private static Parser getInstance() {
+        if (parser == null) {
+            return new Parser(TimeZone.getDefault());
+        } else {
+            return parser;
+        }
+    }
+
     /**
      * Extracts the new task's dateTime from the string arguments using natty.
      * @param String dateTimeArgs
@@ -49,7 +63,7 @@ public class NattyDateTimeParserUtil {
         String startDateTime = StringUtil.EMPTY_STRING;
         String formattedDateTimeArg = convertToUSDateFormat(dateTimeArgs);
 
-        Parser parser = new Parser(TimeZone.getDefault());
+        parser = getInstance();
         List<DateGroup> groups = parser.parse(formattedDateTimeArg);
 
         if (isInvalidDateTimeArg(dateTimeArgs, groups)) {

@@ -166,20 +166,12 @@ public class DateTimeUtil {
 
     /**
      * Check whether dateTimeSource and dateTimeQuery are events before they can be compared
-     * @param dateTimeSource
-     * @param dateTimeQuery
+     * @param dateTimeSource is the event compared to
+     * @param dateTimeQuery is the event to compare
      * @return whether the task compared to and with are events
      */
     private static boolean areEvents(DateTime dateTimeSource, DateTime dateTimeQuery) {
-        if (!isEvent(dateTimeSource)) {
-            return false;
-        }
-
-        if (!isEvent(dateTimeQuery)) {
-            return false;
-        }
-
-        return true;
+        return isEvent(dateTimeSource) && isEvent(dateTimeQuery);
     }
 
     /**
@@ -220,7 +212,10 @@ public class DateTimeUtil {
         return listOfFreeTimeSlots;
     }
 
-
+    /**
+     * @param dateTime
+     * @return
+     */
     public static String getDayAndDateString(DateTime dateTime) {
         StringBuilder sb = new StringBuilder();
 
@@ -314,8 +309,8 @@ public class DateTimeUtil {
 
     /**
      * @param recurDates usually is the start date of an event
-     * @param freqType is the frequency based on recurrance
-     * @param noOfRecurr is the number of recurrance
+     * @param freqType is the frequency based on recurrence
+     * @param noOfRecurr is the number of recurrence
      * Modifies the recurDates based on the frequency for recurring tasks.
      * freqType cannot be null or None
      */
@@ -323,12 +318,20 @@ public class DateTimeUtil {
         ArrayList<String> recurrDates = new ArrayList<String>();
 
         for (int i = 0; i < noOfRecurr; i++) {
+            recurDate = getRecurDate(recurDate, freqType);
             recurrDates.add(getRecurDate(recurDate, freqType));
         }
 
         return recurrDates;
     }
 
+    /**
+     * @param dateTime
+     * @param hour
+     * @param min
+     * @param sec
+     * @return LocalDateTime
+     */
     public static LocalDateTime setLocalTime(LocalDateTime dateTime, int hour, int min, int sec) {
         return LocalDateTime.of(dateTime.getYear(), dateTime.getMonth(), dateTime.getDayOfMonth(), hour, min, sec);
     }
