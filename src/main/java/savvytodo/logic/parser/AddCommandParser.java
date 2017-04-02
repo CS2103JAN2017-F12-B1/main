@@ -18,6 +18,7 @@ import savvytodo.model.task.Description;
 import savvytodo.model.task.Location;
 import savvytodo.model.task.Priority;
 
+//@@author A0140016B
 /**
  * @author A0140016B
  * Parses input arguments and creates a new AddCommand object
@@ -34,7 +35,6 @@ public class AddCommandParser {
         argsTokenizer.tokenize(args);
 
         try {
-
 
             return new AddCommand(argsTokenizer.getPreamble().get(),
                     argsTokenizer.getValue(PREFIX_PRIORITY).orElse(Priority.Level.Medium.toString()),

@@ -38,13 +38,14 @@ public class Recurrence {
         }
 
         /**
-         * Compare enum object with String to see if it matches
+         * Compare enum object with String to see if it matches whole string or first char
          * @param String retype cannot be null
          * @return boolean of whether string matches enum object
          */
-        public static boolean matches(String retype) {
+        public static boolean matches(String reType) {
             for (Type type : Type.values()) {
-                if (type.toString().equalsIgnoreCase(retype)) {
+                if (type.toString().equalsIgnoreCase(reType)
+                        || type.toString().substring(0, 1).equalsIgnoreCase(reType)) {
                     return true;
                 }
             }
@@ -56,8 +57,9 @@ public class Recurrence {
          * @param String retype cannot be null
          * @return boolean of wheather string matches enum object
          */
-        public static boolean isNone(String retype) {
-            if (Type.None.toString().equalsIgnoreCase(retype)) {
+        public static boolean isNone(String reType) {
+            if (Type.None.toString().equalsIgnoreCase(reType)
+                    || Type.None.toString().substring(0, 1).equalsIgnoreCase(reType)) {
                 return true;
             } else {
                 return false;
@@ -103,7 +105,7 @@ public class Recurrence {
 
     /**
      * Constructor when given input as String array
-     * @param recurrence
+     * @param recurrence string array
      * @throws IllegalValueException
      * @throws NumberFormatException
      */
@@ -116,7 +118,11 @@ public class Recurrence {
      */
     public static boolean isValidRecurrence(String type, int numOfTimes) {
         if (numOfTimes >= 0 && Type.matches(type)) {
-            return true;
+            if (Type.isNone(type) && numOfTimes != 0) {
+                return false;
+            } else {
+                return true;
+            }
         } else {
             return false;
         }

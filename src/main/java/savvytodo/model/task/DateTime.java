@@ -11,7 +11,7 @@ import savvytodo.commons.util.StringUtil;
  * @author A0140016B
  *
  * Represents Task's DateTime in the task manager Guarantees: immutable;
- * is valid as declared in {@link #isValidDateTime(String, String)} *
+ * is valid as declared in {@link #isValidEvent(String, String)} *
  */
 public class DateTime implements Comparable<DateTime> {
 
@@ -54,7 +54,7 @@ public class DateTime implements Comparable<DateTime> {
         if (startDateTime != null && !startDateTime.isEmpty()) {
             this.start = LocalDateTime.parse(startDateTime.trim(), DateTimeUtil.DATE_FORMATTER);
             this.startValue = this.start.format(DateTimeUtil.DATE_STRING_FORMATTER);
-            if (!isValidDateTime(this.start, this.end)) {
+            if (!isValidEvent(this.start, this.end)) {
                 throw new IllegalValueException(MESSAGE_DATETIME_CONSTRAINTS);
             }
         } else {
@@ -82,14 +82,10 @@ public class DateTime implements Comparable<DateTime> {
     }
 
     /**
-     * Returns true if a given string is a valid task dateTime.
+     * Returns true if a given string is a valid task event.
      */
-    public static boolean isValidDateTime(LocalDateTime startDateTime, LocalDateTime endDateTime) {
-        if (startDateTime != null && endDateTime != null) {
-            return (startDateTime.isBefore(endDateTime));
-        } else {
-            return false;
-        }
+    public static boolean isValidEvent(LocalDateTime startDateTime, LocalDateTime endDateTime) {
+        return (startDateTime.isBefore(endDateTime));
     }
 
     @Override
