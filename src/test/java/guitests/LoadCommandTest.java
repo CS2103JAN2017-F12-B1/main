@@ -7,7 +7,6 @@ import java.util.Date;
 
 import org.junit.Test;
 
-import savvytodo.TestApp;
 import savvytodo.model.TaskManager;
 import savvytodo.model.task.UniqueTaskList.DuplicateTaskException;
 import savvytodo.storage.StorageManager;
@@ -26,17 +25,21 @@ public class LoadCommandTest extends TaskManagerGuiTest {
     // @@author A0140036X
     /**
      * Tests loading of new file that doesn't exist
-     * 1. Generate tasks
-     * 2. Create new storage file
-     * 3. Save tasks into storage file
-     * 4. Load tasks in UI using command
-     * 5. Compare generated tasks with tasks in list
+     * 1. Save data location
+     * 2. Generate tasks
+     * 3. Create new storage file
+     * 4. Save tasks into storage file
+     * 5. Load tasks in UI using command
+     * 6. Compare generated tasks with tasks in list
      *
-     * Resumes at the end
+     * Resumes with saved location at the end
      * @author A0140036X
      */
     @Test
-    public void newTaskManager() {
+    public void createNewTemporaryTaskManager() {
+        String savedLocation = this.statusBarHandle.getText();
+        String resumeCmd = "load " + savedLocation;
+        
         TaskManager tempTaskManager = new TaskManager();
         TestTask[] tasks = td.getGeneratedTasks(10);
         String testTaskManagerFilePath = TestUtil.getFilePathInSandboxFolder(new Date().getTime() + "_taskmanager.xml");
@@ -59,9 +62,6 @@ public class LoadCommandTest extends TaskManagerGuiTest {
 
         assertTrue(this.taskListPanel.isListMatching(tasks));
 
-        // resume
-        cmd = "load " + TestApp.SAVE_LOCATION_FOR_TESTING;
-        commandBox.runCommand(cmd);
+        commandBox.runCommand(resumeCmd);
     }
-
 }
