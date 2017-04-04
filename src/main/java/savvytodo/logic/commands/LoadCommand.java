@@ -24,10 +24,22 @@ public class LoadCommand extends Command {
         this.filePath = filePath;
     }
 
+    //@@author A0140036X
+    /**
+     * Will post a LoadStorageFileEvent to EventsCenter
+     */
     @Override
     public CommandResult execute() throws CommandException {
         EventsCenter.getInstance().post(new LoadStorageFileEvent(filePath));
-        return new CommandResult(String.format(MESSAGE_SUCCESS, filePath));
+        return new CommandResult(getSuccessMessage(filePath));
     }
 
+    //@@author A0140036X
+    /**
+     * Returns success message if file path was loaded successfully
+     * @param filePath file path of file
+     */
+    public static String getSuccessMessage(String filePath) {
+        return String.format(MESSAGE_SUCCESS, filePath);
+    }
 }

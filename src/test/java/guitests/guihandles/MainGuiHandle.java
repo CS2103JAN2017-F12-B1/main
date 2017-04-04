@@ -1,7 +1,6 @@
 package guitests.guihandles;
 
 import guitests.GuiRobot;
-import guitests.StatusBarHandle;
 import javafx.stage.Stage;
 import savvytodo.TestApp;
 
@@ -39,7 +38,7 @@ public class MainGuiHandle extends GuiHandle {
         return new AlertDialogHandle(guiRobot, primaryStage, title);
     }
 
-    public StatusBarHandle getStatusBar() {
-        return new StatusBarHandle(guiRobot, primaryStage, stageTitle);
+    public StatusBarFooterHandle getStatusBar() {
+        return new StatusBarFooterHandle(guiRobot, primaryStage, stageTitle);
     }
 }
