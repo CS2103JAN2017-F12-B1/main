@@ -61,11 +61,10 @@ public class MainApp extends Application {
 
     //@@author A0140036X
     /**
-     * Starts application. Updates UI with new logic and storage if UI already exists.
+     * Sets up application UI. Updates UI with new logic and storage if UI already exists.
      * @author A0140036X
      * @param configFilePath File path of json file containing configurations
-     * @param useSampleDataIfStorageFileNotFound If true, sample data is to be used if storage file is not found.
-     * If false, an empty task manager will be created.
+     * @param useSampleDataIfStorageFileNotFound True if sample data is to be loaded if storage file is not found.
      */
     public void initApplicationFromConfig(String configFilePath, boolean useSampleDataIfStorageFileNotFound) {
         config = initConfig(configFilePath);
@@ -84,6 +83,8 @@ public class MainApp extends Application {
             ui = new UiManager(logic, config, userPrefs);
         } else {
             ui.setLogic(logic);
+            ui.setConfig(config);
+            ui.refresh();
         }
     }
 
@@ -94,12 +95,13 @@ public class MainApp extends Application {
 
     //@@author A0140036X
     /**
-     * Initializes model based on storage. If storage file is not found, default task manager provided will be used.
+     * Initializes model based on storage. 
+     * If storage file is not found, default task manager provided will be used.
      * If task manager is null, sample task manager will be created.
      * @param storage
      * @param userPrefs
      * @param defaultTaskManager
-     * @return
+     * @return initialized Model
      */
     private Model initModelManager(Storage storage, UserPrefs userPrefs, TaskManager defaultTaskManager) {
         Optional<ReadOnlyTaskManager> taskManagerOptional;
@@ -214,12 +216,11 @@ public class MainApp extends Application {
         this.stop();
     }
 
+    //@@author A0140036X
     /**
      * Loads a new task manager file.
      * 1. Update and save config file with new storage file path
      * 2. Update UI with new logic
-     * 3. Save task manager into new file
-     * @author A0140036X
      */
     @Subscribe
     public void handleLoadStorageFileEvent(LoadStorageFileEvent event) {
@@ -236,13 +237,6 @@ public class MainApp extends Application {
 
         logger.info("Setting UI with new logic");
         initApplicationFromConfig(configFile, false);
-
-        try {
-            storage.saveTaskManager(model.getTaskManager());
-        } catch (IOException e) {
-            logger.severe("Failed to save task manager " + StringUtil.getDetails(e));
-            this.stop();
-        }
     }
 
     public static void main(String[] args) {
