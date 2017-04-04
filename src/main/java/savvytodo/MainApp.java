@@ -62,9 +62,10 @@ public class MainApp extends Application {
     //@@author A0140036X
     /**
      * Sets up application UI. Updates UI with new logic and storage if UI already exists.
+     * If useSampleDataIfStorageFileNotFound is true sample data will be loaded if storage file is not found.
      * @author A0140036X
      * @param configFilePath File path of json file containing configurations
-     * @param useSampleDataIfStorageFileNotFound True if sample data is to be loaded if storage file is not found.
+     * @param useSampleDataIfStorageFileNotFound
      */
     public void initApplicationFromConfig(String configFilePath, boolean useSampleDataIfStorageFileNotFound) {
         config = initConfig(configFilePath);
@@ -130,6 +131,11 @@ public class MainApp extends Application {
         LogsCenter.init(config);
     }
 
+    /**
+     * Loads config file from configFilePath. If not specified, MainApp.configFile will be used.
+     * @param configFilePath
+     * @return initialized Config
+     */
     protected Config initConfig(String configFilePath) {
         Config initializedConfig;
 
@@ -158,12 +164,33 @@ public class MainApp extends Application {
         return initializedConfig;
     }
 
+    /**
+     * Initialized user preferences from file stored in a Config object.
+     * Guarantees a UserPrefs
+     * @param config
+     * @return user preferences
+     */
     protected UserPrefs initPrefs(Config config) {
         assert config != null;
 
         String prefsFilePath = config.getUserPrefsFilePath();
         logger.info("Using prefs file : " + prefsFilePath);
 
+        UserPrefs initializedPrefs = loadUserPrefsFromFile(prefsFilePath);
+
+        //Update prefs file in case it was missing to begin with or there are new/unused fields
+        saveUserPrefs(initializedPrefs);
+        
+        return initializedPrefs;
+    }
+
+    //@@author A0140036X
+    /**
+     * Attempt to load user preferences from file
+     * Guarantees a UserPrefs even if file not found
+     * @return user preferences
+     */
+    private UserPrefs loadUserPrefsFromFile(String prefsFilePath) {
         UserPrefs initializedPrefs;
         try {
             Optional<UserPrefs> prefsOptional = storage.readUserPrefs();
@@ -176,17 +203,25 @@ public class MainApp extends Application {
             logger.warning("Problem while reading from the file. Will be starting with an empty TaskManager");
             initializedPrefs = new UserPrefs();
         }
-
-        //Update prefs file in case it was missing to begin with or there are new/unused fields
-        try {
-            storage.saveUserPrefs(initializedPrefs);
-        } catch (IOException e) {
-            logger.warning("Failed to save preference file : " + StringUtil.getDetails(e));
-        }
-
         return initializedPrefs;
     }
 
+    //@@author A0140036X
+    /**
+     * Attempt to save user preferences to storage
+     * @param prefs
+     * @return true if successful
+     */
+    protected boolean saveUserPrefs(UserPrefs prefs){
+        try {
+            storage.saveUserPrefs(prefs);
+            return true;
+        } catch (IOException e) {
+            logger.warning("Failed to save preference file : " + StringUtil.getDetails(e));
+            return false;
+        }
+    }
+    
     private void initEventsCenter() {
         EventsCenter.getInstance().registerHandler(this);
     }
