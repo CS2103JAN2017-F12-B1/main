@@ -78,10 +78,10 @@ public class UiManager extends ComponentManager implements Ui {
      * Sets config of instance
      * @return
      */
-    public void setConfig(Config config){
+    public void setConfig(Config config) {
         this.config = config;
     }
-    
+
     public MainWindow getMainWindow() {
         return mainWindow;
     }

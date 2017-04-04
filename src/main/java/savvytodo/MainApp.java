@@ -96,7 +96,7 @@ public class MainApp extends Application {
 
     //@@author A0140036X
     /**
-     * Initializes model based on storage. 
+     * Initializes model based on storage.
      * If storage file is not found, default task manager provided will be used.
      * If task manager is null, sample task manager will be created.
      * @param storage
