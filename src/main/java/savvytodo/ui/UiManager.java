@@ -65,11 +65,23 @@ public class UiManager extends ComponentManager implements Ui {
         return logic;
     }
 
+    //@@author A0140036X
+    /**
+     * Sets logic of instance
+     */
     public void setLogic(Logic logic) {
         this.logic = logic;
-        mainWindow.setLogic(logic);
     }
 
+    //@@author A0140036X
+    /**
+     * Sets config of instance
+     * @return
+     */
+    public void setConfig(Config config){
+        this.config = config;
+    }
+    
     public MainWindow getMainWindow() {
         return mainWindow;
     }
@@ -141,6 +153,13 @@ public class UiManager extends ComponentManager implements Ui {
     private void handleTaskPanelSelectionChangedEvent(TaskPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         mainWindow.loadTaskPage(event.getNewSelection());
+    }
+
+    @Override
+    public void refresh() {
+        mainWindow.setLogic(logic);
+        mainWindow.setConfig(config);
+        mainWindow.fillInnerParts();
     }
 
 }

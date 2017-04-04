@@ -118,6 +118,12 @@ public class MainWindow extends UiPart<Region> {
         });
     }
 
+    //@@author A0140036X
+    /**
+     * Fills the contents of the window.
+     * Will create new objects if UI has not been initialized.
+     * Logic will be updated if UI is already initialized.
+     */
     void fillInnerParts() {
         browserPanel = new BrowserPanel(browserPlaceholder);
 
@@ -139,6 +145,8 @@ public class MainWindow extends UiPart<Region> {
 
         if (commandBox == null) {
             commandBox = new CommandBox(getCommandBoxPlaceholder(), logic);
+        }else{
+            commandBox.setLogic(logic);
         }
     }
 
@@ -236,13 +244,22 @@ public class MainWindow extends UiPart<Region> {
         return logic;
     }
 
+    //@@author A0140036X
     /**
      * Sets the logic for the window
      * @param logic
      */
     public void setLogic(Logic logic) {
         this.logic = logic;
-        this.fillInnerParts();
+    }
+    
+    //@@author A0140036X
+    /**
+     * Sets config for the window
+     * @param config
+     */
+    public void setConfig(Config config){
+        this.config = config;
     }
 
     //@@author A0147827U

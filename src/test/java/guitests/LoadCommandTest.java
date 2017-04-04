@@ -16,19 +16,17 @@ import savvytodo.storage.StorageManager;
 import savvytodo.testutil.TestTask;
 import savvytodo.testutil.TestUtil;
 
+//@@author A0140036X
 /**
  * LoadCommandTest tests the load command which changes the storage file used
- *
- * @@author A0140036X
- *
  */
 
 public class LoadCommandTest extends TaskManagerGuiTest {
 
-    // @@author A0140036X
+    //@@author A0140036X
     /**
      * Tests loading of new file that doesn't exist
-     * 1. Save data location
+     * 1. Save current data location
      * 2. Generate tasks
      * 3. Create new storage file
      * 4. Save tasks into storage file
@@ -36,12 +34,14 @@ public class LoadCommandTest extends TaskManagerGuiTest {
      * 6. Assert clear tasks
      * 7. Assert add task
      * 
-     * This test assumes if 5, 6, 7 is successful task manager has been loaded and linked to UI
-     * Resumes with saved location at the end
+     * Resumes with saved location.
+     * 
+     * This test assumes if 5, 6, 7 is successful task manager has been loaded and linked to UI 
+     * and commands will work on the updated data.
      * @author A0140036X
      */
     @Test
-    public void createNewTemporaryTaskManagerAndLoad() {
+    public void createTemporaryTaskManagerAndLoad() {
         String savedLocation = this.statusBarHandle.getSaveLocationText();
         String resumeCmd = "load " + savedLocation;
 
@@ -63,32 +63,30 @@ public class LoadCommandTest extends TaskManagerGuiTest {
         }
         
         assertLoad(testTaskManagerFilePath, testTasks);
-        assertClear();
         assertAdd(testTasks);
+        assertClear();
 
         commandBox.runCommand(resumeCmd);
     }
 
     //@@author A0140036X
     /**
+     * Tests Load Command
      * Loads task manager from file path
      * @param testTaskManagerFilePath path of task manager file to load
      * @param tasks 
      */
     private void assertLoad(String testTaskManagerFilePath, ReadOnlyTask[] tasks) {
         String cmd = "load " + testTaskManagerFilePath;
-
         commandBox.runCommand(cmd);
 
-        assertTrue(this.taskListPanel.isListMatching(tasks));
+        assertTrue(taskListPanel.isListMatching(tasks));
         assertResultMessage(LoadCommand.getSuccessMessage(testTaskManagerFilePath));
-        
-        sleep(1000000);
     }
 
     //@@author A0140036X
     /**
-     * Test clear command
+     * Tests clear command
      */
     private void assertClear() {
         commandBox.runCommand(ClearCommand.COMMAND_WORD);
@@ -98,13 +96,13 @@ public class LoadCommandTest extends TaskManagerGuiTest {
 
     //@@author A0140036X
     /**
-     * Test add command
+     * Tests add command
      * @param currentList 
      */
     private void assertAdd(TestTask[] currentList) {
         TestTask taskToAdd = td.getTypicalTasks()[0];
-        commandBox.runCommand(taskToAdd.getAddCommand());
         TestTask[] expectedList = TestUtil.addTasksToList(currentList, taskToAdd);
+        commandBox.runCommand(taskToAdd.getAddCommand());
         assertTrue(taskListPanel.isListMatching(expectedList));
     }
 }

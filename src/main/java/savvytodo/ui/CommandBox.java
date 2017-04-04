@@ -21,7 +21,7 @@ public class CommandBox extends UiPart<Region> {
     private static final String FXML = "CommandBox.fxml";
     public static final String ERROR_STYLE_CLASS = "error";
 
-    private final Logic logic;
+    private Logic logic;
 
     @FXML
     private TextField commandTextField;
@@ -95,6 +95,15 @@ public class CommandBox extends UiPart<Region> {
      */
     private void setStyleToIndicateCommandFailure() {
         commandTextField.getStyleClass().add(ERROR_STYLE_CLASS);
+    }
+
+    //@@author A0140036X
+    /**
+     * Sets logic for command box
+     * @param logic
+     */
+    public void setLogic(Logic logic) {
+        this.logic = logic;
     }
 
 }
