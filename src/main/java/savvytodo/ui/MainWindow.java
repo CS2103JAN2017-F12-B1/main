@@ -145,7 +145,7 @@ public class MainWindow extends UiPart<Region> {
 
         if (commandBox == null) {
             commandBox = new CommandBox(getCommandBoxPlaceholder(), logic);
-        }else{
+        } else {
             commandBox.setLogic(logic);
         }
     }
@@ -252,13 +252,13 @@ public class MainWindow extends UiPart<Region> {
     public void setLogic(Logic logic) {
         this.logic = logic;
     }
-    
+
     //@@author A0140036X
     /**
      * Sets config for the window
      * @param config
      */
-    public void setConfig(Config config){
+    public void setConfig(Config config) {
         this.config = config;
     }
 

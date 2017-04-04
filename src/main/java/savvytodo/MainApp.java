@@ -180,7 +180,7 @@ public class MainApp extends Application {
 
         //Update prefs file in case it was missing to begin with or there are new/unused fields
         saveUserPrefs(initializedPrefs);
-        
+
         return initializedPrefs;
     }
 
@@ -212,7 +212,7 @@ public class MainApp extends Application {
      * @param prefs
      * @return true if successful
      */
-    protected boolean saveUserPrefs(UserPrefs prefs){
+    protected boolean saveUserPrefs(UserPrefs prefs) {
         try {
             storage.saveUserPrefs(prefs);
             return true;
@@ -221,7 +221,7 @@ public class MainApp extends Application {
             return false;
         }
     }
-    
+
     private void initEventsCenter() {
         EventsCenter.getInstance().registerHandler(this);
     }
