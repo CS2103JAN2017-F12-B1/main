@@ -54,6 +54,7 @@ public abstract class TaskManagerGuiTest {
     protected CommandBoxHandle commandBox;
     protected BrowserPanelHandle browserPanel;
     protected StatusBarFooterHandle statusBarHandle;
+    protected GuiRobot guiRobot = new GuiRobot();
     
     private Stage stage;
 
@@ -70,7 +71,7 @@ public abstract class TaskManagerGuiTest {
     @Before
     public void setup() throws Exception {
         FxToolkit.setupStage((stage) -> {
-            mainGui = new MainGuiHandle(new GuiRobot(), stage);
+            mainGui = new MainGuiHandle(guiRobot, stage);
             mainMenu = mainGui.getMainMenu();
             taskListPanel = mainGui.getTaskListPanel();
             resultDisplay = mainGui.getResultDisplay();
@@ -136,7 +137,12 @@ public abstract class TaskManagerGuiTest {
         Platform.runLater(() -> EventsCenter.getInstance().post(e));
     }
 
+    //@@author A0140036X
+    /**
+     * Simulates a delay
+     * @param milliseconds Time to sleep in milliseconds
+     */
     public void sleep(int milliseconds) {
-        new GuiRobot().sleep((milliseconds));
+        guiRobot.sleep((milliseconds));
     }
 }
