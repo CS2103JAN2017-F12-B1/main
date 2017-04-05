@@ -33,21 +33,19 @@ public class LoadCommandTest extends TaskManagerGuiTest {
      * 5. Assert load tasks
      * 6. Assert clear tasks
      * 7. Assert add task
-     * 
      * Resumes with saved location.
-     * 
-     * This test assumes if 5, 6, 7 is successful task manager has been loaded and linked to UI 
+     * This test assumes if 5, 6, 7 is successful task manager has been loaded and linked to UI
      * and commands will work on the updated data.
      * @author A0140036X
      */
     @Test
     public void createTemporaryTaskManagerAndLoad() {
         String savedLocation = this.statusBarHandle.getSaveLocationText();
-        String resumeCmd = "load " + savedLocation;
 
         TaskManager tempTaskManager = new TaskManager();
         TestTask[] testTasks = td.getGeneratedTasks(10);
-        String testTaskManagerFilePath = TestUtil.getFilePathInSandboxFolder(new Date().getTime() + "_taskmanager.xml");
+        String testTaskManagerFileName = new Date().getTime() + "_taskmanager.xml";
+        String testTaskManagerFilePath = TestUtil.getFilePathInSandboxFolder(testTaskManagerFileName);
 
         try {
             tempTaskManager.setTasks(TestUtil.asList(testTasks));
@@ -61,20 +59,23 @@ public class LoadCommandTest extends TaskManagerGuiTest {
         } catch (IOException e) {
             assertTrue(false);
         }
-        
+
         assertLoad(testTaskManagerFilePath, testTasks);
         assertAdd(testTasks);
         assertClear();
 
+        String resumeCmd = "load " + savedLocation;
         commandBox.runCommand(resumeCmd);
     }
 
     //@@author A0140036X
     /**
-     * Tests Load Command
+     * Tests Load Command.
+     * <p>
      * Loads task manager from file path
+     * </p>
      * @param testTaskManagerFilePath path of task manager file to load
-     * @param tasks 
+     * @param tasks tasks to check against those loaded from file
      */
     private void assertLoad(String testTaskManagerFilePath, ReadOnlyTask[] tasks) {
         String cmd = "load " + testTaskManagerFilePath;
@@ -85,9 +86,7 @@ public class LoadCommandTest extends TaskManagerGuiTest {
     }
 
     //@@author A0140036X
-    /**
-     * Tests clear command
-     */
+    /** Tests clear command. */
     private void assertClear() {
         commandBox.runCommand(ClearCommand.COMMAND_WORD);
         assertListSize(0);
@@ -96,13 +95,15 @@ public class LoadCommandTest extends TaskManagerGuiTest {
 
     //@@author A0140036X
     /**
-     * Tests add command
-     * @param currentList 
+     * Tests add command.
+     * @param currentList list to add task to
+     * @return new list with added task
      */
-    private void assertAdd(TestTask[] currentList) {
+    private TestTask[] assertAdd(TestTask[] currentList) {
         TestTask taskToAdd = td.getTypicalTasks()[0];
         TestTask[] expectedList = TestUtil.addTasksToList(currentList, taskToAdd);
         commandBox.runCommand(taskToAdd.getAddCommand());
         assertTrue(taskListPanel.isListMatching(expectedList));
+        return expectedList;
     }
 }

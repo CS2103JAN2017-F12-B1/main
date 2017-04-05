@@ -3,11 +3,12 @@ package guitests.guihandles;
 import org.controlsfx.control.StatusBar;
 
 import guitests.GuiRobot;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 //@@author A0140036X
 /**
- * A handle for the StatusBarFooter ui
+ * A handle for the StatusBarFooter ui.
  */
 public class StatusBarFooterHandle extends GuiHandle {
     private static final String STATUS_BAR_SAVE_LOCATION_ID = "#saveLocationStatus";
@@ -17,11 +18,12 @@ public class StatusBarFooterHandle extends GuiHandle {
     }
 
     /**
-     * 
-     * @return location of current taskmanager file
+     * Returns location of current save location show in UI.
+     * @return location of current task manager file
      */
-    public String getSaveLocationText(){
-        StatusBar saveLocation = (StatusBar) primaryStage.getScene().lookup(STATUS_BAR_SAVE_LOCATION_ID);
+    public String getSaveLocationText() {
+        Scene primaryScene = primaryStage.getScene();
+        StatusBar saveLocation = (StatusBar) primaryScene.lookup(STATUS_BAR_SAVE_LOCATION_ID);
         return saveLocation.getText();
     }
 }
