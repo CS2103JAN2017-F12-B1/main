@@ -55,7 +55,7 @@ public abstract class TaskManagerGuiTest {
     protected BrowserPanelHandle browserPanel;
     protected StatusBarFooterHandle statusBarHandle;
     protected GuiRobot guiRobot = new GuiRobot();
-    
+
     private Stage stage;
 
     @BeforeClass
@@ -133,13 +133,14 @@ public abstract class TaskManagerGuiTest {
     }
 
     public void raise(BaseEvent e) {
-        //JUnit doesn't run its test cases on the UI thread. Platform.runLater is used to post event on the UI thread.
+        // JUnit doesn't run its test cases on the UI thread. Platform.runLater
+        // is used to post event on the UI thread.
         Platform.runLater(() -> EventsCenter.getInstance().post(e));
     }
 
-    //@@author A0140036X
+    // @@author A0140036X
     /**
-     * Simulates a delay
+     * Simulates a delay.
      * @param milliseconds Time to sleep in milliseconds
      */
     public void sleep(int milliseconds) {
