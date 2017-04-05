@@ -37,4 +37,8 @@ public class MainGuiHandle extends GuiHandle {
         guiRobot.sleep(300);
         return new AlertDialogHandle(guiRobot, primaryStage, title);
     }
+
+    public StatusBarFooterHandle getStatusBar() {
+        return new StatusBarFooterHandle(guiRobot, primaryStage, stageTitle);
+    }
 }

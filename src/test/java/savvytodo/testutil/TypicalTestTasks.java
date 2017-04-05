@@ -91,7 +91,7 @@ public class TypicalTestTasks {
 
     //@@author A0140036X
     /**
-     * generates a list of tasks with random details
+     * generates a list of unique tasks with random details
      * @author A0140036X
      * @return
      */
