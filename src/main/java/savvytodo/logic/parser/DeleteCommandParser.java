@@ -14,18 +14,19 @@ import savvytodo.logic.commands.IncorrectCommand;
 public class DeleteCommandParser {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the DeleteCommand
-     * and returns an DeleteCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the DeleteCommand,
+     * converts the relevant list view index to the source list index,
+     * and then returns an DeleteCommand object for execution.
      */
     public Command parse(String args) {
 
-        Optional<Integer> index = ParserUtil.parseIndex(args);
-        if (!index.isPresent()) {
+        Optional<TaskIndex> taskIndex = ParserUtil.parseIndex(args);
+
+        if (!taskIndex.isPresent()) {
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
-
-        return new DeleteCommand(index.get());
+        return new DeleteCommand(taskIndex.get());
     }
 
 }

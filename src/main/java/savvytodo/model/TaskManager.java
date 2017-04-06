@@ -26,6 +26,9 @@ public class TaskManager implements ReadOnlyTaskManager {
     private final UniqueTaskList tasks;
     private final UniqueCategoryList categories;
 
+    private final UniqueTaskList floatingTasks;
+    private final UniqueTaskList eventTasks;
+
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
@@ -36,6 +39,9 @@ public class TaskManager implements ReadOnlyTaskManager {
     {
         tasks = new UniqueTaskList();
         categories = new UniqueCategoryList();
+        floatingTasks = new UniqueTaskList();
+        eventTasks = new UniqueTaskList();
+
     }
 
     public TaskManager() {}
@@ -72,10 +78,45 @@ public class TaskManager implements ReadOnlyTaskManager {
             assert false : "Task Manager should not have duplicate categories";
         }
         syncMasterCategoryListWith(tasks);
+        try {
+            updateSubTaskList();
+        } catch (DuplicateTaskException e) {
+            e.printStackTrace();
+        }
     }
 
+    public void addCategory(Category t) throws UniqueCategoryList.DuplicateCategoryException {
+        categories.add(t);
+    }
+
+    //@@author A0147827U
     /**
-     * Adds a task to the task manager.
+     * Scans through the main task list and sieves out floating tasks to floatingTaskList
+     *
+     */
+    public void updateSubTaskList() throws DuplicateTaskException {
+        System.out.println("Before sieving: task list size : " + tasks.asObservableList().size());
+        for (Task t : tasks) {
+            switch(t.getType()) {
+            case FLOATING:
+                floatingTasks.add(t);
+                System.out.println("floating task found : " + t.getName());
+                break;
+            case EVENT:
+            default:
+                eventTasks.add(t);
+                System.out.println("event task found : " + t.getName());
+                break;
+            }
+        }
+
+    }
+
+////task-level operations
+
+    //@@author A0147827U
+    /**
+     * Adds a task to the specified list.
      * Also checks the new task's categories and updates {@link #categories} with any new categoies found,
      * and updates the Category objects in the task to point to those in {@link #categories}.
      *
@@ -83,17 +124,21 @@ public class TaskManager implements ReadOnlyTaskManager {
      */
     public void addTask(Task p) throws UniqueTaskList.DuplicateTaskException {
         syncMasterCategoryListWith(p);
-        tasks.add(p);
+        switch(p.getType()) {
+        case FLOATING:
+            floatingTasks.add(p);
+            break;
+        case EVENT:
+        default:
+            eventTasks.add(p);
+            break;
+        }
+        tasks.add(p); //global task list storage
     }
-
-    public void addCategory(Category t) throws UniqueCategoryList.DuplicateCategoryException {
-        categories.add(t);
-    }
-
-////task-level operations
 
     /**
      * Updates the task in the list at position {@code index} with {@code editedReadOnlyTask}.
+     * Moves the task to the new corresponding list (if it switches between floating and event)
      * {@code TaskManager}'s category list will be updated with the categorys of {@code editedReadOnlyTask}.
      * @see #syncMasterCategoryListWith(Task)
      *
@@ -110,7 +155,36 @@ public class TaskManager implements ReadOnlyTaskManager {
         // TODO: the categorys master list will be updated even though the below line fails.
         // This can cause the categorys master list to have additional categorys that are not categoryged to any task
         // in the task list.
-        tasks.updateTask(index, editedTask);
+
+        tasks.updateTask(index, editedTask); //global task list storage
+    }
+
+
+    public boolean removeTask(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException, DuplicateTaskException {
+        switch(key.getType()) {
+        case FLOATING:
+            if (floatingTasks.remove(key)) {
+                if (tasks.remove(key)) {
+                    return true;
+                } else {
+                    throw new UniqueTaskList.TaskNotFoundException();
+                }
+            } else {
+                throw new UniqueTaskList.TaskNotFoundException();
+            }
+        case EVENT:
+        default:
+            if (eventTasks.remove(key)) {
+                if (tasks.remove(key)) {
+                    return true;
+                } else {
+                    throw new UniqueTaskList.TaskNotFoundException();
+                }
+            } else {
+                throw new UniqueTaskList.TaskNotFoundException();
+            }
+        }
+
     }
 
 ////category-level operations
@@ -145,14 +219,6 @@ public class TaskManager implements ReadOnlyTaskManager {
         tasks.forEach(this::syncMasterCategoryListWith);
     }
 
-    public boolean removeTask(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException {
-        if (tasks.remove(key)) {
-            return true;
-        } else {
-            throw new UniqueTaskList.TaskNotFoundException();
-        }
-    }
-
 //// util methods
 
     @Override
@@ -164,6 +230,14 @@ public class TaskManager implements ReadOnlyTaskManager {
     @Override
     public ObservableList<ReadOnlyTask> getTaskList() {
         return new UnmodifiableObservableList<>(tasks.asObservableList());
+    }
+
+    public ObservableList<ReadOnlyTask> getFloatingTaskList() {
+        return new UnmodifiableObservableList<>(floatingTasks.asObservableList());
+    }
+
+    public ObservableList<ReadOnlyTask> getEventTaskList() {
+        return new UnmodifiableObservableList<>(eventTasks.asObservableList());
     }
 
     @Override

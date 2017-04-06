@@ -5,6 +5,7 @@ import savvytodo.commons.core.Messages;
 import savvytodo.commons.core.UnmodifiableObservableList;
 import savvytodo.commons.events.ui.JumpToListRequestEvent;
 import savvytodo.logic.commands.exceptions.CommandException;
+import savvytodo.logic.parser.TaskIndex;
 import savvytodo.model.task.ReadOnlyTask;
 
 /**
@@ -12,7 +13,7 @@ import savvytodo.model.task.ReadOnlyTask;
  */
 public class SelectCommand extends Command {
 
-    public final int targetIndex;
+    public final TaskIndex targetIndex;
 
     public static final String COMMAND_WORD = "select";
 
@@ -23,21 +24,23 @@ public class SelectCommand extends Command {
 
     public static final String MESSAGE_SELECT_TASK_SUCCESS = "Selected task: %1$s";
 
-    public SelectCommand(int targetIndex) {
+    public SelectCommand(TaskIndex targetIndex) {
         this.targetIndex = targetIndex;
     }
 
     @Override
     public CommandResult execute() throws CommandException {
 
-        UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+        UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList(targetIndex.getTaskType());
 
-        if (lastShownList.size() < targetIndex) {
+        if (lastShownList.size() < targetIndex.getIndex()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex - 1));
-        return new CommandResult(String.format(MESSAGE_SELECT_TASK_SUCCESS, targetIndex));
+        EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex.getTaskType(),
+                targetIndex.getIndex() - 1));
+
+        return new CommandResult(String.format(MESSAGE_SELECT_TASK_SUCCESS, targetIndex.getIndex()));
 
     }
 

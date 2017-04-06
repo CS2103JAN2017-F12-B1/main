@@ -6,6 +6,7 @@ import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import savvytodo.commons.core.ComponentManager;
 import savvytodo.commons.core.LogsCenter;
@@ -30,7 +31,9 @@ import savvytodo.model.task.DateTime;
 import savvytodo.model.task.ReadOnlyTask;
 import savvytodo.model.task.Status;
 import savvytodo.model.task.Task;
+import savvytodo.model.task.TaskType;
 import savvytodo.model.task.UniqueTaskList;
+import savvytodo.model.task.UniqueTaskList.DuplicateTaskException;
 import savvytodo.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
@@ -43,8 +46,11 @@ public class ModelManager extends ComponentManager implements Model {
     private static final String TASK_CONFLICTED = "\nTask %1$s: %2$s";
 
     private final TaskManager taskManager;
-    private final FilteredList<ReadOnlyTask> filteredTasks;
     private final UndoRedoOperationCentre undoRedoOpCentre;
+
+    //@@author A0147827U
+    private final FilteredList<ReadOnlyTask> filteredFloatingTasks;
+    private final FilteredList<ReadOnlyTask> filteredEventTasks;
 
     /**
      * Initializes a ModelManager with the given taskManager and userPrefs.
@@ -57,8 +63,11 @@ public class ModelManager extends ComponentManager implements Model {
 
         this.taskManager = new TaskManager(taskManager);
         this.undoRedoOpCentre = new UndoRedoOperationCentre();
-        filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
+        filteredEventTasks = new FilteredList<>(this.taskManager.getEventTaskList());
+        filteredFloatingTasks = new FilteredList<>(this.taskManager.getFloatingTaskList());
+
     }
+
 
     public ModelManager() {
         this(new TaskManager(), new UserPrefs());
@@ -72,6 +81,7 @@ public class ModelManager extends ComponentManager implements Model {
         undoRedoOpCentre.resetRedo();
 
         taskManager.resetData(newData);
+
         indicateTaskManagerChanged();
     }
 
@@ -88,7 +98,11 @@ public class ModelManager extends ComponentManager implements Model {
     //@@author A0124863A
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
-        taskManager.removeTask(target);
+        try {
+            taskManager.removeTask(target);
+        } catch (DuplicateTaskException e) {
+            e.printStackTrace();
+        }
 
         UndoDeleteOperation undoDelete = new UndoDeleteOperation(target);
         undoRedoOpCentre.storeUndoOperation(undoDelete);
@@ -101,7 +115,6 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         taskManager.addTask(task);
-
         UndoAddOperation undoAdd = new UndoAddOperation(task);
         undoRedoOpCentre.storeUndoOperation(undoAdd);
         undoRedoOpCentre.resetRedo();
@@ -116,8 +129,8 @@ public class ModelManager extends ComponentManager implements Model {
             throws UniqueTaskList.DuplicateTaskException {
         assert editedTask != null;
 
-        int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
-        Task originalTask = new Task(filteredTasks.get(filteredTaskListIndex));
+        int taskManagerIndex = getFilteredTasks(editedTask.getType()).getSourceIndex(filteredTaskListIndex);
+        Task originalTask = new Task(getFilteredTasks(editedTask.getType()).get(filteredTaskListIndex));
         UndoEditOperation undoEdit = new UndoEditOperation(filteredTaskListIndex, originalTask, editedTask);
         undoRedoOpCentre.storeUndoOperation(undoEdit);
         undoRedoOpCentre.resetRedo();
@@ -208,7 +221,7 @@ public class ModelManager extends ComponentManager implements Model {
             DateTime dateTimeToCheck) throws DateTimeException, IllegalValueException {
 
         int conflictCount = 1;
-        for (ReadOnlyTask task : taskManager.getTaskList()) {
+        for (ReadOnlyTask task : taskManager.getEventTaskList()) {
             if (task.isCompleted().value == Status.ONGOING
                     && DateTimeUtil.isDateTimeConflict(task.getDateTime(), dateTimeToCheck)) {
                 conflictingTasksStringBuilder
@@ -218,16 +231,53 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
-    //=========== Filtered Task List Accessors =============================================================
+    //@@author A0147827U
 
+    private FilteredList<ReadOnlyTask> getFilteredTasks(TaskType type) {
+        switch (type) {
+        case FLOATING:
+            return filteredFloatingTasks;
+        case EVENT:
+        default:
+            return filteredEventTasks;
+        }
+    }
+
+    //=========== Filtered Task List Accessors =============================================================
     @Override
-    public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
-        return new UnmodifiableObservableList<>(filteredTasks);
+    public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList(TaskType taskType) {
+        switch(taskType) {
+        case FLOATING:
+            return new UnmodifiableObservableList<>(getFilteredFloatingTaskList());
+        case EVENT:
+        default:
+            return new UnmodifiableObservableList<>(getFilteredEventTaskList());
+        }
+
     }
 
     @Override
+    public ObservableList<ReadOnlyTask> getFilteredEventTaskList() {
+        return filteredEventTasks;
+    }
+
+
+    @Override
+    public ObservableList<ReadOnlyTask> getFilteredFloatingTaskList() {
+        return filteredFloatingTasks;
+    }
+    /**
+     * Returns the current selected filtered task list
+     */
+
+
+    /**
+     *  Reset the filters for all the lists
+     */
+    @Override
     public void updateFilteredListToShowAll() {
-        filteredTasks.setPredicate(null);
+        filteredFloatingTasks.setPredicate(null);
+        filteredEventTasks.setPredicate(null);
     }
 
     @Override
@@ -237,12 +287,13 @@ public class ModelManager extends ComponentManager implements Model {
 
     //@@author A0124863A
     public void updateFilteredTaskList(Predicate<ReadOnlyTask> predicate) {
-        filteredTasks.setPredicate(predicate);
-
+        filteredFloatingTasks.setPredicate(predicate);
+        filteredEventTasks.setPredicate(predicate);
     }
 
     private void updateFilteredTaskList(Expression expression) {
-        filteredTasks.setPredicate(expression::satisfies);
+        filteredFloatingTasks.setPredicate(expression::satisfies);
+        filteredEventTasks.setPredicate(expression::satisfies);
     }
 
     //========== Inner classes/interfaces used for filtering =================================================
@@ -299,6 +350,15 @@ public class ModelManager extends ComponentManager implements Model {
             return "name=" + String.join(", ", nameKeyWords);
         }
     }
+
+    @Override
+    public int getTotalFilteredListSize() {
+        return getFilteredEventTaskList().size() + getFilteredFloatingTaskList().size();
+    }
+
+
+
+
 
 
 
