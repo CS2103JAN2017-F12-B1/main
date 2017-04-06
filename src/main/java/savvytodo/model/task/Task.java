@@ -176,5 +176,10 @@ public class Task implements ReadOnlyTask {
     public String toString() {
         return getAsText();
     }
+    
+    //@@author A0147827U
+    public boolean isFloating() {
+        return getDateTime().getStartDate() == null && getDateTime().getEndDate() == null;
+    }
 
 }
