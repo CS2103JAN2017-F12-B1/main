@@ -40,6 +40,8 @@ public class UniqueTaskList implements Iterable<Task> {
             throw new DuplicateTaskException();
         }
         internalList.add(toAdd);
+        internalList.sort((Task task1, Task task2) -> task1.getDateTime().getDateTimeAdded().compareTo(
+                task2.getDateTime().getDateTimeAdded()));
     }
 
     /**

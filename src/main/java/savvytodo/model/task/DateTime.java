@@ -20,6 +20,7 @@ public class DateTime implements Comparable<DateTime> {
 
     private LocalDateTime start;
     private LocalDateTime end;
+    private LocalDateTime dateTimeAdded;
 
     public static final String MESSAGE_DATETIME_CONSTRAINTS = "Start date/time should not be after End date/time";
 
@@ -60,7 +61,7 @@ public class DateTime implements Comparable<DateTime> {
         } else {
             this.startValue = startDateTime;
         }
-
+        dateTimeAdded = LocalDateTime.now();
     }
 
     public DateTime(LocalDateTime startDateTime, LocalDateTime endDateTime) {
@@ -69,6 +70,8 @@ public class DateTime implements Comparable<DateTime> {
         this.end = endDateTime;
         this.endValue = this.end.format(DateTimeUtil.DATE_STRING_FORMATTER);
         this.startValue = this.start.format(DateTimeUtil.DATE_STRING_FORMATTER);
+        dateTimeAdded = LocalDateTime.now();
+
     }
 
     /**
@@ -172,5 +175,10 @@ public class DateTime implements Comparable<DateTime> {
     public void setEnd(LocalDateTime endDateTime) {
         this.end = endDateTime;
     }
+
+    public LocalDateTime getDateTimeAdded() {
+        return dateTimeAdded;
+    }
+
 
 }
