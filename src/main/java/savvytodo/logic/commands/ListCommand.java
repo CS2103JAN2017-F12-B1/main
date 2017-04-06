@@ -11,7 +11,7 @@ import savvytodo.model.task.Status;
 
 //@@author A0124863A
 /**
- * Lists all tasks in the task manager to the user.
+ * Lists all tasks or by category or by priority or by status in the task manager to the user.
  */
 public class ListCommand extends Command {
 
@@ -39,6 +39,10 @@ public class ListCommand extends Command {
         this.status = status;
     }
 
+    /**
+     * Finds if the input category is in the category list of the task manager
+     *
+     */
     public Optional<Category> findCategoryInModel(String key) {
         for (Category c: model.getTaskManager().getCategoryList()) {
             if (c.categoryName.equalsIgnoreCase(key)) {
