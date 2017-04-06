@@ -15,6 +15,7 @@ import savvytodo.model.task.UniqueTaskList.DuplicateTaskException;
 import savvytodo.storage.StorageManager;
 import savvytodo.testutil.TestTask;
 import savvytodo.testutil.TestUtil;
+import savvytodo.testutil.UiState;
 
 //@@author A0140036X
 /**
@@ -25,7 +26,58 @@ public class LoadCommandTest extends TaskManagerGuiTest {
 
     //@@author A0140036X
     /**
-     * Tests loading of new file that doesn't exist
+     * Manages the state of UI for Load command tests.
+     *
+     * Load command requires changes in data used in UI and jUnit does not guarantee
+     * these tests to run after all the other tests so a mechanism must be in place to resume
+     * state of app.
+     *
+     */
+    public static class LoadUiState extends UiState {
+
+        private String savedLocation;
+
+        public LoadUiState(LoadCommandTest test) {
+            super(test);
+        }
+
+        //@@author A0140036X
+        /**
+         * @see UiState#onSaveState()
+         * Records file path location from UI.
+         */
+        @Override
+        public void onSaveState() {
+            this.savedLocation = getGuiTest().statusBarHandle.getSaveLocationText();
+        }
+
+        //@@author A0140036X
+        /**
+         * @see UiState#onSaveState()
+         * Loads savedLocation
+         */
+        @Override
+        public void onResumeState() {
+            ((LoadCommandTest) getGuiTest()).loadFromFilePath(savedLocation);
+        }
+
+    }
+
+    //@@author A0140036X
+    /**
+     * Tests loading of non existent file.
+     */
+    @Test
+    public void load_nonExistentFile() {
+        LoadUiState state = new LoadUiState(this);
+        state.saveState();
+        assertLoad(getNewTestStorageFileName(), new ReadOnlyTask[0]);
+        state.resumeState();
+    }
+
+    //@@author A0140036X
+    /**
+     * Tests loading of file.
      * 1. Save current data location
      * 2. Generate tasks
      * 3. Create new storage file
@@ -39,13 +91,13 @@ public class LoadCommandTest extends TaskManagerGuiTest {
      * @author A0140036X
      */
     @Test
-    public void createTemporaryTaskManagerAndLoad() {
-        String savedLocation = this.statusBarHandle.getSaveLocationText();
+    public void load_createTemporaryTaskManagerAndLoad() {
+        LoadUiState state = new LoadUiState(this);
+        state.saveState();
 
         TaskManager tempTaskManager = new TaskManager();
         TestTask[] testTasks = td.getGeneratedTasks(10);
-        String testTaskManagerFileName = new Date().getTime() + "_taskmanager.xml";
-        String testTaskManagerFilePath = TestUtil.getFilePathInSandboxFolder(testTaskManagerFileName);
+        String testTaskManagerFilePath = getNewTestStorageFileName();
 
         try {
             tempTaskManager.setTasks(TestUtil.asList(testTasks));
@@ -64,8 +116,16 @@ public class LoadCommandTest extends TaskManagerGuiTest {
         assertAdd(testTasks);
         assertClear();
 
-        String resumeCmd = "load " + savedLocation;
-        commandBox.runCommand(resumeCmd);
+        state.resumeState();
+    }
+
+    //@@author A0140036X
+    /**
+     * returns a valid file path for storage file that does not exist.
+     */
+    private String getNewTestStorageFileName() {
+        String testTaskManagerFileName = new Date().getTime() + "_taskmanager.xml";
+        return TestUtil.getFilePathInSandboxFolder(testTaskManagerFileName);
     }
 
     //@@author A0140036X
@@ -78,9 +138,7 @@ public class LoadCommandTest extends TaskManagerGuiTest {
      * @param tasks tasks to check against those loaded from file
      */
     private void assertLoad(String testTaskManagerFilePath, ReadOnlyTask[] tasks) {
-        String cmd = "load " + testTaskManagerFilePath;
-        commandBox.runCommand(cmd);
-
+        loadFromFilePath(testTaskManagerFilePath);
         assertTrue(taskListPanel.isListMatching(tasks));
         assertResultMessage(LoadCommand.getSuccessMessage(testTaskManagerFilePath));
     }
@@ -105,5 +163,14 @@ public class LoadCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand(taskToAdd.getAddCommand());
         assertTrue(taskListPanel.isListMatching(expectedList));
         return expectedList;
+    }
+
+    //@@author A0140036X
+    /**
+     * Enters load command into ui
+     */
+    private void loadFromFilePath(String filePath) {
+        String cmd = "load " + filePath;
+        commandBox.runCommand(cmd);
     }
 }
