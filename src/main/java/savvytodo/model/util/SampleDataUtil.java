@@ -1,7 +1,6 @@
 package savvytodo.model.util;
 
 import savvytodo.commons.exceptions.IllegalValueException;
-import savvytodo.commons.util.StringUtil;
 import savvytodo.model.ReadOnlyTaskManager;
 import savvytodo.model.TaskManager;
 import savvytodo.model.category.UniqueCategoryList;
@@ -50,7 +49,6 @@ public class SampleDataUtil {
         try {
             TaskManager sampleAB = new TaskManager();
             for (Task sampleTask : getSampleTasks()) {
-                sampleTask.getDateTime().timestamp = StringUtil.EMPTY_STRING;
                 sampleAB.addTask(sampleTask);
             }
             return sampleAB;

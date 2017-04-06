@@ -83,6 +83,7 @@ public class XmlAdaptedTask {
         final Location location = new Location(this.location);
         final UniqueCategoryList categories = new UniqueCategoryList(taskCategories);
         final DateTime dateTime = new DateTime(this.dateTime.startValue, this.dateTime.endValue);
+        dateTime.timestamp = this.dateTime.timestamp;
         final Recurrence recurrence = new Recurrence(this.recurrence.type.toString(), this.recurrence.occurences);
         final Status status = new Status(this.status);
 

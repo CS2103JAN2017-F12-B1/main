@@ -62,7 +62,7 @@ public class DateTime implements Comparable<DateTime> {
         } else {
             this.startValue = startDateTime;
         }
-        setDateTimeStamp();
+        this.setDateTimeStamp();
     }
 
     public DateTime(LocalDateTime startDateTime, LocalDateTime endDateTime) {
@@ -71,7 +71,7 @@ public class DateTime implements Comparable<DateTime> {
         this.end = endDateTime;
         this.endValue = this.end.format(DateTimeUtil.DATE_STRING_FORMATTER);
         this.startValue = this.start.format(DateTimeUtil.DATE_STRING_FORMATTER);
-        setDateTimeStamp();
+        this.setDateTimeStamp();
     }
 
     /**
@@ -89,9 +89,9 @@ public class DateTime implements Comparable<DateTime> {
      */
     private void setDateTimeStamp() {
         if (timestamp == null || timestamp.isEmpty()) {
-            add = LocalDateTime.now();
+            this.setAdd(LocalDateTime.now());
         } else {
-            add = LocalDateTime.parse(timestamp);
+            this.setAdd(LocalDateTime.parse(timestamp));
         }
     }
 
