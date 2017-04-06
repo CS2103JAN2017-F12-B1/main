@@ -18,6 +18,7 @@ public class Priority implements Comparable<Priority> {
     private static final int COMPARE_TO_EQUAL = 0;
     private static final int COMPARE_TO_GREATER = 1;
 
+    //@@author A0140016B
     /**
      * @author A0140016B
      * Get type enum object from it's name, ignoring cases

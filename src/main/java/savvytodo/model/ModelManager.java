@@ -107,6 +107,8 @@ public class ModelManager extends ComponentManager implements Model {
         undoRedoOpCentre.storeUndoOperation(undoAdd);
         undoRedoOpCentre.resetRedo();
 
+        taskManager.sortByDatetimeAdded();
+
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
     }
@@ -142,6 +144,7 @@ public class ModelManager extends ComponentManager implements Model {
             Operation undo = undoRedoOpCentre.getUndoOperation();
             if (undo.getClass().isAssignableFrom(UndoMarkOperation.class)) {
                 UndoMarkOperation undoMark = (UndoMarkOperation) undo;
+                taskManager.sortByDatetimeAdded();
                 undoMark.setTaskManager(taskManager);
                 undoMark.setUndoRedoOperationCentre(undoRedoOpCentre);
                 undoMark.execute();
@@ -248,8 +251,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     //@@author A0140016B
     public void updateFilteredTaskListByDateTime(DateTime dateTime) {
-        updateFilteredTaskList(
-                new PredicateExpression(new DateTimeQualifier(dateTime)));
+        updateFilteredTaskList(new PredicateExpression(new DateTimeQualifier(dateTime)));
     }
 
     //========== Inner classes/interfaces used for filtering =================================================

@@ -4,6 +4,7 @@ import java.util.function.Predicate;
 
 import savvytodo.commons.exceptions.IllegalValueException;
 
+//author A0140016B
 /**
  * @author A0140016B
  *
@@ -51,19 +52,15 @@ public class Status {
                         && this.toString().equals(((Status) other).toString()));
     }
 
-
     //@@author A0124863A
     public Status(String status) throws IllegalValueException {
-
         if (status.equalsIgnoreCase(MESSAGE_STATUS_COMPLETED)) {
             value = COMPLETED;
         } else if (status.equalsIgnoreCase(MESSAGE_STATUS_ONGOING)) {
             value = ONGOING;
         } else {
             throw new IllegalValueException(MESSAGE_STATUS_CONSTRAINTS);
-
         }
-
     }
 
     //@@author A0124863A

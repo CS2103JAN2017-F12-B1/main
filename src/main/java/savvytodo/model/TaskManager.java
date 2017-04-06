@@ -1,6 +1,7 @@
 package savvytodo.model;
 
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -111,6 +112,67 @@ public class TaskManager implements ReadOnlyTaskManager {
         // This can cause the categorys master list to have additional categorys that are not categoryged to any task
         // in the task list.
         tasks.updateTask(index, editedTask);
+    }
+
+    // @@author A0140016B
+    /**
+     * Sorts internal list by ascending priority - Low to High
+     */
+    public void sortByAscendingPriority() {
+        this.tasks.getInternalList().sort(new Comparator<Task>() {
+            @Override
+            public int compare(Task o1, Task o2) {
+                return o1.getPriority().compareTo(o2.getPriority());
+            }
+        });
+    }
+
+    // @@author A0140016B
+    /**
+     * Sorts internal list by descending priority - High to Low
+     */
+    public void sortByDescendingPriority() {
+        this.tasks.getInternalList().sort(new Comparator<Task>() {
+            @Override
+            public int compare(Task o1, Task o2) {
+                return o2.getPriority().compareTo(o1.getPriority());
+            }
+        });
+    }
+
+    // @@author A0140016B
+    /**
+     * Sorts internal list by ascending end dateTime
+     */
+    public void sortByAscendingDatetime() {
+        this.tasks.getInternalList().sort(new Comparator<Task>() {
+            @Override
+            public int compare(Task o1, Task o2) {
+                return o1.getDateTime().compareTo(o2.getDateTime());
+            }
+        });
+    }
+
+    // @@author A0140016B
+    /**
+     * Sorts internal list by descending end dateTime
+     */
+    public void sortByDescendingDatetime() {
+        this.tasks.getInternalList().sort(new Comparator<Task>() {
+            @Override
+            public int compare(Task o1, Task o2) {
+                return o2.getDateTime().compareTo(o1.getDateTime());
+            }
+        });
+    }
+
+    //@@author A0124863A
+    /**
+     * Sorts internal list by added dateTime ascending order
+     */
+    public void sortByDatetimeAdded() {
+        this.tasks.getInternalList().sort((Task task1, Task task2) -> task1.getDateTime().getDateTimeAdded().compareTo(
+                task2.getDateTime().getDateTimeAdded()));
     }
 
 ////category-level operations
