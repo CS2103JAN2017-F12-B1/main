@@ -68,6 +68,7 @@ public interface Model {
     void redo() throws RedoFailureException;
 
     //@@author A0124863A
+    /** Record a mark or unmark for undo*/
     void recordMark(int index);
 
 

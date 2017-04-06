@@ -16,6 +16,8 @@ public interface CliSyntax {
     public static final Prefix PREFIX_DESCRIPTION = new Prefix("d/");
     public static final Prefix PREFIX_LOCATION = new Prefix("l/");
     public static final Prefix PREFIX_CATEGORY = new Prefix("c/");
+    public static final Prefix PREFIX_STATUS = new Prefix("s/");
+
 
     /* Patterns definitions */
     public static final Pattern KEYWORDS_ARGS_FORMAT =
