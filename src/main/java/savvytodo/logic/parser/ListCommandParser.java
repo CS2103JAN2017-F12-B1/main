@@ -3,6 +3,7 @@ package savvytodo.logic.parser;
 import static savvytodo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static savvytodo.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static savvytodo.logic.parser.CliSyntax.PREFIX_PRIORITY;
+import static savvytodo.logic.parser.CliSyntax.PREFIX_STATUS;
 
 import java.util.NoSuchElementException;
 
@@ -19,12 +20,12 @@ import savvytodo.logic.commands.ListCommand;
 public class ListCommandParser {
 
     public Command parse(String args) {
-        ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_CATEGORY);
+        ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_CATEGORY, PREFIX_STATUS);
         argsTokenizer.tokenize(args);
 
         try {
             return new ListCommand(argsTokenizer.getValue(PREFIX_PRIORITY),
-                    argsTokenizer.getValue(PREFIX_CATEGORY));
+                    argsTokenizer.getValue(PREFIX_CATEGORY), argsTokenizer.getValue(PREFIX_STATUS));
         } catch (NoSuchElementException nsee) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
         } catch (IllegalValueException ive) {

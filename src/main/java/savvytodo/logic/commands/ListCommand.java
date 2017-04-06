@@ -7,32 +7,42 @@ import savvytodo.commons.exceptions.IllegalValueException;
 import savvytodo.logic.commands.exceptions.CommandException;
 import savvytodo.model.category.Category;
 import savvytodo.model.task.Priority;
+import savvytodo.model.task.Status;
 
 //@@author A0124863A
 /**
- * Lists all tasks in the task manager to the user.
+ * Lists all tasks or by category or by priority or by status in the task manager to the user.
  */
 public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": List tasks based on priority or category or all. "
-            + "Parameters: [p/PRIORITY_LEVEL] or [c/CATEGORY] or none\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": List tasks based on priority or category or status or all. "
+            + "Parameters: [p/PRIORITY_LEVEL] or [c/CATEGORY] or [s/STATUS] or none\n"
             + "Example: " + COMMAND_WORD + " "
             + "p/high or " + COMMAND_WORD + " "
-            + "c/CS2103 or just " + COMMAND_WORD;
+            + "c/CS2103 or " + COMMAND_WORD + " "
+            + "s/completed or just " + COMMAND_WORD;
 
     public static final String LIST_BY_CATEGORY_PRIORITY_SUCCESS = "Listed all tasks in ";
     public static final String LIST_ALL_SUCCESS = "Listed all tasks";
 
     private Optional<String> priority;
     private Optional<String> category;
+    private Optional<String> status;
 
-    public ListCommand(Optional<String> priority, Optional<String> category) throws IllegalValueException {
+    public ListCommand(Optional<String> priority, Optional<String> category, Optional<String> status)
+            throws IllegalValueException {
         this.priority = priority;
         this.category = category;
+        this.status = status;
     }
 
+    /**
+     * Finds if the input category is in the category list of the task manager
+     *
+     */
     public Optional<Category> findCategoryInModel(String key) {
         for (Category c: model.getTaskManager().getCategoryList()) {
             if (c.categoryName.equalsIgnoreCase(key)) {
@@ -67,6 +77,17 @@ public class ListCommand extends Command {
 
             } else {
                 throw new CommandException(Messages.MESSAGE_CATEGORY_NOT_EXISTS);
+            }
+
+        } else if (status.isPresent()) {
+
+            try {
+                Status inputStatus = new Status(status.get());
+                model.updateFilteredTaskList(inputStatus.getPredicate());
+                return new CommandResult("Listed all " + status.get() + " tasks");
+
+            } catch (IllegalValueException ie) {
+                throw new CommandException(Status.MESSAGE_STATUS_CONSTRAINTS);
             }
 
         } else {
