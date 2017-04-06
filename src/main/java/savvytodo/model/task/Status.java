@@ -1,5 +1,9 @@
 package savvytodo.model.task;
 
+import java.util.function.Predicate;
+
+import savvytodo.commons.exceptions.IllegalValueException;
+
 /**
  * @author A0140016B
  *
@@ -9,6 +13,8 @@ package savvytodo.model.task;
 public class Status {
 
     public final boolean value;
+
+    public static final String MESSAGE_STATUS_CONSTRAINTS = "Task status should be 'Completed' or 'Ongoing'";
 
     public static final boolean COMPLETED = true;
     public static final boolean ONGOING = false;
@@ -50,4 +56,23 @@ public class Status {
                         && this.toString().equals(((Status) other).toString()));
     }
 
+
+    //@@author A0124863A
+    public Status(String status) throws IllegalValueException {
+
+        if (status.equalsIgnoreCase(MESSAGE_STATUS_COMPLETED)) {
+            value = COMPLETED;
+        } else if (status.equalsIgnoreCase(MESSAGE_STATUS_ONGOING)) {
+            value = ONGOING;
+        } else {
+            throw new IllegalValueException(MESSAGE_STATUS_CONSTRAINTS);
+
+        }
+
+    }
+
+    //@@author A0124863A
+    public Predicate<ReadOnlyTask> getPredicate() {
+        return (ReadOnlyTask task) -> task.isCompleted().equals(this);
+    }
 }
