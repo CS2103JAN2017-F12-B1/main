@@ -15,11 +15,6 @@ public class Status {
     private static final String MESSAGE_STATUS_COMPLETED = "Completed";
     private static final String MESSAGE_STATUS_ONGOING = "Ongoing";
 
-    public static final String MESSAGE_RECURR_CONSTRAINTS =
-            "If recurrence type is NONE, occurences can only be 0";
-    public static final String MESSAGE_RECURR_NOT_MATCH =
-            "Task recurrence type should be 'none', 'daily', 'weekly', 'monthly' or 'yearly'";
-
     /**
      * Defaults to Not Completed
      */

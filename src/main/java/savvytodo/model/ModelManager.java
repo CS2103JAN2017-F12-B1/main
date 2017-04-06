@@ -1,6 +1,7 @@
 package savvytodo.model;
 
 import java.time.DateTimeException;
+import java.time.LocalDateTime;
 import java.util.EmptyStackException;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -245,6 +246,12 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks.setPredicate(expression::satisfies);
     }
 
+    //@@author A0140016B
+    public void updateFilteredTaskListByDateTime(DateTime dateTime) {
+        updateFilteredTaskList(
+                new PredicateExpression(new DateTimeQualifier(dateTime)));
+    }
+
     //========== Inner classes/interfaces used for filtering =================================================
 
     interface Expression {
@@ -300,6 +307,59 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    //@@author A0140016B
+    /**
+     * Qualifier to sort by DateTime specified
+     * Task type must be event
+     */
+    private class DateTimeQualifier implements Qualifier {
 
+        private LocalDateTime startDateTime;
+        private LocalDateTime endDateTime;
+        private DateTime dateTimeQuery;
+
+        public DateTimeQualifier (DateTime dateTime) {
+            if (dateTime.getStartDate() != null) {
+                startDateTime = DateTimeUtil.setLocalTime(dateTime.getStartDate(),
+                        DateTimeUtil.FIRST_HOUR_OF_DAY,
+                        DateTimeUtil.FIRST_MINUTE_OF_DAY,
+                        DateTimeUtil.FIRST_SECOND_OF_DAY);
+                endDateTime = DateTimeUtil.setLocalTime(dateTime.getEndDate(),
+                        DateTimeUtil.LAST_HOUR_OF_DAY,
+                        DateTimeUtil.LAST_MINUTE_OF_DAY,
+                        DateTimeUtil.LAST_SECOND_OF_DAY);
+            } else {
+                startDateTime = DateTimeUtil.setLocalTime(dateTime.getEndDate(),
+                        DateTimeUtil.FIRST_HOUR_OF_DAY,
+                        DateTimeUtil.FIRST_MINUTE_OF_DAY,
+                        DateTimeUtil.FIRST_SECOND_OF_DAY);
+                endDateTime = DateTimeUtil.setLocalTime(dateTime.getEndDate(),
+                        DateTimeUtil.LAST_HOUR_OF_DAY,
+                        DateTimeUtil.LAST_MINUTE_OF_DAY,
+                        DateTimeUtil.LAST_SECOND_OF_DAY);
+            }
+
+            try {
+                dateTimeQuery = new DateTime();
+                dateTimeQuery.setStart(startDateTime);
+                dateTimeQuery.setEnd(endDateTime);
+            } catch (IllegalValueException e) {
+                dateTimeQuery = new DateTime(LocalDateTime.now(), LocalDateTime.now());
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            try {
+                return DateTimeUtil.isDateTimeWithinRange(task.getDateTime(), dateTimeQuery);
+            } catch (DateTimeException e) {
+                e.printStackTrace();
+            } catch (IllegalValueException e) {
+                e.printStackTrace();
+            }
+            return false;
+        }
+    }
 
 }
