@@ -53,7 +53,7 @@ public class LoadCommandTest extends TaskManagerGuiTest {
 
         //@@author A0140036X
         /**
-         * @see UiState#onSaveState()
+         * @see UiState#onResumeState()
          * Loads savedLocation
          */
         @Override
