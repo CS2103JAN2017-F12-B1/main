@@ -186,7 +186,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
-    //author @@author A0140016B
+    //@@author A0140016B
     /**
      * @author A0140016B
      * Returns a string of conflicting datetimes within a specified datetime
@@ -207,19 +207,26 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     //@@author A0140016B
-    private void appendConflictingTasks(
+    /**
+     * @param conflictingTasksStringBuilder to generate conflicting tasks in String
+     * @return number of task conflicted
+     */
+    private int appendConflictingTasks(
             StringBuilder conflictingTasksStringBuilder,
             DateTime dateTimeToCheck) throws DateTimeException, IllegalValueException {
 
-        int conflictCount = 1;
+        int conflictCount = 0;
+        int conflictPosition = 1;
         for (ReadOnlyTask task : taskManager.getTaskList()) {
             if (task.isCompleted().value == Status.ONGOING
                     && DateTimeUtil.isDateTimeConflict(task.getDateTime(), dateTimeToCheck)) {
                 conflictingTasksStringBuilder
-                        .append(String.format(TASK_CONFLICTED, conflictCount, task.getAsText()));
+                        .append(String.format(TASK_CONFLICTED, conflictPosition, task.getAsText()));
                 conflictCount++;
             }
+            conflictPosition++;
         }
+        return conflictCount;
     }
 
     //=========== Filtered Task List Accessors =============================================================

@@ -280,7 +280,7 @@ public class DateTimeUtil {
      * Modifies the recurDate based on the frequency for recurring tasks.
      * freqType cannot be null or None
      */
-    private static String getRecurDate(String recurDate, String freqType) {
+    public static String getRecurDate(String recurDate, String freqType) {
         LocalDateTime date = LocalDateTime.parse(recurDate, DATE_FORMATTER);
 
         switch (freqType.toLowerCase()) {
