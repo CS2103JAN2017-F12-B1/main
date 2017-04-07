@@ -1,0 +1,514 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<taskmanager>
+    <tasks>
+        <name>Assignment 1</name>
+        <priority>High</priority>
+        <description>Start early</description>
+        <location>None</location>
+        <dateTime>
+            <startValue>01/03/2017 1400</startValue>
+            <endValue>02/03/2017 1400</endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <categorized>friends</categorized>
+    </tasks>
+    <tasks>
+        <name>dental</name>
+        <priority>High</priority>
+        <description>Wisdom tooth</description>
+        <location>KTPH</location>
+        <dateTime>
+            <startValue>02/03/2017 1400</startValue>
+            <endValue>03/03/2017 1400</endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <categorized>owesMoney</categorized>
+        <categorized>friends</categorized>
+    </tasks>
+    <tasks>
+        <name>My birthday</name>
+        <priority>Medium</priority>
+        <description>Celebration @ 1pm</description>
+        <location>wall street</location>
+        <dateTime>
+            <startValue>03/03/2017 1400</startValue>
+            <endValue>04/03/2017 1400</endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+    </tasks>
+    <tasks>
+        <name>CS2103 Project Meeting</name>
+        <priority>Medium</priority>
+        <description>cornelia@google.com</description>
+        <location>10th street</location>
+        <dateTime>
+            <startValue>04/03/2017 1400</startValue>
+            <endValue>05/03/2017 1400</endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+    </tasks>
+    <tasks>
+        <name>CS2103 midterm test</name>
+        <priority>High</priority>
+        <description>2pm Mon 23 Aug</description>
+        <location>NUS MPSH 4</location>
+        <dateTime>
+            <startValue>05/03/2017 1400</startValue>
+            <endValue>06/03/2017 1400</endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+    </tasks>
+    <tasks>
+        <name>Informal Presentation</name>
+        <priority>Low</priority>
+        <description>3pm</description>
+        <location>NUS HALL</location>
+        <dateTime>
+            <startValue>06/03/2017 1400</startValue>
+            <endValue>07/03/2017 1400</endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+    </tasks>
+    <tasks>
+        <name>Project Milestone 2</name>
+        <priority>High</priority>
+        <description>anna@google.com</description>
+        <location>4th street</location>
+        <dateTime>
+            <startValue>07/03/2017 1400</startValue>
+            <endValue>08/03/2017 1400</endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+    </tasks>
+    <tasks>
+        <name>99 co Internship Interview</name>
+        <priority>High</priority>
+        <description>Face to face interview attire casual</description>
+        <location>One North</location>
+        <dateTime>
+            <startValue>11/06/2017 1000</startValue>
+            <endValue>11/06/2017 1600</endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+    </tasks>
+    <tasks>
+        <name>SoC games</name>
+        <priority>Medium</priority>
+        <description>Annual games</description>
+        <location>School of Computing</location>
+        <dateTime>
+            <startValue>11/03/2017 0800</startValue>
+            <endValue>11/03/2017 1600</endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+    </tasks>
+    <tasks>
+        <name>Meet up with Jane</name>
+        <priority>Medium</priority>
+        <description>Call interview</description>
+        <location>Arts Canteen</location>
+        <dateTime>
+            <startValue>10/03/2017 1000</startValue>
+            <endValue>10/03/2017 1600</endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+    </tasks>
+    <tasks>
+        <name>Study Session</name>
+        <priority>Low</priority>
+        <description>b1 gang</description>
+        <location>Marina Bay</location>
+        <dateTime>
+            <startValue>10/04/2017 1000</startValue>
+            <endValue>10/04/2017 1600</endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+    </tasks>
+    <tasks>
+        <name>CS2103 Lecture 1</name>
+        <priority>Low</priority>
+        <description>Webcast</description>
+        <location>iCube</location>
+        <dateTime>
+            <startValue>07/01/2017 1000</startValue>
+            <endValue>07/01/2017 1100</endValue>
+        </dateTime>
+        <status>false</status>
+    </tasks>
+    <tasks>
+        <name>CS2103 Lecture 2</name>
+        <priority>Low</priority>
+        <description>Webcast</description>
+        <location>iCube</location>
+        <dateTime>
+            <startValue>14/01/2017 1000</startValue>
+            <endValue>14/01/2017 1100</endValue>
+        </dateTime>
+        <status>false</status>
+    </tasks>
+    <tasks>
+        <name>CS2103 Lecture 3</name>
+        <priority>Low</priority>
+        <description>Webcast</description>
+        <location>iCube</location>
+        <dateTime>
+            <startValue>21/01/2017 1000</startValue>
+            <endValue>21/01/2017 1100</endValue>
+        </dateTime>
+        <status>false</status>
+    </tasks>
+    <tasks>
+        <name>CS2103 Lecture 4</name>
+        <priority>Low</priority>
+        <description>Webcast</description>
+        <location>iCube</location>
+        <dateTime>
+            <startValue>28/01/2017 1000</startValue>
+            <endValue>28/01/2017 1100</endValue>
+        </dateTime>
+        <status>false</status>
+    </tasks>
+    <tasks>
+        <name>CS2103 Lecture 5</name>
+        <priority>Low</priority>
+        <description>Webcast</description>
+        <location>iCube</location>
+        <dateTime>
+            <startValue>05/02/2017 1000</startValue>
+            <endValue>05/02/2017 1100</endValue>
+        </dateTime>
+        <status>false</status>
+    </tasks>
+    <tasks>
+        <name>CS2103 Lecture 6</name>
+        <priority>Low</priority>
+        <description>Webcast</description>
+        <location>iCube</location>
+        <dateTime>
+            <startValue>12/02/2017 1000</startValue>
+            <endValue>12/02/2017 1100</endValue>
+        </dateTime>
+        <status>false</status>
+    </tasks>
+    <tasks>
+        <name>CS2103 Lecture 7</name>
+        <priority>Low</priority>
+        <description>Webcast</description>
+        <location>iCube</location>
+        <dateTime>
+            <startValue>19/02/2017 1000</startValue>
+            <endValue>19/02/2017 1100</endValue>
+        </dateTime>
+        <status>false</status>
+    </tasks>
+    <tasks>
+        <name>CS2103 Lecture 8</name>
+        <priority>Low</priority>
+        <description>Webcast</description>
+        <location>iCube</location>
+        <dateTime>
+            <startValue>26/02/2017 1000</startValue>
+            <endValue>26/02/2017 1100</endValue>
+        </dateTime>
+        <status>false</status>
+    </tasks>
+    <tasks>
+        <name>CS2103 Lecture 9</name>
+        <priority>Low</priority>
+        <description>Webcast</description>
+        <location>iCube</location>
+        <dateTime>
+            <startValue>03/03/2017 1000</startValue>
+            <endValue>03/03/2017 1100</endValue>
+        </dateTime>
+        <status>false</status>
+    </tasks>
+    <tasks>
+        <name>CS2103 Lecture 10</name>
+        <priority>Low</priority>
+        <description>Webcast</description>
+        <location>iCube</location>
+        <dateTime>
+            <startValue>10/03/2017 1000</startValue>
+            <endValue>10/03/2017 1100</endValue>
+        </dateTime>
+        <status>false</status>
+    </tasks>
+    <tasks>
+        <name>CS2103 Lecture 11</name>
+        <priority>Low</priority>
+        <description>Webcast</description>
+        <location>iCube</location>
+        <dateTime>
+            <startValue>17/03/2017 1000</startValue>
+            <endValue>17/03/2017 1100</endValue>
+        </dateTime>
+        <status>false</status>
+    </tasks>
+    <tasks>
+        <name>CS2103 Lecture 12</name>
+        <priority>Low</priority>
+        <description>Webcast</description>
+        <location>iCube</location>
+        <dateTime>
+            <startValue>24/03/2017 1000</startValue>
+            <endValue>24/03/2017 1100</endValue>
+        </dateTime>
+        <status>false</status>
+    </tasks>
+    <tasks>
+        <name>CS2103 Lecture 13</name>
+        <priority>Low</priority>
+        <description>Webcast</description>
+        <location>iCube</location>
+        <dateTime>
+            <startValue>01/04/2017 1000</startValue>
+            <endValue>01/04/2017 1100</endValue>
+        </dateTime>
+        <status>false</status>
+    </tasks>
+    <tasks>
+        <name>CS2103 Lecture 14</name>
+        <priority>Low</priority>
+        <description>Webcast</description>
+        <location>iCube</location>
+        <dateTime>
+            <startValue>08/04/2017 1000</startValue>
+            <endValue>08/04/2017 1100</endValue>
+        </dateTime>
+        <status>false</status>
+    </tasks>
+    <tasks>
+        <name>Dance Class 1</name>
+        <priority>High</priority>
+        <description>WuStudio</description>
+        <location>Studio</location>
+        <dateTime>
+            <startValue>09/04/2017 1000</startValue>
+            <endValue>09/04/2017 1100</endValue>
+        </dateTime>
+        <status>false</status>
+    </tasks>
+    <tasks>
+        <name>Dance Class 2</name>
+        <priority>High</priority>
+        <description>WuStudio</description>
+        <location>Studio</location>
+        <dateTime>
+            <startValue>10/04/2017 1000</startValue>
+            <endValue>10/04/2017 1100</endValue>
+        </dateTime>
+        <status>false</status>
+    </tasks>
+    <tasks>
+        <name>Dance Class 3</name>
+        <priority>High</priority>
+        <description>WuStudio</description>
+        <location>Studio</location>
+        <dateTime>
+            <startValue>11/04/2017 1000</startValue>
+            <endValue>11/04/2017 1100</endValue>
+        </dateTime>
+        <status>false</status>
+    </tasks>
+    <tasks>
+        <name>Dance Class 4</name>
+        <priority>High</priority>
+        <description>WuStudio</description>
+        <location>Studio</location>
+        <dateTime>
+            <startValue>12/04/2017 1000</startValue>
+            <endValue>12/04/2017 1100</endValue>
+        </dateTime>
+        <status>false</status>
+    </tasks>
+    <tasks>
+        <name>Dance Class 5</name>
+        <priority>High</priority>
+        <description>WuStudio</description>
+        <location>Studio</location>
+        <dateTime>
+            <startValue>13/04/2017 1000</startValue>
+            <endValue>13/04/2017 1100</endValue>
+        </dateTime>
+        <status>false</status>
+    </tasks>
+    <tasks>
+        <name>Dance Class 6</name>
+        <priority>High</priority>
+        <description>WuStudio</description>
+        <location>Studio</location>
+        <dateTime>
+            <startValue>14/04/2017 1000</startValue>
+            <endValue>14/04/2017 1100</endValue>
+        </dateTime>
+        <status>false</status>
+    </tasks>
+    <tasks>
+        <name>CS1231 Tutorial 10</name>
+        <priority>High</priority>
+        <description>Propositions</description>
+        <location>Anywhere</location>
+        <dateTime>
+            <startValue>14/04/2017 1200</startValue>
+            <endValue>14/04/2017 1300</endValue>
+        </dateTime>
+        <status>false</status>
+    </tasks>
+    <tasks>
+        <name>CS1231 Tutorial 12</name>
+        <priority>High</priority>
+        <description>Definition</description>
+        <location>Anywhere</location>
+        <dateTime>
+            <startValue>15/04/2017 1200</startValue>
+            <endValue>15/04/2017 1300</endValue>
+        </dateTime>
+        <status>false</status>
+    </tasks>
+    <tasks>
+        <name>CS1231 Tutorial 13</name>
+        <priority>High</priority>
+        <description>Quantifiers</description>
+        <location>Anywhere</location>
+        <dateTime>
+            <startValue>16/04/2017 1200</startValue>
+            <endValue>16/04/2017 1300</endValue>
+        </dateTime>
+        <status>false</status>
+    </tasks>
+    <tasks>
+        <name>CS1231 Tutorial 14</name>
+        <priority>High</priority>
+        <description>Stats</description>
+        <location>Anywhere</location>
+        <dateTime>
+            <startValue>17/04/2017 1200</startValue>
+            <endValue>17/04/2017 1300</endValue>
+        </dateTime>
+        <status>false</status>
+    </tasks>
+    <tasks>
+        <name>CS1231 Tutorial 15</name>
+        <priority>High</priority>
+        <description></description>
+        <location>Anywhere</location>
+        <dateTime>
+            <startValue>18/04/2017 1200</startValue>
+            <endValue>18/04/2017 1300</endValue>
+        </dateTime>
+        <status>false</status>
+    </tasks>
+    <tasks>
+        <name>CS1231 Tutorial 16</name>
+        <priority>High</priority>
+        <description>Truth Tables</description>
+        <location>Anywhere</location>
+        <dateTime>
+            <startValue>19/04/2017 1200</startValue>
+            <endValue>19/04/2017 1300</endValue>
+        </dateTime>
+        <status>false</status>
+    </tasks>
+    <tasks>
+        <name>Date with Abigail</name>
+        <priority>High</priority>
+        <description></description>
+        <location>Orchard</location>
+        <dateTime>
+            <startValue>19/05/2017 1700</startValue>
+            <endValue>19/05/2017 2300</endValue>
+        </dateTime>
+        <status>false</status>
+    </tasks>
+    <tasks>
+        <name>Date with Adyln</name>
+        <priority>High</priority>
+        <description></description>
+        <location>Orchard</location>
+        <dateTime>
+            <startValue>20/05/2017 1700</startValue>
+            <endValue>20/05/2017 2300</endValue>
+        </dateTime>
+        <status>false</status>
+    </tasks>
+    <tasks>
+        <name>Date with Adele</name>
+        <priority>High</priority>
+        <description></description>
+        <location>Orchard</location>
+        <dateTime>
+            <startValue>21/05/2017 1700</startValue>
+            <endValue>21/05/2017 2300</endValue>
+        </dateTime>
+        <status>false</status>
+    </tasks>
+    <tasks>
+        <name>Date with Adrienne</name>
+        <priority>High</priority>
+        <description></description>
+        <location>Orchard</location>
+        <dateTime>
+            <startValue>22/05/2017 1700</startValue>
+            <endValue>22/05/2017 2300</endValue>
+        </dateTime>
+        <status>false</status>
+    </tasks>
+    <tasks>
+        <name>Buy korea trip tickets</name>
+        <priority>High</priority>
+        <description>$$</description>
+        <location>Gordon's</location>
+        <dateTime>
+            <startValue>08/04/2017 2200</startValue>
+            <endValue>08/04/2017 2300</endValue>
+        </dateTime>
+        <status>false</status>
+    </tasks>
+    <categories>friends</categories>
+    <categories>owesMoney</categories>
+</taskmanager>
