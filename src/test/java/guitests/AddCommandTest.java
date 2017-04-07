@@ -14,7 +14,7 @@ public class AddCommandTest extends TaskManagerGuiTest {
 
     //@@author A0140016B
     @Test
-    public void add() {
+    public void addContinuousTesting() {
         TestTask[] currentList = td.getTypicalTasks();
 
         //add one task

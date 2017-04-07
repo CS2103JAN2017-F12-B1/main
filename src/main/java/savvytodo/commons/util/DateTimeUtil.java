@@ -103,10 +103,8 @@ public class DateTimeUtil {
      * i.e. dateTimeQuery start is equals to or before the dateTimeSource end
      * && dateTimeQuery end is equals to or after the dateTimeSource start
      * Return false if task is a deadline or floating task (i.e. no start or end)
-     * @param dateTimeSource
-     * @param dateTimeQuery
-     * @throws IllegalValueException
-     * @throws DateTimeException
+     * @param dateTimeSource is event compare to
+     * @param dateTimeQuery  is event compare with
      */
     public static boolean isDateTimeWithinRange(DateTime dateTimeSource, DateTime dateTimeQuery)
             throws DateTimeException, IllegalValueException {
@@ -126,8 +124,6 @@ public class DateTimeUtil {
      * i.e. dateTimeQuery end should occur after the dateTimeSource start
      * and dateTimeQuery start should occur before the dateTimeSource end
      * Return false if task is a deadline or floating task (i.e. no start or end)
-     * @throws IllegalValueException
-     * @throws DateTimeException
      */
     public static boolean isDateTimeConflict(DateTime dateTimeSource, DateTime dateTimeQuery)
             throws DateTimeException, IllegalValueException {
@@ -213,8 +209,7 @@ public class DateTimeUtil {
     }
 
     /**
-     * @param dateTime
-     * @return
+     * @return String from normal DateTime Object
      */
     public static String getDayAndDateString(DateTime dateTime) {
         StringBuilder sb = new StringBuilder();
@@ -326,11 +321,11 @@ public class DateTimeUtil {
     }
 
     /**
-     * @param dateTime
-     * @param hour
-     * @param min
-     * @param sec
-     * @return LocalDateTime
+     * @param dateTime in LocalDateTime which has been initialized with a date
+     * @param hour in int that is to be changed in hour
+     * @param min in int that is to be changed in min
+     * @param sec in int that is to be changed in sec
+     * @return LocalDateTime which is modified with new time
      */
     public static LocalDateTime setLocalTime(LocalDateTime dateTime, int hour, int min, int sec) {
         return LocalDateTime.of(dateTime.getYear(), dateTime.getMonth(), dateTime.getDayOfMonth(), hour, min, sec);
