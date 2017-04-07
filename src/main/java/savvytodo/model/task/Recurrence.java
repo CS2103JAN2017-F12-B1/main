@@ -35,7 +35,7 @@ public class Recurrence {
                     return type;
                 }
             }
-            throw new IllegalArgumentException("Unknown recurrence type: " + retype);
+            throw new IllegalArgumentException(MESSAGE_RECURR_NOT_MATCH);
         }
 
         /**

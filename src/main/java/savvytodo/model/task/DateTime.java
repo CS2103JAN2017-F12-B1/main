@@ -115,10 +115,22 @@ public class DateTime implements Comparable<DateTime> {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof DateTime // instanceof handles nulls
-                        && this.toString()
-                                .equals(((DateTime) other).toString())); // state check
+        if (other == null) return false;
+        if (other == this) return true;
+        if (!(other instanceof DateTime)) return false;
+        DateTime o = (DateTime) other;
+
+        if (this.getEndDate() == null && o.getEndDate() == null) {
+            return true;
+        } else if ((this.getStartDate() == null && o.getStartDate() == null)
+                && (this.getEndDate() != null && o.getEndDate() != null)) {
+            return (this.getEndDate().equals(o.getEndDate()));
+        } else if (this.getStartDate() != null && o.getStartDate() != null && this.getEndDate() != null
+                && o.getEndDate() != null) {
+            return (this.getStartDate().equals(o.getStartDate()) && this.getEndDate().equals(o.getEndDate()));
+        }
+
+        return false;
     }
 
     @Override

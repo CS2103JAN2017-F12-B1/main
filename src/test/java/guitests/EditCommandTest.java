@@ -113,7 +113,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
     @Test
     public void edit_duplicateTask_failure() {
         commandBox.runCommand(
-                "edit 3 Assignment 1 dt/01/03/2017 1400 = 02/03/2017 1400 p/high d/Start early l/None");
+                "edit 3 Assignment 1 dt/01/03/2017 1400 to 02/03/2017 1400 p/high d/Start early l/None");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 
