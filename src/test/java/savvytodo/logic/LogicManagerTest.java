@@ -34,7 +34,6 @@ import savvytodo.logic.commands.DeleteCommand;
 import savvytodo.logic.commands.ExitCommand;
 import savvytodo.logic.commands.FindCommand;
 import savvytodo.logic.commands.HelpCommand;
-import savvytodo.logic.commands.ListCommand;
 import savvytodo.logic.commands.SelectCommand;
 import savvytodo.logic.commands.exceptions.CommandException;
 import savvytodo.model.Model;
