@@ -4,6 +4,7 @@ import java.util.Optional;
 import java.util.logging.Logger;
 
 import guitests.GuiRobot;
+import javafx.application.Platform;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -62,8 +63,12 @@ public class GuiHandle {
     protected void setTextField(String textFieldId, String newText) {
         guiRobot.clickOn(textFieldId);
         TextField textField = getNode(textFieldId);
-        textField.setText(newText);
-        guiRobot.sleep(10); // so that the texts stays visible on the GUI for a short period
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                textField.setText(newText);
+            }
+        }); // java.lang.IllegalStateException: Task must only be used from the FX Application Thread
+        guiRobot.sleep(100); // so that the texts stays visible on the GUI for a short period
     }
 
     public void pressEnter() {

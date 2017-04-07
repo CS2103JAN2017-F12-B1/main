@@ -11,15 +11,17 @@ import savvytodo.commons.util.StringUtil;
  * @author A0140016B
  *
  * Represents Task's DateTime in the task manager Guarantees: immutable;
- * is valid as declared in {@link #isValidDateTime(String, String)} *
+ * is valid as declared in {@link #isValidEvent(String, String)} *
  */
 public class DateTime implements Comparable<DateTime> {
 
     public String startValue;
     public String endValue;
+    public String timestamp;
 
     private LocalDateTime start;
     private LocalDateTime end;
+    private LocalDateTime add;
 
     public static final String MESSAGE_DATETIME_CONSTRAINTS = "Start date/time should not be after End date/time";
 
@@ -54,13 +56,13 @@ public class DateTime implements Comparable<DateTime> {
         if (startDateTime != null && !startDateTime.isEmpty()) {
             this.start = LocalDateTime.parse(startDateTime.trim(), DateTimeUtil.DATE_FORMATTER);
             this.startValue = this.start.format(DateTimeUtil.DATE_STRING_FORMATTER);
-            if (!isValidDateTime(this.start, this.end)) {
+            if (!isValidEvent(this.start, this.end)) {
                 throw new IllegalValueException(MESSAGE_DATETIME_CONSTRAINTS);
             }
         } else {
             this.startValue = startDateTime;
         }
-
+        this.setDateTimeStamp();
     }
 
     public DateTime(LocalDateTime startDateTime, LocalDateTime endDateTime) {
@@ -69,6 +71,7 @@ public class DateTime implements Comparable<DateTime> {
         this.end = endDateTime;
         this.endValue = this.end.format(DateTimeUtil.DATE_STRING_FORMATTER);
         this.startValue = this.start.format(DateTimeUtil.DATE_STRING_FORMATTER);
+        this.setDateTimeStamp();
     }
 
     /**
@@ -82,14 +85,21 @@ public class DateTime implements Comparable<DateTime> {
     }
 
     /**
-     * Returns true if a given string is a valid task dateTime.
+     * Set timestamp if exists
      */
-    public static boolean isValidDateTime(LocalDateTime startDateTime, LocalDateTime endDateTime) {
-        if (startDateTime != null && endDateTime != null) {
-            return (startDateTime.isBefore(endDateTime));
+    private void setDateTimeStamp() {
+        if (timestamp == null || timestamp.isEmpty()) {
+            this.setAdd(LocalDateTime.now());
         } else {
-            return false;
+            this.setAdd(LocalDateTime.parse(timestamp));
         }
+    }
+
+    /**
+     * Returns true if a given string is a valid task event.
+     */
+    public static boolean isValidEvent(LocalDateTime startDateTime, LocalDateTime endDateTime) {
+        return (startDateTime.isBefore(endDateTime));
     }
 
     @Override
@@ -105,10 +115,22 @@ public class DateTime implements Comparable<DateTime> {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof DateTime // instanceof handles nulls
-                        && this.toString()
-                                .equals(((DateTime) other).toString())); // state check
+        if (other == null) return false;
+        if (other == this) return true;
+        if (!(other instanceof DateTime)) return false;
+        DateTime o = (DateTime) other;
+
+        if (this.getEndDate() == null && o.getEndDate() == null) {
+            return true;
+        } else if ((this.getStartDate() == null && o.getStartDate() == null)
+                && (this.getEndDate() != null && o.getEndDate() != null)) {
+            return (this.getEndDate().equals(o.getEndDate()));
+        } else if (this.getStartDate() != null && o.getStartDate() != null && this.getEndDate() != null
+                && o.getEndDate() != null) {
+            return (this.getStartDate().equals(o.getStartDate()) && this.getEndDate().equals(o.getEndDate()));
+        }
+
+        return false;
     }
 
     @Override
@@ -157,6 +179,10 @@ public class DateTime implements Comparable<DateTime> {
         return end;
     }
 
+    public LocalDateTime getDateTimeAdded() {
+        return add;
+    }
+
     /**
      * Set method for start
      * @param LocalDateTime
@@ -171,6 +197,15 @@ public class DateTime implements Comparable<DateTime> {
      */
     public void setEnd(LocalDateTime endDateTime) {
         this.end = endDateTime;
+    }
+
+    /**
+     * Set method for add
+     * @param LocalDateTime
+     */
+    public void setAdd(LocalDateTime DateTimeAdded) {
+        timestamp = DateTimeAdded.toString();
+        this.add = DateTimeAdded;
     }
 
 }

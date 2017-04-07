@@ -18,6 +18,7 @@ public class Priority implements Comparable<Priority> {
     private static final int COMPARE_TO_EQUAL = 0;
     private static final int COMPARE_TO_GREATER = 1;
 
+    //@@author A0140016B
     /**
      * @author A0140016B
      * Get type enum object from it's name, ignoring cases
@@ -72,11 +73,19 @@ public class Priority implements Comparable<Priority> {
     public static boolean isValidPriority(String test) {
         boolean matches = false;
         for (Level level : Level.values()) {
-            if (level.toString().equalsIgnoreCase(test)) {
+            if (level.toString().equalsIgnoreCase(test) || Integer.toString(level.showInt()).equalsIgnoreCase(test)
+                    || isValidCharPriority(level, test)) {
                 matches = true;
             }
         }
         return matches;
+    }
+
+    /**
+     * Return true if string matches first char
+     */
+    private static boolean isValidCharPriority(Level level, String test) {
+        return level.toString().substring(0, 1).equalsIgnoreCase(test);
     }
 
     //@@author A0124863A
