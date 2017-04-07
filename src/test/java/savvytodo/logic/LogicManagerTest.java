@@ -34,6 +34,7 @@ import savvytodo.logic.commands.DeleteCommand;
 import savvytodo.logic.commands.ExitCommand;
 import savvytodo.logic.commands.FindCommand;
 import savvytodo.logic.commands.HelpCommand;
+import savvytodo.logic.commands.ListCommand;
 import savvytodo.logic.commands.SelectCommand;
 import savvytodo.logic.commands.exceptions.CommandException;
 import savvytodo.model.Model;
@@ -232,18 +233,18 @@ public class LogicManagerTest {
 
     }
 
-//    @Test
-//    public void execute_list_showsAllTasks() throws Exception {
-//        // prepare expectations
-//        TestDataHelper helper = new TestDataHelper();
-//        TaskManager expectedAB = helper.generateTaskManager(2);
-//        List<? extends ReadOnlyTask> expectedList = expectedAB.getTaskList();
-//
-//        // prepare task manager state
-//        helper.addToModel(model, 2);
-//
-//        assertCommandSuccess("list", ListCommand.LIST_ALL_SUCCESS, expectedAB, expectedList);
-//    }
+    @Test
+    public void execute_list_showsAllTasks() throws Exception {
+        // prepare expectations
+        TestDataHelper helper = new TestDataHelper();
+        TaskManager expectedAB = helper.generateTaskManager(2);
+        List<? extends ReadOnlyTask> expectedList = expectedAB.getTaskList();
+
+        // prepare task manager state
+        helper.addToModel(model, 2);
+
+        assertCommandSuccess("list", ListCommand.LIST_ALL_SUCCESS, expectedAB, expectedList);
+    }
 
     /**
      * Confirms the 'invalid argument index number behaviour' for the given command

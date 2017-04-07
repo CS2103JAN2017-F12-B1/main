@@ -71,6 +71,7 @@ public class AddCommand extends Command {
         int numTasks = 1;
         if (recurrence != null
                 && Integer.parseInt(recurrence[1]) > Integer.parseInt(Recurrence.DEFAULT_VALUES[1])) {
+            recurrence[0] = Recurrence.Type.valueOfIgnoreCase(recurrence[0]).name();
             numTasks += Integer.parseInt(recurrence[1]);
         }
 

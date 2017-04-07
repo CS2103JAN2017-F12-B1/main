@@ -29,9 +29,10 @@ public class Recurrence {
          * @param String recurrence type
          * @return Corresponding enum object
          */
-        public static Type valueOfIgnoreCase(String retype) {
+        public static Type valueOfIgnoreCase(String reType) {
             for (Type type : Type.values()) {
-                if (type.toString().equalsIgnoreCase(retype)) {
+                if (type.toString().equalsIgnoreCase(reType)
+                        || type.toString().substring(0, 1).equalsIgnoreCase(reType)) {
                     return type;
                 }
             }
