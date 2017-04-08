@@ -5,6 +5,7 @@ import java.util.List;
 import savvytodo.commons.core.Messages;
 import savvytodo.logic.commands.exceptions.CommandException;
 import savvytodo.logic.parser.CommandTaskDescriptor;
+import savvytodo.logic.parser.TaskIndex;
 import savvytodo.model.category.UniqueCategoryList;
 import savvytodo.model.task.DateTime;
 import savvytodo.model.task.Description;
@@ -38,36 +39,36 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
 
-    private final int filteredTaskListIndex;
+    private final TaskIndex filteredTaskListIndex;
     private final CommandTaskDescriptor cmdTaskDescriptor;
 
     /**
      * @param filteredTaskListIndex the index of the task in the filtered task list to edit
      * @param editTaskDescriptor details to edit the task with
      */
-    public EditCommand(int filteredTaskListIndex, CommandTaskDescriptor cmdTaskDescriptor) {
-        assert filteredTaskListIndex > 0;
+    public EditCommand(TaskIndex filteredTaskListIndex, CommandTaskDescriptor cmdTaskDescriptor) {
+        assert filteredTaskListIndex.getIndex() > 0;
         assert cmdTaskDescriptor != null;
 
         // converts filteredTaskListIndex from one-based to zero-based.
-        this.filteredTaskListIndex = filteredTaskListIndex - 1;
+        this.filteredTaskListIndex = filteredTaskListIndex;
 
         this.cmdTaskDescriptor = new CommandTaskDescriptor(cmdTaskDescriptor);
     }
 
     @Override
     public CommandResult execute() throws CommandException {
-        List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+        List<ReadOnlyTask> lastShownList = model.getFilteredTaskList(filteredTaskListIndex.getTaskType());
 
-        if (filteredTaskListIndex >= lastShownList.size() || filteredTaskListIndex < 0) {
+        if (filteredTaskListIndex.getIndex() - 1 >= lastShownList.size() || filteredTaskListIndex.getIndex() < 0) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
+        ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex.getIndex() - 1);
         Task editedTask = createEditedTask(taskToEdit, cmdTaskDescriptor);
 
         try {
-            model.updateTask(filteredTaskListIndex, editedTask);
+            model.updateTask(filteredTaskListIndex.getIndex() - 1, editedTask);
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }

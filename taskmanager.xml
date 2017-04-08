@@ -1,68 +1,34 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <taskmanager>
     <tasks>
-        <name>Watch CS2103 Webcast 8</name>
-        <priority>Low</priority>
+        <name>mytest5</name>
+        <priority>High</priority>
         <description>No description given.</description>
         <location>Location has not been set.</location>
         <dateTime>
-            <startValue></startValue>
-            <endValue></endValue>
+            <startValue>07/04/2017 0510</startValue>
+            <endValue>08/04/2017 0510</endValue>
         </dateTime>
         <recurrence>
             <occurences>0</occurences>
             <type>None</type>
         </recurrence>
         <status>false</status>
-        <categorized>cs2103</categorized>
     </tasks>
     <tasks>
-        <name>Watch CS2103 Webcast 7</name>
-        <priority>Low</priority>
+        <name>mytest5</name>
+        <priority>Medium</priority>
         <description>No description given.</description>
         <location>Location has not been set.</location>
         <dateTime>
-            <startValue></startValue>
-            <endValue></endValue>
+            <startValue>07/04/2017 0510</startValue>
+            <endValue>08/04/2017 0510</endValue>
         </dateTime>
         <recurrence>
             <occurences>0</occurences>
             <type>None</type>
         </recurrence>
         <status>false</status>
-        <categorized>cs2103</categorized>
-    </tasks>
-    <tasks>
-        <name>Watch CS2103 Webcast 9</name>
-        <priority>Low</priority>
-        <description>No description given.</description>
-        <location>Location has not been set.</location>
-        <dateTime>
-            <startValue></startValue>
-            <endValue></endValue>
-        </dateTime>
-        <recurrence>
-            <occurences>0</occurences>
-            <type>None</type>
-        </recurrence>
-        <status>false</status>
-        <categorized>cs2103</categorized>
-    </tasks>
-    <tasks>
-        <name>Watch CS2103 Webcast 10</name>
-        <priority>Low</priority>
-        <description>No description given.</description>
-        <location>Location has not been set.</location>
-        <dateTime>
-            <startValue></startValue>
-            <endValue></endValue>
-        </dateTime>
-        <recurrence>
-            <occurences>0</occurences>
-            <type>None</type>
-        </recurrence>
-        <status>false</status>
-        <categorized>cs2103</categorized>
     </tasks>
     <tasks>
         <name>Watch CS2103 Webcast 11</name>
@@ -291,6 +257,128 @@
     <tasks>
         <name>rehearse for 2103 mock presentation</name>
         <priority>Medium</priority>
+        <description>No description given.</description>
+        <location>Location has not been set.</location>
+        <dateTime>
+            <startValue></startValue>
+            <endValue></endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <categorized>cs2103</categorized>
+    </tasks>
+    <tasks>
+        <name>floating</name>
+        <priority>Medium</priority>
+        <description>No description given.</description>
+        <location>Location has not been set.</location>
+        <dateTime>
+            <startValue></startValue>
+            <endValue></endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+    </tasks>
+    <tasks>
+        <name>test</name>
+        <priority>Medium</priority>
+        <description>No description given.</description>
+        <location>Location has not been set.</location>
+        <dateTime>
+            <startValue></startValue>
+            <endValue></endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+    </tasks>
+    <tasks>
+        <name>testfloating</name>
+        <priority>Medium</priority>
+        <description>No description given.</description>
+        <location>Location has not been set.</location>
+        <dateTime>
+            <startValue></startValue>
+            <endValue></endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+    </tasks>
+    <tasks>
+        <name>mytest2</name>
+        <priority>Medium</priority>
+        <description>No description given.</description>
+        <location>Location has not been set.</location>
+        <dateTime>
+            <startValue>07/04/2017 0510</startValue>
+            <endValue>08/04/2017 0510</endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+    </tasks>
+    <tasks>
+        <name>mytest1</name>
+        <priority>Medium</priority>
+        <description>No description given.</description>
+        <location>Location has not been set.</location>
+        <dateTime>
+            <startValue>07/04/2017 0510</startValue>
+            <endValue>08/04/2017 0510</endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+    </tasks>
+    <tasks>
+        <name>Watch CS2103 Webcast 8</name>
+        <priority>Low</priority>
+        <description>No description given.</description>
+        <location>Location has not been set.</location>
+        <dateTime>
+            <startValue></startValue>
+            <endValue></endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <categorized>cs2103</categorized>
+    </tasks>
+    <tasks>
+        <name>mytest3</name>
+        <priority>Medium</priority>
+        <description>No description given.</description>
+        <location>Location has not been set.</location>
+        <dateTime>
+            <startValue>07/04/2017 0538</startValue>
+            <endValue>08/04/2017 0538</endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+    </tasks>
+    <tasks>
+        <name>Watch CS2103 Webcast 7</name>
+        <priority>Low</priority>
         <description>No description given.</description>
         <location>Location has not been set.</location>
         <dateTime>

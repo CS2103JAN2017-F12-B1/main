@@ -20,7 +20,6 @@ public class Task implements ReadOnlyTask {
     private DateTime dateTime;
     private Recurrence recurrence;
     private Status isCompleted;
-
     private UniqueCategoryList categories;
 
     /**
@@ -175,6 +174,19 @@ public class Task implements ReadOnlyTask {
     @Override
     public String toString() {
         return getAsText();
+    }
+
+    //@@author A0147827U
+    public boolean isFloating() {
+        return getDateTime().getStartDate() == null && getDateTime().getEndDate() == null;
+    }
+
+    public TaskType getType() {
+        if (isFloating()) {
+            return TaskType.FLOATING;
+        } else {
+            return TaskType.EVENT;
+        }
     }
 
 }

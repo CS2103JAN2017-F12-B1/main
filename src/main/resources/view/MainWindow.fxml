@@ -36,14 +36,25 @@
        </AnchorPane>
       <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.4" VBox.vgrow="ALWAYS">
          <items>
-            <VBox fx:id="taskList" minWidth="340" prefWidth="340">
+            <VBox fx:id="floatingTaskList" minWidth="340" prefWidth="340">
+            	<Label fx:id="taskListLabel" styleClass="label-bright">FLOATING TASKS</Label>
                 <padding>
                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
                 </padding>
                <children>
-                  <AnchorPane fx:id="taskListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+                  <AnchorPane fx:id="floatingTaskListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
                </children>
             </VBox>
+            <VBox fx:id="eventTaskList" minWidth="340" prefWidth="340">
+            	<Label fx:id="taskListLabel" styleClass="label-bright">EVENTS</Label>
+                <padding>
+                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                </padding>
+               <children>
+                  <AnchorPane fx:id="eventTaskListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+               </children>
+            </VBox>
+            
             <AnchorPane fx:id="browserPlaceholder" prefWidth="340" >
                 <padding>
                     <Insets top="10" bottom="10" left="10" right="10"/>

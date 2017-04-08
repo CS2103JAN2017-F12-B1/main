@@ -22,6 +22,7 @@ import savvytodo.model.task.Location;
 import savvytodo.model.task.Name;
 import savvytodo.model.task.Priority;
 import savvytodo.model.task.Recurrence;
+import savvytodo.model.task.TaskType;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes
@@ -34,22 +35,37 @@ public class ParserUtil {
 
     private static final Pattern INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
 
+    //@@author A0147827U
     /**
-     * Returns the specified index in the {@code command} if it is a positive unsigned integer
+     * Returns the specified TaskIndex in the {@code command} if it matches the required syntax (eg "1", "f1")
      * Returns an {@code Optional.empty()} otherwise.
      */
-    public static Optional<Integer> parseIndex(String command) {
+    public static Optional<TaskIndex> parseIndex(String command) {
         final Matcher matcher = INDEX_ARGS_FORMAT.matcher(command.trim());
         if (!matcher.matches()) {
             return Optional.empty();
         }
 
+        Optional<TaskIndex> parsedIndex;
+
         String index = matcher.group("targetIndex");
         if (!StringUtil.isUnsignedInteger(index)) {
-            return Optional.empty();
+            String listIdentifier = "" + index.charAt(0);
+            if (listIdentifier.equalsIgnoreCase(CliSyntax.INDEX_FLOATING)) {
+                index = index.substring(1);
+                if (!StringUtil.isUnsignedInteger(index)) {
+                    parsedIndex = Optional.empty();
+                } else {
+                    parsedIndex = Optional.of(new TaskIndex(TaskType.FLOATING, Integer.parseInt(index)));
+                }
+            } else {
+                parsedIndex = Optional.empty();
+            }
+        } else {
+            parsedIndex = Optional.of(new TaskIndex(TaskType.EVENT, Integer.parseInt(index))); //defaults to event type
         }
-        return Optional.of(Integer.parseInt(index));
 
+        return parsedIndex;
     }
 
     //@@author A0140016B
