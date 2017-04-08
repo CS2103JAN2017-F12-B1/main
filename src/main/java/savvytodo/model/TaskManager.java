@@ -27,8 +27,6 @@ public class TaskManager implements ReadOnlyTaskManager {
     private final UniqueTaskList tasks;
     private final UniqueCategoryList categories;
 
-    private final UniqueTaskList floatingTasks;
-    private final UniqueTaskList eventTasks;
 
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
@@ -40,8 +38,6 @@ public class TaskManager implements ReadOnlyTaskManager {
     {
         tasks = new UniqueTaskList();
         categories = new UniqueCategoryList();
-        floatingTasks = new UniqueTaskList();
-        eventTasks = new UniqueTaskList();
 
     }
 
@@ -79,39 +75,15 @@ public class TaskManager implements ReadOnlyTaskManager {
             assert false : "Task Manager should not have duplicate categories";
         }
         syncMasterCategoryListWith(tasks);
-        try {
-            updateSubTaskList();
-        } catch (DuplicateTaskException e) {
-            e.printStackTrace();
-        }
+
     }
+
 
     public void addCategory(Category t) throws UniqueCategoryList.DuplicateCategoryException {
         categories.add(t);
     }
 
-    //@@author A0147827U
-    /**
-     * Scans through the main task list and sieves out floating tasks to floatingTaskList
-     *
-     */
-    public void updateSubTaskList() throws DuplicateTaskException {
-        System.out.println("Before sieving: task list size : " + tasks.asObservableList().size());
-        for (Task t : tasks) {
-            switch(t.getType()) {
-            case FLOATING:
-                floatingTasks.add(t);
-                System.out.println("floating task found : " + t.getName());
-                break;
-            case EVENT:
-            default:
-                eventTasks.add(t);
-                System.out.println("event task found : " + t.getName());
-                break;
-            }
-        }
 
-    }
 
 ////task-level operations
 
@@ -125,15 +97,6 @@ public class TaskManager implements ReadOnlyTaskManager {
      */
     public void addTask(Task p) throws UniqueTaskList.DuplicateTaskException {
         syncMasterCategoryListWith(p);
-        switch(p.getType()) {
-        case FLOATING:
-            floatingTasks.add(p);
-            break;
-        case EVENT:
-        default:
-            eventTasks.add(p);
-            break;
-        }
         tasks.add(p); //global task list storage
     }
 
@@ -162,28 +125,10 @@ public class TaskManager implements ReadOnlyTaskManager {
 
 
     public boolean removeTask(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException, DuplicateTaskException {
-        switch(key.getType()) {
-        case FLOATING:
-            if (floatingTasks.remove(key)) {
-                if (tasks.remove(key)) {
-                    return true;
-                } else {
-                    throw new UniqueTaskList.TaskNotFoundException();
-                }
-            } else {
-                throw new UniqueTaskList.TaskNotFoundException();
-            }
-        case EVENT:
-        default:
-            if (eventTasks.remove(key)) {
-                if (tasks.remove(key)) {
-                    return true;
-                } else {
-                    throw new UniqueTaskList.TaskNotFoundException();
-                }
-            } else {
-                throw new UniqueTaskList.TaskNotFoundException();
-            }
+        if (tasks.remove(key)) {
+            return true;
+        } else {
+            throw new UniqueTaskList.TaskNotFoundException();
         }
 
     }
@@ -295,13 +240,6 @@ public class TaskManager implements ReadOnlyTaskManager {
         return new UnmodifiableObservableList<>(tasks.asObservableList());
     }
 
-    public ObservableList<ReadOnlyTask> getFloatingTaskList() {
-        return new UnmodifiableObservableList<>(floatingTasks.asObservableList());
-    }
-
-    public ObservableList<ReadOnlyTask> getEventTaskList() {
-        return new UnmodifiableObservableList<>(eventTasks.asObservableList());
-    }
 
     @Override
     public ObservableList<Category> getCategoryList() {

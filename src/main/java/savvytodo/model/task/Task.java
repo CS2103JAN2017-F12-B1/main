@@ -21,6 +21,7 @@ public class Task implements ReadOnlyTask {
     private Recurrence recurrence;
     private Status isCompleted;
     private UniqueCategoryList categories;
+    private Type type;
 
     /**
      * Every field must be present and not null.
@@ -36,6 +37,7 @@ public class Task implements ReadOnlyTask {
         this.dateTime = dateTime;
         this.recurrence = recurrence;
         this.isCompleted = new Status();
+        this.type = new Type(dateTime);
     }
 
     public Task(Name name, Priority priority, Description description, Location location,
@@ -50,6 +52,7 @@ public class Task implements ReadOnlyTask {
         this.dateTime = dateTime;
         this.recurrence = recurrence;
         this.isCompleted = status;
+        this.type = new Type(dateTime);
     }
 
     /**
@@ -156,6 +159,7 @@ public class Task implements ReadOnlyTask {
         this.setDateTime(replacement.getDateTime());
         this.setRecurrence(replacement.getRecurrence());
         this.setStatus(replacement.isCompleted());
+        this.setType(replacement.getType());
     }
 
     @Override
@@ -177,15 +181,33 @@ public class Task implements ReadOnlyTask {
     }
 
     //@@author A0147827U
-    public boolean isFloating() {
+    private boolean isFloating() {
         return getDateTime().getStartDate() == null && getDateTime().getEndDate() == null;
     }
 
-    public TaskType getType() {
-        if (isFloating()) {
-            return TaskType.FLOATING;
-        } else {
-            return TaskType.EVENT;
+    private boolean isEvent() {
+        return !(getDateTime().getStartDate() == null && getDateTime().getEndDate() == null);
+    }
+
+    private boolean isDeadline() {
+        return getDateTime().getStartDate() == null && !(getDateTime().getEndDate() == null);
+    }
+
+    public Type getType() {
+        updateType();
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
+    private void updateType() {
+        if (isEvent()) {
+            type.setType(TaskType.EVENT);
+        } else if (isFloating()) {
+            type.setType(TaskType.FLOATING);
+        } else if (isDeadline()) {
+            type.setType(TaskType.DEADLINE);
         }
     }
 
