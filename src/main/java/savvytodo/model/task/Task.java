@@ -29,7 +29,8 @@ public class Task implements ReadOnlyTask {
      */
     public Task(Name name, Priority priority, Description description, Location location,
             UniqueCategoryList categories, DateTime dateTime, Recurrence recurrence) {
-        assert !CollectionUtil.isAnyNull(name, priority, description, location, categories, dateTime, recurrence);
+        assert !CollectionUtil.isAnyNull(name, priority, description, location, categories,
+                dateTime, recurrence);
         this.name = name;
         this.priority = priority;
         this.description = description;
@@ -39,6 +40,21 @@ public class Task implements ReadOnlyTask {
         this.recurrence = recurrence;
         this.isCompleted = new Status();
         this.timeStamp = new TimeStamp();
+    }
+
+    public Task(Name name, Priority priority, Description description, Location location,
+            UniqueCategoryList categories, DateTime dateTime, Recurrence recurrence, TimeStamp timeStamp) {
+        assert !CollectionUtil.isAnyNull(name, priority, description, location, categories,
+                dateTime, recurrence, timeStamp);
+        this.name = name;
+        this.priority = priority;
+        this.description = description;
+        this.location = location;
+        this.categories = new UniqueCategoryList(categories); //protect internal categories from changes in the arg list
+        this.dateTime = dateTime;
+        this.recurrence = recurrence;
+        this.isCompleted = new Status();
+        this.timeStamp = new TimeStamp(timeStamp);
     }
 
     public Task(Name name, Priority priority, Description description, Location location,

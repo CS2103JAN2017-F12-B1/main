@@ -64,8 +64,8 @@ public class TestTask implements ReadOnlyTask {
         this.categories = categories;
     }
 
-    public void setTimeStamp(TimeStamp timeStamp) {
-        this.timeStamp = timeStamp;
+    public void setTimeStamp() {
+        this.timeStamp = new TimeStamp();
     }
 
     @Override

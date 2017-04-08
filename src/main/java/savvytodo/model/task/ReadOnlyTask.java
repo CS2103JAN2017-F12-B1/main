@@ -36,8 +36,7 @@ public interface ReadOnlyTask {
                 && other.isCompleted().equals(this.isCompleted())
                 && other.getDescription().equals(this.getDescription())
                 && other.getLocation().equals(this.getLocation()))
-                && other.isCompleted().equals(this.isCompleted())
-                && other.getTimeStamp().equals(this.getTimeStamp());
+                && other.isCompleted().equals(this.isCompleted());
     }
 
     /**
@@ -58,9 +57,7 @@ public interface ReadOnlyTask {
                 .append(getDescription())
                 .append(" Status: ")
                 .append(isCompleted())
-                .append(" Categories: ")
-                .append(" TimeStamp: ")
-                .append(getTimeStamp());
+                .append(" Categories: ");
         getCategories().forEach(builder::append);
         return builder.toString();
     }

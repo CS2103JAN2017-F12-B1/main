@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
  */
 public class TimeStamp {
     private LocalDateTime dateTimeAdded;
+    public static final LocalDateTime DEFAULT_DATE_TIME = LocalDateTime.of(2017, 04, 15, 11, 30);
 
     public TimeStamp() {
         dateTimeAdded = LocalDateTime.now();
@@ -16,6 +17,10 @@ public class TimeStamp {
 
     public TimeStamp(TimeStamp timeStamp) {
         dateTimeAdded = timeStamp.getDateTimeAdded();
+    }
+
+    public TimeStamp(LocalDateTime dateTime) {
+        dateTimeAdded = dateTime;
     }
 
     public LocalDateTime getDateTimeAdded() {
