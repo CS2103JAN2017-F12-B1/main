@@ -1,5 +1,10 @@
 package savvytodo.model.task;
 
+import java.util.function.Predicate;
+
+import savvytodo.commons.exceptions.IllegalValueException;
+
+//author A0140016B
 /**
  * @author A0140016B
  *
@@ -10,15 +15,12 @@ public class Status {
 
     public final boolean value;
 
+    public static final String MESSAGE_STATUS_CONSTRAINTS = "Task status should be 'Completed' or 'Ongoing'";
+
     public static final boolean COMPLETED = true;
     public static final boolean ONGOING = false;
     private static final String MESSAGE_STATUS_COMPLETED = "Completed";
     private static final String MESSAGE_STATUS_ONGOING = "Ongoing";
-
-    public static final String MESSAGE_RECURR_CONSTRAINTS =
-            "If recurrence type is NONE, occurences can only be 0";
-    public static final String MESSAGE_RECURR_NOT_MATCH =
-            "Task recurrence type should be 'none', 'daily', 'weekly', 'monthly' or 'yearly'";
 
     /**
      * Defaults to Not Completed
@@ -50,4 +52,19 @@ public class Status {
                         && this.toString().equals(((Status) other).toString()));
     }
 
+    //@@author A0124863A
+    public Status(String status) throws IllegalValueException {
+        if (status.equalsIgnoreCase(MESSAGE_STATUS_COMPLETED)) {
+            value = COMPLETED;
+        } else if (status.equalsIgnoreCase(MESSAGE_STATUS_ONGOING)) {
+            value = ONGOING;
+        } else {
+            throw new IllegalValueException(MESSAGE_STATUS_CONSTRAINTS);
+        }
+    }
+
+    //@@author A0124863A
+    public Predicate<ReadOnlyTask> getPredicate() {
+        return (ReadOnlyTask task) -> task.isCompleted().equals(this);
+    }
 }

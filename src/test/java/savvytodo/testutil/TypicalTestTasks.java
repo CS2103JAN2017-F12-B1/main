@@ -89,11 +89,10 @@ public class TypicalTestTasks {
         return ab;
     }
 
-    //@@author A0140036X
+    // @@author A0140036X
     /**
      * generates a list of unique tasks with random details
-     * @author A0140036X
-     * @return
+     * @return list of tasks
      */
     public TestTask[] getGeneratedTasks(int numberOfTasks) {
         TestTask[] ret = new TestTask[numberOfTasks];

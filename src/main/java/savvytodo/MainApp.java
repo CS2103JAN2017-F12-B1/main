@@ -38,7 +38,7 @@ import savvytodo.ui.UiManager;
 public class MainApp extends Application {
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
-    public static final Version VERSION = new Version(1, 0, 0, true);
+    public static final Version VERSION = new Version(5, 0, 0, true);
 
     protected Ui ui;
     protected Logic logic;
@@ -99,9 +99,9 @@ public class MainApp extends Application {
      * Initializes model based on storage.
      * If storage file is not found, default task manager provided will be used.
      * If task manager is null, sample task manager will be created.
-     * @param storage
-     * @param userPrefs
-     * @param defaultTaskManager
+     * @param storage Storage that is to be used by model
+     * @param userPrefs User preferences for application
+     * @param defaultTaskManager see method description
      * @return initialized Model
      */
     private Model initModelManager(Storage storage, UserPrefs userPrefs, TaskManager defaultTaskManager) {

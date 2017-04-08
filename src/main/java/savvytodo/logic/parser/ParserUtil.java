@@ -125,8 +125,9 @@ public class ParserUtil {
     //@@author A0140016B
     /**
      * Extract a {@code Optional<String> dateTime} into an {@code String[]} if {@code dateTime} is present.
+     * @throws IllegalValueException for invalid dateTime
      */
-    public static String[] getDateTimeFromArgs(Optional<String> dateTime) {
+    public static String[] getDateTimeFromArgs(Optional<String> dateTime) throws IllegalValueException {
         assert dateTime != null;
         if (dateTime.isPresent()) {
             String [] dateTimeValues = DateTimeUtil.parseStringToDateTime(dateTime.get());
