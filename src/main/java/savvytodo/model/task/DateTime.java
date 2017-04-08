@@ -195,4 +195,12 @@ public class DateTime implements Comparable<DateTime> {
         this.add = DateTimeAdded;
     }
 
+    /**
+     * Override the hashcode to remove the timestamp comparison
+     */
+    @Override
+    public int hashCode() {
+        return (this.start.hashCode() + this.end.hashCode());
+    }
+
 }
