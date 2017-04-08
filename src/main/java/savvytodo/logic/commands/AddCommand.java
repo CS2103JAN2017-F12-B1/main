@@ -125,6 +125,8 @@ public class AddCommand extends Command {
             throw new CommandException(DateTimeUtil.MESSAGE_INCORRECT_SYNTAX);
         } catch (IllegalValueException e) {
             throw new CommandException(Messages.MESSAGE_INVALID_COMMAND_FORMAT);
+        } catch (IllegalArgumentException e) {
+            throw new CommandException(e.getMessage());
         }
     }
 

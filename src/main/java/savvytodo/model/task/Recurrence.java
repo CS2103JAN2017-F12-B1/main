@@ -28,6 +28,7 @@ public class Recurrence {
          * Get type enum object from it's name, ignoring cases
          * @param String recurrence type
          * @return Corresponding enum object
+         * @throws IllegalArgumentException if invalid input
          */
         public static Type valueOfIgnoreCase(String reType) {
             for (Type type : Type.values()) {
