@@ -23,7 +23,6 @@ public class StorageManager extends ComponentManager implements Storage {
     private TaskManagerStorage taskManagerStorage;
     private UserPrefsStorage userPrefsStorage;
 
-
     public StorageManager(TaskManagerStorage taskManagerStorage, UserPrefsStorage userPrefsStorage) {
         super();
         this.taskManagerStorage = taskManagerStorage;
@@ -45,7 +44,6 @@ public class StorageManager extends ComponentManager implements Storage {
     public void saveUserPrefs(UserPrefs userPrefs) throws IOException {
         userPrefsStorage.saveUserPrefs(userPrefs);
     }
-
 
     // ================ TaskManager methods ==============================
 
@@ -76,7 +74,6 @@ public class StorageManager extends ComponentManager implements Storage {
         taskManagerStorage.saveTaskManager(taskManager, filePath);
     }
 
-
     @Override
     @Subscribe
     public void handleTaskManagerChangedEvent(TaskManagerChangedEvent event) {
@@ -86,6 +83,23 @@ public class StorageManager extends ComponentManager implements Storage {
         } catch (IOException e) {
             raise(new DataSavingExceptionEvent(e));
         }
+    }
+
+    //@@author A0140036X
+    public TaskManagerStorage getTaskManagerStorage() {
+        return taskManagerStorage;
+    }
+
+    //@@author A0140036X
+    @Override
+    public void setTaskManagerStorageFilePath(String filePath) {
+        this.taskManagerStorage = new XmlTaskManagerStorage(filePath);
+    }
+
+    //@@author A0140036X
+    @Override
+    public void setTaskManagerStorage(TaskManagerStorage taskManagerStorage) {
+        this.taskManagerStorage = taskManagerStorage;
     }
 
 }

@@ -30,6 +30,7 @@ public class UndoEditOperation extends Operation {
         assert taskManager != null;
         try {
             taskManager.updateTask(index, undoTask);
+
         } catch (DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }

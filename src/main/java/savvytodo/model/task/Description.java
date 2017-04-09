@@ -6,10 +6,9 @@ import savvytodo.commons.exceptions.IllegalValueException;
  * Represents a Task's description in the task manager.
  * Guarantees: immutable; is valid as declared in {@link #isValidDescription(String)}
  */
-public class Description {
+public class Description implements Comparable<Description> {
 
-    public static final String MESSAGE_DESCRIPTION_CONSTRAINTS =
-            "Description should not be empty";
+    public static final String MESSAGE_DESCRIPTION_CONSTRAINTS = "Description should not be empty";
     public static final String DESCRIPTION_VALIDATION_REGEX = ".*";
     public static final String DESCRIPTION_DEFAULT_VALUES = "No description given.";
 
@@ -45,12 +44,18 @@ public class Description {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Description // instanceof handles nulls
-                && this.value.equals(((Description) other).value)); // state check
+                        && this.value.equals(((Description) other).value)); // state check
     }
 
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    //@@author A0140036X
+    @Override
+    public int compareTo(Description o) {
+        return toString().compareTo(o.toString());
     }
 
 }

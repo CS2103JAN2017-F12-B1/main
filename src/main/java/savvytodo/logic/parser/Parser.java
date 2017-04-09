@@ -19,6 +19,7 @@ import savvytodo.logic.commands.ListCommand;
 import savvytodo.logic.commands.LoadCommand;
 import savvytodo.logic.commands.MarkCommand;
 import savvytodo.logic.commands.RedoCommand;
+import savvytodo.logic.commands.SaveCommand;
 import savvytodo.logic.commands.SelectCommand;
 import savvytodo.logic.commands.UndoCommand;
 import savvytodo.logic.commands.UnmarkCommand;
@@ -78,6 +79,9 @@ public class Parser {
 
         case LoadCommand.COMMAND_WORD:
             return new LoadCommandParser().parse(arguments);
+
+        case SaveCommand.COMMAND_WORD:
+            return new SaveCommandParser().parse(arguments);
 
         case UndoCommand.COMMAND_WORD:
             return new UndoCommand();
