@@ -12,7 +12,8 @@ import savvytodo.commons.util.StringUtil;
  */
 public class Priority implements Comparable<Priority> {
 
-    public static final String MESSAGE_PRIORITY_CONSTRAINTS = "Task priority should be 'low', 'medium' or 'high'";
+    public static final String MESSAGE_PRIORITY_CONSTRAINTS = "Task priority should be 'low(1)', 'medium(2)' "
+            + "or 'high(3)'\n Example: p/3 , p/h or p/high means the HIGH priority";
 
     private static final int COMPARE_TO_SMALLER = -1;
     private static final int COMPARE_TO_EQUAL = 0;
@@ -56,15 +57,41 @@ public class Priority implements Comparable<Priority> {
             throw new IllegalValueException(MESSAGE_PRIORITY_CONSTRAINTS);
         }
 
-        if (priority.equalsIgnoreCase(Level.High.name())) {
-            this.level = Level.High.ordinal();
-        } else if (priority.equalsIgnoreCase(Level.Medium.name())) {
-            this.level = Level.Medium.ordinal();
+        if (!StringUtil.isUnsignedInteger(priority)) {
+            this.value = this.mapValue(priority);
         } else {
-            this.level = Level.Low.ordinal();
+            this.value = mapLevel(priority);
+        }
+    }
+
+    /**
+     * @return String priority map and assign value if is String
+     */
+    private String mapValue(String priority) {
+        String val = Level.Medium.toString();
+        for (Level level : Level.values()) {
+            if (level.toString().substring(0, 1).equalsIgnoreCase(priority)) {
+                this.level = level.ordinal();
+                val = level.toString();
+            }
         }
 
-        this.value = StringUtil.firstCharUpperCaseRestLowerCase(trimmedPriority);
+        return val;
+    }
+
+    /**
+     * @return String priority map and assign value if is integer
+     */
+    private String mapLevel(String priority) {
+        String val = Level.Medium.toString();
+        for (Level level : Level.values()) {
+            if (Integer.toString(level.showInt()).equalsIgnoreCase(priority)) {
+                this.level = level.ordinal();
+                val = level.toString();
+            }
+        }
+
+        return val;
     }
 
     /**

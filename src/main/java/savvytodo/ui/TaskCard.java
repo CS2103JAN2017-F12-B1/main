@@ -5,15 +5,26 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import savvytodo.commons.util.StringUtil;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import savvytodo.logic.parser.CliSyntax;
-import savvytodo.model.task.DateTime;
 import savvytodo.model.task.ReadOnlyTask;
+import savvytodo.model.task.Status;
 import savvytodo.model.task.TaskType;
 
+//@@author A0140016B
 public class TaskCard extends UiPart<Region> {
 
     private static final String FXML = "TaskListCard.fxml";
+
+    private static final String LABEL_LOW = "L";
+    private static final String LABEL_MEDIUM = "M";
+    private static final String LABEL_HIGH = "H";
+    private static final String LABEL_DONE = "✔ ";
+
+    private static final String PRIORITY_HIGH = "High";
+    private static final String PRIORITY_MEDIUM = "Medium";
+    private static final String PRIORITY_LOW = "Low";
 
     @FXML
     private HBox cardPane;
@@ -22,41 +33,77 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label priority;
-    @FXML
     private Label status;
     @FXML
-    private Label dateTimeRecur;
+    private Label dateTime;
     @FXML
     private Label description;
     @FXML
     private FlowPane categories;
-    //@@author A0147827U
+    @FXML
+    private Label circleLabel;
+    @FXML
+    private Circle circle;
+
+
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
         name.setText(task.getName().name);
-        if (task.getType().getType() == TaskType.FLOATING || task.getType().getType() == TaskType.DEADLINE) {
+        setId(task, displayedIndex);
+        description.setText(task.getDescription().value);
+        dateTime.setText(getDateTimeRecur(task));
+        setStatus(task);
+        initCategories(task);
+        setCircle(task);
+    }
+
+    //@@author A0147827U
+    private void setId(ReadOnlyTask task, int displayedIndex) {
+        if (task.getType().getType() == TaskType.FLOATING) {
             id.setText(CliSyntax.INDEX_FLOATING.toUpperCase() + displayedIndex + ". ");
         } else {
             id.setText(displayedIndex + ". ");
         }
-        description.setText(task.getDescription().value);
-        priority.setText(task.getPriority().value);
-        dateTimeRecur.setText(getDateTimeRecur(task));
-        status.setText(task.isCompleted().toString());
-        initCategories(task);
+    }
+    //@@author
+    //@@author A0140016B
+    private void setStatus(ReadOnlyTask task) {
+        if (task.isCompleted().value == Status.COMPLETED) {
+            status.setText(LABEL_DONE + task.isCompleted().toString());
+        }
+    }
+
+    private void setCircle(ReadOnlyTask task) {
+        switch (task.getPriority().value) {
+        case PRIORITY_HIGH:
+            circleLabel.setText(LABEL_HIGH);
+            circle.setFill(Color.RED);
+            break;
+        case PRIORITY_MEDIUM:
+            circleLabel.setText(LABEL_MEDIUM);
+            circle.setFill(Color.ORANGE);
+            break;
+        case PRIORITY_LOW:
+            circleLabel.setText(LABEL_LOW);
+            circle.setFill(Color.GREENYELLOW);
+            break;
+        default:
+            break;
+        }
     }
 
     private String getDateTimeRecur(ReadOnlyTask task) {
-        if (task.getDateTime().toString().equalsIgnoreCase(StringUtil.EMPTY_STRING)) {
-            return "This is a floating task";
-        } else if (task.getDateTime().startValue.equalsIgnoreCase(StringUtil.EMPTY_STRING)
-                || task.getDateTime().startValue == null) {
-            return "Deadline: " + task.getDateTime().toString();
+        StringBuilder sb = new StringBuilder();
+        if (task.getType().getType() == TaskType.FLOATING) {
+            sb.append("-");
+        } else if (task.getType().getType() == TaskType.DEADLINE) {
+            sb.append("Due By: " + task.getDateTime().toString());
         } else {
-            return "Event: " + task.getDateTime().toString() + DateTime.DATETIME_STRING_CONNECTOR
-                    + task.getRecurrence().toString();
+            sb.append("From: " + task.getDateTime().toString());
+            sb.append(task.getRecurrence().toString());
         }
+
+        return sb.toString();
     }
 
     private void initCategories(ReadOnlyTask task) {

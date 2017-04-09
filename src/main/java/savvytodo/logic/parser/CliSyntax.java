@@ -12,8 +12,6 @@ public interface CliSyntax {
     /* Prefix definitions */
     public static final Prefix PREFIX_PRIORITY = new Prefix("p/");
     public static final Prefix PREFIX_DATE_TIME = new Prefix("dt/");
-    public static final Prefix PREFIX_START_DATE_TIME = new Prefix("sd/");
-    public static final Prefix PREFIX_END_DATE_TIME = new Prefix("ed/");
     public static final Prefix PREFIX_RECURRENCE = new Prefix("r/");
     public static final Prefix PREFIX_DESCRIPTION = new Prefix("d/");
     public static final Prefix PREFIX_LOCATION = new Prefix("l/");
