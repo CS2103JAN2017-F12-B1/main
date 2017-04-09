@@ -59,11 +59,9 @@ public class EditCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        List<ReadOnlyTask> lastShownList = model
-                .getFilteredTaskList(filteredTaskListIndex.getTaskType());
+        List<ReadOnlyTask> lastShownList = model.getFilteredTaskList(filteredTaskListIndex.getTaskType());
 
-        if (filteredTaskListIndex.getIndex() - 1 >= lastShownList.size()
-                || filteredTaskListIndex.getIndex() < 0) {
+        if (filteredTaskListIndex.getIndex() - 1 >= lastShownList.size() || filteredTaskListIndex.getIndex() < 0) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
@@ -83,27 +81,20 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}
      * edited with {@code cmdTaskDescriptor}.
      */
-    private static Task createEditedTask(ReadOnlyTask taskToEdit,
-            CommandTaskDescriptor cmdTaskDescriptor) {
+    private static Task createEditedTask(ReadOnlyTask taskToEdit, CommandTaskDescriptor cmdTaskDescriptor) {
         assert taskToEdit != null;
 
         Name updatedName = cmdTaskDescriptor.getName().orElseGet(taskToEdit::getName);
-        Priority updatedPriority = cmdTaskDescriptor.getPriority()
-                .orElseGet(taskToEdit::getPriority);
-        Description updatedDescription = cmdTaskDescriptor.getDescription()
-                .orElseGet(taskToEdit::getDescription);
-        Location updatedLocation = cmdTaskDescriptor.getLocation()
-                .orElseGet(taskToEdit::getLocation);
-        UniqueCategoryList updatedCategories = cmdTaskDescriptor.getCategories()
-                .orElseGet(taskToEdit::getCategories);
-        DateTime updatedDateTime = cmdTaskDescriptor.getDateTime()
-                .orElseGet(taskToEdit::getDateTime);
-        Recurrence updatedRecurrence = cmdTaskDescriptor.getRecurrence()
-                .orElseGet(taskToEdit::getRecurrence);
+        Priority updatedPriority = cmdTaskDescriptor.getPriority().orElseGet(taskToEdit::getPriority);
+        Description updatedDescription = cmdTaskDescriptor.getDescription().orElseGet(taskToEdit::getDescription);
+        Location updatedLocation = cmdTaskDescriptor.getLocation().orElseGet(taskToEdit::getLocation);
+        UniqueCategoryList updatedCategories = cmdTaskDescriptor.getCategories().orElseGet(taskToEdit::getCategories);
+        DateTime updatedDateTime = cmdTaskDescriptor.getDateTime().orElseGet(taskToEdit::getDateTime);
+        Recurrence updatedRecurrence = cmdTaskDescriptor.getRecurrence().orElseGet(taskToEdit::getRecurrence);
         Status updatedStatus = cmdTaskDescriptor.getStatus().orElseGet(taskToEdit::isCompleted);
         TimeStamp timeStamp = taskToEdit.getTimeStamp();
-        return new Task(updatedName, updatedPriority, updatedDescription, updatedLocation,
-                updatedCategories, updatedDateTime, updatedRecurrence, updatedStatus, timeStamp);
+        return new Task(updatedName, updatedPriority, updatedDescription, updatedLocation, updatedCategories,
+                updatedDateTime, updatedRecurrence, updatedStatus, timeStamp);
     }
 
 }
