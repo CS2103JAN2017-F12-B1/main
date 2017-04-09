@@ -26,7 +26,7 @@ public class GenerateCommandTest extends StorageTest {
      * @author A0140036X
      */
     @Test
-    public void generate_createTemporaryTaskManagerAndLoad() {
+    public void generate_createTemporaryTaskManagerAndCheck() {
         SaveAppLocation state = new SaveAppLocation(this);
         state.saveState();
 
