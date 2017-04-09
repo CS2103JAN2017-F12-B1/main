@@ -161,7 +161,7 @@ public class MainWindow extends UiPart<Region> {
         } else {
             commandBox.setLogic(logic);
         }
-        commandBox.disableAutoComplete();
+
     }
 
     private AnchorPane getCommandBoxPlaceholder() {

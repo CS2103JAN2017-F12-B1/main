@@ -69,7 +69,6 @@ public class CommandBox extends UiPart<Region> {
     public void executeExternalCommand(String command) {
         try {
             CommandResult commandResult = logic.execute(command);
-
             // process result of the command
             setStyleToIndicateCommandSuccess();
             logger.info("Result: " + commandResult.feedbackToUser);

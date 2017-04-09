@@ -50,23 +50,6 @@
         <categorized>Driving</categorized>
     </tasks>
     <tasks>
-        <name>CS8888 Test</name>
-        <priority>High</priority>
-        <description>3pm, Open Book</description>
-        <location>NUS, MPSH 4</location>
-        <dateTime>
-            <startValue></startValue>
-            <endValue></endValue>
-        </dateTime>
-        <recurrence>
-            <occurences>0</occurences>
-            <type>None</type>
-        </recurrence>
-        <status>false</status>
-        <timeStamp/>
-        <categorized>test</categorized>
-    </tasks>
-    <tasks>
         <name>my 2nd event</name>
         <priority>Medium</priority>
         <description>No description given.</description>
@@ -84,6 +67,38 @@
     </tasks>
     <tasks>
         <name>my new floating task</name>
+        <priority>Medium</priority>
+        <description>No description given.</description>
+        <location>Location has not been set.</location>
+        <dateTime>
+            <startValue></startValue>
+            <endValue></endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <timeStamp/>
+    </tasks>
+    <tasks>
+        <name>my floating task</name>
+        <priority>Medium</priority>
+        <description>No description given.</description>
+        <location>Location has not been set.</location>
+        <dateTime>
+            <startValue></startValue>
+            <endValue></endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <timeStamp/>
+    </tasks>
+    <tasks>
+        <name>no task</name>
         <priority>Medium</priority>
         <description>No description given.</description>
         <location>Location has not been set.</location>
