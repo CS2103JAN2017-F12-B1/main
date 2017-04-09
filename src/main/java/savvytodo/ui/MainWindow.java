@@ -30,8 +30,8 @@ public class MainWindow extends UiPart<Region> {
 
     private static final String ICON = "/images/task_manager_32.png";
     private static final String FXML = "MainWindow.fxml";
-    private static final int MIN_HEIGHT = 600;
-    private static final int MIN_WIDTH = 450;
+    private static final int MIN_HEIGHT = 768;
+    private static final int MIN_WIDTH = 1024;
 
     private Stage primaryStage;
     private Logic logic;
@@ -242,7 +242,7 @@ public class MainWindow extends UiPart<Region> {
 
     public TaskListPanel getTaskListPanel(TaskType targetTaskList) {
         switch(targetTaskList) {
-        case FLOATING:
+        case FLOATING_DEADLINE:
             return this.floatingTaskListPanel;
         case EVENT:
         default:

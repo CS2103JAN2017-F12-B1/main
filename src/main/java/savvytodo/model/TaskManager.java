@@ -99,7 +99,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         System.out.println("Before sieving: task list size : " + tasks.asObservableList().size());
         for (Task t : tasks) {
             switch(t.getType()) {
-            case FLOATING:
+            case FLOATING_DEADLINE:
                 floatingTasks.add(t);
                 System.out.println("floating task found : " + t.getName());
                 break;
@@ -126,7 +126,7 @@ public class TaskManager implements ReadOnlyTaskManager {
     public void addTask(Task p) throws UniqueTaskList.DuplicateTaskException {
         syncMasterCategoryListWith(p);
         switch(p.getType()) {
-        case FLOATING:
+        case FLOATING_DEADLINE:
             floatingTasks.add(p);
             break;
         case EVENT:
@@ -137,6 +137,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         tasks.add(p); //global task list storage
     }
 
+    //@@author A0140016B
     /**
      * Updates the task in the list at position {@code index} with {@code editedReadOnlyTask}.
      * Moves the task to the new corresponding list (if it switches between floating and event)
@@ -157,13 +158,22 @@ public class TaskManager implements ReadOnlyTaskManager {
         // This can cause the categorys master list to have additional categorys that are not categoryged to any task
         // in the task list.
 
+        switch(editedReadOnlyTask.getType()) {
+        case FLOATING_DEADLINE:
+            floatingTasks.updateTask(index, editedTask);
+            break;
+        case EVENT:
+        default:
+            eventTasks.updateTask(index, editedTask);
+            break;
+        }
         tasks.updateTask(index, editedTask); //global task list storage
     }
 
-
+    //@@author A0147827U
     public boolean removeTask(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException, DuplicateTaskException {
         switch(key.getType()) {
-        case FLOATING:
+        case FLOATING_DEADLINE:
             if (floatingTasks.remove(key)) {
                 if (tasks.remove(key)) {
                     return true;

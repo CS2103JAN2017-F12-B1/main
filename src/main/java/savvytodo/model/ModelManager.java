@@ -85,6 +85,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         indicateTaskManagerChanged();
     }
+    //@@author
 
     @Override
     public ReadOnlyTaskManager getTaskManager() {
@@ -242,10 +243,9 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     //@@author A0147827U
-
     private FilteredList<ReadOnlyTask> getFilteredTasks(TaskType type) {
         switch (type) {
-        case FLOATING:
+        case FLOATING_DEADLINE:
             return filteredFloatingTasks;
         case EVENT:
         default:
@@ -257,7 +257,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList(TaskType taskType) {
         switch(taskType) {
-        case FLOATING:
+        case FLOATING_DEADLINE:
             return new UnmodifiableObservableList<>(getFilteredFloatingTaskList());
         case EVENT:
         default:
