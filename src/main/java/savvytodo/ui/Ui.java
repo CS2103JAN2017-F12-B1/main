@@ -26,4 +26,8 @@ public interface Ui {
     //@@author A0140036X
     /** Links UI to underlying logic and config and updates UI */
     void refresh();
+
+    //@@author A0140036X
+    /** Gets ui window */
+    MainWindow getMainWindow();
 }
