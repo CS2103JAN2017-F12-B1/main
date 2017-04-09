@@ -251,11 +251,12 @@ public class ModelManager extends ComponentManager implements Model {
      */
     private FilteredList<ReadOnlyTask> getFilteredTasks(Type type) {
         switch (type.getType()) {
-        case FLOATING:
-            return filteredFloatingTasks;
         case EVENT:
-        default:
             return filteredEventTasks;
+        case FLOATING:
+        case DEADLINE:
+        default:
+            return filteredFloatingTasks;
         }
     }
 
@@ -271,6 +272,7 @@ public class ModelManager extends ComponentManager implements Model {
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList(TaskType taskType) {
         switch(taskType) {
         case FLOATING:
+        case DEADLINE:
             return new UnmodifiableObservableList<>(getFilteredFloatingTaskList());
         case EVENT:
         default:
@@ -298,7 +300,6 @@ public class ModelManager extends ComponentManager implements Model {
         filteredFloatingTasks.setPredicate(Type.getFloatingType().getPredicate()
                 .or(Type.getDeadlineType().getPredicate()));
         filteredEventTasks.setPredicate(Type.getEventType().getPredicate());
-
     }
 
     @Override

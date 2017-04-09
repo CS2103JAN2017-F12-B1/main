@@ -213,11 +213,11 @@ public class Task implements ReadOnlyTask {
     }
 
     private boolean isEvent() {
-        return !(getDateTime().getStartDate() == null && getDateTime().getEndDate() == null);
+        return getDateTime().getStartDate() != null && getDateTime().getEndDate() != null;
     }
 
     private boolean isDeadline() {
-        return getDateTime().getStartDate() == null && !(getDateTime().getEndDate() == null);
+        return getDateTime().getStartDate() == null && getDateTime().getEndDate() != null;
     }
 
     public Type getType() {

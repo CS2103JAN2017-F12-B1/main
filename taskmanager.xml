@@ -1,45 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <taskmanager>
     <tasks>
-        <name>my first event</name>
+        <name>olddeadline</name>
         <priority>Medium</priority>
         <description>No description given.</description>
         <location>Location has not been set.</location>
-        <dateTime>
-            <startValue>09/04/2017 1639</startValue>
-            <endValue>10/04/2017 1639</endValue>
-        </dateTime>
-        <recurrence>
-            <occurences>0</occurences>
-            <type>None</type>
-        </recurrence>
-        <status>false</status>
-        <timeStamp/>
-    </tasks>
-    <tasks>
-        <name>my second event</name>
-        <priority>Medium</priority>
-        <description>No description given.</description>
-        <location>Location has not been set.</location>
-        <dateTime>
-            <startValue>09/04/2017 1645</startValue>
-            <endValue>10/04/2017 1645</endValue>
-        </dateTime>
-        <recurrence>
-            <occurences>0</occurences>
-            <type>None</type>
-        </recurrence>
-        <status>false</status>
-        <timeStamp/>
-    </tasks>
-    <tasks>
-        <name>Driving lesson</name>
-        <priority>Medium</priority>
-        <description>Bring PDL and wear shoes</description>
-        <location>Ubi Crescent</location>
         <dateTime>
             <startValue></startValue>
-            <endValue></endValue>
+            <endValue>09/04/2017 2347</endValue>
         </dateTime>
         <recurrence>
             <occurences>0</occurences>
@@ -47,16 +15,15 @@
         </recurrence>
         <status>false</status>
         <timeStamp/>
-        <categorized>Driving</categorized>
     </tasks>
     <tasks>
-        <name>my 2nd event</name>
+        <name>my event</name>
         <priority>Medium</priority>
         <description>No description given.</description>
         <location>Location has not been set.</location>
         <dateTime>
-            <startValue>09/04/2017 1645</startValue>
-            <endValue>10/04/2017 1645</endValue>
+            <startValue>09/04/2017 2348</startValue>
+            <endValue>10/04/2017 2348</endValue>
         </dateTime>
         <recurrence>
             <occurences>0</occurences>
@@ -66,7 +33,23 @@
         <timeStamp/>
     </tasks>
     <tasks>
-        <name>my new floating task</name>
+        <name>my deadline</name>
+        <priority>Medium</priority>
+        <description>No description given.</description>
+        <location>Location has not been set.</location>
+        <dateTime>
+            <startValue></startValue>
+            <endValue>09/04/2017 2348</endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <timeStamp/>
+    </tasks>
+    <tasks>
+        <name>my task</name>
         <priority>Medium</priority>
         <description>No description given.</description>
         <location>Location has not been set.</location>
@@ -82,7 +65,7 @@
         <timeStamp/>
     </tasks>
     <tasks>
-        <name>my floating task</name>
+        <name>mysecond task</name>
         <priority>Medium</priority>
         <description>No description given.</description>
         <location>Location has not been set.</location>
@@ -97,25 +80,4 @@
         <status>false</status>
         <timeStamp/>
     </tasks>
-    <tasks>
-        <name>no task</name>
-        <priority>Medium</priority>
-        <description>No description given.</description>
-        <location>Location has not been set.</location>
-        <dateTime>
-            <startValue></startValue>
-            <endValue></endValue>
-        </dateTime>
-        <recurrence>
-            <occurences>0</occurences>
-            <type>None</type>
-        </recurrence>
-        <status>false</status>
-        <timeStamp/>
-    </tasks>
-    <categories>project</categories>
-    <categories>family</categories>
-    <categories>meetup</categories>
-    <categories>Driving</categories>
-    <categories>test</categories>
 </taskmanager>
