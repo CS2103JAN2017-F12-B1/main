@@ -86,6 +86,7 @@ Shows a list of tasks in the Savvy To-Do by category or by priority or everythin
 Examples:
 * `list c/CS2103`<br>
 * `list p/high`<br>
+* `list s/completed`<br>
 * `list`<br>
 
 ### 2.4. Editing a task : `edit`
