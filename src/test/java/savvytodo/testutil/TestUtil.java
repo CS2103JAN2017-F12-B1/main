@@ -69,42 +69,62 @@ public class TestUtil {
                     actualException.getClass().getName());
             throw new AssertionFailedError(message);
         }
-        throw new AssertionFailedError(
-                String.format("Expected %s to be thrown, but nothing was thrown.", expected.getName()));
+        throw new AssertionFailedError(String
+                .format("Expected %s to be thrown, but nothing was thrown.", expected.getName()));
     }
 
     private static Task[] getSampleTaskData() {
         try {
             //CHECKSTYLE.OFF: LineLength
-            return new Task[]{
-                new Task(new Name("Ali Muster"), new Priority("low"), new Description("hans@google.com"),
-                        new Location("4th street"), new UniqueCategoryList(), new DateTime("01/03/2017 1400", "02/03/2017 1400"),
-                        new Recurrence(Recurrence.DEFAULT_VALUES)),
-                new Task(new Name("Boris Mueller"), new Priority("low"), new Description("ruth@google.com"),
-                        new Location("81th street"), new UniqueCategoryList(),
-                        new DateTime("02/03/2017 1400", "03/03/2017 1400"), new Recurrence(Recurrence.DEFAULT_VALUES)),
-                new Task(new Name("Carl Kurz"), new Priority("low"), new Description("heinz@yahoo.com"),
-                        new Location("wall street"), new UniqueCategoryList(),
-                        new DateTime("03/03/2017 1400", "04/03/2017 1400"), new Recurrence(Recurrence.DEFAULT_VALUES)),
-                new Task(new Name("Daniel Meier"), new Priority("low"), new Description("cornelia@google.com"),
-                        new Location("10th street"), new UniqueCategoryList(),
-                        new DateTime("04/03/2017 1400", "05/03/2017 1400"), new Recurrence(Recurrence.DEFAULT_VALUES)),
-                new Task(new Name("Elle Meyer"), new Priority("low"), new Description("werner@gmail.com"),
-                        new Location("michegan ave"), new UniqueCategoryList(),
-                        new DateTime("05/03/2017 1400", "06/03/2017 1400"), new Recurrence(Recurrence.DEFAULT_VALUES)),
-                new Task(new Name("Fiona Kunz"), new Priority("low"), new Description("lydia@gmail.com"),
-                        new Location("little tokyo"), new UniqueCategoryList(),
-                        new DateTime("06/03/2017 1400", "07/03/2017 1400"), new Recurrence(Recurrence.DEFAULT_VALUES)),
-                new Task(new Name("George Best"), new Priority("low"), new Description("anna@google.com"),
-                        new Location("4th street"), new UniqueCategoryList(), new DateTime("01/03/2017 1400", "02/03/2017 1400"),
-                        new Recurrence(Recurrence.DEFAULT_VALUES)),
-                new Task(new Name("Hoon Meier"), new Priority("low"), new Description("stefan@mail.com"),
-                        new Location("little india"), new UniqueCategoryList(),
-                        new DateTime("07/03/2017 1400", "08/03/2017 1400"), new Recurrence(Recurrence.DEFAULT_VALUES)),
-                new Task(new Name("Ida Mueller"), new Priority("low"), new Description("hans@google.com"),
-                        new Location("chicago ave"), new UniqueCategoryList(),
-                        new DateTime("08/03/2017 1400", "09/03/2017 1400"), new Recurrence(Recurrence.DEFAULT_VALUES)),            };
+            //CHECKSTYLE.OFF: Indentation
+            return new Task[] {
+                    new Task(new Name("Ali Muster"), new Priority("low"),
+                            new Description("hans@google.com"), new Location("4th street"),
+                            new UniqueCategoryList(),
+                            new DateTime("01/03/2017 1400", "02/03/2017 1400"),
+                            new Recurrence(Recurrence.DEFAULT_VALUES)),
+                    new Task(new Name("Boris Mueller"), new Priority("low"),
+                            new Description("ruth@google.com"), new Location("81th street"),
+                            new UniqueCategoryList(),
+                            new DateTime("02/03/2017 1400", "03/03/2017 1400"),
+                            new Recurrence(Recurrence.DEFAULT_VALUES)),
+                    new Task(new Name("Carl Kurz"), new Priority("low"),
+                            new Description("heinz@yahoo.com"), new Location("wall street"),
+                            new UniqueCategoryList(),
+                            new DateTime("03/03/2017 1400", "04/03/2017 1400"),
+                            new Recurrence(Recurrence.DEFAULT_VALUES)),
+                    new Task(new Name("Daniel Meier"), new Priority("low"),
+                            new Description("cornelia@google.com"), new Location("10th street"),
+                            new UniqueCategoryList(),
+                            new DateTime("04/03/2017 1400", "05/03/2017 1400"),
+                            new Recurrence(Recurrence.DEFAULT_VALUES)),
+                    new Task(new Name("Elle Meyer"), new Priority("low"),
+                            new Description("werner@gmail.com"), new Location("michegan ave"),
+                            new UniqueCategoryList(),
+                            new DateTime("05/03/2017 1400", "06/03/2017 1400"),
+                            new Recurrence(Recurrence.DEFAULT_VALUES)),
+                    new Task(new Name("Fiona Kunz"), new Priority("low"),
+                            new Description("lydia@gmail.com"), new Location("little tokyo"),
+                            new UniqueCategoryList(),
+                            new DateTime("06/03/2017 1400", "07/03/2017 1400"),
+                            new Recurrence(Recurrence.DEFAULT_VALUES)),
+                    new Task(new Name("George Best"), new Priority("low"),
+                            new Description("anna@google.com"), new Location("4th street"),
+                            new UniqueCategoryList(),
+                            new DateTime("01/03/2017 1400", "02/03/2017 1400"),
+                            new Recurrence(Recurrence.DEFAULT_VALUES)),
+                    new Task(new Name("Hoon Meier"), new Priority("low"),
+                            new Description("stefan@mail.com"), new Location("little india"),
+                            new UniqueCategoryList(),
+                            new DateTime("07/03/2017 1400", "08/03/2017 1400"),
+                            new Recurrence(Recurrence.DEFAULT_VALUES)),
+                    new Task(new Name("Ida Mueller"), new Priority("low"),
+                            new Description("hans@google.com"), new Location("chicago ave"),
+                            new UniqueCategoryList(),
+                            new DateTime("08/03/2017 1400", "09/03/2017 1400"),
+                            new Recurrence(Recurrence.DEFAULT_VALUES)), };
             //CHECKSTYLE.ON: LineLength
+            //CHECKSTYLE.ON: Indentation
         } catch (IllegalValueException e) {
             assert false;
             // not possible
@@ -112,13 +132,9 @@ public class TestUtil {
         }
     }
 
-
     private static Category[] getSampleCategoryData() {
         try {
-            return new Category[]{
-                new Category("relatives"),
-                new Category("friends")
-            };
+            return new Category[] { new Category("relatives"), new Category("friends") };
         } catch (IllegalValueException e) {
             assert false;
             return null;
@@ -186,7 +202,7 @@ public class TestUtil {
             keys.add(KeyCode.CONTROL);
         }
         keys.add(keyCodeCombination.getCode());
-        return keys.toArray(new KeyCode[]{});
+        return keys.toArray(new KeyCode[] {});
     }
 
     public static boolean isHeadlessEnvironment() {
@@ -204,14 +220,12 @@ public class TestUtil {
     }
 
     public static String descOnFail(Object... comparedObjects) {
-        return "Comparison failed \n"
-                + Arrays.asList(comparedObjects).stream()
-                .map(Object::toString)
-                .collect(Collectors.joining("\n"));
+        return "Comparison failed \n" + Arrays.asList(comparedObjects).stream()
+                .map(Object::toString).collect(Collectors.joining("\n"));
     }
 
-    public static void setFinalStatic(Field field, Object newValue) throws NoSuchFieldException,
-                                                                           IllegalAccessException {
+    public static void setFinalStatic(Field field, Object newValue)
+            throws NoSuchFieldException, IllegalAccessException {
         field.setAccessible(true);
         // remove final modifier from field
         Field modifiersField = Field.class.getDeclaredField("modifiers");
@@ -237,7 +251,8 @@ public class TestUtil {
      *
      * Caveat: only find method declared in the current Class, not inherited from supertypes
      */
-    public static Method getPrivateMethod(Class<?> objectClass, String methodName) throws NoSuchMethodException {
+    public static Method getPrivateMethod(Class<?> objectClass, String methodName)
+            throws NoSuchMethodException {
         Method method = objectClass.getDeclaredMethod(methodName);
         method.setAccessible(true);
         return method;
@@ -304,19 +319,20 @@ public class TestUtil {
      * @param tasksToRemove The subset of tasks.
      * @return The modified tasks after removal of the subset from tasks.
      */
-    public static TestTask[] removeTasksFromList(final TestTask[] tasks, TestTask... tasksToRemove) {
+    public static TestTask[] removeTasksFromList(final TestTask[] tasks,
+            TestTask... tasksToRemove) {
         List<TestTask> listOfTasks = asList(tasks);
         listOfTasks.removeAll(asList(tasksToRemove));
         return listOfTasks.toArray(new TestTask[listOfTasks.size()]);
     }
-
 
     /**
      * Returns a copy of the list with the task at specified index removed.
      * @param list original list to copy from
      * @param targetIndexInOneIndexedFormat e.g. index 1 if the first element is to be removed
      */
-    public static TestTask[] removeTaskFromList(final TestTask[] list, int targetIndexInOneIndexedFormat) {
+    public static TestTask[] removeTaskFromList(final TestTask[] list,
+            int targetIndexInOneIndexedFormat) {
         return removeTasksFromList(list, list[targetIndexInOneIndexedFormat - 1]);
     }
 
@@ -358,7 +374,7 @@ public class TestUtil {
 
     public static Category[] getCategoryList(String categories) {
         if ("".equals(categories)) {
-            return new Category[]{};
+            return new Category[] {};
         }
 
         final String[] split = categories.split(", ");
@@ -376,4 +392,13 @@ public class TestUtil {
         return collect.toArray(new Category[split.length]);
     }
 
+    //@@author A0140036X
+    /**
+     * Print tasks.
+     */
+    public static void printTasks(ReadOnlyTask... tasks) {
+        for (ReadOnlyTask t : tasks) {
+            System.out.println(t);
+        }
+    }
 }

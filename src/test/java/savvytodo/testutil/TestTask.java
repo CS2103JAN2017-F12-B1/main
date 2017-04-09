@@ -34,10 +34,24 @@ public class TestTask implements ReadOnlyTask {
         categories = new UniqueCategoryList();
     }
 
+    //@@author A0140036X
+    /**
+     * Creates a TestTask from ReadOnlyTask
+     */
+    public TestTask(ReadOnlyTask taskToCopy) {
+        copyFromReadOnlyTask(taskToCopy);
+    }
+
+    //@@author A0140036X
     /**
      * Creates a copy of {@code taskToCopy}.
      */
     public TestTask(TestTask taskToCopy) {
+        copyFromReadOnlyTask(taskToCopy);
+    }
+
+    //@@author A0140036X
+    private void copyFromReadOnlyTask(ReadOnlyTask taskToCopy) {
         this.name = taskToCopy.getName();
         this.priority = taskToCopy.getPriority();
         this.dateTime = taskToCopy.getDateTime();
@@ -144,7 +158,8 @@ public class TestTask implements ReadOnlyTask {
         sb.append("dt/" + this.getDateTime().startValue + DateTime.DATETIME_STRING_CONNECTOR
                 + this.getDateTime().endValue + " ");
         sb.append("d/" + this.getDescription().value + " ");
-        this.getCategories().asObservableList().stream().forEach(s -> sb.append("c/" + s.categoryName + " "));
+        this.getCategories().asObservableList().stream()
+                .forEach(s -> sb.append("c/" + s.categoryName + " "));
         return sb.toString();
     }
 
@@ -160,6 +175,7 @@ public class TestTask implements ReadOnlyTask {
         return getDateTime().getStartDate() == null && !(getDateTime().getEndDate() == null);
     }
 
+    @Override
     public Type getType() {
         updateType();
         return type;
@@ -168,6 +184,7 @@ public class TestTask implements ReadOnlyTask {
     public void setType(Type type) {
         this.type = type;
     }
+
     private void updateType() {
         if (isEvent()) {
             type.setType(TaskType.EVENT);
@@ -176,5 +193,17 @@ public class TestTask implements ReadOnlyTask {
         } else if (isDeadline()) {
             type.setType(TaskType.DEADLINE);
         }
+    }
+
+    //@@author A0140036X
+    /**
+     * Converts a list of ReadOnlyTask to list of TestTask
+     */
+    public static TestTask[] listFromReadOnlyTask(ReadOnlyTask[] tasks) {
+        TestTask[] testTasks = new TestTask[tasks.length];
+        for (int i = 0; i < tasks.length; i++) {
+            testTasks[i] = new TestTask(tasks[i]);
+        }
+        return testTasks;
     }
 }

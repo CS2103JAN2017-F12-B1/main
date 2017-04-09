@@ -1,7 +1,9 @@
 package savvytodo.logic.commands;
 
-import savvytodo.commons.core.EventsCenter;
-import savvytodo.commons.events.storage.LoadStorageFileEvent;
+import java.io.IOException;
+
+import savvytodo.MainApp;
+import savvytodo.commons.exceptions.DataConversionException;
 import savvytodo.logic.commands.exceptions.CommandException;
 
 //@@author A0147827U
@@ -26,12 +28,16 @@ public class LoadCommand extends Command {
 
     //@@author A0140036X
     /**
-     * Will post a LoadStorageFileEvent to EventsCenter
+     * Loads filepath
      */
     @Override
     public CommandResult execute() throws CommandException {
-        EventsCenter.getInstance().post(new LoadStorageFileEvent(filePath));
-        return new CommandResult(getSuccessMessage(filePath));
+        try {
+            MainApp.getRunningInstance().loadTaskManagerFile(filePath);
+            return new CommandResult(getSuccessMessage(filePath));
+        } catch (DataConversionException | IOException e) {
+            return new CommandResult(getFailureMessage(filePath));
+        }
     }
 
     //@@author A0140036X
@@ -41,5 +47,14 @@ public class LoadCommand extends Command {
      */
     public static String getSuccessMessage(String filePath) {
         return String.format(MESSAGE_SUCCESS, filePath);
+    }
+
+    //@@author A0140036X
+    /**
+     * Returns failure message if file path was loaded unsuccessfully
+     * @param filePath file path of file
+     */
+    public static String getFailureMessage(String filePath) {
+        return String.format(MESSAGE_FILE_NOT_FOUND, filePath);
     }
 }
