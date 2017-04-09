@@ -70,6 +70,7 @@ public class UiManager extends ComponentManager implements Ui {
     /**
      * Sets logic of instance
      */
+    @Override
     public void setLogic(Logic logic) {
         this.logic = logic;
     }
@@ -79,10 +80,12 @@ public class UiManager extends ComponentManager implements Ui {
      * Sets config of instance
      * @return
      */
+    @Override
     public void setConfig(Config config) {
         this.config = config;
     }
 
+    @Override
     public MainWindow getMainWindow() {
         return mainWindow;
     }
@@ -161,10 +164,12 @@ public class UiManager extends ComponentManager implements Ui {
         mainWindow.loadTaskPage(event.getNewSelection());
     }
 
+    //@@author A0140036X
+    /**
+     * Refreshes the ui
+     */
     @Override
     public void refresh() {
-        mainWindow.setLogic(logic);
-        mainWindow.setConfig(config);
         mainWindow.fillInnerParts();
     }
 
