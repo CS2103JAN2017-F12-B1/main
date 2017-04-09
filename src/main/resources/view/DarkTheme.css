@@ -16,7 +16,7 @@
     -fx-text-fill: #1d1d1d;
     -fx-opacity: 1;
     -fx-label-padding: 0 0 15 10;
-
+    -fx-text-fill: white;
 }
 /*@@author */
 .label-header {
@@ -92,13 +92,13 @@
 .eventTaskList {
 	-fx-border-radius: 1;
     -fx-border-width: 1;
-    -fx-background-color: derive(#7ec9e5, 20%);
+    -fx-background-color: derive(#146f77, 20%);
 }
 
 .floatingTaskList {
 	-fx-border-radius: 1;
     -fx-border-width: 1;
-    -fx-background-color: derive(#7ee5c9, 20%);
+    -fx-background-color: derive(#146f77, 20%);
 }
 /*@@author */
 .list-cell {
@@ -132,8 +132,7 @@
 }
 /*@@author A0147827U */
 .browser-pane {
-	 -fx-background-color: derive(#e57e7e, 20%);
-     -fx-border-color: derive(#1d1d1d, 10%);
+	 -fx-background-color: derive(#7ec9e5, 20%);
      -fx-border-top-width: 1px;
 }
 /*@@author */
