@@ -79,20 +79,27 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}
      * edited with {@code cmdTaskDescriptor}.
      */
-    private static Task createEditedTask(ReadOnlyTask taskToEdit, CommandTaskDescriptor cmdTaskDescriptor) {
+    private static Task createEditedTask(ReadOnlyTask taskToEdit,
+            CommandTaskDescriptor cmdTaskDescriptor) {
         assert taskToEdit != null;
 
         Name updatedName = cmdTaskDescriptor.getName().orElseGet(taskToEdit::getName);
-        Priority updatedPriority = cmdTaskDescriptor.getPriority().orElseGet(taskToEdit::getPriority);
-        Description updatedDescription = cmdTaskDescriptor.getDescription().orElseGet(taskToEdit::getDescription);
-        Location updatedLocation = cmdTaskDescriptor.getLocation().orElseGet(taskToEdit::getLocation);
-        UniqueCategoryList updatedCategories = cmdTaskDescriptor.getCategories().orElseGet(taskToEdit::getCategories);
-        DateTime updatedDateTime = cmdTaskDescriptor.getDateTime().orElseGet(taskToEdit::getDateTime);
-        Recurrence updatedRecurrence = cmdTaskDescriptor.getRecurrence().orElseGet(taskToEdit::getRecurrence);
+        Priority updatedPriority = cmdTaskDescriptor.getPriority()
+                .orElseGet(taskToEdit::getPriority);
+        Description updatedDescription = cmdTaskDescriptor.getDescription()
+                .orElseGet(taskToEdit::getDescription);
+        Location updatedLocation = cmdTaskDescriptor.getLocation()
+                .orElseGet(taskToEdit::getLocation);
+        UniqueCategoryList updatedCategories = cmdTaskDescriptor.getCategories()
+                .orElseGet(taskToEdit::getCategories);
+        DateTime updatedDateTime = cmdTaskDescriptor.getDateTime()
+                .orElseGet(taskToEdit::getDateTime);
+        Recurrence updatedRecurrence = cmdTaskDescriptor.getRecurrence()
+                .orElseGet(taskToEdit::getRecurrence);
         Status updatedStatus = cmdTaskDescriptor.getStatus().orElseGet(taskToEdit::isCompleted);
 
-        return new Task(updatedName, updatedPriority, updatedDescription, updatedLocation, updatedCategories,
-                updatedDateTime, updatedRecurrence, updatedStatus);
+        return new Task(updatedName, updatedPriority, updatedDescription, updatedLocation,
+                updatedCategories, updatedDateTime, updatedRecurrence);
     }
 
 }
