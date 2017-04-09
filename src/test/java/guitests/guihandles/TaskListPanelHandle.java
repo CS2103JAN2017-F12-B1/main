@@ -61,13 +61,13 @@ public class TaskListPanelHandle extends GuiHandle {
         }
         if (!ignoreOrder) {
             assertTrue(this.containsInOrder(startPosition, tasks));
-        }
-        for (int i = 0; i < tasks.length; i++) {
-            final int scrollTo = i + startPosition;
-            guiRobot.interact(() -> getListView().scrollTo(scrollTo));
-            guiRobot.sleep(1);
-            if (!TestUtil.compareCardAndTask(getTaskCardHandle(startPosition + i), tasks[i])) {
-                return false;
+            for (int i = 0; i < tasks.length; i++) {
+                final int scrollTo = i + startPosition;
+                guiRobot.interact(() -> getListView().scrollTo(scrollTo));
+                guiRobot.sleep(1);
+                if (!TestUtil.compareCardAndTask(getTaskCardHandle(startPosition + i), tasks[i])) {
+                    return false;
+                }
             }
         }
         return true;
@@ -90,7 +90,7 @@ public class TaskListPanelHandle extends GuiHandle {
      * @param tasks A list of task in the correct order.
      */
     public boolean isListMatchingIgnoreOrder(ReadOnlyTask... tasks) {
-        return isListMatching(0, false, tasks);
+        return isListMatching(0, true, tasks);
     }
 
     /**

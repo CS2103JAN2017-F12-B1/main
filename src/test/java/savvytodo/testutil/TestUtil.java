@@ -380,8 +380,8 @@ public class TestUtil {
     /**
      * Print tasks.
      */
-    public static void printTasks(Task... tasks) {
-        for (Task t : tasks) {
+    public static void printTasks(ReadOnlyTask... tasks) {
+        for (ReadOnlyTask t : tasks) {
             System.out.println(t);
         }
     }

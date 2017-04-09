@@ -93,6 +93,9 @@ public class StorageTest extends TaskManagerGuiTest {
     protected void assertLoad(String testTaskManagerFilePath, ReadOnlyTask[] tasks) {
         loadFromFilePath(testTaskManagerFilePath);
         TestUtil.printTasks(taskListPanel.getListView().getItems().toArray(new Task[0]));
+        System.out.println();
+
+        TestUtil.printTasks(tasks);
         assertTrue(taskListPanel.isListMatchingIgnoreOrder(tasks));
         assertResultMessage(LoadCommand.getSuccessMessage(testTaskManagerFilePath));
     }
