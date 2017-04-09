@@ -139,7 +139,7 @@ public class LoadCommandTest extends TaskManagerGuiTest {
      */
     private void assertLoad(String testTaskManagerFilePath, ReadOnlyTask[] tasks) {
         loadFromFilePath(testTaskManagerFilePath);
-        assertTrue(taskListPanel.isListMatching(tasks));
+        assertTrue(eventTaskListPanel.isListMatching(tasks));
         assertResultMessage(LoadCommand.getSuccessMessage(testTaskManagerFilePath));
     }
 
@@ -161,7 +161,7 @@ public class LoadCommandTest extends TaskManagerGuiTest {
         TestTask taskToAdd = td.getTypicalTasks()[0];
         TestTask[] expectedList = TestUtil.addTasksToList(currentList, taskToAdd);
         commandBox.runCommand(taskToAdd.getAddCommand());
-        assertTrue(taskListPanel.isListMatching(expectedList));
+        assertTrue(eventTaskListPanel.isListMatching(expectedList));
         return expectedList;
     }
 

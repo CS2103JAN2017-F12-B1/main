@@ -105,14 +105,14 @@ public class MarkCommandTest extends TaskManagerGuiTest {
 
         for (TestTask markedTask : markedTasks) {
             // confirm the new card contains the right data
-            TaskCardHandle editedCard = taskListPanel.navigateToTask(markedTask.getName().name);
+            TaskCardHandle editedCard = eventTaskListPanel.navigateToTask(markedTask.getName().name);
             assertMatching(markedTask, editedCard);
 
             expectedTasksList[targetIndices.peek() - 1] = markedTask;
             resultSb.append(String.format(MESSAGE_MARK_TASK_SUCCESS, targetIndices.pop()));
         }
 
-        assertTrue(taskListPanel.isListMatching(expectedTasksList));
+        assertTrue(eventTaskListPanel.isListMatching(expectedTasksList));
         assertResultMessage(resultSb.toString());
     }
 
@@ -133,13 +133,13 @@ public class MarkCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand("mark " + filteredTaskListIndex);
 
         // confirm the new card contains the right data
-        TaskCardHandle editedCard = taskListPanel.navigateToTask(markedTask.getName().name);
+        TaskCardHandle editedCard = eventTaskListPanel.navigateToTask(markedTask.getName().name);
         assertMatching(markedTask, editedCard);
 
         // confirm the list now contains all previous tasks plus the task with
         // updated details
         expectedTasksList[markedTaskIndex - 1] = markedTask;
-        assertTrue(taskListPanel.isListMatching(expectedTasksList));
+        assertTrue(eventTaskListPanel.isListMatching(expectedTasksList));
         assertResultMessage(String.format(MESSAGE_MARK_TASK_SUCCESS, markedTaskIndex));
     }
 

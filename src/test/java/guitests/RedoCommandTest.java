@@ -30,7 +30,7 @@ public class RedoCommandTest extends TaskManagerGuiTest {
     private void assertRedoSuccess(TestTask editedTask) {
         commandBox.runCommand("redo");
 
-        TaskCardHandle editedTaskCard = taskListPanel.navigateToTask(editedTask.getName().name);
+        TaskCardHandle editedTaskCard = eventTaskListPanel.navigateToTask(editedTask.getName().name);
         assertMatching(editedTask, editedTaskCard);
 
     }

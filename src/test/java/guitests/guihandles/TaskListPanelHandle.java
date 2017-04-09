@@ -23,6 +23,7 @@ public class TaskListPanelHandle extends GuiHandle {
     public static final int NOT_FOUND = -1;
     public static final String CARD_PANE_ID = "#cardPane";
 
+    //to identify the right task list view
     public static final String FLOATING_TASK_LIST_VIEW_ID = "#taskListView";
     public static final String EVENT_TASK_LIST_VIEW_ID = "#eventTaskListView";
 

@@ -9,7 +9,6 @@ import guitests.guihandles.TaskListPanelHandle;
 import savvytodo.commons.core.Messages;
 import savvytodo.logic.commands.AddCommand;
 import savvytodo.model.task.TaskType;
-import savvytodo.model.task.Type;
 import savvytodo.testutil.TestTask;
 import savvytodo.testutil.TestUtil;
 
