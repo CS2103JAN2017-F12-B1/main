@@ -35,4 +35,16 @@ public interface Storage extends TaskManagerStorage, UserPrefsStorage {
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
     void handleTaskManagerChangedEvent(TaskManagerChangedEvent abce);
+
+    //@@author A0140036X
+    /**
+     * Sets task manager storage.
+     */
+    void setTaskManagerStorage(TaskManagerStorage taskManagerStorage);
+
+    //@@author A0140036X
+    /**
+     * Sets task manager storage from filepath.
+     */
+    void setTaskManagerStorageFilePath(String filePath);
 }
