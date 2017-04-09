@@ -48,7 +48,7 @@ public class MarkCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
         lastShownEventList = model.getFilteredTaskList(TaskType.EVENT);
-        lastShownFloatingList = model.getFilteredTaskList(TaskType.FLOATING_DEADLINE);
+        lastShownFloatingList = model.getFilteredTaskList(TaskType.FLOATING);
         for (TaskIndex targetIndex : targetIndices) {
             int filteredTaskListIndex = targetIndex.getIndex() - 1;
             if (targetIndex.getTaskType().equals(TaskType.EVENT)) {

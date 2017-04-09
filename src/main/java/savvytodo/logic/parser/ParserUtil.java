@@ -59,7 +59,7 @@ public class ParserUtil {
                 if (!StringUtil.isUnsignedInteger(index)) {
                     parsedIndex = Optional.empty();
                 } else {
-                    parsedIndex = Optional.of(new TaskIndex(TaskType.FLOATING_DEADLINE, Integer.parseInt(index)));
+                    parsedIndex = Optional.of(new TaskIndex(TaskType.FLOATING, Integer.parseInt(index)));
                 }
             } else {
                 parsedIndex = Optional.empty();
@@ -112,7 +112,7 @@ public class ParserUtil {
                             parseError = true;
                             break;
                         } else {
-                            indicesList.add(new TaskIndex(TaskType.FLOATING_DEADLINE, Integer.parseInt(index)));
+                            indicesList.add(new TaskIndex(TaskType.FLOATING, Integer.parseInt(index)));
                         }
                     } else {
                         parseError = true;

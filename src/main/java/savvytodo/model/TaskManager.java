@@ -78,7 +78,6 @@ public class TaskManager implements ReadOnlyTaskManager {
 
     }
 
-
     public void addCategory(Category t) throws UniqueCategoryList.DuplicateCategoryException {
         categories.add(t);
     }

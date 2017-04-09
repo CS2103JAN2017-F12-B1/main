@@ -49,7 +49,7 @@ public class UnmarkCommand extends Command {
     public CommandResult execute()  throws CommandException {
         for (TaskIndex targetIndex : targetIndices) {
             lastShownEventList = model.getFilteredTaskList(TaskType.EVENT);
-            lastShownFloatingList = model.getFilteredTaskList(TaskType.FLOATING_DEADLINE);
+            lastShownFloatingList = model.getFilteredTaskList(TaskType.FLOATING);
             int filteredTaskListIndex = targetIndex.getIndex() - 1;
             if (targetIndex.getTaskType().equals(TaskType.EVENT)) {
                 if (filteredTaskListIndex >= lastShownEventList.size() || filteredTaskListIndex < 0) {

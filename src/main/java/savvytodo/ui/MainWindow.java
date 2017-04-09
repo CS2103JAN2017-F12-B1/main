@@ -242,7 +242,7 @@ public class MainWindow extends UiPart<Region> {
 
     public TaskListPanel getTaskListPanel(TaskType targetTaskList) {
         switch(targetTaskList) {
-        case FLOATING_DEADLINE:
+        case FLOATING:
             return this.floatingTaskListPanel;
         case EVENT:
         default:
