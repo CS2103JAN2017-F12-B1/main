@@ -76,10 +76,8 @@ public class MarkCommand extends Command {
      */
     private void markTasks() {
         int numOfSuccessfulMark = 0;
-        System.out.println(targettedTaskIndices.size() + " " + targettedEventIndices.size());
         numOfSuccessfulMark += markTasks(tasksToMark, targettedTaskIndices);
         numOfSuccessfulMark += markTasks(eventsToMark, targettedEventIndices);
-        System.out.println(numOfSuccessfulMark);
         if (numOfSuccessfulMark > 0) {
             model.recordMark(numOfSuccessfulMark);
         }
@@ -105,7 +103,6 @@ public class MarkCommand extends Command {
             }
         } catch (DuplicateTaskException e) {
             //ignore for completed
-            System.out.println(numOfSuccessfulMark);
         }
         return numOfSuccessfulMark;
     }

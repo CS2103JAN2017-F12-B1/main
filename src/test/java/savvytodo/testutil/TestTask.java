@@ -13,6 +13,7 @@ import savvytodo.model.task.TaskType;
 import savvytodo.model.task.TimeStamp;
 import savvytodo.model.task.Type;
 
+//@@author A0140016B
 /**
  * A mutable task object. For testing only.
  */
@@ -136,8 +137,6 @@ public class TestTask implements ReadOnlyTask {
     }
 
     public String getAddCommand() {
-
-        System.out.println(this.getPriority().value);
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getName().name + " ");
         sb.append("l/" + this.getLocation().value + " ");
@@ -149,7 +148,6 @@ public class TestTask implements ReadOnlyTask {
         return sb.toString();
     }
 
-    //@@author A0147827U
     private boolean isFloating() {
         return getDateTime().getStartDate() == null && getDateTime().getEndDate() == null;
     }
