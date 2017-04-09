@@ -14,7 +14,6 @@ import savvytodo.commons.core.Config;
 import savvytodo.commons.core.EventsCenter;
 import savvytodo.commons.core.LogsCenter;
 import savvytodo.commons.core.Version;
-import savvytodo.commons.events.storage.LoadStorageFileEvent;
 import savvytodo.commons.events.ui.ExitAppRequestEvent;
 import savvytodo.commons.exceptions.DataConversionException;
 import savvytodo.commons.util.ConfigUtil;
@@ -40,6 +39,8 @@ public class MainApp extends Application {
 
     public static final Version VERSION = new Version(1, 0, 0, true);
 
+    private static MainApp RUNNING_INSTANCE = null;
+
     protected Ui ui;
     protected Logic logic;
     protected Storage storage;
@@ -49,10 +50,21 @@ public class MainApp extends Application {
 
     public String configFile = Config.DEFAULT_CONFIG_FILE;
 
+    //@@author A0140036X
+    /**
+     * Gets running JavaFX Application instance
+     * @return
+     */
+    public static MainApp getRunningInstance() {
+        return RUNNING_INSTANCE;
+    }
+
     @Override
     public void init() throws Exception {
         logger.info("=============================[ Initializing Task Manager ]===========================");
         super.init();
+
+        RUNNING_INSTANCE = this;
 
         initEventsCenter();
 
@@ -61,7 +73,7 @@ public class MainApp extends Application {
 
     //@@author A0140036X
     /**
-     * Sets up application UI. Updates UI with new logic and storage if UI already exists.
+     * Sets up application UI.
      * If useSampleDataIfStorageFileNotFound is true sample data will be loaded if storage file is not found.
      * @author A0140036X
      * @param configFilePath File path of json file containing configurations
@@ -77,16 +89,8 @@ public class MainApp extends Application {
         initLogging(config);
 
         model = initModelManager(storage, userPrefs, useSampleDataIfStorageFileNotFound ? null : new TaskManager());
-
         logic = new LogicManager(model, storage);
-
-        if (ui == null) {
-            ui = new UiManager(logic, config, userPrefs);
-        } else {
-            ui.setLogic(logic);
-            ui.setConfig(config);
-            ui.refresh();
-        }
+        ui = new UiManager(logic, config, userPrefs);
     }
 
     private String getApplicationParameter(String parameterName) {
@@ -105,17 +109,9 @@ public class MainApp extends Application {
      * @return initialized Model
      */
     private Model initModelManager(Storage storage, UserPrefs userPrefs, TaskManager defaultTaskManager) {
-        Optional<ReadOnlyTaskManager> taskManagerOptional;
         ReadOnlyTaskManager initialData;
         try {
-            taskManagerOptional = storage.readTaskManager();
-            if (!taskManagerOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with "
-                        + ((defaultTaskManager == null ? "a sample " : "provided ") + "TaskManager"));
-            }
-            logger.info("Data file found " + storage.getTaskManagerFilePath());
-            initialData = taskManagerOptional.orElseGet(
-                    defaultTaskManager == null ? SampleDataUtil::getSampleTaskManager : () -> new TaskManager());
+            initialData = getTaskManagerFromStorage(storage, defaultTaskManager);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty TaskManager");
             initialData = new TaskManager();
@@ -125,6 +121,20 @@ public class MainApp extends Application {
         }
 
         return new ModelManager(initialData, userPrefs);
+    }
+
+    //@@author A0140036X
+    private ReadOnlyTaskManager getTaskManagerFromStorage(Storage storage2, ReadOnlyTaskManager defaultTaskManager)
+            throws DataConversionException, IOException {
+        Optional<ReadOnlyTaskManager> taskManagerOptional = storage.readTaskManager();
+        if (!taskManagerOptional.isPresent()) {
+            logger.info("Data file not found. Will be starting with "
+                    + ((defaultTaskManager == null ? "a sample " : "provided ") + "TaskManager"));
+        }
+        logger.info("Data file found " + storage.getTaskManagerFilePath());
+        ReadOnlyTaskManager initialData = taskManagerOptional
+                .orElseGet(defaultTaskManager == null ? SampleDataUtil::getSampleTaskManager : () -> new TaskManager());
+        return initialData;
     }
 
     private void initLogging(Config config) {
@@ -256,22 +266,41 @@ public class MainApp extends Application {
      * Loads a new task manager file.
      * 1. Update and save config file with new storage file path
      * 2. Update UI with new logic
+     * @throws IOException
+     * @throws DataConversionException
      */
-    @Subscribe
-    public void handleLoadStorageFileEvent(LoadStorageFileEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        String taskManagerFilePath = event.getFilePath();
-        config.setTaskManagerFilePath(taskManagerFilePath);
+    public void loadTaskManagerFile(String filePath) throws DataConversionException, IOException {
+        logger.info("Loading new file " + filePath);
+        storage.setTaskManagerStorageFilePath(filePath);
+        model.resetData(getTaskManagerFromStorage(storage, new TaskManager()));
+        config.setTaskManagerFilePath(filePath);
+        saveConfig();
+        ui.refresh();
+    }
 
+    //@@author A0140036X
+    /**
+     * Saves config to file.
+     */
+    private void saveConfig() {
         try {
             ConfigUtil.saveConfig(config, configFile);
         } catch (IOException e) {
             logger.severe("Failed to save config " + StringUtil.getDetails(e));
             this.stop();
         }
+    }
 
-        logger.info("Setting UI with new logic");
-        initApplicationFromConfig(configFile, false);
+    //@@author A0140036X
+    /**
+     * Saves storage to filepath.
+     * @throws IOException Error saving task manager
+     * @throws DataConversionException
+     */
+    public void saveTaskManagerToFile(String filePath) throws IOException, DataConversionException {
+        logger.info("Saving to file " + filePath);
+        storage.saveTaskManager(model.getTaskManager(), filePath);
+        loadTaskManagerFile(filePath);
     }
 
     public static void main(String[] args) {
