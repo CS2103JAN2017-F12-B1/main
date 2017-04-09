@@ -52,6 +52,7 @@ import savvytodo.model.task.ReadOnlyTask;
 import savvytodo.model.task.Recurrence;
 import savvytodo.model.task.Task;
 import savvytodo.model.task.TimeStamp;
+import savvytodo.model.task.Type;
 import savvytodo.storage.StorageManager;
 
 public class LogicManagerTest {
@@ -119,6 +120,18 @@ public class LogicManagerTest {
         assertCommandBehavior(false, inputCommand, expectedMessage, expectedTaskManager, expectedShownList);
     }
 
+    //@@author A0140016B
+    /**
+     * Executes the command, confirms that a CommandException is not thrown and that the result message is correct.
+     * Also confirms that both the 'task manager' and the 'last shown list' are as specified.
+     * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskManager, List)
+     */
+    private void assertCommandSuccess2(String inputCommand, String expectedMessage,
+            ReadOnlyTaskManager expectedTaskManager, List<? extends ReadOnlyTask> expectedShownList) {
+        assertCommandBehavior2(false, inputCommand, expectedMessage, expectedTaskManager, expectedShownList);
+    }
+    //@@author
+    
     /**
      * Executes the command, confirms that a CommandException is thrown and that the result message is correct.
      * Both the 'task manager' and the 'last shown list' are verified to be unchanged.
@@ -158,6 +171,35 @@ public class LogicManagerTest {
         assertEquals(expectedTaskManager, latestSavedTaskManager);
     }
 
+    //@@author A0140016B
+    /**
+     * Executes the command, confirms that the result message is correct
+     * and that a CommandException is thrown if expected
+     * and also confirms that the following three parts of the LogicManager object's state are as expected:<br>
+     *      - the internal task manager data are same as those in the {@code expectedTaskManager} <br>
+     *      - the backing list shown by UI matches the {@code shownList} <br>
+     *      - {@code expectedTaskManager} was saved to the storage file. <br>
+     */
+    private void assertCommandBehavior2(boolean isCommandExceptionExpected, String inputCommand, String expectedMessage,
+            ReadOnlyTaskManager expectedTaskManager, List<? extends ReadOnlyTask> expectedShownList) {
+
+        try {
+            CommandResult result = logic.execute(inputCommand);
+            assertFalse("CommandException expected but was not thrown.", isCommandExceptionExpected);
+            assertEquals(expectedMessage, result.feedbackToUser);
+        } catch (CommandException e) {
+            assertTrue("CommandException not expected but was thrown.", isCommandExceptionExpected);
+            assertEquals(expectedMessage, e.getMessage());
+        }
+
+        //Confirm the ui display elements should contain the right data
+        assertEquals(expectedShownList, model.getFilteredEventTaskList());
+
+        //Confirm the state of data (saved and in-memory) is as expected
+        assertEquals(expectedTaskManager, model.getTaskManager());
+        assertEquals(expectedTaskManager, latestSavedTaskManager);
+    }
+    //@@author
     @Test
     public void execute_unknownCommandWord() {
         String unknownCommand = "uicfhmowqewca";
@@ -234,6 +276,7 @@ public class LogicManagerTest {
 
     }
 
+    //@@author A0140016B
     @Test
     public void execute_list_showsAllTasks() throws Exception {
         // prepare expectations
@@ -244,9 +287,9 @@ public class LogicManagerTest {
         // prepare task manager state
         helper.addToModel2(model, expectedList);
 
-        assertCommandSuccess("list", ListCommand.LIST_ALL_SUCCESS, expectedAB, expectedList);
+        assertCommandSuccess2("list", ListCommand.LIST_ALL_SUCCESS, expectedAB, expectedList);
     }
-
+    //@@author
     /**
      * Confirms the 'invalid argument index number behaviour' for the given command
      * targeting a single task in the shown list, using visible index.
@@ -293,20 +336,21 @@ public class LogicManagerTest {
         assertIndexNotFoundBehaviorForCommand("select");
     }
 
+    //@@author A0140016B
     @Test
     public void execute_select_jumpsToCorrectTask() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         List<Task> threeTasks = helper.generateTaskList(3);
 
         TaskManager expectedAB = helper.generateTaskManager(threeTasks);
-        helper.addToModel(model, threeTasks);
+        helper.addToModel2(model, threeTasks);
 
-        assertCommandSuccess("select 2", String.format(SelectCommand.MESSAGE_SELECT_TASK_SUCCESS, 2), expectedAB,
+        assertCommandSuccess2("select 2", String.format(SelectCommand.MESSAGE_SELECT_TASK_SUCCESS, 2), expectedAB,
                 expectedAB.getTaskList());
         assertEquals(1, targetedJumpIndex);
-        assertEquals(model.getFilteredFloatingTaskList().get(1), threeTasks.get(1));
+        assertEquals(model.getFilteredEventTaskList().get(1), threeTasks.get(1));
     }
-
+    //@@author
     @Test
     public void execute_deleteInvalidArgsFormat_errorMessageShown() throws Exception {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE);
@@ -318,6 +362,7 @@ public class LogicManagerTest {
         assertIndexNotFoundBehaviorForCommand("delete");
     }
 
+    //@@author A0140016B
     @Test
     public void execute_delete_removesCorrectTask() throws Exception {
         TestDataHelper helper = new TestDataHelper();
@@ -325,12 +370,12 @@ public class LogicManagerTest {
 
         TaskManager expectedAB = helper.generateTaskManager(threeTasks);
         expectedAB.removeTask(threeTasks.get(1));
-        helper.addToModel(model, threeTasks);
+        helper.addToModel2(model, threeTasks);
 
-        assertCommandSuccess("delete 2", String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS, threeTasks.get(1)),
+        assertCommandSuccess2("delete 2", String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS, threeTasks.get(1)),
                 expectedAB, expectedAB.getTaskList());
     }
-
+    //@@author
     @Test
     public void execute_find_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE);
@@ -520,7 +565,9 @@ public class LogicManagerTest {
         List<Task> generateTaskList(int numGenerated) throws Exception {
             List<Task> tasks = new ArrayList<>();
             for (int i = 1; i <= numGenerated; i++) {
-                tasks.add(generateTask(i));
+                Task task = generateTask(i);
+                task.setType(Type.getEventType());
+                tasks.add(task);
             }
             return tasks;
         }
