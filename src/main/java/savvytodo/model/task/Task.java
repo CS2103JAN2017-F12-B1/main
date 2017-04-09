@@ -1,5 +1,8 @@
 package savvytodo.model.task;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 import savvytodo.commons.util.CollectionUtil;
 import savvytodo.model.category.UniqueCategoryList;
 
@@ -216,6 +219,7 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         return getDateTime().getStartDate() == null && !(getDateTime().getEndDate() == null);
     }
 
+    @Override
     public Type getType() {
         updateType();
         return type;
