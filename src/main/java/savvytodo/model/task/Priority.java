@@ -96,6 +96,7 @@ public class Priority implements Comparable<Priority> {
     public Predicate<ReadOnlyTask> getPredicate() {
         return (ReadOnlyTask task) -> task.getPriority().equals(this);
     }
+    //@@author
 
     @Override
     public String toString() {

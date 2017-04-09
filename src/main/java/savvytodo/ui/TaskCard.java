@@ -6,8 +6,10 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import savvytodo.commons.util.StringUtil;
+import savvytodo.logic.parser.CliSyntax;
 import savvytodo.model.task.DateTime;
 import savvytodo.model.task.ReadOnlyTask;
+import savvytodo.model.task.TaskType;
 
 public class TaskCard extends UiPart<Region> {
 
@@ -29,11 +31,15 @@ public class TaskCard extends UiPart<Region> {
     private Label description;
     @FXML
     private FlowPane categories;
-
+    //@@author A0147827U
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
         name.setText(task.getName().name);
-        id.setText(displayedIndex + ". ");
+        if (task.getType().getType() == TaskType.FLOATING) {
+            id.setText(CliSyntax.INDEX_FLOATING.toUpperCase() + displayedIndex + ". ");
+        } else {
+            id.setText(displayedIndex + ". ");
+        }
         description.setText(task.getDescription().value);
         priority.setText(task.getPriority().value);
         dateTimeRecur.setText(getDateTimeRecur(task));

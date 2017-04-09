@@ -19,8 +19,10 @@ import savvytodo.commons.util.FxViewUtil;
 import savvytodo.logic.Logic;
 import savvytodo.model.UserPrefs;
 import savvytodo.model.task.ReadOnlyTask;
+import savvytodo.model.task.TaskType;
 import savvytodo.ui.hotkeys.HotKeysManager;
 
+//@@author A0147827U
 /**
  * The Main Window. Provides the basic application layout containing
  * a menu bar and space where other JavaFX elements can be placed.
@@ -29,15 +31,16 @@ public class MainWindow extends UiPart<Region> {
 
     private static final String ICON = "/images/task_manager_32.png";
     private static final String FXML = "MainWindow.fxml";
-    private static final int MIN_HEIGHT = 600;
-    private static final int MIN_WIDTH = 450;
+    private static final int MIN_HEIGHT = 768;
+    private static final int MIN_WIDTH = 1024;
 
     private Stage primaryStage;
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
-    private TaskListPanel taskListPanel;
+    private TaskListPanel eventTaskListPanel;
+    private TaskListPanel floatingTaskListPanel;
     private Config config;
 
     @FXML
@@ -50,7 +53,10 @@ public class MainWindow extends UiPart<Region> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private AnchorPane taskListPanelPlaceholder;
+    private AnchorPane eventTaskListPanelPlaceholder;
+
+    @FXML
+    private AnchorPane floatingTaskListPanelPlaceholder;
 
     @FXML
     private AnchorPane resultDisplayPlaceholder;
@@ -128,10 +134,17 @@ public class MainWindow extends UiPart<Region> {
     void fillInnerParts() {
         browserPanel = new BrowserPanel(browserPlaceholder);
 
-        if (taskListPanel == null) {
-            taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
+        if (eventTaskListPanel == null) {
+            eventTaskListPanel = new TaskListPanel(getEventTaskListPlaceholder(), logic.getFilteredEventTaskList());
         } else {
-            taskListPanel.setConnections(logic.getFilteredTaskList());
+            eventTaskListPanel.setConnections(logic.getFilteredEventTaskList());
+        }
+
+        if (floatingTaskListPanel == null) {
+            floatingTaskListPanel = new TaskListPanel(getFloatingTaskListPlaceholder(),
+                    logic.getFilteredFloatingTaskList());
+        } else {
+            floatingTaskListPanel.setConnections(logic.getFilteredFloatingTaskList());
         }
 
         if (resultDisplay == null) {
@@ -163,10 +176,12 @@ public class MainWindow extends UiPart<Region> {
         return resultDisplayPlaceholder;
     }
 
-    private AnchorPane getTaskListPlaceholder() {
-        return taskListPanelPlaceholder;
+    private AnchorPane getEventTaskListPlaceholder() {
+        return eventTaskListPanelPlaceholder;
     }
-
+    private AnchorPane getFloatingTaskListPlaceholder() {
+        return floatingTaskListPanelPlaceholder;
+    }
     void hide() {
         primaryStage.hide();
     }
@@ -226,8 +241,14 @@ public class MainWindow extends UiPart<Region> {
         raise(new ExitAppRequestEvent());
     }
 
-    public TaskListPanel getTaskListPanel() {
-        return this.taskListPanel;
+    public TaskListPanel getTaskListPanel(TaskType targetTaskList) {
+        switch(targetTaskList) {
+        case FLOATING:
+            return this.floatingTaskListPanel;
+        case EVENT:
+        default:
+            return this.eventTaskListPanel;
+        }
     }
 
     void loadTaskPage(ReadOnlyTask task) {

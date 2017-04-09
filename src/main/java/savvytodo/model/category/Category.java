@@ -45,6 +45,7 @@ public class Category implements Comparable<Category> {
     public Predicate<ReadOnlyTask> getPredicate() {
         return (ReadOnlyTask task) -> task.getCategories().contains(this);
     }
+    //@@author
 
     @Override
     public boolean equals(Object other) {

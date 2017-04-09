@@ -24,10 +24,12 @@ public class Recurrence implements Comparable<Recurrence> {
          * Get type enum object from it's name, ignoring cases
          * @param String recurrence type
          * @return Corresponding enum object
+         * @throws IllegalArgumentException if invalid input
          */
-        public static Type valueOfIgnoreCase(String retype) {
+        public static Type valueOfIgnoreCase(String reType) {
             for (Type type : Type.values()) {
-                if (type.toString().equalsIgnoreCase(retype)) {
+                if (type.toString().equalsIgnoreCase(reType)
+                        || type.toString().substring(0, 1).equalsIgnoreCase(reType)) {
                     return type;
                 }
             }
