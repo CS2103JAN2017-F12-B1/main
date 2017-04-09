@@ -9,7 +9,9 @@ import savvytodo.model.task.Priority;
 import savvytodo.model.task.ReadOnlyTask;
 import savvytodo.model.task.Recurrence;
 import savvytodo.model.task.Status;
+import savvytodo.model.task.TaskType;
 import savvytodo.model.task.TimeStamp;
+import savvytodo.model.task.Type;
 
 /**
  * A mutable task object. For testing only.
@@ -25,6 +27,7 @@ public class TestTask implements ReadOnlyTask {
     private UniqueCategoryList categories;
     private Status isCompleted;
     private TimeStamp timeStamp;
+    private Type type;
 
     public TestTask() {
         categories = new UniqueCategoryList();
@@ -144,5 +147,36 @@ public class TestTask implements ReadOnlyTask {
         sb.append("d/" + this.getDescription().value + " ");
         this.getCategories().asObservableList().stream().forEach(s -> sb.append("c/" + s.categoryName + " "));
         return sb.toString();
+    }
+
+    //@@author A0147827U
+    private boolean isFloating() {
+        return getDateTime().getStartDate() == null && getDateTime().getEndDate() == null;
+    }
+
+    private boolean isEvent() {
+        return !(getDateTime().getStartDate() == null && getDateTime().getEndDate() == null);
+    }
+
+    private boolean isDeadline() {
+        return getDateTime().getStartDate() == null && !(getDateTime().getEndDate() == null);
+    }
+
+    public Type getType() {
+        updateType();
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
+    private void updateType() {
+        if (isEvent()) {
+            type.setType(TaskType.EVENT);
+        } else if (isFloating()) {
+            type.setType(TaskType.FLOATING);
+        } else if (isDeadline()) {
+            type.setType(TaskType.DEADLINE);
+        }
     }
 }

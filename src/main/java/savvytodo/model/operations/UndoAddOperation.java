@@ -2,6 +2,7 @@ package savvytodo.model.operations;
 
 import savvytodo.logic.commands.exceptions.CommandException;
 import savvytodo.model.task.Task;
+import savvytodo.model.task.UniqueTaskList.DuplicateTaskException;
 import savvytodo.model.task.UniqueTaskList.TaskNotFoundException;
 
 //@@author A0124863A
@@ -22,6 +23,8 @@ public class UndoAddOperation extends Operation {
             taskManager.removeTask(task);
         } catch (TaskNotFoundException e) {
             assert false : "The target task cannot be missing";
+        } catch (DuplicateTaskException e) {
+            e.printStackTrace();
         }
     }
 

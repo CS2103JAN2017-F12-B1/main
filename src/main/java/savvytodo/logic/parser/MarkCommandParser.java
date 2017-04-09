@@ -2,6 +2,7 @@ package savvytodo.logic.parser;
 
 import static savvytodo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import java.util.List;
 import java.util.Optional;
 
 import savvytodo.logic.commands.Command;
@@ -19,11 +20,11 @@ public class MarkCommandParser {
      * and returns an MarkCommand object for execution.
      */
     public Command parse(String args) {
-        Optional<int[]> intArray = ParserUtil.parseMultipleInteger(args);
-        if (!intArray.isPresent()) {
+        Optional<List<TaskIndex>> indicesList = ParserUtil.parseMultipleInteger(args);
+        if (!indicesList.isPresent()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_USAGE));
         }
-        return new MarkCommand(intArray.get());
+        return new MarkCommand(indicesList.get());
     }
 
 }

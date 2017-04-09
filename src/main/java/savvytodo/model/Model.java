@@ -5,6 +5,7 @@ import java.util.Set;
 
 import java.util.function.Predicate;
 
+import javafx.collections.ObservableList;
 import savvytodo.commons.core.UnmodifiableObservableList;
 import savvytodo.commons.exceptions.IllegalValueException;
 import savvytodo.model.operations.exceptions.RedoFailureException;
@@ -12,6 +13,7 @@ import savvytodo.model.operations.exceptions.UndoFailureException;
 import savvytodo.model.task.DateTime;
 import savvytodo.model.task.ReadOnlyTask;
 import savvytodo.model.task.Task;
+import savvytodo.model.task.TaskType;
 import savvytodo.model.task.UniqueTaskList;
 import savvytodo.model.task.UniqueTaskList.DuplicateTaskException;
 
@@ -45,9 +47,14 @@ public interface Model {
      * @throws DateTimeException */
     String getTaskConflictingDateTimeWarningMessage(DateTime dateTimeToCheck)
             throws DateTimeException, IllegalValueException;
-
+    //@@author A0147827U
     /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
-    UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
+    UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList(TaskType taskType);
+    ObservableList<ReadOnlyTask> getFilteredEventTaskList();
+    ObservableList<ReadOnlyTask> getFilteredFloatingTaskList();
+
+    /** Returns the total count of all filtered lists*/
+    int getTotalFilteredListSize();
 
     /** Updates the filter of the filtered task list to show all tasks */
     void updateFilteredListToShowAll();
@@ -71,6 +78,7 @@ public interface Model {
     /** Record a mark or unmark for undo*/
     void recordMark(int index);
 
-
+    //@@author A0140016B
+    ObservableList<ReadOnlyTask> getFilteredTaskList();
 
 }
