@@ -175,6 +175,7 @@ public class TestTask implements ReadOnlyTask {
         return getDateTime().getStartDate() == null && !(getDateTime().getEndDate() == null);
     }
 
+    @Override
     public Type getType() {
         updateType();
         return type;
@@ -193,7 +194,7 @@ public class TestTask implements ReadOnlyTask {
             type.setType(TaskType.DEADLINE);
         }
     }
-  
+
     //@@author A0140036X
     /**
      * Converts a list of ReadOnlyTask to list of TestTask
