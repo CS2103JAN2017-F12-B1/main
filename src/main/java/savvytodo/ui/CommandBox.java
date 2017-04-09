@@ -23,7 +23,7 @@ public class CommandBox extends UiPart<Region> {
     public static final String ERROR_STYLE_CLASS = "error";
     //@@author A0147827U
     private Logic logic;
-    private AutoCompletionBinding<String> binding; 
+    private AutoCompletionBinding<String> binding;
     @FXML
     private TextField commandTextField;
 
@@ -113,7 +113,7 @@ public class CommandBox extends UiPart<Region> {
     }
     /**
      * Enables the auto complete feature
-     */    
+     */
     public void enableAutoComplete() {
         binding = TextFields.bindAutoCompletion(commandTextField, AutoCompleteDictionaryFactory.getDictionary());
     }

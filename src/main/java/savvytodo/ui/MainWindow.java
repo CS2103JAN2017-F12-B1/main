@@ -18,7 +18,6 @@ import savvytodo.commons.util.FxViewUtil;
 import savvytodo.logic.Logic;
 import savvytodo.model.UserPrefs;
 import savvytodo.model.task.ReadOnlyTask;
-import savvytodo.model.task.TaskType;
 import savvytodo.ui.hotkeys.HotKeysManager;
 
 //@@author A0147827U
@@ -134,7 +133,8 @@ public class MainWindow extends UiPart<Region> {
         browserPanel = new BrowserPanel(browserPlaceholder);
 
         if (eventTaskListPanel == null) {
-            eventTaskListPanel = new EventTaskListPanel(getEventTaskListPlaceholder(), logic.getFilteredEventTaskList());
+            eventTaskListPanel = new EventTaskListPanel(getEventTaskListPlaceholder(),
+                    logic.getFilteredEventTaskList());
         } else {
             eventTaskListPanel.setConnections(logic.getFilteredEventTaskList());
         }
