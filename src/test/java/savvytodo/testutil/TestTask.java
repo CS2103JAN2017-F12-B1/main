@@ -28,10 +28,24 @@ public class TestTask implements ReadOnlyTask {
         categories = new UniqueCategoryList();
     }
 
+    //@@author A0140036X
+    /**
+     * Creates a TestTask from ReadOnlyTask
+     */
+    public TestTask(ReadOnlyTask taskToCopy) {
+        copyFromReadOnlyTask(taskToCopy);
+    }
+
+    //@@author A0140036X
     /**
      * Creates a copy of {@code taskToCopy}.
      */
     public TestTask(TestTask taskToCopy) {
+        copyFromReadOnlyTask(taskToCopy);
+    }
+
+    //@@author A0140036X
+    private void copyFromReadOnlyTask(ReadOnlyTask taskToCopy) {
         this.name = taskToCopy.getName();
         this.priority = taskToCopy.getPriority();
         this.dateTime = taskToCopy.getDateTime();
@@ -121,8 +135,6 @@ public class TestTask implements ReadOnlyTask {
     }
 
     public String getAddCommand() {
-
-        System.out.println(this.getPriority().value);
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getName().name + " ");
         sb.append("l/" + this.getLocation().value + " ");
@@ -132,5 +144,17 @@ public class TestTask implements ReadOnlyTask {
         sb.append("d/" + this.getDescription().value + " ");
         this.getCategories().asObservableList().stream().forEach(s -> sb.append("c/" + s.categoryName + " "));
         return sb.toString();
+    }
+
+    //@@author A0140036X
+    /**
+     * Converts a list of ReadOnlyTask to list of TestTask
+     */
+    public static TestTask[] listFromReadOnlyTask(ReadOnlyTask[] tasks) {
+        TestTask[] testTasks = new TestTask[tasks.length];
+        for (int i = 0; i < tasks.length; i++) {
+            testTasks[i] = new TestTask(tasks[i]);
+        }
+        return testTasks;
     }
 }
