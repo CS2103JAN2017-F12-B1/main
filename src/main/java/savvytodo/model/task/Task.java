@@ -187,8 +187,15 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
      */
     @SuppressWarnings("rawtypes")
     private Comparable[] attributes() {
-        Comparable[] attributes = new Comparable[] { name, priority, description, location,
-                categories, dateTime, recurrence, isCompleted };
+        Comparable[] attributes = new Comparable[8];
+        attributes[0] = name;
+        attributes[1] = priority;
+        attributes[2] = description;
+        attributes[3] = location;
+        attributes[4] = categories;
+        attributes[5] = dateTime;
+        attributes[6] = recurrence;
+        attributes[7] = isCompleted;
         return attributes;
     }
 
