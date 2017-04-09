@@ -57,6 +57,7 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         this.dateTime = dateTime;
         this.recurrence = recurrence;
         this.isCompleted = new Status();
+        this.type = new Type(dateTime);
         this.timeStamp = new TimeStamp(timeStamp);
     }
 
@@ -130,6 +131,7 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
     public void setDateTime(DateTime dateTime) {
         assert dateTime != null;
         this.dateTime = dateTime;
+        updateType();
     }
 
     @Override
@@ -212,11 +214,11 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
     }
 
     private boolean isEvent() {
-        return !(getDateTime().getStartDate() == null && getDateTime().getEndDate() == null);
+        return getDateTime().getStartDate() != null && getDateTime().getEndDate() != null;
     }
 
     private boolean isDeadline() {
-        return getDateTime().getStartDate() == null && !(getDateTime().getEndDate() == null);
+        return getDateTime().getStartDate() == null && getDateTime().getEndDate() != null;
     }
 
     @Override

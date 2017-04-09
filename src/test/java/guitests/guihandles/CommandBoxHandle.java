@@ -25,6 +25,7 @@ public class CommandBoxHandle extends GuiHandle {
 
     public void enterCommand(String command) {
         setTextField(COMMAND_INPUT_FIELD_ID, command);
+
     }
 
     public String getCommandInput() {
@@ -38,6 +39,7 @@ public class CommandBoxHandle extends GuiHandle {
         enterCommand(command);
         pressEnter();
         guiRobot.sleep(100); //Give time for the command to take effect
+
     }
 
     /**

@@ -60,6 +60,7 @@ public class TestTask implements ReadOnlyTask {
         this.categories = taskToCopy.getCategories();
         this.isCompleted = taskToCopy.isCompleted();
         this.timeStamp = taskToCopy.getTimeStamp();
+        this.type = taskToCopy.getType();
     }
 
     public void setName(Name name) {
@@ -155,8 +156,11 @@ public class TestTask implements ReadOnlyTask {
         sb.append("add " + this.getName().name + " ");
         sb.append("l/" + this.getLocation().value + " ");
         sb.append("p/" + this.getPriority().value + " ");
-        sb.append("dt/" + this.getDateTime().startValue + DateTime.DATETIME_STRING_CONNECTOR
-                + this.getDateTime().endValue + " ");
+        //@@author A0147827U
+        if (!isFloating()) {
+            sb.append("dt/" + this.getDateTime().startValue + DateTime.DATETIME_STRING_CONNECTOR
+                    + this.getDateTime().endValue + " ");
+        }
         sb.append("d/" + this.getDescription().value + " ");
         this.getCategories().asObservableList().stream()
                 .forEach(s -> sb.append("c/" + s.categoryName + " "));
@@ -194,6 +198,8 @@ public class TestTask implements ReadOnlyTask {
             type.setType(TaskType.DEADLINE);
         }
     }
+  //@@author
+
 
     //@@author A0140036X
     /**
@@ -206,4 +212,5 @@ public class TestTask implements ReadOnlyTask {
         }
         return testTasks;
     }
+
 }
