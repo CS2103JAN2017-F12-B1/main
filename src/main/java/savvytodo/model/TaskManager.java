@@ -83,8 +83,6 @@ public class TaskManager implements ReadOnlyTaskManager {
         categories.add(t);
     }
 
-
-
 ////task-level operations
 
     //@@author A0147827U
@@ -100,6 +98,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         tasks.add(p); //global task list storage
     }
 
+    //@@author A0140016B
     /**
      * Updates the task in the list at position {@code index} with {@code editedReadOnlyTask}.
      * Moves the task to the new corresponding list (if it switches between floating and event)
@@ -123,7 +122,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         tasks.updateTask(index, editedTask); //global task list storage
     }
 
-
+    //@@author A0147827U
     public boolean removeTask(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException, DuplicateTaskException {
         if (tasks.remove(key)) {
             return true;

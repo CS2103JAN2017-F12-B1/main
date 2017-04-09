@@ -89,6 +89,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         indicateTaskManagerChanged();
     }
+    //@@author
 
     @Override
     public ReadOnlyTaskManager getTaskManager() {
@@ -265,7 +266,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList(TaskType taskType) {
         switch(taskType) {
-        case FLOATING:
+        case FLOATING_DEADLINE:
             return new UnmodifiableObservableList<>(getFilteredFloatingTaskList());
         case EVENT:
         default:
@@ -318,6 +319,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredTaskListByDateTime(DateTime dateTime) {
         updateFilteredTaskList(new PredicateExpression(new DateTimeQualifier(dateTime)));
     }
+    //@@author
 
     //========== Inner classes/interfaces used for filtering =================================================
 

@@ -1,5 +1,6 @@
 package savvytodo.logic.parser;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -29,6 +30,8 @@ import savvytodo.model.task.TaskType;
  */
 public class ParserUtil {
 
+    private static final int CHAR_POS_0 = 0;
+    private static final int CHAR_POS_1 = 1;
     private static final int SIZE_OF_DATE_TIME_INPUT = 1;
     private static final int ARRAY_FIELD_2 = 1;
     private static final int ARRAY_FIELD_1 = 0;
@@ -50,13 +53,13 @@ public class ParserUtil {
 
         String index = matcher.group("targetIndex");
         if (!StringUtil.isUnsignedInteger(index)) {
-            String listIdentifier = "" + index.charAt(0);
-            if (listIdentifier.equalsIgnoreCase(CliSyntax.INDEX_FLOATING)) {
+            String listIdentifier = listIdentifier(index);
+            if (isValidTaskType(listIdentifier)) {
                 index = index.substring(1);
                 if (!StringUtil.isUnsignedInteger(index)) {
                     parsedIndex = Optional.empty();
                 } else {
-                    parsedIndex = Optional.of(new TaskIndex(TaskType.FLOATING, Integer.parseInt(index)));
+                    parsedIndex = Optional.of(new TaskIndex(TaskType.FLOATING_DEADLINE, Integer.parseInt(index)));
                 }
             } else {
                 parsedIndex = Optional.empty();
@@ -70,36 +73,63 @@ public class ParserUtil {
 
     //@@author A0140016B
     /**
-     * Returns int[] if the String is parsed <br>
-     * Returns a int[] populated by all elements in the given string
-     * Returns a int[] if the given {@code Optional} is empty,
-     * or if the int[] contained in the {@code Optional} is empty
+     * @param listIdentifier
+     * @return true is it has valid floating task type
      */
-    public static Optional<int[]> parseMultipleInteger(String indicesString) {
+    private static boolean isValidTaskType(String listIdentifier) {
+        return listIdentifier.equalsIgnoreCase(CliSyntax.INDEX_FLOATING);
+    }
+
+    /**
+     * @param unfilteredIndexString that is not a integer, it cannot be null
+     * @return position character of the String is there is any
+     */
+    private static String listIdentifier(String unfilteredIndexString) {
+        String listIdentifier = StringUtil.EMPTY_STRING + unfilteredIndexString.charAt(CHAR_POS_0);
+        return listIdentifier;
+    }
+
+    /**
+     * Returns List<TaskIndex> if the String is parsed
+     * Returns a List<TaskIndex> populated by all elements in the given string
+     * Returns a List<TaskIndex> if the given {@code Optional} is empty,
+     * or if the List<TaskIndex> contained in the {@code Optional} is empty
+     */
+    public static Optional<List<TaskIndex>> parseMultipleInteger(String indicesString) {
         boolean parseError = false;
 
         String trimmedIndicesString = indicesString.trim();
-        String[] indicesStringArray = null;
-        int[] indicesArray = null;
-        try {
-            indicesStringArray = trimmedIndicesString.split(StringUtil.WHITESPACE_REGEX);
-            indicesArray = Arrays.stream(indicesStringArray).mapToInt(Integer::parseInt).toArray();
+        String[] indicesArray = trimmedIndicesString.split(StringUtil.WHITESPACE_REGEX);
+        List<TaskIndex> indicesList = new ArrayList<TaskIndex>();
 
-            for (String index : indicesStringArray) {
+        if (!trimmedIndicesString.isEmpty()) {
+            for (String index : indicesArray) {
+                String listIdentifier = listIdentifier(index);
                 if (!StringUtil.isUnsignedInteger(index)) {
-                    parseError = true;
-                    break;
+                    if (isValidTaskType(listIdentifier)) {
+                        index = index.substring(1);
+                        if (!StringUtil.isUnsignedInteger(index)) {
+                            parseError = true;
+                            break;
+                        } else {
+                            indicesList.add(new TaskIndex(TaskType.FLOATING_DEADLINE, Integer.parseInt(index)));
+                        }
+                    } else {
+                        parseError = true;
+                        break;
+                    }
+                } else {
+                    indicesList.add(new TaskIndex(TaskType.EVENT, Integer.parseInt(index)));
                 }
             }
-        } catch (NumberFormatException ex) {
-            parseError = true;
         }
 
-        if (parseError) {
+        if (indicesList.isEmpty() || parseError) {
             return Optional.empty();
         }
-        return Optional.of(indicesArray);
+        return Optional.of(indicesList);
     }
+    //@@author
 
     /**
      * Returns a new Set populated by all elements in the given list of strings
@@ -141,7 +171,6 @@ public class ParserUtil {
         }
     }
 
-    //@@author A0140016B
     /**
      * Extract a {@code Optional<String> recurrence} into an {@code String[]} if {@code recurrence} is present.
      */
@@ -208,6 +237,7 @@ public class ParserUtil {
             return Optional.empty();
         }
     }
+    //@@author
 
     /**
      * Parses a {@code Optional<String> description} into an {@code Optional<Description>}
