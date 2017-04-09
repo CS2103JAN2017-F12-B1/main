@@ -13,7 +13,7 @@ import savvytodo.commons.util.StringUtil;
 public class Priority implements Comparable<Priority> {
 
     public static final String MESSAGE_PRIORITY_CONSTRAINTS = "Task priority should be 'low(1)', 'medium(2)' "
-            + "or 'high(3)'\n Example: p/3 , p/h or p/high are equivalent";
+            + "or 'high(3)'\n Example: p/3 , p/h or p/high means the HIGH priority";
 
     private static final int COMPARE_TO_SMALLER = -1;
     private static final int COMPARE_TO_EQUAL = 0;
