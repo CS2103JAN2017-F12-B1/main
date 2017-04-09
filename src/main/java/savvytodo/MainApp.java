@@ -39,7 +39,7 @@ public class MainApp extends Application {
 
     public static final Version VERSION = new Version(1, 0, 0, true);
 
-    private static MainApp running_instance = null;
+    private static MainApp runningInstance = null;
 
     protected Ui ui;
     protected Logic logic;
@@ -56,7 +56,7 @@ public class MainApp extends Application {
      * @return
      */
     public static MainApp getRunningInstance() {
-        return running_instance;
+        return runningInstance;
     }
 
     @Override
@@ -65,7 +65,7 @@ public class MainApp extends Application {
                 "=============================[ Initializing Task Manager ]===========================");
         super.init();
 
-        running_instance = this;
+        runningInstance = this;
 
         initEventsCenter();
 
