@@ -26,6 +26,9 @@ public class TestApp extends MainApp {
     protected Supplier<ReadOnlyTaskManager> initialDataSupplier = () -> null;
     protected String saveFileLocation = SAVE_LOCATION_FOR_TESTING;
 
+    private static final double DEFAULT_HEIGHT = 768;
+    private static final double DEFAULT_WIDTH = 1024;
+
     public TestApp() {
     }
 
@@ -57,7 +60,7 @@ public class TestApp extends MainApp {
         UserPrefs userPrefs = super.initPrefs(config);
         double x = Screen.getPrimary().getVisualBounds().getMinX();
         double y = Screen.getPrimary().getVisualBounds().getMinY();
-        userPrefs.updateLastUsedGuiSetting(new GuiSettings(600.0, 600.0, (int) x, (int) y));
+        userPrefs.updateLastUsedGuiSetting(new GuiSettings(DEFAULT_WIDTH, DEFAULT_HEIGHT, (int) x, (int) y));
         return userPrefs;
     }
 

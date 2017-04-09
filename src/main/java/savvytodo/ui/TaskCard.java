@@ -35,7 +35,7 @@ public class TaskCard extends UiPart<Region> {
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
         name.setText(task.getName().name);
-        if (task.getType() == TaskType.FLOATING) {
+        if (task.getType() == TaskType.FLOATING_DEADLINE) {
             id.setText(CliSyntax.INDEX_FLOATING.toUpperCase() + displayedIndex + ". ");
         } else {
             id.setText(displayedIndex + ". ");

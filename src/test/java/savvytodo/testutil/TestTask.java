@@ -9,6 +9,7 @@ import savvytodo.model.task.Priority;
 import savvytodo.model.task.ReadOnlyTask;
 import savvytodo.model.task.Recurrence;
 import savvytodo.model.task.Status;
+import savvytodo.model.task.TaskType;
 
 /**
  * A mutable task object. For testing only.
@@ -132,5 +133,18 @@ public class TestTask implements ReadOnlyTask {
         sb.append("d/" + this.getDescription().value + " ");
         this.getCategories().asObservableList().stream().forEach(s -> sb.append("c/" + s.categoryName + " "));
         return sb.toString();
+    }
+
+    //@@author A0147827U
+    public boolean isFloating() {
+        return getDateTime().getStartDate() == null && getDateTime().getEndDate() == null;
+    }
+
+    public TaskType getType() {
+        if (isFloating()) {
+            return TaskType.FLOATING_DEADLINE;
+        } else {
+            return TaskType.EVENT;
+        }
     }
 }

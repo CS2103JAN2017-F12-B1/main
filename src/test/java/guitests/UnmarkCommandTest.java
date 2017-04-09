@@ -23,7 +23,7 @@ public class UnmarkCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void unmarkInvalidCommand() {
-        commandBox.runCommand("unmark ");
+        commandBox.runCommand("unmark");
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
 
