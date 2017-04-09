@@ -129,6 +129,7 @@ public class Task implements ReadOnlyTask {
     public void setDateTime(DateTime dateTime) {
         assert dateTime != null;
         this.dateTime = dateTime;
+        updateType();
     }
 
     @Override
