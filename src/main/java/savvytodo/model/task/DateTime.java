@@ -17,7 +17,6 @@ public class DateTime implements Comparable<DateTime> {
 
     public String startValue;
     public String endValue;
-    public String timestamp;
 
     private LocalDateTime start;
     private LocalDateTime end;
@@ -152,10 +151,6 @@ public class DateTime implements Comparable<DateTime> {
         return end;
     }
 
-    public LocalDateTime getDateTimeAdded() {
-        return add;
-    }
-
     /**
      * Set method for start
      * @param LocalDateTime
@@ -172,9 +167,6 @@ public class DateTime implements Comparable<DateTime> {
         this.end = endDateTime;
     }
 
-    /**
-     * Override the hashcode to remove the timestamp comparison
-     */
     @Override
     public int hashCode() {
         return (this.start.hashCode() + this.end.hashCode());
