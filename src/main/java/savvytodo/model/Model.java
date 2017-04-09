@@ -47,8 +47,12 @@ public interface Model {
      * @throws DateTimeException */
     String getTaskConflictingDateTimeWarningMessage(DateTime dateTimeToCheck)
             throws DateTimeException, IllegalValueException;
-    //@@author A0147827U
+
+    //@@author A0140016B
     /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
+    ObservableList<ReadOnlyTask> getFilteredTaskList();
+
+    //@@author A0147827U
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList(TaskType taskType);
     ObservableList<ReadOnlyTask> getFilteredEventTaskList();
     ObservableList<ReadOnlyTask> getFilteredFloatingTaskList();
@@ -77,8 +81,5 @@ public interface Model {
     //@@author A0124863A
     /** Record a mark or unmark for undo*/
     void recordMark(int index);
-
-    //@@author A0140016B
-    ObservableList<ReadOnlyTask> getFilteredTaskList();
 
 }

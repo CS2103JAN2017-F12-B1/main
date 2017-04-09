@@ -2,11 +2,14 @@ package guitests.guihandles;
 
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
 import guitests.GuiRobot;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.control.ListView;
@@ -39,6 +42,36 @@ public class TaskListPanelHandle extends GuiHandle {
         return getNode(TASK_LIST_VIEW_ID);
     }
 
+    //@@author A0140016B
+    public Set<ListView<ReadOnlyTask>> getBothListView() {
+        return getAllNodes(TASK_LIST_VIEW_ID);
+    }
+
+    public List<ReadOnlyTask> getBothListViewItems() {
+        Set<ListView<ReadOnlyTask>> taskListViews = getBothListView();
+        ObservableList<ReadOnlyTask> list = FXCollections.observableArrayList();
+        if (!taskListViews.isEmpty()) {
+            for (ListView<ReadOnlyTask> listView : taskListViews) {
+                list.addAll(listView.getItems());
+            }
+        }
+
+        return new ArrayList<ReadOnlyTask>();
+    }
+
+    public List<ReadOnlyTask> getSelectedTasksFromBothListViews() {
+        Set<ListView<ReadOnlyTask>> taskListViews = getBothListView();
+        ObservableList<ReadOnlyTask> list = FXCollections.observableArrayList();
+        if (!taskListViews.isEmpty()) {
+            for (ListView<ReadOnlyTask> listView : taskListViews) {
+                list.addAll(listView.getSelectionModel().getSelectedItems());
+            }
+        }
+
+        return new ArrayList<ReadOnlyTask>();
+    }
+    //@@author A0140016B
+
     /**
      * Returns true if the list is showing the task details correctly and in correct order.
      * @param tasks A list of task in the correct order.
@@ -53,9 +86,9 @@ public class TaskListPanelHandle extends GuiHandle {
      * @param tasks A list of task in the correct order.
      */
     public boolean isListMatching(int startPosition, ReadOnlyTask... tasks) throws IllegalArgumentException {
-        if (tasks.length + startPosition != getListView().getItems().size()) {
+        if (tasks.length + startPosition != getBothListViewItems().size()) {
             throw new IllegalArgumentException(
-                    "List size mismatched\n" + "Expected " + (getListView().getItems().size() - 1) + " tasks, got "
+                    "List size mismatched\n" + "Expected " + (getBothListViewItems().size() - 1) + " tasks, got "
                             + (tasks.length + startPosition) + " instead");
         }
         assertTrue(this.containsInOrder(startPosition, tasks));
@@ -82,7 +115,7 @@ public class TaskListPanelHandle extends GuiHandle {
      * Returns true if the {@code tasks} appear as the sub list (in that order) at position {@code startPosition}.
      */
     public boolean containsInOrder(int startPosition, ReadOnlyTask... tasks) {
-        List<ReadOnlyTask> tasksInList = getListView().getItems();
+        List<ReadOnlyTask> tasksInList = getBothListViewItems();
 
         // Return false if the list in panel is too short to contain the given list
         if (startPosition + tasks.length > tasksInList.size()) {
@@ -101,7 +134,7 @@ public class TaskListPanelHandle extends GuiHandle {
 
     public TaskCardHandle navigateToTask(String name) {
         guiRobot.sleep(100); //Allow a bit of time for the list to be updated
-        final Optional<ReadOnlyTask> task = getListView().getItems().stream().filter(p -> p.getName().name.equals(name))
+        final Optional<ReadOnlyTask> task = getBothListViewItems().stream().filter(p -> p.getName().name.equals(name))
                 .findAny();
         if (!task.isPresent()) {
             throw new IllegalStateException("Name not found: " + name);
@@ -129,7 +162,7 @@ public class TaskListPanelHandle extends GuiHandle {
      * Returns the position of the task given, {@code NOT_FOUND} if not found in the list.
      */
     public int getTaskIndex(ReadOnlyTask targetTask) {
-        List<ReadOnlyTask> tasksInList = getListView().getItems();
+        List<ReadOnlyTask> tasksInList = getBothListViewItems();
         for (int i = 0; i < tasksInList.size(); i++) {
             if (tasksInList.get(i).getName().equals(targetTask.getName())) {
                 return i;
@@ -142,11 +175,11 @@ public class TaskListPanelHandle extends GuiHandle {
      * Gets a task from the list by index
      */
     public ReadOnlyTask getTask(int index) {
-        return getListView().getItems().get(index);
+        return getBothListViewItems().get(index);
     }
 
     public TaskCardHandle getTaskCardHandle(int index) {
-        return getTaskCardHandle(new Task(getListView().getItems().get(index)));
+        return getTaskCardHandle(new Task(getBothListViewItems().get(index)));
     }
 
     public TaskCardHandle getTaskCardHandle(ReadOnlyTask task) {
@@ -165,6 +198,6 @@ public class TaskListPanelHandle extends GuiHandle {
     }
 
     public int getNumberOfPeople() {
-        return getListView().getItems().size();
+        return getBothListViewItems().size();
     }
 }

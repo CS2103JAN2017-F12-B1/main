@@ -260,6 +260,13 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     //=========== Filtered Task List Accessors =============================================================
+    //@@author A0140016B
+    @Override
+    public ObservableList<ReadOnlyTask> getFilteredTaskList() {
+        return taskManager.getTaskList();
+    }
+    //@@author
+    //@@author A0147827U
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList(TaskType taskType) {
         switch(taskType) {
@@ -282,7 +289,6 @@ public class ModelManager extends ComponentManager implements Model {
     public ObservableList<ReadOnlyTask> getFilteredFloatingTaskList() {
         return filteredFloatingTasks;
     }
-
 
     /**
      *  Reset the filters for all the lists. Adds the default filter (based on task type)
@@ -313,11 +319,6 @@ public class ModelManager extends ComponentManager implements Model {
     }
     //@@author
     //@@author A0140016B
-    @Override
-    public ObservableList<ReadOnlyTask> getFilteredTaskList() {
-        return taskManager.getTaskList();
-    }
-    
     public void updateFilteredTaskListByDateTime(DateTime dateTime) {
         updateFilteredTaskList(new PredicateExpression(new DateTimeQualifier(dateTime)));
     }
