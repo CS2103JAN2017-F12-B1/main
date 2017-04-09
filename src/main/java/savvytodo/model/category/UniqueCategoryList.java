@@ -23,14 +23,15 @@ import savvytodo.commons.util.CollectionUtil;
  * @see Category#equals(Object)
  * @see CollectionUtil#elementsAreUnique(Collection)
  */
-public class UniqueCategoryList implements Iterable<Category> {
+public class UniqueCategoryList implements Iterable<Category>, Comparable<UniqueCategoryList> {
 
     private final ObservableList<Category> internalList = FXCollections.observableArrayList();
 
     /**
      * Constructs empty CategoryList.
      */
-    public UniqueCategoryList() {}
+    public UniqueCategoryList() {
+    }
 
     /**
      * Creates a UniqueCategoryList using given String categories.
@@ -111,9 +112,7 @@ public class UniqueCategoryList implements Iterable<Category> {
      */
     public void mergeFrom(UniqueCategoryList from) {
         final Set<Category> alreadyInside = this.toSet();
-        from.internalList.stream()
-                .filter(category -> !alreadyInside.contains(category))
-                .forEach(internalList::add);
+        from.internalList.stream().filter(category -> !alreadyInside.contains(category)).forEach(internalList::add);
     }
 
     /**
@@ -150,8 +149,7 @@ public class UniqueCategoryList implements Iterable<Category> {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof UniqueCategoryList // instanceof handles nulls
-                && this.internalList.equals(
-                ((UniqueCategoryList) other).internalList));
+                        && this.internalList.equals(((UniqueCategoryList) other).internalList));
     }
 
     public boolean equalsOrderInsensitive(UniqueCategoryList other) {
@@ -170,6 +168,26 @@ public class UniqueCategoryList implements Iterable<Category> {
         protected DuplicateCategoryException() {
             super("Operation would result in duplicate categories");
         }
+    }
+
+    //@@authorA0140036X
+    @Override
+    public int compareTo(UniqueCategoryList o) {
+        ObservableList<Category> thisAttributes = this.internalList;
+        ObservableList<Category> thatAttributes = o.internalList;
+        int lengthToCheck = Integer.min(thisAttributes.size(), thatAttributes.size());
+        int compareVal;
+        for (int i = 0; i < lengthToCheck; i++) {
+            compareVal = thisAttributes.get(i).compareTo(thatAttributes.get(i));
+            if (compareVal != 0) {
+                return compareVal;
+            }
+        }
+
+        if (thisAttributes.size() != thatAttributes.size()) {
+            return Integer.compare(thisAttributes.size(), thatAttributes.size());
+        }
+        return 0;
     }
 
 }
