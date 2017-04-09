@@ -1,6 +1,6 @@
 package savvytodo.model.task;
 
-//@@author A0147828U
+//@@author A0147827U
 /**
  * Enum to differentiate between the types of tasks
  * @author jingloon

@@ -130,18 +130,17 @@ public class UniqueTaskList implements Iterable<Task> {
     public static class DuplicateTaskException extends DuplicateDataException {
         private final ReadOnlyTask toAdd;
 
-        //@@author A01400036X
         /** Returns attempted task **/
         public ReadOnlyTask getTask() {
             return toAdd;
         }
 
-        //@@author A0140036X
         protected DuplicateTaskException(ReadOnlyTask toAddTask) {
             super("Operation would result in duplicate tasks");
             this.toAdd = toAddTask;
         }
     }
+    //@@author
 
     /**
      * Signals that an operation targeting a specified task in the list would fail because
