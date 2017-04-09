@@ -35,7 +35,7 @@ public class SampleDataTest extends TaskManagerGuiTest {
      * Tests generating of big data.
      */
     @Test
-    public void moreSampleData(){
+    public void moreSampleData() {
         assertTrue(new MoreSampleDataUtil().getSampleTasks().length == 50);
     }
 }

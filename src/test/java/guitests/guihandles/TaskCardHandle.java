@@ -8,14 +8,13 @@ import javafx.scene.Node;
 import javafx.scene.control.Labeled;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
-import savvytodo.commons.util.StringUtil;
 import savvytodo.model.category.UniqueCategoryList;
-import savvytodo.model.task.DateTime;
 import savvytodo.model.task.Priority;
 import savvytodo.model.task.ReadOnlyTask;
 import savvytodo.model.task.Status;
-import savvytodo.model.task.TaskType;
 
+
+//@@author A0140016
 /**
  * Provides a handle to a task card in the task list panel.
  */
@@ -84,20 +83,6 @@ public class TaskCardHandle extends GuiHandle {
 
     private Region getCategoriesContainer() {
         return guiRobot.from(node).lookup(CATEGORIES_FIELD_ID).query();
-    }
-
-    private String getDateTimeRecur(ReadOnlyTask task) {
-        StringBuilder sb = new StringBuilder();
-        if (task.getType().getType() == TaskType.FLOATING) {
-            sb.append("-");
-        } else if (task.getType().getType() == TaskType.DEADLINE) {
-            sb.append("Due By: " + task.getDateTime().toString());
-        } else {
-            sb.append("From: " + task.getDateTime().toString());
-            sb.append(StringUtil.WHITESPACE + task.getRecurrence().toString());
-        }
-
-        return sb.toString();
     }
 
     public boolean isSameTask(ReadOnlyTask task) {
