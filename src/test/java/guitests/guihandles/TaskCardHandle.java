@@ -18,8 +18,8 @@ import savvytodo.model.task.ReadOnlyTask;
  */
 public class TaskCardHandle extends GuiHandle {
     private static final String NAME_FIELD_ID = "#name";
-    private static final String DATETIME_RECUR_FIELD_ID = "#dateTimeRecur";
-    private static final String PRIORITY_FIELD_ID = "#priority";
+    private static final String DATETIME_RECUR_FIELD_ID = "#dateTime";
+    private static final String PRIORITY_FIELD_ID = "#circleLabel";
     private static final String STATUS_FIELD_ID = "#status";
     private static final String DESCRIPTION_FIELD_ID = "#description";
     private static final String CATEGORIES_FIELD_ID = "#categories";

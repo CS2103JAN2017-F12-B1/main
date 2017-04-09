@@ -36,7 +36,7 @@
                             <children>
                                 <HBox>
                                     <Label fx:id="id"  minWidth="-Infinity" />
-                                    <Label fx:id="name" styleClass="cell_big_label" wrapText="true"/>
+                                    <Label fx:id="name" styleClass="cell_big_label" text="\$name" wrapText="true" />
                                 </HBox>
 								<StackPane>
 									<Circle fx:id="circle" fill="WHITE" radius="11.0" 
