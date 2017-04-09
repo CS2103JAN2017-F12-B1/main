@@ -308,6 +308,7 @@
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }
 
+/* @@author A0140016B */
 #categories {
     -fx-hgap: 7;
     -fx-vgap: 3;
