@@ -49,14 +49,14 @@ public class TaskListPanelHandle extends GuiHandle {
 
     public List<ReadOnlyTask> getBothListViewItems() {
         Set<ListView<ReadOnlyTask>> taskListViews = getBothListView();
-        ObservableList<ReadOnlyTask> list = FXCollections.observableArrayList();
+        ArrayList<ReadOnlyTask> list = new ArrayList<ReadOnlyTask>();
         if (!taskListViews.isEmpty()) {
             for (ListView<ReadOnlyTask> listView : taskListViews) {
                 list.addAll(listView.getItems());
             }
         }
 
-        return new ArrayList<ReadOnlyTask>();
+        return list;
     }
 
     public List<ReadOnlyTask> getSelectedTasksFromBothListViews() {
@@ -197,7 +197,7 @@ public class TaskListPanelHandle extends GuiHandle {
         return guiRobot.lookup(CARD_PANE_ID).queryAll();
     }
 
-    public int getNumberOfPeople() {
+    public int getNumberOfTasks() {
         return getBothListViewItems().size();
     }
 }
