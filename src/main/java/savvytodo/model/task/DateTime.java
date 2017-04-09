@@ -82,17 +82,6 @@ public class DateTime implements Comparable<DateTime> {
     }
 
     /**
-     * Set timestamp if exists
-     */
-    private void setDateTimeStamp() {
-        if (timestamp == null || timestamp.isEmpty()) {
-            this.setAdd(LocalDateTime.now());
-        } else {
-            this.setAdd(LocalDateTime.parse(timestamp));
-        }
-    }
-
-    /**
      * Returns true if a given string is a valid task event.
      */
     public static boolean isValidEvent(LocalDateTime startDateTime, LocalDateTime endDateTime) {
