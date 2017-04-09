@@ -146,4 +146,12 @@ public abstract class TaskManagerGuiTest {
     public void sleep(int milliseconds) {
         guiRobot.sleep((milliseconds));
     }
+
+    //@@author A0140036X
+    /**
+     * Simulates a very long delay
+     */
+    public void sleep() {
+        guiRobot.sleep(200000);
+    }
 }
