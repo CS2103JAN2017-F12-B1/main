@@ -76,14 +76,14 @@ public class HotKeyTest extends TaskManagerGuiTest {
 
     private void assertUndoSuccess() {
       //result will either be undo success or fail to undo
-        assertTrue(resultDisplay.getText().equals(UndoCommand.MESSAGE_FAILURE) ||
+        assertTrue(resultDisplay.getText().equals(UndoCommand.MESSAGE_FAILURE + ", " + "empty stack") ||
                 resultDisplay.getText().equals(UndoCommand.MESSAGE_SUCCESS));
 
     }
 
     private void assertRedoSuccess() {
         //result will either be redo success or fail to redo
-        assertTrue(resultDisplay.getText().equals(RedoCommand.MESSAGE_FAILURE) ||
+        assertTrue(resultDisplay.getText().equals(RedoCommand.MESSAGE_FAILURE + ", " + "empty stack") ||
                 resultDisplay.getText().equals(RedoCommand.MESSAGE_SUCCESS));
     }
 
