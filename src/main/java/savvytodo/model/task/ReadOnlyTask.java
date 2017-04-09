@@ -10,21 +10,13 @@ import savvytodo.model.category.UniqueCategoryList;
 public interface ReadOnlyTask {
 
     Name getName();
-
     Priority getPriority();
-
     Description getDescription();
-
     Location getLocation();
-
     DateTime getDateTime();
-
     Recurrence getRecurrence();
-
     Status isCompleted();
-
     Type getType();
-
     TimeStamp getTimeStamp();
 
     /**
@@ -39,14 +31,14 @@ public interface ReadOnlyTask {
     default boolean isSameStateAs(ReadOnlyTask other) {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
-                        && other.getName().equals(this.getName()) // state checks here onwards
-                        && other.getPriority().equals(this.getPriority())
-                        && other.isCompleted().equals(this.isCompleted())
-                        && other.getDescription().equals(this.getDescription())
-                        && other.getDateTime().equals(this.getDateTime())
-                        && other.getLocation().equals(this.getLocation()))
-                        && other.isCompleted().equals(this.isCompleted())
-                        && other.getType().equals(this.getType());
+                && other.getName().equals(this.getName()) // state checks here onwards
+                && other.getPriority().equals(this.getPriority())
+                && other.isCompleted().equals(this.isCompleted())
+                && other.getDescription().equals(this.getDescription())
+                && other.getDateTime().equals(this.getDateTime())
+                && other.getLocation().equals(this.getLocation()))
+                && other.isCompleted().equals(this.isCompleted())
+                && other.getType().equals(this.getType());
     }
 
     /**
@@ -54,11 +46,20 @@ public interface ReadOnlyTask {
      */
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName()).append(" Date Time: ").append(getDateTime())
-                .append(" Recurrence: ").append(getRecurrence()).append(" Priority: ")
-                .append(getPriority()).append(" Location: ").append(getLocation())
-                .append(" Description: ").append(getDescription()).append(" Status: ")
-                .append(isCompleted()).append(" Categories: ");
+        builder.append(getName())
+                .append(" Date Time: ")
+                .append(getDateTime())
+                .append(" Recurrence: ")
+                .append(getRecurrence())
+                .append(" Priority: ")
+                .append(getPriority())
+                .append(" Location: ")
+                .append(getLocation())
+                .append(" Description: ")
+                .append(getDescription())
+                .append(" Status: ")
+                .append(isCompleted())
+                .append(" Categories: ");
         getCategories().forEach(builder::append);
         return builder.toString();
     }
