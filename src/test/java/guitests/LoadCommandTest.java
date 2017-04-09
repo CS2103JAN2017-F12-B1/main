@@ -3,12 +3,9 @@ package guitests;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
-import java.util.Date;
 
 import org.junit.Test;
 
-import savvytodo.logic.commands.ClearCommand;
-import savvytodo.logic.commands.LoadCommand;
 import savvytodo.model.TaskManager;
 import savvytodo.model.task.ReadOnlyTask;
 import savvytodo.model.task.UniqueTaskList.DuplicateTaskException;
@@ -78,60 +75,4 @@ public class LoadCommandTest extends StorageTest {
 
         state.resumeState();
     }
-
-    //@@author A0140036X
-    /**
-     * returns a valid file path for storage file that does not exist.
-     */
-    protected String getNewTestStorageFileName() {
-        String testTaskManagerFileName = new Date().getTime() + "_taskmanager.xml";
-        return TestUtil.getFilePathInSandboxFolder(testTaskManagerFileName);
-    }
-
-    //@@author A0140036X
-    /**
-     * Tests Load Command.
-     * <p>
-     * Loads task manager from file path
-     * </p>
-     * @param testTaskManagerFilePath path of task manager file to load
-     * @param tasks tasks to check against those loaded from file
-     */
-    protected void assertLoad(String testTaskManagerFilePath, ReadOnlyTask[] tasks) {
-        loadFromFilePath(testTaskManagerFilePath);
-        assertTrue(eventTaskListPanel.isListMatching(tasks));
-        assertResultMessage(LoadCommand.getSuccessMessage(testTaskManagerFilePath));
-    }
-
-    //@@author A0140036X
-    /** Tests clear command. */
-    protected void assertClear() {
-        commandBox.runCommand(ClearCommand.COMMAND_WORD);
-        assertListSize(0);
-        assertResultMessage(ClearCommand.MESSAGE_SUCCESS);
-    }
-
-    //@@author A0140036X
-    /**
-     * Tests add command.
-     * @param currentList list to add task to
-     * @return new list with added task
-     */
-    protected TestTask[] assertAdd(TestTask[] currentList) {
-        TestTask taskToAdd = td.getTypicalTasks()[0];
-        TestTask[] expectedList = TestUtil.addTasksToList(currentList, taskToAdd);
-        commandBox.runCommand(taskToAdd.getAddCommand());
-        assertTrue(eventTaskListPanel.isListMatching(expectedList));
-        return expectedList;
-    }
-
-    //@@author A0140036X
-    /**
-     * Enters load command into ui
-     */
-    protected void loadFromFilePath(String filePath) {
-        String cmd = "load " + filePath;
-        commandBox.runCommand(cmd);
-    }
-
 }

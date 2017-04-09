@@ -37,7 +37,9 @@ public class GenerateCommandTest extends StorageTest {
         String testTaskManagerFilePath = getNewTestStorageFileName();
 
         commandBox.enterCommand(GenerateCommand.getCommand(testTaskManagerFilePath));
-        sleep(3000);
+
+        sleep(600);
+        commandBox.pressEnter();
 
         TaskManagerStorage storage = new XmlTaskManagerStorage(testTaskManagerFilePath);
 

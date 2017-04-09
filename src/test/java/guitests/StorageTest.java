@@ -3,15 +3,20 @@ package guitests;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Optional;
 
+import javafx.collections.transformation.FilteredList;
 import savvytodo.commons.exceptions.DataConversionException;
 import savvytodo.logic.commands.ClearCommand;
 import savvytodo.logic.commands.LoadCommand;
 import savvytodo.model.ReadOnlyTaskManager;
+import savvytodo.model.TaskManager;
 import savvytodo.model.task.ReadOnlyTask;
 import savvytodo.model.task.Task;
+import savvytodo.model.task.Type;
+import savvytodo.model.task.UniqueTaskList.DuplicateTaskException;
 import savvytodo.storage.TaskManagerStorage;
 import savvytodo.storage.XmlTaskManagerStorage;
 import savvytodo.testutil.TestTask;
@@ -92,8 +97,8 @@ public class StorageTest extends TaskManagerGuiTest {
      */
     protected void assertLoad(String testTaskManagerFilePath, ReadOnlyTask[] tasks) {
         loadFromFilePath(testTaskManagerFilePath);
-        TestUtil.printTasks(eventTaskListPanel.getListView().getItems().toArray(new Task[0]));
-        assertTrue(eventTaskListPanel.isListMatchingIgnoreOrder(tasks));
+
+        assertGuiSync(tasks);
         assertResultMessage(LoadCommand.getSuccessMessage(testTaskManagerFilePath));
     }
 
@@ -112,12 +117,48 @@ public class StorageTest extends TaskManagerGuiTest {
         try {
             read = tmStorage.readTaskManager();
             assertTrue(read.isPresent());
-            Task[] readTasks = read.get().getTaskList().toArray(new Task[0]);
-            assertTrue(eventTaskListPanel.isListMatchingIgnoreOrder(readTasks));
+
+            ReadOnlyTaskManager taskManager = read.get();
+            assertGuiSync(taskManager);
+
             assertResultMessage(LoadCommand.getSuccessMessage(testTaskManagerFilePath));
         } catch (DataConversionException | IOException e) {
             assertTrue(false);
         }
+    }
+
+    //@@author A0140036X
+    /**
+     * Checks panel and data are in sync.
+     */
+    protected void assertGuiSync(ReadOnlyTaskManager taskManager) {
+        FilteredList<ReadOnlyTask> filteredEventTasks = new FilteredList<>(
+                taskManager.getTaskList());
+        filteredEventTasks.setPredicate(Type.getEventType().getPredicate());
+
+        assertTrue(eventTaskListPanel
+                .isListMatchingIgnoreOrder(filteredEventTasks.toArray(new Task[] {})));
+
+        FilteredList<ReadOnlyTask> filteredFloatingTasks = new FilteredList<>(
+                taskManager.getTaskList());
+        filteredFloatingTasks.setPredicate(
+                Type.getFloatingType().getPredicate().or(Type.getDeadlineType().getPredicate()));
+        assertTrue(floatingTaskListPanel
+                .isListMatchingIgnoreOrder(filteredFloatingTasks.toArray(new Task[] {})));
+    }
+
+    //@@authorA0140036X
+    /**
+     * Checks panel and data are in sync.
+     */
+    private void assertGuiSync(ReadOnlyTask[] expectedList) {
+        TaskManager storedTaskManager = new TaskManager();
+        try {
+            storedTaskManager.setTasks(Arrays.asList(expectedList));
+        } catch (DuplicateTaskException e) {
+            assertTrue(false);
+        }
+        assertGuiSync(storedTaskManager);
     }
 
     //@@author A0140036X
@@ -138,7 +179,7 @@ public class StorageTest extends TaskManagerGuiTest {
         TestTask taskToAdd = td.getTypicalTasks()[0];
         TestTask[] expectedList = TestUtil.addTasksToList(currentList, taskToAdd);
         commandBox.runCommand(taskToAdd.getAddCommand());
-        assertTrue(eventTaskListPanel.isListMatching(expectedList));
+        assertGuiSync(expectedList);
         return expectedList;
     }
 

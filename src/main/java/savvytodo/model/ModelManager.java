@@ -222,6 +222,7 @@ public class ModelManager extends ComponentManager implements Model {
      * @throws IllegalValueException
      * @throws DateTimeException
      */
+    @Override
     public String getTaskConflictingDateTimeWarningMessage(DateTime dateTimeToCheck)
             throws DateTimeException, IllegalValueException {
         StringBuilder conflictingTasksStringBuilder = new StringBuilder(StringUtil.EMPTY_STRING);
@@ -321,6 +322,7 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
     }
 
+    @Override
     public void updateFilteredTaskList(Predicate<ReadOnlyTask> predicate) {
         filteredFloatingTasks.setPredicate(predicate.and(Type.getFloatingType().getPredicate()
                 .or(Type.getDeadlineType().getPredicate())));
