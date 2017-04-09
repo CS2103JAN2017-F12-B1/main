@@ -1,6 +1,7 @@
 package guitests.guihandles;
 
 import java.util.Optional;
+import java.util.Set;
 import java.util.logging.Logger;
 
 import guitests.GuiRobot;
@@ -43,9 +44,9 @@ public class GuiHandle {
 
     public void focusOnWindow(String stageTitle) {
         logger.info("Focusing " + stageTitle);
-        Optional<Window> window = guiRobot.listTargetWindows()
-                .stream()
-                .filter(w -> w instanceof Stage && ((Stage) w).getTitle().equals(stageTitle)).findAny();
+        Optional<Window> window = guiRobot.listTargetWindows().stream()
+                .filter(w -> w instanceof Stage && ((Stage) w).getTitle().equals(stageTitle))
+                .findAny();
 
         if (!window.isPresent()) {
             logger.warning("Can't find stage " + stageTitle + ", Therefore, aborting focusing");
@@ -61,16 +62,24 @@ public class GuiHandle {
         return guiRobot.lookup(query).query();
     }
 
+    //@@author A0140016B
+    protected <T extends Node> Set<T> getAllNodes(String query) {
+        return guiRobot.lookup(query).queryAll();
+    }
+
+    //@@author A0140016B
     protected String getTextFieldText(String filedName) {
         TextField textField = getNode(filedName);
         return textField.getText();
     }
 
+    //@@author A0140036X
     protected void setTextField(String textFieldId, String newText) {
         guiRobot.clickOn(textFieldId);
         TextField textField = getNode(textFieldId);
         Platform.runLater(new Runnable() {
-            @Override public void run() {
+            @Override
+            public void run() {
                 textField.setText(newText);
             }
         }); // java.lang.IllegalStateException: Task must only be used from the FX Application Thread
@@ -96,9 +105,9 @@ public class GuiHandle {
     }
 
     public void closeWindow() {
-        Optional<Window> window = guiRobot.listTargetWindows()
-                .stream()
-                .filter(w -> w instanceof Stage && ((Stage) w).getTitle().equals(stageTitle)).findAny();
+        Optional<Window> window = guiRobot.listTargetWindows().stream()
+                .filter(w -> w instanceof Stage && ((Stage) w).getTitle().equals(stageTitle))
+                .findAny();
 
         if (!window.isPresent()) {
             return;

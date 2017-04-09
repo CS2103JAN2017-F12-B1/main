@@ -14,6 +14,8 @@ public class StringUtil {
 
     public static final String SYSTEM_NEWLINE = System.lineSeparator();
 
+    public static final String WHITESPACE = " ";
+
     /**
      * Returns true if the {@code sentence} contains the {@code word}.
      *   Ignores case, but a full word match is required.

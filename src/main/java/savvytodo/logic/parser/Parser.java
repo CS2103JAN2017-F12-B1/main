@@ -13,12 +13,14 @@ import savvytodo.logic.commands.DeleteCommand;
 import savvytodo.logic.commands.EditCommand;
 import savvytodo.logic.commands.ExitCommand;
 import savvytodo.logic.commands.FindCommand;
+import savvytodo.logic.commands.GenerateCommand;
 import savvytodo.logic.commands.HelpCommand;
 import savvytodo.logic.commands.IncorrectCommand;
 import savvytodo.logic.commands.ListCommand;
 import savvytodo.logic.commands.LoadCommand;
 import savvytodo.logic.commands.MarkCommand;
 import savvytodo.logic.commands.RedoCommand;
+import savvytodo.logic.commands.SaveCommand;
 import savvytodo.logic.commands.SelectCommand;
 import savvytodo.logic.commands.UndoCommand;
 import savvytodo.logic.commands.UnmarkCommand;
@@ -31,7 +33,8 @@ public class Parser {
     /**
      * Used for initial separation of command word and args.
      */
-    private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+    private static final Pattern BASIC_COMMAND_FORMAT = Pattern
+            .compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
     /**
      * Parses user input into command for execution.
@@ -42,7 +45,8 @@ public class Parser {
     public Command parseCommand(String userInput) {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
 
         final String commandWord = matcher.group("commandWord");
@@ -79,6 +83,9 @@ public class Parser {
         case LoadCommand.COMMAND_WORD:
             return new LoadCommandParser().parse(arguments);
 
+        case SaveCommand.COMMAND_WORD:
+            return new SaveCommandParser().parse(arguments);
+
         case UndoCommand.COMMAND_WORD:
             return new UndoCommand();
 
@@ -90,6 +97,9 @@ public class Parser {
 
         case UnmarkCommand.COMMAND_WORD:
             return new UnmarkCommandParser().parse(arguments);
+
+        case GenerateCommand.COMMAND_WORD:
+            return new GenerateCommandParser().parse(arguments);
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);

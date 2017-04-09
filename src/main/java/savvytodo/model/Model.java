@@ -33,25 +33,31 @@ public interface Model {
     /** Adds the given task */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
 
-    /**
-     * Updates the task located at {@code filteredTaskListIndex} with {@code editedTask}.
-     *
-     * @throws DuplicateTaskException if updating the task's details causes the task to be equivalent to
-     *      another existing task in the list.
-     * @throws IndexOutOfBoundsException if {@code filteredTaskListIndex} < 0 or >= the size of the filtered list.
-     */
-    void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask) throws UniqueTaskList.DuplicateTaskException;
 
     /** Checks for tasks with conflicting datetime and returns a string of all conflicting tasks
      * @throws IllegalValueException
      * @throws DateTimeException */
     String getTaskConflictingDateTimeWarningMessage(DateTime dateTimeToCheck)
             throws DateTimeException, IllegalValueException;
-    //@@author A0147827U
+
+    //@@author A0140016B
     /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
+    ObservableList<ReadOnlyTask> getFilteredTaskList();
+
+    //@@author A0147827U
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList(TaskType taskType);
     ObservableList<ReadOnlyTask> getFilteredEventTaskList();
     ObservableList<ReadOnlyTask> getFilteredFloatingTaskList();
+    /**
+     * Updates the task located at {@code filteredTaskListIndex} with {@code editedTask}.
+     * {@code originalTask} is used to determine the targeted list view
+     * @throws DuplicateTaskException if updating the task's details causes the task to be equivalent to
+     *      another existing task in the list.
+     * @throws IndexOutOfBoundsException if {@code filteredTaskListIndex} < 0 or >= the size of the filtered list.
+     */
+    void updateTask(int filteredTaskListIndex, ReadOnlyTask originalTask, ReadOnlyTask editedTask)
+            throws UniqueTaskList.DuplicateTaskException;
+    void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask) throws DuplicateTaskException;
 
     /** Returns the total count of all filtered lists*/
     int getTotalFilteredListSize();
@@ -77,8 +83,5 @@ public interface Model {
     //@@author A0124863A
     /** Record a mark or unmark for undo*/
     void recordMark(int index);
-
-    //@@author A0140016B
-    ObservableList<ReadOnlyTask> getFilteredTaskList();
 
 }

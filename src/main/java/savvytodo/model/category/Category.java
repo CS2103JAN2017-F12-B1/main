@@ -4,11 +4,12 @@ import java.util.function.Predicate;
 
 import savvytodo.commons.exceptions.IllegalValueException;
 import savvytodo.model.task.ReadOnlyTask;
+
 /**
  * Represents a Category in the task manager.
  * Guarantees: immutable; name is valid as declared in {@link #isValidCategoryName(String)}
  */
-public class Category {
+public class Category implements Comparable<Category> {
 
     public static final String MESSAGE_CATEGORY_CONSTRAINTS = "Category names should be alphanumeric";
     public static final String CATEGORY_VALIDATION_REGEX = "\\p{Alnum}+";
@@ -50,7 +51,7 @@ public class Category {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Category // instanceof handles nulls
-                && this.categoryName.equals(((Category) other).categoryName)); // state check
+                        && this.categoryName.equals(((Category) other).categoryName)); // state check
     }
 
     @Override
@@ -61,8 +62,14 @@ public class Category {
     /**
      * Format state as text for viewing.
      */
+    @Override
     public String toString() {
         return '[' + categoryName + ']';
     }
 
+    //@@author A0140036X
+    @Override
+    public int compareTo(Category compare) {
+        return this.toString().compareTo(compare.toString());
+    }
 }

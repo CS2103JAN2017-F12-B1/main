@@ -15,19 +15,24 @@ import savvytodo.TestApp;
 import savvytodo.model.task.ReadOnlyTask;
 import savvytodo.model.task.Task;
 import savvytodo.testutil.TestUtil;
-
+//@@author A0147827U
 /**
- * Provides a handle for the panel containing the task list.
+ * Provides a handle for the panel containing the specified task list.
  */
 public class TaskListPanelHandle extends GuiHandle {
 
     public static final int NOT_FOUND = -1;
     public static final String CARD_PANE_ID = "#cardPane";
 
-    private static final String TASK_LIST_VIEW_ID = "#taskListView";
+    //to identify the right task list view
+    public static final String FLOATING_TASK_LIST_VIEW_ID = "#taskListView";
+    public static final String EVENT_TASK_LIST_VIEW_ID = "#eventTaskListView";
 
-    public TaskListPanelHandle(GuiRobot guiRobot, Stage primaryStage) {
+    private String viewId;
+
+    public TaskListPanelHandle(GuiRobot guiRobot, Stage primaryStage, String viewId) {
         super(guiRobot, primaryStage, TestApp.APP_TITLE);
+        this.viewId = viewId;
     }
 
     public List<ReadOnlyTask> getSelectedTasks() {
@@ -36,7 +41,7 @@ public class TaskListPanelHandle extends GuiHandle {
     }
 
     public ListView<ReadOnlyTask> getListView() {
-        return getNode(TASK_LIST_VIEW_ID);
+        return getNode(viewId);
     }
 
     /**
@@ -52,22 +57,50 @@ public class TaskListPanelHandle extends GuiHandle {
      * @param startPosition The starting position of the sub list.
      * @param tasks A list of task in the correct order.
      */
-    public boolean isListMatching(int startPosition, ReadOnlyTask... tasks) throws IllegalArgumentException {
+
+    public boolean isListMatching(int startPosition, boolean ignoreOrder, ReadOnlyTask... tasks)
+            throws IllegalArgumentException {
         if (tasks.length + startPosition != getListView().getItems().size()) {
+            TestUtil.printTasks(getListView().getItems().toArray(new ReadOnlyTask[]{}));
+            System.out.println();
+            TestUtil.printTasks(tasks);
+
             throw new IllegalArgumentException(
-                    "List size mismatched\n" + "Expected " + (getListView().getItems().size() - 1) + " tasks, got "
+                    "List size mismatched\n" + "Expected " + (getListView().getItems().size()) + " tasks, got "
                             + (tasks.length + startPosition) + " instead");
         }
-        assertTrue(this.containsInOrder(startPosition, tasks));
-        for (int i = 0; i < tasks.length; i++) {
-            final int scrollTo = i + startPosition;
-            guiRobot.interact(() -> getListView().scrollTo(scrollTo));
-            guiRobot.sleep(1);
-            if (!TestUtil.compareCardAndTask(getTaskCardHandle(startPosition + i), tasks[i])) {
-                return false;
+        if (!ignoreOrder) {
+            assertTrue(this.containsInOrder(startPosition, tasks));
+            for (int i = 0; i < tasks.length; i++) {
+                final int scrollTo = i + startPosition;
+                guiRobot.interact(() -> getListView().scrollTo(scrollTo));
+                guiRobot.sleep(1);
+                if (!TestUtil.compareCardAndTask(getTaskCardHandle(startPosition + i), tasks[i])) {
+                    return false;
+                }
             }
         }
         return true;
+    }
+
+    //@@author A0140036X
+    /**
+     * Returns true if the list is showing the task details correctly in correct order.
+     * @param startPosition The starting position of the sub list.
+     * @param tasks A list of task in the correct order.
+     */
+    public boolean isListMatching(int startPosition, ReadOnlyTask... tasks) {
+        return isListMatching(0, false, tasks);
+    }
+
+    //@@author A0140036X
+    /**
+     * Returns true if the list is showing the task details correctly.
+     * @param startPosition The starting position of the sub list.
+     * @param tasks A list of task in the correct order.
+     */
+    public boolean isListMatchingIgnoreOrder(ReadOnlyTask... tasks) {
+        return isListMatching(0, true, tasks);
     }
 
     /**
@@ -100,7 +133,9 @@ public class TaskListPanelHandle extends GuiHandle {
     }
 
     public TaskCardHandle navigateToTask(String name) {
-        guiRobot.sleep(100); //Allow a bit of time for the list to be updated
+
+        guiRobot.sleep(2000); //Allow a bit of time for the list to be updated
+        
         final Optional<ReadOnlyTask> task = getListView().getItems().stream().filter(p -> p.getName().name.equals(name))
                 .findAny();
         if (!task.isPresent()) {
@@ -164,7 +199,7 @@ public class TaskListPanelHandle extends GuiHandle {
         return guiRobot.lookup(CARD_PANE_ID).queryAll();
     }
 
-    public int getNumberOfPeople() {
+    public int getNumberOfTasks() {
         return getListView().getItems().size();
     }
 }

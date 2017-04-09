@@ -9,6 +9,11 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.layout.StackPane?>
+
+<!-- @@author A0140016B -->
 
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <children>
@@ -30,16 +35,26 @@
                         <HBox spacing="5" alignment="CENTER_LEFT">
                             <children>
                                 <HBox>
-                                    <Label fx:id="id" styleClass="cell_big_label"></Label>
-                                    <Label fx:id="name" text="\$name" styleClass="cell_big_label"/>
+                                    <Label fx:id="id"  minWidth="-Infinity" />
+                                    <Label fx:id="name" styleClass="cell_big_label" text="\$name" wrapText="true" />
                                 </HBox>
+								<StackPane>
+									<Circle fx:id="circle" fill="WHITE" radius="11.0" 
+										stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
+									</Circle>
+									<Label fx:id="priority" alignment="CENTER"
+										contentDisplay="CENTER"	textAlignment="CENTER" textFill="WHITE">
+										<font>
+											<Font size="11.0" />
+										</font>
+									</Label>
+								</StackPane>
                             </children>
                         </HBox>
-                        <FlowPane fx:id="categories" />
-                        <Label fx:id="priority" styleClass="cell_small_label" text="\$priority" />
-						<Label fx:id="status" styleClass="cell_small_label" text="\$status" />
-                        <Label fx:id="dateTimeRecur" styleClass="cell_small_label" text="\$dateTimeRecur" />
-                        <Label fx:id="description" styleClass="cell_small_label" text="\$description" />
+                        <FlowPane fx:id="categories" prefWrapLength="10.0" />
+						<Label fx:id="status" styleClass="cell_small_label" />
+                        <Label fx:id="dateTime" styleClass="cell_small_label" />
+                        <Label fx:id="description" styleClass="cell_small_label" />
                     </children>
                 </VBox>
             </children>

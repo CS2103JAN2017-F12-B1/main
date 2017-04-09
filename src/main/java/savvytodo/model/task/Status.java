@@ -11,7 +11,7 @@ import savvytodo.commons.exceptions.IllegalValueException;
  * Represents Task's Status of Completion in the task manager
  * Guarantees: immutable; Defaults to false
  */
-public class Status {
+public class Status implements Comparable<Status> {
 
     public final boolean value;
 
@@ -19,8 +19,8 @@ public class Status {
 
     public static final boolean COMPLETED = true;
     public static final boolean ONGOING = false;
-    private static final String MESSAGE_STATUS_COMPLETED = "Completed";
-    private static final String MESSAGE_STATUS_ONGOING = "Ongoing";
+    public static final String MESSAGE_STATUS_COMPLETED = "Completed";
+    public static final String MESSAGE_STATUS_ONGOING = "Ongoing";
 
     /**
      * Defaults to Not Completed
@@ -47,9 +47,7 @@ public class Status {
 
     @Override
     public boolean equals(Object other) {
-        return other == this
-                || (other instanceof Status
-                        && this.toString().equals(((Status) other).toString()));
+        return other == this || (other instanceof Status && this.toString().equals(((Status) other).toString()));
     }
 
     //@@author A0124863A
@@ -66,5 +64,11 @@ public class Status {
     //@@author A0124863A
     public Predicate<ReadOnlyTask> getPredicate() {
         return (ReadOnlyTask task) -> task.isCompleted().equals(this);
+    }
+
+    //@@author A0140036X
+    @Override
+    public int compareTo(Status o) {
+        return Boolean.compare(value, o.value);
     }
 }

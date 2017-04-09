@@ -20,6 +20,7 @@ import savvytodo.commons.events.ui.TaskPanelSelectionChangedEvent;
 import savvytodo.commons.util.StringUtil;
 import savvytodo.logic.Logic;
 import savvytodo.model.UserPrefs;
+import savvytodo.model.task.TaskType;
 
 /**
  * The manager of the UI component.
@@ -69,6 +70,7 @@ public class UiManager extends ComponentManager implements Ui {
     /**
      * Sets logic of instance
      */
+    @Override
     public void setLogic(Logic logic) {
         this.logic = logic;
     }
@@ -78,10 +80,12 @@ public class UiManager extends ComponentManager implements Ui {
      * Sets config of instance
      * @return
      */
+    @Override
     public void setConfig(Config config) {
         this.config = config;
     }
 
+    @Override
     public MainWindow getMainWindow() {
         return mainWindow;
     }
@@ -146,7 +150,12 @@ public class UiManager extends ComponentManager implements Ui {
     @Subscribe
     private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainWindow.getTaskListPanel(event.targetTaskList).scrollTo(event.targetIndex);
+        if (event.targetTaskList == TaskType.FLOATING) {
+            mainWindow.getTaskListPanel().scrollTo(event.targetIndex);
+        } else {
+            mainWindow.getEventTaskListPanel().scrollTo(event.targetIndex);
+        }
+
     }
 
     @Subscribe
@@ -155,10 +164,12 @@ public class UiManager extends ComponentManager implements Ui {
         mainWindow.loadTaskPage(event.getNewSelection());
     }
 
+    //@@author A0140036X
+    /**
+     * Refreshes the ui
+     */
     @Override
     public void refresh() {
-        mainWindow.setLogic(logic);
-        mainWindow.setConfig(config);
         mainWindow.fillInnerParts();
     }
 

@@ -47,6 +47,8 @@ public interface ReadOnlyTask {
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
+                .append("Type: ")
+                .append(getType())
                 .append(" Date Time: ")
                 .append(getDateTime())
                 .append(" Recurrence: ")

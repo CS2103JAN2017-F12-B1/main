@@ -10,6 +10,7 @@ import com.joestelmach.natty.Parser;
 
 import savvytodo.commons.core.Messages;
 import savvytodo.commons.exceptions.IllegalValueException;
+import savvytodo.model.task.DateTime;
 
 //@@author A0140016B
 /**
@@ -62,6 +63,9 @@ public class NattyDateTimeParserUtil {
         String endDateTime = StringUtil.EMPTY_STRING;
         String startDateTime = StringUtil.EMPTY_STRING;
         String formattedDateTimeArg = convertToUSDateFormat(dateTimeArgs);
+        if (formattedDateTimeArg.contains(DateTime.DATETIME_STRING_CONNECTOR)) {
+            formattedDateTimeArg.replaceAll(DateTime.DATETIME_STRING_CONNECTOR, DateTime.DATETIME_STRING_TO_CONNECTOR);
+        }
 
         parser = getInstance();
         List<DateGroup> groups = parser.parse(formattedDateTimeArg);

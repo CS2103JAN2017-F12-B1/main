@@ -49,7 +49,8 @@ public abstract class TaskManagerGuiTest {
      */
     protected MainGuiHandle mainGui;
     protected MainMenuHandle mainMenu;
-    protected TaskListPanelHandle taskListPanel;
+    protected TaskListPanelHandle floatingTaskListPanel;
+    protected TaskListPanelHandle eventTaskListPanel;
     protected ResultDisplayHandle resultDisplay;
     protected CommandBoxHandle commandBox;
     protected BrowserPanelHandle browserPanel;
@@ -73,7 +74,8 @@ public abstract class TaskManagerGuiTest {
         FxToolkit.setupStage((stage) -> {
             mainGui = new MainGuiHandle(guiRobot, stage);
             mainMenu = mainGui.getMainMenu();
-            taskListPanel = mainGui.getTaskListPanel();
+            floatingTaskListPanel = mainGui.getTaskListPanel();
+            eventTaskListPanel = mainGui.getEventTaskListPanel();
             resultDisplay = mainGui.getResultDisplay();
             commandBox = mainGui.getCommandBox();
             browserPanel = mainGui.getBrowserPanel();
@@ -116,15 +118,29 @@ public abstract class TaskManagerGuiTest {
     public void assertMatching(ReadOnlyTask task, TaskCardHandle card) {
         assertTrue(TestUtil.compareCardAndTask(card, task));
     }
-
+    //@@author A0147827U
     /**
-     * Asserts the size of the task list is equal to the given number.
+     * Asserts the total size of the both task lists is equal to the given number.
      */
     protected void assertListSize(int size) {
-        int numberOfPeople = taskListPanel.getNumberOfPeople();
-        assertEquals(size, numberOfPeople);
+        int numberOfTasks = floatingTaskListPanel.getNumberOfTasks() + eventTaskListPanel.getNumberOfTasks();
+        assertEquals(size, numberOfTasks);
     }
-
+    /**
+     * Asserts the size of the event task list is equal to the given number.
+     */
+    protected void assertEventListSize(int size) {
+        int numberOfTasks = eventTaskListPanel.getNumberOfTasks();
+        assertEquals(size, numberOfTasks);
+    }
+    /**
+     * Asserts the size of the floating task list is equal to the given number.
+     */
+    protected void assertFloatingListSize(int size) {
+        int numberOfTasks = floatingTaskListPanel.getNumberOfTasks();
+        assertEquals(size, numberOfTasks);
+    }
+    //@@author
     /**
      * Asserts the message shown in the Result Display area is same as the given string.
      */
@@ -145,5 +161,13 @@ public abstract class TaskManagerGuiTest {
      */
     public void sleep(int milliseconds) {
         guiRobot.sleep((milliseconds));
+    }
+
+    //@@author A0140036X
+    /**
+     * Simulates a very long delay
+     */
+    public void sleep() {
+        guiRobot.sleep(200000);
     }
 }

@@ -1,7 +1,9 @@
 package savvytodo.model.task;
 
+import java.text.SimpleDateFormat;
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 import savvytodo.commons.exceptions.IllegalValueException;
 import savvytodo.commons.util.DateTimeUtil;
@@ -29,7 +31,14 @@ public class DateTime implements Comparable<DateTime> {
 
     public static final String DATETIME_STRING_CONNECTOR = " = ";
     private static final String DATETIME_STRING_TO_STRING_CONNECTOR = " ~ ";
-    public static final String[] DEFAULT_VALUES = {StringUtil.EMPTY_STRING, StringUtil.EMPTY_STRING};
+    public static final String DATETIME_STRING_TO_CONNECTOR = " to ";
+    public static final String[] DEFAULT_VALUES = {
+            StringUtil.EMPTY_STRING,
+            StringUtil.EMPTY_STRING };
+
+    //@@author A0140036X
+    public static final SimpleDateFormat DATETIME_FORMAT = new SimpleDateFormat(
+            DateTimeUtil.DATE_STRING_FORMAT);
 
     /**
      * Default constructor
@@ -78,6 +87,15 @@ public class DateTime implements Comparable<DateTime> {
      */
     public DateTime(String[] dateTime) throws DateTimeException, IllegalValueException {
         this(dateTime[0], dateTime[1]);
+    }
+
+    //@@author A0140036X
+    /**
+     * Constructor when given input are java.util.Date object
+     * @throws IllegalValueException
+     */
+    public DateTime(Date start, Date end) throws IllegalValueException {
+        this(DATETIME_FORMAT.format(start), DATETIME_FORMAT.format(end));
     }
 
     /**
@@ -171,5 +189,4 @@ public class DateTime implements Comparable<DateTime> {
     public int hashCode() {
         return (this.start.hashCode() + this.end.hashCode());
     }
-
 }

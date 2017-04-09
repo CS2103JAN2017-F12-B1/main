@@ -8,6 +8,7 @@ import javafx.scene.input.KeyCodeCombination;
 import savvytodo.logic.commands.ClearCommand;
 import savvytodo.logic.commands.ListCommand;
 import savvytodo.logic.commands.RedoCommand;
+import savvytodo.logic.commands.UndoCommand;
 import savvytodo.ui.hotkeys.HotKeysCombinations;
 
 //@@author A0147827U
@@ -74,10 +75,10 @@ public class HotKeyTest extends TaskManagerGuiTest {
     }
 
     private void assertUndoSuccess() {
-        //result will either be undo success or fail to undo
-//        assertTrue(resultDisplay.getText().equals(UndoCommand.MESSAGE_FAILURE) ||
-//                resultDisplay.getText().equals(UndoCommand.MESSAGE_SUCCESS));
-        assertTrue(true); //stub to be fixed in 0.5
+      //result will either be undo success or fail to undo
+        assertTrue(resultDisplay.getText().equals(UndoCommand.MESSAGE_FAILURE) ||
+                resultDisplay.getText().equals(UndoCommand.MESSAGE_SUCCESS));
+
     }
 
     private void assertRedoSuccess() {

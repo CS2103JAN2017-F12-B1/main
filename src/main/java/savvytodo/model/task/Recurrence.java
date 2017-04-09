@@ -9,7 +9,7 @@ import savvytodo.commons.exceptions.IllegalValueException;
  * Represents Task's Recurrence in the task manager Guarantees: immutable;
  * is valid as declared in {@link #isValidRecurrence(String, int)} *
  */
-public class Recurrence {
+public class Recurrence implements Comparable<Recurrence> {
 
     /**
      * @author A0140016B
@@ -18,11 +18,7 @@ public class Recurrence {
      * Defaults to none if it is a one-time task
      */
     public enum Type {
-        None,
-        Daily,
-        Weekly,
-        Monthly,
-        Yearly;
+        None, Daily, Weekly, Monthly, Yearly;
 
         /**
          * Get type enum object from it's name, ignoring cases
@@ -74,10 +70,13 @@ public class Recurrence {
     public int occurences;
     public Type type;
 
-    public static final String MESSAGE_RECURR_CONSTRAINTS =
-            "If recurrence type is NONE, occurences can only be 0";
+    public static final String MESSAGE_RECURR_CONSTRAINTS = "Recurrence Parameters accepted: r/TYPE [NUM OF TIMES] \n"
+            + "with [NUM OF TIMES] = 0 if not specified AND If recurrence type is NONE, occurences can only be 0!\n"
+            + "Else for other type, if occurences is 0 => forever recurring!\n"
+            + "Some examples: r/w 2, r/daily 3, r/n 0";
     public static final String MESSAGE_RECURR_NOT_MATCH =
             "Task recurrence type should be 'none', 'daily', 'weekly', 'monthly' or 'yearly'";
+    public static final String MESSAGE_INVALID_RECUR_NUM = "Number of recurrence provided is invalid!";
     public static final String[] DEFAULT_VALUES = {Type.None.toString(), "0"};
 
     /**
@@ -134,6 +133,12 @@ public class Recurrence {
     @Override
     public String toString() {
         return this.type.toString() + "(" + this.occurences + ")";
+    }
+
+    //@@author A0140036X
+    @Override
+    public int compareTo(Recurrence o) {
+        return toString().compareTo(o.toString());
     }
 
 }

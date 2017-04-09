@@ -13,6 +13,8 @@ import savvytodo.model.task.Location;
 import savvytodo.model.task.Name;
 import savvytodo.model.task.Priority;
 import savvytodo.model.task.Recurrence;
+import savvytodo.model.task.TaskType;
+import savvytodo.model.task.Type;
 import savvytodo.testutil.TaskBuilder;
 import savvytodo.testutil.TestTask;
 
@@ -30,7 +32,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
         TestTask editedTask = new TaskBuilder().withName("Project 1").withPriority("high").withDescription("2pm")
                 .withLocation("NUS mall").withCategories("Meeting").withDateTime("02/03/2017 1400", "03/03/2017 1400")
-                .withRecurrence(Recurrence.DEFAULT_VALUES).withStatus(false).build();
+                .withRecurrence(Recurrence.DEFAULT_VALUES).withStatus(false).withType(Type.getEventType()).build();
 
         assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
     }
@@ -135,13 +137,13 @@ public class EditCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand("edit " + filteredTaskListIndex + " " + detailsToEdit);
 
         // confirm the new card contains the right data
-        TaskCardHandle editedCard = taskListPanel.navigateToTask(editedTask.getName().name);
+        TaskCardHandle editedCard = eventTaskListPanel.navigateToTask(editedTask.getName().name);
         assertMatching(editedTask, editedCard);
 
         // confirm the list now contains all previous tasks plus the task with
         // updated details
         expectedTasksList[taskManagerIndex - 1] = editedTask;
-        assertTrue(taskListPanel.isListMatching(expectedTasksList));
+        assertTrue(eventTaskListPanel.isListMatching(expectedTasksList));
         assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask));
     }
 }
