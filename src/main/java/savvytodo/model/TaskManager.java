@@ -99,7 +99,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         System.out.println("Before sieving: task list size : " + tasks.asObservableList().size());
         for (Task t : tasks) {
             switch(t.getType()) {
-            case FLOATING_DEADLINE:
+            case FLOATING:
                 floatingTasks.add(t);
                 System.out.println("floating task found : " + t.getName());
                 break;
@@ -126,7 +126,7 @@ public class TaskManager implements ReadOnlyTaskManager {
     public void addTask(Task p) throws UniqueTaskList.DuplicateTaskException {
         syncMasterCategoryListWith(p);
         switch(p.getType()) {
-        case FLOATING_DEADLINE:
+        case FLOATING:
             floatingTasks.add(p);
             break;
         case EVENT:
@@ -159,7 +159,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         // in the task list.
 
         switch(editedReadOnlyTask.getType()) {
-        case FLOATING_DEADLINE:
+        case FLOATING:
             floatingTasks.updateTask(index, editedTask);
             break;
         case EVENT:
@@ -173,7 +173,7 @@ public class TaskManager implements ReadOnlyTaskManager {
     //@@author A0147827U
     public boolean removeTask(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException, DuplicateTaskException {
         switch(key.getType()) {
-        case FLOATING_DEADLINE:
+        case FLOATING:
             if (floatingTasks.remove(key)) {
                 if (tasks.remove(key)) {
                     return true;

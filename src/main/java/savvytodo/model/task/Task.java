@@ -183,7 +183,7 @@ public class Task implements ReadOnlyTask {
 
     public TaskType getType() {
         if (isFloating()) {
-            return TaskType.FLOATING_DEADLINE;
+            return TaskType.FLOATING;
         } else {
             return TaskType.EVENT;
         }

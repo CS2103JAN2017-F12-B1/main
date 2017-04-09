@@ -245,7 +245,7 @@ public class ModelManager extends ComponentManager implements Model {
     //@@author A0147827U
     private FilteredList<ReadOnlyTask> getFilteredTasks(TaskType type) {
         switch (type) {
-        case FLOATING_DEADLINE:
+        case FLOATING:
             return filteredFloatingTasks;
         case EVENT:
         default:
@@ -257,7 +257,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList(TaskType taskType) {
         switch(taskType) {
-        case FLOATING_DEADLINE:
+        case FLOATING:
             return new UnmodifiableObservableList<>(getFilteredFloatingTaskList());
         case EVENT:
         default:

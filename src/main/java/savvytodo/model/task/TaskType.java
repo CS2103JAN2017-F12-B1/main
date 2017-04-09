@@ -7,5 +7,5 @@ package savvytodo.model.task;
  *
  */
 public enum TaskType {
-    FLOATING_DEADLINE, EVENT
+    FLOATING, EVENT
 }
