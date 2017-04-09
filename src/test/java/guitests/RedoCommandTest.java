@@ -60,7 +60,6 @@ public class RedoCommandTest extends TaskManagerGuiTest {
 
 
     private void assertRedoAfterUndoAfterDeleteSuccess(int targetIndexOneIndexed, final TestTask[] currentList) {
-        TestTask taskToDelete = currentList[targetIndexOneIndexed - 1]; // -1 as array uses zero indexing
         TestTask[] expectedRemainder = TestUtil.removeTaskFromList(currentList, targetIndexOneIndexed);
         
         commandBox.runCommand("redo");
