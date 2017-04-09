@@ -15,7 +15,7 @@
         <URL value="@DarkTheme.css"/>
         <URL value="@Extensions.css"/>
     </stylesheets>
-	<GridPane fx:id="content" alignment="center" vgap="20">
+	<GridPane fx:id="content" id="content" alignment="center" vgap="20">
 		<GridPane fx:id="innerContent" GridPane.halignment="CENTER" alignment="center" vgap="20">
 			<padding>
 		         <Insets left="30.0" right="30.0" top="10.0" bottom="20.0"/>
