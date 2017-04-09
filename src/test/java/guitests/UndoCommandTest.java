@@ -22,20 +22,15 @@ public class UndoCommandTest extends TaskManagerGuiTest {
         int targetIndex = 2;
         commandBox.runCommand("delete " + targetIndex);
         assertUndoAfterDeleteSuccess(currentList);
-        
-
 
     }
 
 
     private void assertUndoAfterDeleteSuccess(TestTask... currentList) {
-
         commandBox.runCommand("undo");
 
         assertTrue(eventTaskListPanel.isListMatching(currentList));
         assertResultMessage(UndoCommand.MESSAGE_SUCCESS);
-
-
     }
     
 
@@ -52,7 +47,6 @@ public class UndoCommandTest extends TaskManagerGuiTest {
     }
 
     private void assertUndoAfterAddSuccess(int index, TestTask... currentList) {
-
         commandBox.runCommand("undo");
         TestTask[] expectedList = TestUtil.removeTaskFromList(currentList, index);
         assertTrue(eventTaskListPanel.isListMatching(expectedList));
@@ -75,7 +69,6 @@ public class UndoCommandTest extends TaskManagerGuiTest {
     }
 
     private void assertUndoAfterEditSuccess(TestTask task) {
-
         commandBox.runCommand("undo");
         TaskCardHandle taskCard = eventTaskListPanel.navigateToTask(task.getName().name);
         assertMatching(task, taskCard);

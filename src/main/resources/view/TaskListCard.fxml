@@ -42,7 +42,7 @@
 									<Circle fx:id="circle" fill="WHITE" radius="11.0" 
 										stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
 									</Circle>
-									<Label fx:id="circleLabel" alignment="CENTER"
+									<Label fx:id="priority" alignment="CENTER"
 										contentDisplay="CENTER"	textAlignment="CENTER" textFill="WHITE">
 										<font>
 											<Font size="11.0" />

@@ -158,15 +158,16 @@ public class TestTask implements ReadOnlyTask {
         sb.append("p/" + this.getPriority().value + " ");
         //@@author A0147827U
         if (!isFloating()) {
-            sb.append("dt/" + this.getDateTime().startValue + DateTime.DATETIME_STRING_CONNECTOR
+            sb.append("dt/" + this.getDateTime().startValue + DateTime.DATETIME_STRING_TO_CONNECTOR
                     + this.getDateTime().endValue + " ");
         }
+        //@@author
         sb.append("d/" + this.getDescription().value + " ");
         this.getCategories().asObservableList().stream()
                 .forEach(s -> sb.append("c/" + s.categoryName + " "));
         return sb.toString();
     }
-
+    //@@author A0147827U
     private boolean isFloating() {
         return getDateTime().getStartDate() == null && getDateTime().getEndDate() == null;
     }

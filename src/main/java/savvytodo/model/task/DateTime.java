@@ -31,6 +31,7 @@ public class DateTime implements Comparable<DateTime> {
 
     public static final String DATETIME_STRING_CONNECTOR = " = ";
     private static final String DATETIME_STRING_TO_STRING_CONNECTOR = " ~ ";
+    public static final String DATETIME_STRING_TO_CONNECTOR = " to ";
     public static final String[] DEFAULT_VALUES = {
             StringUtil.EMPTY_STRING,
             StringUtil.EMPTY_STRING };
