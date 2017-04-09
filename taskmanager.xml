@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <taskmanager>
     <tasks>
-        <name>olddeadline</name>
+        <name>Floating 1</name>
         <priority>Medium</priority>
         <description>No description given.</description>
         <location>Location has not been set.</location>
         <dateTime>
-            <startValue></startValue>
-            <endValue>09/04/2017 2347</endValue>
+            <startValue>11/04/2017 0000</startValue>
+            <endValue>17/04/2017 2359</endValue>
         </dateTime>
         <recurrence>
             <occurences>0</occurences>
@@ -17,55 +17,7 @@
         <timeStamp/>
     </tasks>
     <tasks>
-        <name>my event</name>
-        <priority>Medium</priority>
-        <description>No description given.</description>
-        <location>Location has not been set.</location>
-        <dateTime>
-            <startValue>09/04/2017 2348</startValue>
-            <endValue>10/04/2017 2348</endValue>
-        </dateTime>
-        <recurrence>
-            <occurences>0</occurences>
-            <type>None</type>
-        </recurrence>
-        <status>false</status>
-        <timeStamp/>
-    </tasks>
-    <tasks>
-        <name>my deadline</name>
-        <priority>Medium</priority>
-        <description>No description given.</description>
-        <location>Location has not been set.</location>
-        <dateTime>
-            <startValue></startValue>
-            <endValue>09/04/2017 2348</endValue>
-        </dateTime>
-        <recurrence>
-            <occurences>0</occurences>
-            <type>None</type>
-        </recurrence>
-        <status>false</status>
-        <timeStamp/>
-    </tasks>
-    <tasks>
-        <name>my task</name>
-        <priority>Medium</priority>
-        <description>No description given.</description>
-        <location>Location has not been set.</location>
-        <dateTime>
-            <startValue></startValue>
-            <endValue></endValue>
-        </dateTime>
-        <recurrence>
-            <occurences>0</occurences>
-            <type>None</type>
-        </recurrence>
-        <status>false</status>
-        <timeStamp/>
-    </tasks>
-    <tasks>
-        <name>mysecond task</name>
+        <name>Event 1</name>
         <priority>Medium</priority>
         <description>No description given.</description>
         <location>Location has not been set.</location>

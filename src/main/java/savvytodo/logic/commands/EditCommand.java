@@ -69,7 +69,7 @@ public class EditCommand extends Command {
         Task editedTask = createEditedTask(taskToEdit, cmdTaskDescriptor);
 
         try {
-            model.updateTask(filteredTaskListIndex.getIndex() - 1, editedTask);
+            model.updateTask(filteredTaskListIndex.getIndex() - 1, taskToEdit, editedTask);
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
