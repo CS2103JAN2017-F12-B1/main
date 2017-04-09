@@ -20,6 +20,7 @@ public class Task implements ReadOnlyTask {
     private DateTime dateTime;
     private Recurrence recurrence;
     private Status isCompleted;
+    private TimeStamp timeStamp;
 
     private UniqueCategoryList categories;
 
@@ -28,7 +29,8 @@ public class Task implements ReadOnlyTask {
      */
     public Task(Name name, Priority priority, Description description, Location location,
             UniqueCategoryList categories, DateTime dateTime, Recurrence recurrence) {
-        assert !CollectionUtil.isAnyNull(name, priority, description, location, categories, dateTime, recurrence);
+        assert !CollectionUtil.isAnyNull(name, priority, description, location, categories,
+                dateTime, recurrence);
         this.name = name;
         this.priority = priority;
         this.description = description;
@@ -37,10 +39,27 @@ public class Task implements ReadOnlyTask {
         this.dateTime = dateTime;
         this.recurrence = recurrence;
         this.isCompleted = new Status();
+        this.timeStamp = new TimeStamp();
     }
 
     public Task(Name name, Priority priority, Description description, Location location,
-            UniqueCategoryList categories, DateTime dateTime, Recurrence recurrence, Status status) {
+            UniqueCategoryList categories, DateTime dateTime, Recurrence recurrence, TimeStamp timeStamp) {
+        assert !CollectionUtil.isAnyNull(name, priority, description, location, categories,
+                dateTime, recurrence, timeStamp);
+        this.name = name;
+        this.priority = priority;
+        this.description = description;
+        this.location = location;
+        this.categories = new UniqueCategoryList(categories); //protect internal categories from changes in the arg list
+        this.dateTime = dateTime;
+        this.recurrence = recurrence;
+        this.isCompleted = new Status();
+        this.timeStamp = new TimeStamp(timeStamp);
+    }
+
+    public Task(Name name, Priority priority, Description description, Location location,
+            UniqueCategoryList categories, DateTime dateTime, Recurrence recurrence,
+            Status status, TimeStamp timeStamp) {
         assert !CollectionUtil.isAnyNull(name, priority, description, location,
                 categories, dateTime, recurrence, status);
         this.name = name;
@@ -51,6 +70,7 @@ public class Task implements ReadOnlyTask {
         this.dateTime = dateTime;
         this.recurrence = recurrence;
         this.isCompleted = status;
+        this.timeStamp = new TimeStamp(timeStamp);
     }
 
     /**
@@ -58,8 +78,10 @@ public class Task implements ReadOnlyTask {
      */
     public Task(ReadOnlyTask source) {
         this(source.getName(), source.getPriority(), source.getDescription(), source.getLocation(),
-                source.getCategories(), source.getDateTime(), source.getRecurrence(), source.isCompleted());
+                source.getCategories(), source.getDateTime(), source.getRecurrence(),
+                source.isCompleted(), source.getTimeStamp());
     }
+
 
     public void setName(Name name) {
         assert name != null;
@@ -157,6 +179,7 @@ public class Task implements ReadOnlyTask {
         this.setDateTime(replacement.getDateTime());
         this.setRecurrence(replacement.getRecurrence());
         this.setStatus(replacement.isCompleted());
+        this.setTimeStamp(replacement.getTimeStamp());
     }
 
     @Override
@@ -169,7 +192,8 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, priority, description, location, categories, dateTime, recurrence, isCompleted);
+        return Objects.hash(name, priority, description, location, categories, dateTime, recurrence,
+                isCompleted, timeStamp);
     }
 
     @Override
@@ -177,4 +201,15 @@ public class Task implements ReadOnlyTask {
         return getAsText();
     }
 
+
+    //@@author A0124863A
+    @Override
+    public TimeStamp getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(TimeStamp timeStamp) {
+        assert timeStamp != null;
+        this.timeStamp = timeStamp;
+    }
 }
