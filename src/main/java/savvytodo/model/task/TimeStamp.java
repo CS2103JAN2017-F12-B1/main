@@ -14,6 +14,7 @@ public class TimeStamp {
         dateTimeAdded = LocalDateTime.now();
     }
 
+
     public TimeStamp(TimeStamp timeStamp) {
         dateTimeAdded = timeStamp.getDateTimeAdded();
     }

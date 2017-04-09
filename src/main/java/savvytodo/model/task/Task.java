@@ -1,5 +1,6 @@
 package savvytodo.model.task;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 import savvytodo.commons.util.CollectionUtil;
@@ -11,7 +12,7 @@ import savvytodo.model.category.UniqueCategoryList;
  * Represents a Task in the task manager.
  * Guarantees: details are present and not null, field values are validated.
  */
-public class Task implements ReadOnlyTask {
+public class Task implements ReadOnlyTask, Comparable<Task> {
 
     private Name name;
     private Priority priority;
@@ -218,6 +219,7 @@ public class Task implements ReadOnlyTask {
         return getDateTime().getStartDate() == null && !(getDateTime().getEndDate() == null);
     }
 
+    @Override
     public Type getType() {
         updateType();
         return type;
@@ -245,5 +247,61 @@ public class Task implements ReadOnlyTask {
     public void setTimeStamp(TimeStamp timeStamp) {
         assert timeStamp != null;
         this.timeStamp = timeStamp;
+    }
+
+    //@@author A0140036X
+    /**
+     * Array of string representation of all the attributes of a Task.
+     */
+    @SuppressWarnings("rawtypes")
+    private Comparable[] attributes() {
+        Comparable[] attributes = new Comparable[8];
+        attributes[0] = name;
+        attributes[1] = priority;
+        attributes[2] = description;
+        attributes[3] = location;
+        attributes[4] = categories;
+        attributes[5] = dateTime;
+        attributes[6] = recurrence;
+        attributes[7] = isCompleted;
+        return attributes;
+    }
+
+    //@@author A0140036X
+    /**
+     * Generic comparison to another task using attributes of a Task.
+     */
+    @SuppressWarnings("rawtypes")
+    @Override
+    public int compareTo(Task o) {
+        Comparable[] thisAttributes = attributes();
+        Comparable[] thatAttributes = o.attributes();
+        int compareVal;
+        for (int i = 0; i < thisAttributes.length; i++) {
+            compareVal = thisAttributes[i].compareTo(thatAttributes[i]);
+            if (compareVal != 0) {
+                return compareVal;
+            }
+        }
+        return 0;
+    }
+
+    //@@author A0140036X
+    /**
+     * Checks if two lists of tasks are the same.
+     */
+    public static boolean areTasksSame(Task[] t1, Task[] t2) {
+        if (t1.length != t2.length) {
+            return false;
+        }
+        Arrays.sort(t1);
+        Arrays.sort(t2);
+
+        for (int i = 0; i < t1.length; i++) {
+            if (!t1[i].equals(t2[i])) {
+                return false;
+            }
+        }
+        return true;
     }
 }
