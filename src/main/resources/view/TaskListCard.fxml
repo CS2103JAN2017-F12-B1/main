@@ -39,7 +39,7 @@
                                     <Label fx:id="name" styleClass="cell_big_label" text="\$name" wrapText="true" />
                                 </HBox>
 								<StackPane>
-									<Circle fx:id="circle" fill="WHITE" radius="11.0" 
+									<Circle fx:id="circle" fill="WHITE" radius="11.0"
 										stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
 									</Circle>
 									<Label fx:id="priority" alignment="CENTER"

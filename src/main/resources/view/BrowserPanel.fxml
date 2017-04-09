@@ -22,11 +22,11 @@
 		     </padding>
 		     <columnConstraints>
 			    <ColumnConstraints halignment="CENTER" />
-	 		</columnConstraints>	
+	 		</columnConstraints>
 			<children>
 		    	<Label fx:id="nameLabel" text="Welcome to SavvyToDo!" GridPane.rowIndex="0"/>
 				<Label fx:id="dateLabel" styleClass="label-bright" text="" GridPane.rowIndex="1"/>
-				<Label fx:id="descriptionLabel" styleClass="label-bright" text="" GridPane.rowIndex="2"/>	
+				<Label fx:id="descriptionLabel" styleClass="label-bright" text="" GridPane.rowIndex="2"/>
 	    	</children>
 	    </GridPane>
     </GridPane>

@@ -43,7 +43,7 @@ By : `Team F12-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbs
 
 > **Task Types**
 >
-> * Tasks are labelled as 3 different types: 
+> * Tasks are labelled as 3 different types:
 >   * Floating - tasks without date and time specification
 >   * Deadline - tasks with an `END_DATE`
 >   * Event - tasks with a specified duration (`START_DATE` and `END_DATE`)
@@ -75,7 +75,7 @@ Examples:
 * `add NUSSU Leadership Camp s/05-10-2016 2pm e/08-10-2016 6pm c/NUSSU`
   Add task named, NUSSU Leadership Camp, under NUSSU category. The 4 day 3 night is schedule to take place from 5th October, 2pm to 8th of October 2016, 6pm.
 
-### Parameters 
+### Parameters
 > Parameters | Description
 > -------- | :--------
 > TASK_NAME | `Mandatory` Specifies the name of the task.

@@ -127,7 +127,7 @@ _Figure 2.1.3a : Component interactions for `delete 1` command (part 1)_
 
 >Note how the `Model` simply raises a `TaskManagerChangedEvent` when the Task Manager data are changed,
  instead of asking the `Storage` to save the updates to the hard disk.
- 
+
 Author: Wang Si Qi
 
 The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the
@@ -211,8 +211,8 @@ The `Model`,
 
 > An undo operation is first stored in a stack in the undoRedoOperationCentre when the user calls for a command that changes the task list. For
 example, a user that adds a new task, an undoAddOperation will be stored in the undoRedoOperationCentre's undo stack. When undo is called by
-the user, undoRedoOperationCentre will pop the undoAddOperation and execute it to restore back the original state. The reverse operation 
-of undoAddOperation will be stored in the redo stack of UndoRedoOperationCentre after the undo stack pop, so that redo can be called after undo. 
+the user, undoRedoOperationCentre will pop the undoAddOperation and execute it to restore back the original state. The reverse operation
+of undoAddOperation will be stored in the redo stack of UndoRedoOperationCentre after the undo stack pop, so that redo can be called after undo.
 Redo works the same way as undo.
 
 * exposes two `UnmodifiableObservableList<ReadOnlyTask>` (for *Floating Tasks & Deadlines* and *Events*) that can be 'observed' e.g. the UI can be bound to these two lists

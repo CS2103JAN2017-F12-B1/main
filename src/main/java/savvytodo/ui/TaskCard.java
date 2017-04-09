@@ -101,7 +101,7 @@ public class TaskCard extends UiPart<Region> {
             sb.append("Due By: " + task.getDateTime().toString());
         } else {
             sb.append("From: " + task.getDateTime().toString());
-            sb.append(StringUtil.WHITESPACE + task.getRecurrence().toString());
+            sb.append(StringUtil.WHITESPACE + "(" + task.getRecurrence().toString() + ")");
         }
 
         return sb.toString();
