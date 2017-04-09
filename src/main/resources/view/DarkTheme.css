@@ -323,6 +323,13 @@
     -fx-font-size: 11;
 }
 
+/*@@author A0140036X */
+#nameLabel {
+	-fx-font-size: 1.2em;
+    -fx-text-fill: white !important;
+    -fx-opacity: 1;
+}
+
 #priority {
     -fx-text-fill: white;
     -fx-background-color: #0f5e66;

@@ -9,7 +9,7 @@ import savvytodo.TestApp;
  */
 public class BrowserPanelHandle extends GuiHandle {
 
-    private static final String BROWSER_ID = "#browserDisplay";
+    private static final String BROWSER_ID = "#content";
 
     public BrowserPanelHandle(GuiRobot guiRobot, Stage primaryStage) {
         super(guiRobot, primaryStage, TestApp.APP_TITLE);

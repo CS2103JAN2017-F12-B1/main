@@ -24,9 +24,9 @@ import savvytodo.model.task.DateTime;
 public class DateTimeUtil {
 
     private static final String TIME_ONLY_FORMAT = "HHmm";
-    private static final String DATE_ONLY_FORMAT = "dd/MM/uuuu";
+    private static final String DATE_ONLY_FORMAT = "dd/MM/yyyy";
     private static final String DATE_FORMAT = "d/M/uuuu HHmm";
-    private static final String DATE_STRING_FORMAT = "dd/MM/uuuu HHmm";
+    public static final String DATE_STRING_FORMAT = "dd/MM/yyyy HHmm";
 
     public static final int FIRST_HOUR_OF_DAY = 0;
     public static final int FIRST_MINUTE_OF_DAY = 0;
@@ -41,19 +41,22 @@ public class DateTimeUtil {
     private static final String YEARLY = "yearly";
     private static final int INCREMENT_FREQ = 1;
 
-    private static final DateTimeFormatter DATE_ONLY_FORMATTER = DateTimeFormatter.ofPattern(DATE_ONLY_FORMAT);
-    private static final DateTimeFormatter TIME_ONLY_FORMATTER = DateTimeFormatter.ofPattern(TIME_ONLY_FORMAT);
+    private static final DateTimeFormatter DATE_ONLY_FORMATTER = DateTimeFormatter
+            .ofPattern(DATE_ONLY_FORMAT);
+    private static final DateTimeFormatter TIME_ONLY_FORMATTER = DateTimeFormatter
+            .ofPattern(TIME_ONLY_FORMAT);
 
     public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(DATE_FORMAT)
             .withResolverStyle(ResolverStyle.STRICT);
-    public static final DateTimeFormatter DATE_STRING_FORMATTER = DateTimeFormatter.ofPattern(DATE_STRING_FORMAT);
+    public static final DateTimeFormatter DATE_STRING_FORMATTER = DateTimeFormatter
+            .ofPattern(DATE_STRING_FORMAT);
 
     public static final String MESSAGE_INCORRECT_SYNTAX = "It must be a valid date";
 
     private static final String MESSAGE_DURATION = "%1$s hr %2$s min";
 
-    public static final String MESSAGE_FREE_TIME_SLOT = StringUtil.SYSTEM_NEWLINE + "%1$s. %2$shrs to %3$shrs (%4$s)";
-
+    public static final String MESSAGE_FREE_TIME_SLOT = StringUtil.SYSTEM_NEWLINE
+            + "%1$s. %2$shrs to %3$shrs (%4$s)";
 
     /**
      * Extracts the new task's dateTime from the string arguments.
@@ -80,8 +83,8 @@ public class DateTimeUtil {
             return false;
         } else {
             LocalDateTime now = LocalDateTime.now();
-            LocalDateTime endThisWeek = now.with(TemporalAdjusters.next(DayOfWeek.MONDAY)).withHour(0).withMinute(0)
-                    .withSecond(0);
+            LocalDateTime endThisWeek = now.with(TemporalAdjusters.next(DayOfWeek.MONDAY))
+                    .withHour(0).withMinute(0).withSecond(0);
             return endDateTime.isAfter(now) && endDateTime.isBefore(endThisWeek);
         }
     }
@@ -152,8 +155,7 @@ public class DateTimeUtil {
      * @return whether task is an event
      */
     private static boolean isEvent(DateTime eventDateTime) {
-        if (eventDateTime.getStartDate() == null
-                || eventDateTime.getEndDate() == null) {
+        if (eventDateTime.getStartDate() == null || eventDateTime.getEndDate() == null) {
             return false;
         }
 
@@ -175,8 +177,7 @@ public class DateTimeUtil {
      * @return an ArrayList<DateTime> of free slots in a specified date
      * else return an empty ArrayList
      */
-    public static ArrayList<DateTime> getListOfFreeTimeSlotsInDate(
-            DateTime dateToCheck,
+    public static ArrayList<DateTime> getListOfFreeTimeSlotsInDate(DateTime dateToCheck,
             ArrayList<DateTime> listOfFilledTimeSlotsInDate) {
         ArrayList<DateTime> listOfFreeTimeSlots = new ArrayList<DateTime>();
         if (isEvent(dateToCheck)) {
@@ -191,8 +192,7 @@ public class DateTimeUtil {
                 }
 
                 if (startDateTime.isBefore(endDateTime)) {
-                    listOfFreeTimeSlots
-                            .add(new DateTime(startDateTime, endDateTime));
+                    listOfFreeTimeSlots.add(new DateTime(startDateTime, endDateTime));
                 }
 
                 if (startDateTime.isBefore(dateTime.getEndDate())) {
@@ -214,9 +214,9 @@ public class DateTimeUtil {
     public static String getDayAndDateString(DateTime dateTime) {
         StringBuilder sb = new StringBuilder();
 
-        sb.append(dateTime.getEndDate().getDayOfWeek()
-                .getDisplayName(TextStyle.FULL, Locale.ENGLISH)).append(",")
-                .append(dateTime.getEndDate().format(DATE_ONLY_FORMATTER));
+        sb.append(
+                dateTime.getEndDate().getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.ENGLISH))
+                .append(",").append(dateTime.getEndDate().format(DATE_ONLY_FORMATTER));
 
         return sb.toString();
     }
@@ -228,8 +228,7 @@ public class DateTimeUtil {
             ArrayList<DateTime> listOfFreeTimeSlotsInDate) {
         StringBuilder sb = new StringBuilder();
 
-        sb.append(getDayAndDateString(dateToCheck))
-                .append(":");
+        sb.append(getDayAndDateString(dateToCheck)).append(":");
 
         int counter = 1;
 
@@ -237,7 +236,8 @@ public class DateTimeUtil {
             sb.append(String.format(MESSAGE_FREE_TIME_SLOT, counter,
                     dateTime.getStartDate().format(TIME_ONLY_FORMATTER),
                     dateTime.getEndDate().format(TIME_ONLY_FORMATTER),
-                    getDurationBetweenTwoLocalDateTime(dateTime.getStartDate(), dateTime.getEndDate())));
+                    getDurationBetweenTwoLocalDateTime(dateTime.getStartDate(),
+                            dateTime.getEndDate())));
             counter++;
         }
 
@@ -250,8 +250,8 @@ public class DateTimeUtil {
      * @param endDateTime is not null
      * @return String duration between 2 dates
      */
-    public static String getDurationBetweenTwoLocalDateTime(
-            LocalDateTime startDateTime, LocalDateTime endDateTime) {
+    public static String getDurationBetweenTwoLocalDateTime(LocalDateTime startDateTime,
+            LocalDateTime endDateTime) {
         Duration duration = Duration.between(startDateTime, endDateTime);
         long hours = duration.toHours();
         long minutes = duration.toMinutes() % 60;
@@ -309,7 +309,8 @@ public class DateTimeUtil {
      * Modifies the recurDates based on the frequency for recurring tasks.
      * freqType cannot be null or None
      */
-    public static ArrayList<String> getRecurDates(String recurDate, String freqType, int noOfRecurr) {
+    public static ArrayList<String> getRecurDates(String recurDate, String freqType,
+            int noOfRecurr) {
         ArrayList<String> recurrDates = new ArrayList<String>();
 
         for (int i = 0; i < noOfRecurr; i++) {
@@ -328,6 +329,20 @@ public class DateTimeUtil {
      * @return LocalDateTime which is modified with new time
      */
     public static LocalDateTime setLocalTime(LocalDateTime dateTime, int hour, int min, int sec) {
-        return LocalDateTime.of(dateTime.getYear(), dateTime.getMonth(), dateTime.getDayOfMonth(), hour, min, sec);
+        return LocalDateTime.of(dateTime.getYear(), dateTime.getMonth(), dateTime.getDayOfMonth(),
+                hour, min, sec);
+    }
+
+    //@@author A0140036X
+    /**
+     * Generates a DateTime from start time and duration.
+     * @throws IllegalValueException
+     */
+    public static DateTime generateDateTimeFromDuration(Date start, int field, int value)
+            throws IllegalValueException {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(start);
+        calendar.add(field, value);
+        return new DateTime(start, calendar.getTime());
     }
 }

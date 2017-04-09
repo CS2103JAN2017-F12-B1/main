@@ -1,15 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
 <?import java.net.URL?>
-<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
+
 <AnchorPane fx:id="placeHolder" styleClass="anchor-pane-with-border" xmlns="http://javafx.com/javafx/8"
             xmlns:fx="http://javafx.com/fxml/1">
     <stylesheets>
         <URL value="@DarkTheme.css"/>
         <URL value="@Extensions.css"/>
     </stylesheets>
-    <AnchorPane fx:id="browser">
-        <TextArea fx:id="browserDisplay" editable="false" styleClass="browser-display"/>
-    </AnchorPane>
+	<GridPane fx:id="content" id="content" alignment="center" vgap="20">
+		<GridPane fx:id="innerContent" GridPane.halignment="CENTER" alignment="center" vgap="20">
+			<padding>
+		         <Insets left="30.0" right="30.0" top="10.0" bottom="20.0"/>
+		     </padding>
+		     <columnConstraints>
+			    <ColumnConstraints halignment="CENTER" />
+	 		</columnConstraints>	
+			<children>
+		    	<Label fx:id="nameLabel" text="Welcome to SavvyToDo!" GridPane.rowIndex="0"/>
+				<Label fx:id="dateLabel" styleClass="label-bright" text="" GridPane.rowIndex="1"/>
+				<Label fx:id="descriptionLabel" styleClass="label-bright" text="" GridPane.rowIndex="2"/>	
+	    	</children>
+	    </GridPane>
+    </GridPane>
 </AnchorPane>
