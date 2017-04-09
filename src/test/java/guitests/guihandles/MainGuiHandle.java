@@ -14,7 +14,11 @@ public class MainGuiHandle extends GuiHandle {
     }
 
     public TaskListPanelHandle getTaskListPanel() {
-        return new TaskListPanelHandle(guiRobot, primaryStage);
+        return new TaskListPanelHandle(guiRobot, primaryStage, TaskListPanelHandle.FLOATING_TASK_LIST_VIEW_ID);
+    }
+    
+    public TaskListPanelHandle getEventTaskListPanel() {
+        return new TaskListPanelHandle(guiRobot, primaryStage, TaskListPanelHandle.EVENT_TASK_LIST_VIEW_ID);
     }
 
     public ResultDisplayHandle getResultDisplay() {
