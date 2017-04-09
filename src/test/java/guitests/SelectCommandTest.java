@@ -1,5 +1,3 @@
-
-
 package guitests;
 
 import static org.junit.Assert.assertEquals;
@@ -80,7 +78,7 @@ public class SelectCommandTest extends TaskManagerGuiTest {
     private void assertNoEventTaskSelected() {
         assertEquals(eventTaskListPanel.getSelectedTasks().size(), 0);
     }
-    
+
     private void assertNoFloatingTaskSelected() {
         assertEquals(floatingTaskListPanel.getSelectedTasks().size(), 0);
     }

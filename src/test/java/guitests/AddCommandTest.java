@@ -57,12 +57,12 @@ public class AddCommandTest extends TaskManagerGuiTest {
         assertAddSuccess(taskToAdd, currentList);
         System.out.println(taskToAdd.getAddCommand());
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
-        
+
         //add duplicate floating task
         commandBox.runCommand(td.floating1.getAddCommand());
         assertResultMessage(AddCommand.MESSAGE_DUPLICATE_TASK);
         assertTrue(floatingTaskListPanel.isListMatching(currentList));
-        
+
         //add one more floating task
         taskToAdd = td.floating2;
         assertAddSuccess(taskToAdd, currentList);
@@ -72,13 +72,13 @@ public class AddCommandTest extends TaskManagerGuiTest {
     //@@author A0140016B
     private void assertAddSuccess(TestTask taskToAdd, TestTask... currentList) {
         commandBox.runCommand(taskToAdd.getAddCommand());
-        
+
         TaskListPanelHandle targetList;
-        if(taskToAdd.getType().getType() == TaskType.EVENT) {
-           targetList = eventTaskListPanel;
-           } else {
+        if (taskToAdd.getType().getType() == TaskType.EVENT) {
+            targetList = eventTaskListPanel;
+        } else {
             targetList = floatingTaskListPanel;
-           }
+        }
         //confirm the new card contains the right data
         TaskCardHandle addedCard = targetList.navigateToTask(taskToAdd.getName().name);
         assertMatching(taskToAdd, addedCard);

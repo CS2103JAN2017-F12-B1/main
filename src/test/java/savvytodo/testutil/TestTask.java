@@ -142,7 +142,7 @@ public class TestTask implements ReadOnlyTask {
         sb.append("add " + this.getName().name + " ");
         sb.append("l/" + this.getLocation().value + " ");
         sb.append("p/" + this.getPriority().value + " ");
-        if(!isFloating()) {
+        if (!isFloating()) {
             sb.append("dt/" + this.getDateTime().startValue + DateTime.DATETIME_STRING_CONNECTOR
                     + this.getDateTime().endValue + " ");
         }

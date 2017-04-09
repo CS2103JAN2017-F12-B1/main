@@ -21,7 +21,7 @@ import savvytodo.model.task.UniqueTaskList;
 public class TypicalTestTasks {
 
     public TestTask assignment, appointment, birthday, meeting, test, presentation, project,
-    discussion, interview, job, floating1, floating2, floating3;
+        discussion, interview, job, floating1, floating2, floating3;
 
     public TypicalTestTasks() {
         try {
