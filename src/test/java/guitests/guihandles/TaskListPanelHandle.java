@@ -7,7 +7,6 @@ import java.util.Optional;
 import java.util.Set;
 
 import guitests.GuiRobot;
-
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.control.ListView;
@@ -62,19 +61,23 @@ public class TaskListPanelHandle extends GuiHandle {
     public boolean isListMatching(int startPosition, boolean ignoreOrder, ReadOnlyTask... tasks)
             throws IllegalArgumentException {
         if (tasks.length + startPosition != getListView().getItems().size()) {
+            TestUtil.printTasks(getListView().getItems().toArray(new ReadOnlyTask[]{}));
+            System.out.println();
+            TestUtil.printTasks(tasks);
+
             throw new IllegalArgumentException(
-                    "List size mismatched\n" + "Expected " + (getListView().getItems().size() - 1) + " tasks, got "
+                    "List size mismatched\n" + "Expected " + (getListView().getItems().size()) + " tasks, got "
                             + (tasks.length + startPosition) + " instead");
         }
         if (!ignoreOrder) {
             assertTrue(this.containsInOrder(startPosition, tasks));
-        }
-        for (int i = 0; i < tasks.length; i++) {
-            final int scrollTo = i + startPosition;
-            guiRobot.interact(() -> getListView().scrollTo(scrollTo));
-            guiRobot.sleep(1);
-            if (!TestUtil.compareCardAndTask(getTaskCardHandle(startPosition + i), tasks[i])) {
-                return false;
+            for (int i = 0; i < tasks.length; i++) {
+                final int scrollTo = i + startPosition;
+                guiRobot.interact(() -> getListView().scrollTo(scrollTo));
+                guiRobot.sleep(1);
+                if (!TestUtil.compareCardAndTask(getTaskCardHandle(startPosition + i), tasks[i])) {
+                    return false;
+                }
             }
         }
         return true;
@@ -87,7 +90,7 @@ public class TaskListPanelHandle extends GuiHandle {
      * @param tasks A list of task in the correct order.
      */
     public boolean isListMatching(int startPosition, ReadOnlyTask... tasks) {
-        return isListMatching(0, true, tasks);
+        return isListMatching(0, false, tasks);
     }
 
     //@@author A0140036X
@@ -97,7 +100,7 @@ public class TaskListPanelHandle extends GuiHandle {
      * @param tasks A list of task in the correct order.
      */
     public boolean isListMatchingIgnoreOrder(ReadOnlyTask... tasks) {
-        return isListMatching(0, false, tasks);
+        return isListMatching(0, true, tasks);
     }
 
     /**
