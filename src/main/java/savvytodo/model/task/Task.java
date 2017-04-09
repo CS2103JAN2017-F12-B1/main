@@ -21,9 +21,9 @@ public class Task implements ReadOnlyTask {
     private Recurrence recurrence;
     private Status isCompleted;
     private TimeStamp timeStamp;
+    private Type type;
 
     private UniqueCategoryList categories;
-    private Type type;
 
     /**
      * Every field must be present and not null.

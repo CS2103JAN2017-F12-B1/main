@@ -313,6 +313,11 @@ public class ModelManager extends ComponentManager implements Model {
     }
     //@@author
     //@@author A0140016B
+    @Override
+    public ObservableList<ReadOnlyTask> getFilteredTaskList() {
+        return taskManager.getTaskList();
+    }
+    
     public void updateFilteredTaskListByDateTime(DateTime dateTime) {
         updateFilteredTaskList(new PredicateExpression(new DateTimeQualifier(dateTime)));
     }

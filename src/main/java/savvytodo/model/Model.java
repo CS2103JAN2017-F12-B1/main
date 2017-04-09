@@ -78,4 +78,7 @@ public interface Model {
     /** Record a mark or unmark for undo*/
     void recordMark(int index);
 
+    //@@author A0140016B
+    ObservableList<ReadOnlyTask> getFilteredTaskList();
+
 }
