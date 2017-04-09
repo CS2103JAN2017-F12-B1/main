@@ -68,7 +68,7 @@ public class TaskListPanelHandle extends GuiHandle {
             }
         }
 
-        return new ArrayList<ReadOnlyTask>();
+        return list;
     }
     //@@author A0140016B
 
