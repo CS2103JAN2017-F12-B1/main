@@ -16,6 +16,8 @@ public interface ReadOnlyTask {
     DateTime getDateTime();
     Recurrence getRecurrence();
     Status isCompleted();
+    TimeStamp getTimeStamp();
+
 
     /**
      * The returned CategoryList is a deep copy of the internal CategoryList,

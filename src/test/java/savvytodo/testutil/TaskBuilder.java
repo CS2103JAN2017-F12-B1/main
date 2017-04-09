@@ -72,6 +72,11 @@ public class TaskBuilder {
         return this;
     }
 
+    public TaskBuilder withTimeStamp() {
+        this.task.setTimeStamp();
+        return this;
+    }
+
     public TestTask build() {
         return this.task;
     }

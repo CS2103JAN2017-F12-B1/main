@@ -1,7 +1,6 @@
 package savvytodo.logic.commands;
 
 import java.time.DateTimeException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -92,8 +91,6 @@ public class AddCommand extends Command {
             );
 
             toAdd.setStatus(new Status());
-            toAdd.getDateTime().setAdd(LocalDateTime.now());
-
             toAddList.add(toAdd);
         }
     }

@@ -17,11 +17,9 @@ public class DateTime implements Comparable<DateTime> {
 
     public String startValue;
     public String endValue;
-    public String timestamp;
 
     private LocalDateTime start;
     private LocalDateTime end;
-    private LocalDateTime add;
 
     public static final String MESSAGE_DATETIME_CONSTRAINTS = "Start date/time should not be after End date/time";
 
@@ -62,7 +60,6 @@ public class DateTime implements Comparable<DateTime> {
         } else {
             this.startValue = startDateTime;
         }
-        this.setDateTimeStamp();
     }
 
     public DateTime(LocalDateTime startDateTime, LocalDateTime endDateTime) {
@@ -71,7 +68,6 @@ public class DateTime implements Comparable<DateTime> {
         this.end = endDateTime;
         this.endValue = this.end.format(DateTimeUtil.DATE_STRING_FORMATTER);
         this.startValue = this.start.format(DateTimeUtil.DATE_STRING_FORMATTER);
-        this.setDateTimeStamp();
     }
 
     /**
@@ -82,17 +78,6 @@ public class DateTime implements Comparable<DateTime> {
      */
     public DateTime(String[] dateTime) throws DateTimeException, IllegalValueException {
         this(dateTime[0], dateTime[1]);
-    }
-
-    /**
-     * Set timestamp if exists
-     */
-    private void setDateTimeStamp() {
-        if (timestamp == null || timestamp.isEmpty()) {
-            this.setAdd(LocalDateTime.now());
-        } else {
-            this.setAdd(LocalDateTime.parse(timestamp));
-        }
     }
 
     /**
@@ -166,10 +151,6 @@ public class DateTime implements Comparable<DateTime> {
         return end;
     }
 
-    public LocalDateTime getDateTimeAdded() {
-        return add;
-    }
-
     /**
      * Set method for start
      * @param LocalDateTime
@@ -186,18 +167,6 @@ public class DateTime implements Comparable<DateTime> {
         this.end = endDateTime;
     }
 
-    /**
-     * Set method for add
-     * @param LocalDateTime
-     */
-    public void setAdd(LocalDateTime DateTimeAdded) {
-        timestamp = DateTimeAdded.toString();
-        this.add = DateTimeAdded;
-    }
-
-    /**
-     * Override the hashcode to remove the timestamp comparison
-     */
     @Override
     public int hashCode() {
         return (this.start.hashCode() + this.end.hashCode());
