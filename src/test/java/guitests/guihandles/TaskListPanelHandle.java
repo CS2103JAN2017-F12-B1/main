@@ -2,14 +2,10 @@ package guitests.guihandles;
 
 import static org.junit.Assert.assertTrue;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-
 import guitests.GuiRobot;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.control.ListView;
@@ -107,7 +103,7 @@ public class TaskListPanelHandle extends GuiHandle {
     }
 
     public TaskCardHandle navigateToTask(String name) {
-        guiRobot.sleep(100); //Allow a bit of time for the list to be updated
+        guiRobot.sleep(3000); //Allow a bit of time for the list to be updated
         final Optional<ReadOnlyTask> task = getListView().getItems().stream().filter(p -> p.getName().name.equals(name))
                 .findAny();
         if (!task.isPresent()) {

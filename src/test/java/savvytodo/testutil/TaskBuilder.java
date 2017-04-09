@@ -10,6 +10,7 @@ import savvytodo.model.task.Name;
 import savvytodo.model.task.Priority;
 import savvytodo.model.task.Recurrence;
 import savvytodo.model.task.Status;
+import savvytodo.model.task.Type;
 
 /**
  * @author A0140016B
@@ -76,7 +77,10 @@ public class TaskBuilder {
         this.task.setTimeStamp();
         return this;
     }
-
+    public TaskBuilder withType(Type type) {
+        this.task.setType(type);
+        return this;
+    }
     public TestTask build() {
         return this.task;
     }

@@ -82,6 +82,22 @@
         <status>false</status>
         <timeStamp/>
     </tasks>
+    <tasks>
+        <name>my new floating task</name>
+        <priority>Medium</priority>
+        <description>No description given.</description>
+        <location>Location has not been set.</location>
+        <dateTime>
+            <startValue></startValue>
+            <endValue></endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <timeStamp/>
+    </tasks>
     <categories>project</categories>
     <categories>family</categories>
     <categories>meetup</categories>

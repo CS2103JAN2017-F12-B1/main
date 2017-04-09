@@ -46,6 +46,7 @@ public class TestTask implements ReadOnlyTask {
         this.categories = taskToCopy.getCategories();
         this.isCompleted = taskToCopy.isCompleted();
         this.timeStamp = taskToCopy.getTimeStamp();
+        this.type = taskToCopy.getType();
     }
 
     public void setName(Name name) {

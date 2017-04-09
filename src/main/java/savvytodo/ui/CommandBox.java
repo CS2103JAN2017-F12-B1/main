@@ -2,6 +2,7 @@ package savvytodo.ui;
 
 import java.util.logging.Logger;
 
+import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 
 import javafx.fxml.FXML;
@@ -20,20 +21,19 @@ public class CommandBox extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
     private static final String FXML = "CommandBox.fxml";
     public static final String ERROR_STYLE_CLASS = "error";
-
+    //@@author A0147827U
     private Logic logic;
-
+    private AutoCompletionBinding<String> binding; 
     @FXML
     private TextField commandTextField;
 
-    //@@author A0147827U
     public CommandBox(AnchorPane commandBoxPlaceholder, Logic logic) {
         super(FXML);
         this.logic = logic;
-        TextFields.bindAutoCompletion(commandTextField, AutoCompleteDictionaryFactory.getDictionary());
+        binding = TextFields.bindAutoCompletion(commandTextField, AutoCompleteDictionaryFactory.getDictionary());
         addToPlaceholder(commandBoxPlaceholder);
     }
-
+    //@@author
     private void addToPlaceholder(AnchorPane placeHolderPane) {
         SplitPane.setResizableWithParent(placeHolderPane, false);
         placeHolderPane.getChildren().add(commandTextField);
@@ -105,5 +105,18 @@ public class CommandBox extends UiPart<Region> {
     public void setLogic(Logic logic) {
         this.logic = logic;
     }
-
+    //@@author A0147827U
+    /**
+     * Disables the auto complete feature
+     */
+    public void disableAutoComplete() {
+        binding.dispose();
+    }
+    /**
+     * Enables the auto complete feature
+     */    
+    public void enableAutoComplete() {
+        binding = TextFields.bindAutoCompletion(commandTextField, AutoCompleteDictionaryFactory.getDictionary());
+    }
+    //@@author
 }
