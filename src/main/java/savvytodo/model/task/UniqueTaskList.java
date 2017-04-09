@@ -1,5 +1,6 @@
 package savvytodo.model.task;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -45,11 +46,11 @@ public class UniqueTaskList implements Iterable<Task> {
     public void add(Task toAdd) throws DuplicateTaskException {
         assert toAdd != null;
         if (contains(toAdd)) {
-            throw new DuplicateTaskException();
+            throw new DuplicateTaskException(toAdd);
         }
         internalList.add(toAdd);
-        internalList.sort((ReadOnlyTask task1, ReadOnlyTask task2) -> task1.getTimeStamp().getDateTimeAdded().compareTo(
-                task2.getTimeStamp().getDateTimeAdded()));
+        internalList.sort((ReadOnlyTask task1, ReadOnlyTask task2) -> task1.getTimeStamp()
+                .getDateTimeAdded().compareTo(task2.getTimeStamp().getDateTimeAdded()));
     }
 
     /**
@@ -64,7 +65,7 @@ public class UniqueTaskList implements Iterable<Task> {
 
         Task taskToUpdate = internalList.get(index);
         if (!taskToUpdate.equals(editedTask) && internalList.contains(editedTask)) {
-            throw new DuplicateTaskException();
+            throw new DuplicateTaskException(editedTask);
         }
 
         taskToUpdate.resetData(editedTask);
@@ -113,8 +114,7 @@ public class UniqueTaskList implements Iterable<Task> {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof UniqueTaskList // instanceof handles nulls
-                && this.internalList.equals(
-                ((UniqueTaskList) other).internalList));
+                        && this.internalList.equals(((UniqueTaskList) other).internalList));
     }
 
     @Override
@@ -122,12 +122,23 @@ public class UniqueTaskList implements Iterable<Task> {
         return internalList.hashCode();
     }
 
+    //@@author A0140036X
     /**
      * Signals that an operation would have violated the 'no duplicates' property of the list.
      */
     public static class DuplicateTaskException extends DuplicateDataException {
-        protected DuplicateTaskException() {
+        private final ReadOnlyTask toAdd;
+
+        //@@author A01400036X
+        /** Returns attempted task **/
+        public ReadOnlyTask getTask() {
+            return toAdd;
+        }
+
+        //@@author A0140036X
+        protected DuplicateTaskException(ReadOnlyTask toAddTask) {
             super("Operation would result in duplicate tasks");
+            this.toAdd = toAddTask;
         }
     }
 
@@ -135,6 +146,7 @@ public class UniqueTaskList implements Iterable<Task> {
      * Signals that an operation targeting a specified task in the list would fail because
      * there is no such matching task in the list.
      */
-    public static class TaskNotFoundException extends Exception {}
+    public static class TaskNotFoundException extends Exception {
+    }
 
 }
