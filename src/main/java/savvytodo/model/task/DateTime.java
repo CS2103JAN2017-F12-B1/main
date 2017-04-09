@@ -31,7 +31,8 @@ public class DateTime implements Comparable<DateTime> {
 
     public static final String DATETIME_STRING_CONNECTOR = " = ";
     private static final String DATETIME_STRING_TO_STRING_CONNECTOR = " ~ ";
-    public static final String[] DEFAULT_VALUES = {StringUtil.EMPTY_STRING, StringUtil.EMPTY_STRING};
+    public static final String[] DEFAULT_VALUES = { StringUtil.EMPTY_STRING,
+            StringUtil.EMPTY_STRING };
 
     /**
      * Default constructor
@@ -115,9 +116,12 @@ public class DateTime implements Comparable<DateTime> {
 
     @Override
     public boolean equals(Object other) {
-        if (other == null) return false;
-        if (other == this) return true;
-        if (!(other instanceof DateTime)) return false;
+        if (other == null)
+            return false;
+        if (other == this)
+            return true;
+        if (!(other instanceof DateTime))
+            return false;
         DateTime o = (DateTime) other;
 
         if (this.getEndDate() == null && o.getEndDate() == null) {
@@ -125,9 +129,10 @@ public class DateTime implements Comparable<DateTime> {
         } else if ((this.getStartDate() == null && o.getStartDate() == null)
                 && (this.getEndDate() != null && o.getEndDate() != null)) {
             return (this.getEndDate().equals(o.getEndDate()));
-        } else if (this.getStartDate() != null && o.getStartDate() != null && this.getEndDate() != null
-                && o.getEndDate() != null) {
-            return (this.getStartDate().equals(o.getStartDate()) && this.getEndDate().equals(o.getEndDate()));
+        } else if (this.getStartDate() != null && o.getStartDate() != null
+                && this.getEndDate() != null && o.getEndDate() != null) {
+            return (this.getStartDate().equals(o.getStartDate())
+                    && this.getEndDate().equals(o.getEndDate()));
         }
 
         return false;
@@ -206,6 +211,11 @@ public class DateTime implements Comparable<DateTime> {
     public void setAdd(LocalDateTime dateTimeAdded) {
         timestamp = dateTimeAdded.toString();
         this.add = dateTimeAdded;
+    }
+
+    @Override
+    public int hashCode() {
+        return (this.start.hashCode() + this.end.hashCode());
     }
 
 }
