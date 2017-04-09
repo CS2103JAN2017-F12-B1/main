@@ -310,12 +310,12 @@
 
 /*@@author A0140036X */
 #nameLabel {
-	-fx-font-size: 1.2em;
+	-fx-font-size: 2em;
     -fx-text-fill: white !important;
     -fx-opacity: 1;
 }
 
-/* @@author A0140016B */
+/*@@author A0140016B */
 #categories {
     -fx-hgap: 7;
     -fx-vgap: 3;
