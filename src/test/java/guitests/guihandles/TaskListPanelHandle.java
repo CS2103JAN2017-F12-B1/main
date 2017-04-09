@@ -52,13 +52,16 @@ public class TaskListPanelHandle extends GuiHandle {
      * @param startPosition The starting position of the sub list.
      * @param tasks A list of task in the correct order.
      */
-    public boolean isListMatching(int startPosition, ReadOnlyTask... tasks) throws IllegalArgumentException {
+    public boolean isListMatching(int startPosition, boolean ignoreOrder, ReadOnlyTask... tasks)
+            throws IllegalArgumentException {
         if (tasks.length + startPosition != getListView().getItems().size()) {
             throw new IllegalArgumentException(
                     "List size mismatched\n" + "Expected " + (getListView().getItems().size() - 1) + " tasks, got "
                             + (tasks.length + startPosition) + " instead");
         }
-        assertTrue(this.containsInOrder(startPosition, tasks));
+        if (!ignoreOrder) {
+            assertTrue(this.containsInOrder(startPosition, tasks));
+        }
         for (int i = 0; i < tasks.length; i++) {
             final int scrollTo = i + startPosition;
             guiRobot.interact(() -> getListView().scrollTo(scrollTo));
@@ -68,6 +71,26 @@ public class TaskListPanelHandle extends GuiHandle {
             }
         }
         return true;
+    }
+
+    //@@author A0140036X
+    /**
+     * Returns true if the list is showing the task details correctly in correct order.
+     * @param startPosition The starting position of the sub list.
+     * @param tasks A list of task in the correct order.
+     */
+    public boolean isListMatching(int startPosition, ReadOnlyTask... tasks) {
+        return isListMatching(0, true, tasks);
+    }
+
+    //@@author A0140036X
+    /**
+     * Returns true if the list is showing the task details correctly.
+     * @param startPosition The starting position of the sub list.
+     * @param tasks A list of task in the correct order.
+     */
+    public boolean isListMatchingIgnoreOrder(ReadOnlyTask... tasks) {
+        return isListMatching(0, false, tasks);
     }
 
     /**
