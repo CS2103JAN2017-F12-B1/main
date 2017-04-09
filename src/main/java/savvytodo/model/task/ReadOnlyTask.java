@@ -16,6 +16,8 @@ public interface ReadOnlyTask {
     DateTime getDateTime();
     Recurrence getRecurrence();
     Status isCompleted();
+    TimeStamp getTimeStamp();
+
 
     /**
      * The returned CategoryList is a deep copy of the internal CategoryList,
@@ -32,8 +34,8 @@ public interface ReadOnlyTask {
                 && other.getName().equals(this.getName()) // state checks here onwards
                 && other.getPriority().equals(this.getPriority())
                 && other.isCompleted().equals(this.isCompleted())
-                && other.getDateTime().equals(this.getDateTime())
                 && other.getDescription().equals(this.getDescription())
+                && other.getDateTime().equals(this.getDateTime())
                 && other.getLocation().equals(this.getLocation()))
                 && other.isCompleted().equals(this.isCompleted());
     }

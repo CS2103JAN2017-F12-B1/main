@@ -14,6 +14,7 @@
             <type>None</type>
         </recurrence>
         <status>false</status>
+        <timeStamp/>
         <categorized>project</categorized>
     </tasks>
     <tasks>
@@ -30,6 +31,7 @@
             <type>None</type>
         </recurrence>
         <status>false</status>
+        <timeStamp/>
         <categorized>family</categorized>
         <categorized>meetup</categorized>
     </tasks>
@@ -47,6 +49,7 @@
             <type>None</type>
         </recurrence>
         <status>false</status>
+        <timeStamp/>
         <categorized>project</categorized>
     </tasks>
     <tasks>
@@ -63,6 +66,7 @@
             <type>None</type>
         </recurrence>
         <status>false</status>
+        <timeStamp/>
         <categorized>family</categorized>
     </tasks>
     <tasks>
@@ -79,6 +83,7 @@
             <type>None</type>
         </recurrence>
         <status>false</status>
+        <timeStamp/>
         <categorized>Driving</categorized>
     </tasks>
     <tasks>
@@ -95,6 +100,7 @@
             <type>None</type>
         </recurrence>
         <status>false</status>
+        <timeStamp/>
         <categorized>test</categorized>
     </tasks>
     <tasks>
@@ -111,6 +117,7 @@
             <type>None</type>
         </recurrence>
         <status>false</status>
+        <timeStamp/>
     </tasks>
     <categories>project</categories>
     <categories>family</categories>
