@@ -22,7 +22,7 @@ public class RedoCommand extends Command {
             model.redo();
             return new CommandResult(MESSAGE_SUCCESS);
         } catch (RedoFailureException e) {
-            throw new CommandException(MESSAGE_FAILURE);
+            throw new CommandException(MESSAGE_FAILURE + ", " + e.getMessage());
         }
     }
 }

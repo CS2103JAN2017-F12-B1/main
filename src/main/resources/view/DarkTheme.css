@@ -9,14 +9,16 @@
     -fx-text-fill: #555555;
     -fx-opacity: 0.9;
 }
-
-.label-bright {
-    -fx-font-size: 11pt;
+/*@@author A0147827U */
+.label-task-type {
+    -fx-font-size: 20pt;
     -fx-font-family: "Segoe UI Semibold";
-    -fx-text-fill: white;
+    -fx-text-fill: #1d1d1d;
     -fx-opacity: 1;
-}
+    -fx-label-padding: 0 0 15 10;
 
+}
+/*@@author */
 .label-header {
     -fx-font-size: 32pt;
     -fx-font-family: "Segoe UI Light";
@@ -86,7 +88,19 @@
     -fx-border-width: 1;
     -fx-background-color: derive(#146f77, 20%);
 }
+/*@@author A0147827U */
+.eventTaskList {
+	-fx-border-radius: 1;
+    -fx-border-width: 1;
+    -fx-background-color: derive(#7ec9e5, 20%);
+}
 
+.floatingTaskList {
+	-fx-border-radius: 1;
+    -fx-border-width: 1;
+    -fx-background-color: derive(#7ee5c9, 20%);
+}
+/*@@author */
 .list-cell {
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
@@ -116,7 +130,13 @@
      -fx-border-color: derive(#146f77, 10%);
      -fx-border-top-width: 1px;
 }
-
+/*@@author A0147827U */
+.browser-pane {
+	 -fx-background-color: derive(#e57e7e, 20%);
+     -fx-border-color: derive(#1d1d1d, 10%);
+     -fx-border-top-width: 1px;
+}
+/*@@author */
 .status-bar {
     -fx-background-color: derive(#146f77, 20%);
     -fx-text-fill: black;

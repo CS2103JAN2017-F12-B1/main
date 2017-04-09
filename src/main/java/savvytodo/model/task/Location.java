@@ -6,10 +6,10 @@ import savvytodo.commons.exceptions.IllegalValueException;
  * Represents a Task's location in the task manager. Guarantees: immutable; is
  * valid as declared in {@link #isValidLocation(String)}
  */
-public class Location {
+public class Location implements Comparable<Location> {
 
-    public static final String MESSAGE_LOCATION_CONSTRAINTS =
-            "Task location can take any values, and it should not be blank";
+    public static final String MESSAGE_LOCATION_CONSTRAINTS = "Task location can take any values "
+            + ", and it should not be blank";
     public static final String LOCATION_DEFAULT_VALUES = "Location has not been set.";
 
     /*
@@ -52,12 +52,18 @@ public class Location {
         return other == this // short circuit if same object
                 || (other instanceof Location // instanceof handles nulls
                         && this.value.equals(((Location) other).value)); // state
-                                                                         // check
+        // check
     }
 
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    //@@author A0140036X
+    @Override
+    public int compareTo(Location o) {
+        return toString().compareTo(o.toString());
     }
 
 }

@@ -135,13 +135,13 @@ public class EditCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand("edit " + filteredTaskListIndex + " " + detailsToEdit);
 
         // confirm the new card contains the right data
-        TaskCardHandle editedCard = taskListPanel.navigateToTask(editedTask.getName().name);
+        TaskCardHandle editedCard = eventTaskListPanel.navigateToTask(editedTask.getName().name);
         assertMatching(editedTask, editedCard);
 
         // confirm the list now contains all previous tasks plus the task with
         // updated details
         expectedTasksList[taskManagerIndex - 1] = editedTask;
-        assertTrue(taskListPanel.isListMatching(expectedTasksList));
+        assertTrue(eventTaskListPanel.isListMatching(expectedTasksList));
         assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask));
     }
 }

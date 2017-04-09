@@ -7,23 +7,25 @@ import java.util.NoSuchElementException;
 import savvytodo.logic.commands.Command;
 import savvytodo.logic.commands.IncorrectCommand;
 import savvytodo.logic.commands.LoadCommand;
+import savvytodo.logic.commands.SaveCommand;
 
+//@@author A0140036X
 /**
- * @author A0147827U
- * Parses input arguments and creates a new LoadCommand object
+ * @author A0140036X
+ * Parses input arguments and creates a new SaveCommand object
  */
-public class LoadCommandParser {
+public class SaveCommandParser {
 
-    //@@author A0147827U
+    //@@author A0140036X
     /**
-     * Parses the given {@code String} of arguments in the context of the LoadCommand
-     * and returns an LoadCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the SaveCommand
+     * and returns an SaveCommand object for execution.
      */
     public Command parse(String args) {
         ArgumentTokenizer argsTokenizer = new ArgumentTokenizer();
         argsTokenizer.tokenize(args);
         try {
-            return new LoadCommand(argsTokenizer.getPreamble().get());
+            return new SaveCommand(argsTokenizer.getPreamble().get());
         } catch (NoSuchElementException nsee) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LoadCommand.MESSAGE_USAGE));
         }

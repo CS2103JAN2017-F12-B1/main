@@ -9,7 +9,7 @@ import savvytodo.commons.exceptions.IllegalValueException;
  * Represents Task's Recurrence in the task manager Guarantees: immutable;
  * is valid as declared in {@link #isValidRecurrence(String, int)} *
  */
-public class Recurrence {
+public class Recurrence implements Comparable<Recurrence> {
 
     /**
      * @author A0140016B
@@ -18,11 +18,7 @@ public class Recurrence {
      * Defaults to none if it is a one-time task
      */
     public enum Type {
-        None,
-        Daily,
-        Weekly,
-        Monthly,
-        Yearly;
+        None, Daily, Weekly, Monthly, Yearly;
 
         /**
          * Get type enum object from it's name, ignoring cases
@@ -137,6 +133,12 @@ public class Recurrence {
     @Override
     public String toString() {
         return this.type.toString() + "(" + this.occurences + ")";
+    }
+
+    //@@author A0140036X
+    @Override
+    public int compareTo(Recurrence o) {
+        return toString().compareTo(o.toString());
     }
 
 }
