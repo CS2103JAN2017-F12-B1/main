@@ -153,15 +153,21 @@ public class UnmodifiableObservableList<E> implements ObservableList<E> {
         return new Iterator<E>() {
             private final Iterator<? extends E> i = backingList.iterator();
 
+            @Override
             public final boolean hasNext() {
                 return i.hasNext();
             }
+
+            @Override
             public final E next() {
                 return i.next();
             }
+
+            @Override
             public final void remove() {
                 throw new UnsupportedOperationException();
             }
+
             @Override
             public final void forEachRemaining(Consumer<? super E> action) {
                 // Use backing collection version
@@ -210,7 +216,6 @@ public class UnmodifiableObservableList<E> implements ObservableList<E> {
         throw new UnsupportedOperationException(MUTATION_OP_EXCEPTION_MESSAGE);
     }
 
-
     @Override
     public final boolean equals(Object o) {
         return o == this || backingList.equals(o);
@@ -220,7 +225,6 @@ public class UnmodifiableObservableList<E> implements ObservableList<E> {
     public final int hashCode() {
         return backingList.hashCode();
     }
-
 
     @Override
     public final E get(int index) {
@@ -253,31 +257,47 @@ public class UnmodifiableObservableList<E> implements ObservableList<E> {
         return new ListIterator<E>() {
             private final ListIterator<? extends E> i = backingList.listIterator(index);
 
+            @Override
             public final boolean hasNext() {
                 return i.hasNext();
             }
+
+            @Override
             public final E next() {
                 return i.next();
             }
+
+            @Override
             public final boolean hasPrevious() {
                 return i.hasPrevious();
             }
+
+            @Override
             public final E previous() {
                 return i.previous();
             }
+
+            @Override
             public final int nextIndex() {
                 return i.nextIndex();
             }
+
+            @Override
             public final int previousIndex() {
                 return i.previousIndex();
             }
 
+            @Override
             public final void remove() {
                 throw new UnsupportedOperationException(MUTATION_OP_EXCEPTION_MESSAGE);
             }
+
+            @Override
             public final void set(E e) {
                 throw new UnsupportedOperationException(MUTATION_OP_EXCEPTION_MESSAGE);
             }
+
+            @Override
             public final void add(E e) {
                 throw new UnsupportedOperationException(MUTATION_OP_EXCEPTION_MESSAGE);
             }
