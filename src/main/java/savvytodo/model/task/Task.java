@@ -46,7 +46,8 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
     }
 
     public Task(Name name, Priority priority, Description description, Location location,
-            UniqueCategoryList categories, DateTime dateTime, Recurrence recurrence, TimeStamp timeStamp) {
+            UniqueCategoryList categories, DateTime dateTime, Recurrence recurrence,
+            TimeStamp timeStamp) {
         assert !CollectionUtil.isAnyNull(name, priority, description, location, categories,
                 dateTime, recurrence, timeStamp);
         this.name = name;
@@ -61,10 +62,10 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
     }
 
     public Task(Name name, Priority priority, Description description, Location location,
-            UniqueCategoryList categories, DateTime dateTime, Recurrence recurrence,
-            Status status, TimeStamp timeStamp) {
-        assert !CollectionUtil.isAnyNull(name, priority, description, location,
-                categories, dateTime, recurrence, status);
+            UniqueCategoryList categories, DateTime dateTime, Recurrence recurrence, Status status,
+            TimeStamp timeStamp) {
+        assert !CollectionUtil.isAnyNull(name, priority, description, location, categories,
+                dateTime, recurrence, status);
         this.name = name;
         this.priority = priority;
         this.description = description;
@@ -85,7 +86,6 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
                 source.getCategories(), source.getDateTime(), source.getRecurrence(),
                 source.isCompleted(), source.getTimeStamp());
     }
-
 
     public void setName(Name name) {
         assert name != null;
@@ -191,7 +191,7 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof ReadOnlyTask // instanceof handles nulls
-                && this.isSameStateAs((ReadOnlyTask) other));
+                        && this.isSameStateAs((ReadOnlyTask) other));
     }
 
     @Override
@@ -228,6 +228,7 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
     public void setType(Type type) {
         this.type = type;
     }
+
     private void updateType() {
         if (isEvent()) {
             type.setType(TaskType.EVENT);
@@ -291,7 +292,10 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
      * Checks if two lists of tasks are the same.
      */
     public static boolean areTasksSame(Task[] t1, Task[] t2) {
-        if (t1.length != t2.length) {
+        if (t1 == null && t2 == null) {
+            return true;
+        }
+        if (t1 == null || t2 == null || t1.length != t2.length) {
             return false;
         }
         Arrays.sort(t1);
