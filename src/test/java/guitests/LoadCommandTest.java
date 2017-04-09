@@ -3,9 +3,12 @@ package guitests;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
+import java.util.Date;
 
 import org.junit.Test;
 
+import savvytodo.logic.commands.ClearCommand;
+import savvytodo.logic.commands.LoadCommand;
 import savvytodo.model.TaskManager;
 import savvytodo.model.task.ReadOnlyTask;
 import savvytodo.model.task.UniqueTaskList.DuplicateTaskException;
@@ -80,7 +83,7 @@ public class LoadCommandTest extends StorageTest {
     /**
      * returns a valid file path for storage file that does not exist.
      */
-    private String getNewTestStorageFileName() {
+    protected String getNewTestStorageFileName() {
         String testTaskManagerFileName = new Date().getTime() + "_taskmanager.xml";
         return TestUtil.getFilePathInSandboxFolder(testTaskManagerFileName);
     }
@@ -94,7 +97,7 @@ public class LoadCommandTest extends StorageTest {
      * @param testTaskManagerFilePath path of task manager file to load
      * @param tasks tasks to check against those loaded from file
      */
-    private void assertLoad(String testTaskManagerFilePath, ReadOnlyTask[] tasks) {
+    protected void assertLoad(String testTaskManagerFilePath, ReadOnlyTask[] tasks) {
         loadFromFilePath(testTaskManagerFilePath);
         assertTrue(eventTaskListPanel.isListMatching(tasks));
         assertResultMessage(LoadCommand.getSuccessMessage(testTaskManagerFilePath));
@@ -102,7 +105,7 @@ public class LoadCommandTest extends StorageTest {
 
     //@@author A0140036X
     /** Tests clear command. */
-    private void assertClear() {
+    protected void assertClear() {
         commandBox.runCommand(ClearCommand.COMMAND_WORD);
         assertListSize(0);
         assertResultMessage(ClearCommand.MESSAGE_SUCCESS);
@@ -114,7 +117,7 @@ public class LoadCommandTest extends StorageTest {
      * @param currentList list to add task to
      * @return new list with added task
      */
-    private TestTask[] assertAdd(TestTask[] currentList) {
+    protected TestTask[] assertAdd(TestTask[] currentList) {
         TestTask taskToAdd = td.getTypicalTasks()[0];
         TestTask[] expectedList = TestUtil.addTasksToList(currentList, taskToAdd);
         commandBox.runCommand(taskToAdd.getAddCommand());
@@ -126,7 +129,7 @@ public class LoadCommandTest extends StorageTest {
     /**
      * Enters load command into ui
      */
-    private void loadFromFilePath(String filePath) {
+    protected void loadFromFilePath(String filePath) {
         String cmd = "load " + filePath;
         commandBox.runCommand(cmd);
     }

@@ -94,6 +94,16 @@ public class Priority implements Comparable<Priority> {
         return val;
     }
 
+    public static String getPriorityValue(String priority) {
+        for (Level level : Level.values()) {
+            if (level.toString().substring(0, 1).equalsIgnoreCase(priority)) {
+                return level.toString();
+            }
+        }
+
+        return Level.Medium.toString();
+    }
+
     /**
      * Returns true if a given string is a valid task priority.
      */

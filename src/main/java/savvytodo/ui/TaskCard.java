@@ -7,6 +7,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import savvytodo.commons.util.StringUtil;
 import savvytodo.logic.parser.CliSyntax;
 import savvytodo.model.task.ReadOnlyTask;
 import savvytodo.model.task.Status;
@@ -22,9 +23,9 @@ public class TaskCard extends UiPart<Region> {
     private static final String LABEL_HIGH = "H";
     private static final String LABEL_DONE = "✔ ";
 
-    private static final String PRIORITY_HIGH = "High";
-    private static final String PRIORITY_MEDIUM = "Medium";
     private static final String PRIORITY_LOW = "Low";
+    private static final String PRIORITY_MEDIUM = "Medium";
+    private static final String PRIORITY_HIGH = "High";
 
     @FXML
     private HBox cardPane;
@@ -35,13 +36,13 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label status;
     @FXML
+    private Label priority;
+    @FXML
     private Label dateTime;
     @FXML
     private Label description;
     @FXML
     private FlowPane categories;
-    @FXML
-    private Label circleLabel;
     @FXML
     private Circle circle;
 
@@ -76,15 +77,15 @@ public class TaskCard extends UiPart<Region> {
     private void setCircle(ReadOnlyTask task) {
         switch (task.getPriority().value) {
         case PRIORITY_HIGH:
-            circleLabel.setText(LABEL_HIGH);
+            priority.setText(LABEL_HIGH);
             circle.setFill(Color.RED);
             break;
         case PRIORITY_MEDIUM:
-            circleLabel.setText(LABEL_MEDIUM);
+            priority.setText(LABEL_MEDIUM);
             circle.setFill(Color.ORANGE);
             break;
         case PRIORITY_LOW:
-            circleLabel.setText(LABEL_LOW);
+            priority.setText(LABEL_LOW);
             circle.setFill(Color.GREENYELLOW);
             break;
         default:
@@ -100,7 +101,7 @@ public class TaskCard extends UiPart<Region> {
             sb.append("Due By: " + task.getDateTime().toString());
         } else {
             sb.append("From: " + task.getDateTime().toString());
-            sb.append(task.getRecurrence().toString());
+            sb.append(StringUtil.WHITESPACE + task.getRecurrence().toString());
         }
 
         return sb.toString();

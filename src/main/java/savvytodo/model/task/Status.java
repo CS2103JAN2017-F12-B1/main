@@ -19,8 +19,8 @@ public class Status implements Comparable<Status> {
 
     public static final boolean COMPLETED = true;
     public static final boolean ONGOING = false;
-    private static final String MESSAGE_STATUS_COMPLETED = "Completed";
-    private static final String MESSAGE_STATUS_ONGOING = "Ongoing";
+    public static final String MESSAGE_STATUS_COMPLETED = "Completed";
+    public static final String MESSAGE_STATUS_ONGOING = "Ongoing";
 
     /**
      * Defaults to Not Completed

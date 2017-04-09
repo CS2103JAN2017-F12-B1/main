@@ -308,6 +308,13 @@
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }
 
+/*@@author A0140036X */
+#nameLabel {
+	-fx-font-size: 1.2em;
+    -fx-text-fill: white !important;
+    -fx-opacity: 1;
+}
+
 /* @@author A0140016B */
 #categories {
     -fx-hgap: 7;
@@ -323,22 +330,6 @@
     -fx-font-size: 11;
 }
 
-/*@@author A0140036X */
-#nameLabel {
-	-fx-font-size: 1.2em;
-    -fx-text-fill: white !important;
-    -fx-opacity: 1;
-}
-
-#priority {
-    -fx-text-fill: white;
-    -fx-background-color: #0f5e66;
-    -fx-padding: 1 3 1 3;
-    -fx-border-radius: 2;
-    -fx-background-radius: 2;
-    -fx-font-size: 11;
-}
-
 #id {
     -fx-font-size: 18px;
   	-fx-font-family: "Tahoma";
@@ -346,7 +337,7 @@
     -fx-effect: innershadow( three-pass-box , rgba(0.0,0.0,0.0,0.7) , 6.0, 0.0 , 0.0 , 2.0 );
 }
 
-#circleLabel {
+#priority {
 	-fx-padding: 2 0 0 0;
 	-fx-font-weight: bold;
 	-fx-font-size: 16px;

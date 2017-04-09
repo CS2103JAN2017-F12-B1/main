@@ -11,7 +11,10 @@ import javafx.stage.Stage;
 import savvytodo.commons.util.StringUtil;
 import savvytodo.model.category.UniqueCategoryList;
 import savvytodo.model.task.DateTime;
+import savvytodo.model.task.Priority;
 import savvytodo.model.task.ReadOnlyTask;
+import savvytodo.model.task.Status;
+import savvytodo.model.task.TaskType;
 
 /**
  * Provides a handle to a task card in the task list panel.
@@ -19,7 +22,7 @@ import savvytodo.model.task.ReadOnlyTask;
 public class TaskCardHandle extends GuiHandle {
     private static final String NAME_FIELD_ID = "#name";
     private static final String DATETIME_RECUR_FIELD_ID = "#dateTime";
-    private static final String PRIORITY_FIELD_ID = "#circleLabel";
+    private static final String PRIORITY_FIELD_ID = "#priority";
     private static final String STATUS_FIELD_ID = "#status";
     private static final String DESCRIPTION_FIELD_ID = "#description";
     private static final String CATEGORIES_FIELD_ID = "#categories";
@@ -44,11 +47,15 @@ public class TaskCardHandle extends GuiHandle {
     }
 
     public String getPriority() {
-        return getTextFromLabel(PRIORITY_FIELD_ID);
+        return Priority.getPriorityValue(getTextFromLabel(PRIORITY_FIELD_ID));
     }
 
     public String getStatus() {
-        return getTextFromLabel(STATUS_FIELD_ID);
+        String status = getTextFromLabel(STATUS_FIELD_ID);
+        if (status.contains(Status.MESSAGE_STATUS_COMPLETED)) {
+            return Status.MESSAGE_STATUS_COMPLETED;
+        }
+        return Status.MESSAGE_STATUS_ONGOING;
     }
 
     public String getDescription() {
@@ -79,16 +86,18 @@ public class TaskCardHandle extends GuiHandle {
         return guiRobot.from(node).lookup(CATEGORIES_FIELD_ID).query();
     }
 
-    private String getDateTimeRecurrence(ReadOnlyTask task) {
-        if (task.getDateTime().toString().equalsIgnoreCase(StringUtil.EMPTY_STRING)) {
-            return "This is a floating task";
-        } else if (task.getDateTime().startValue.equalsIgnoreCase(StringUtil.EMPTY_STRING)
-                || task.getDateTime().startValue == null) {
-            return "Deadline: " + task.getDateTime().toString();
+    private String getDateTimeRecur(ReadOnlyTask task) {
+        StringBuilder sb = new StringBuilder();
+        if (task.getType().getType() == TaskType.FLOATING) {
+            sb.append("-");
+        } else if (task.getType().getType() == TaskType.DEADLINE) {
+            sb.append("Due By: " + task.getDateTime().toString());
         } else {
-            return "Event: " + task.getDateTime().toString() + DateTime.DATETIME_STRING_CONNECTOR
-                    + task.getRecurrence().toString();
+            sb.append("From: " + task.getDateTime().toString());
+            sb.append(StringUtil.WHITESPACE + task.getRecurrence().toString());
         }
+
+        return sb.toString();
     }
 
     public boolean isSameTask(ReadOnlyTask task) {
