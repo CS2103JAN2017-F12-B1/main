@@ -17,6 +17,7 @@ import savvytodo.model.task.ReadOnlyTask;
 import savvytodo.model.task.Recurrence;
 import savvytodo.model.task.Status;
 import savvytodo.model.task.Task;
+import savvytodo.model.task.TimeStamp;
 
 /**
  * JAXB-friendly version of the Task.
@@ -37,6 +38,8 @@ public class XmlAdaptedTask {
     private Recurrence recurrence;
     @XmlElement
     private boolean status;
+    @XmlElement
+    private TimeStamp timeStamp;
 
     @XmlElement
     private List<XmlAdaptedCategory> categorized = new ArrayList<>();
@@ -61,6 +64,7 @@ public class XmlAdaptedTask {
         dateTime = source.getDateTime();
         recurrence = source.getRecurrence();
         status = source.isCompleted().value;
+        timeStamp = source.getTimeStamp();
         categorized = new ArrayList<>();
         for (Category category : source.getCategories()) {
             categorized.add(new XmlAdaptedCategory(category));
@@ -83,10 +87,10 @@ public class XmlAdaptedTask {
         final Location location = new Location(this.location);
         final UniqueCategoryList categories = new UniqueCategoryList(taskCategories);
         final DateTime dateTime = new DateTime(this.dateTime.startValue, this.dateTime.endValue);
-        dateTime.timestamp = this.dateTime.timestamp;
         final Recurrence recurrence = new Recurrence(this.recurrence.type.toString(), this.recurrence.occurences);
         final Status status = new Status(this.status);
+        final TimeStamp timeStamp = new TimeStamp(this.timeStamp);
 
-        return new Task(name, priority, description, location, categories, dateTime, recurrence, status);
+        return new Task(name, priority, description, location, categories, dateTime, recurrence, status, timeStamp);
     }
 }

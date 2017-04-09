@@ -16,9 +16,9 @@ public interface ReadOnlyTask {
     DateTime getDateTime();
     Recurrence getRecurrence();
     Status isCompleted();
-    //@@author A0147827U
     Type getType();
-    //@@author
+    TimeStamp getTimeStamp();
+
     /**
      * The returned CategoryList is a deep copy of the internal CategoryList,
      * changes on the returned list will not affect the task's internal categories.

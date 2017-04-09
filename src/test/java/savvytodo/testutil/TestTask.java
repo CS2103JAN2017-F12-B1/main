@@ -10,6 +10,7 @@ import savvytodo.model.task.ReadOnlyTask;
 import savvytodo.model.task.Recurrence;
 import savvytodo.model.task.Status;
 import savvytodo.model.task.TaskType;
+import savvytodo.model.task.TimeStamp;
 
 /**
  * A mutable task object. For testing only.
@@ -24,6 +25,7 @@ public class TestTask implements ReadOnlyTask {
     private Recurrence recurrence;
     private UniqueCategoryList categories;
     private Status isCompleted;
+    private TimeStamp timeStamp;
 
     public TestTask() {
         categories = new UniqueCategoryList();
@@ -40,6 +42,7 @@ public class TestTask implements ReadOnlyTask {
         this.location = taskToCopy.getLocation();
         this.categories = taskToCopy.getCategories();
         this.isCompleted = taskToCopy.isCompleted();
+        this.timeStamp = taskToCopy.getTimeStamp();
     }
 
     public void setName(Name name) {
@@ -60,6 +63,10 @@ public class TestTask implements ReadOnlyTask {
 
     public void setCategories(UniqueCategoryList categories) {
         this.categories = categories;
+    }
+
+    public void setTimeStamp() {
+        this.timeStamp = new TimeStamp();
     }
 
     @Override
@@ -90,6 +97,11 @@ public class TestTask implements ReadOnlyTask {
     @Override
     public DateTime getDateTime() {
         return dateTime;
+    }
+
+    @Override
+    public TimeStamp getTimeStamp() {
+        return timeStamp;
     }
 
     public void setRecurrence(Recurrence recurrence) {
