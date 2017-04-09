@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 import savvytodo.commons.core.Config;
 import savvytodo.commons.core.GuiSettings;
 import savvytodo.commons.events.ui.ExitAppRequestEvent;
+import savvytodo.commons.events.ui.NewResultAvailableEvent;
 import savvytodo.commons.util.FxViewUtil;
 import savvytodo.logic.Logic;
 import savvytodo.model.UserPrefs;
@@ -269,6 +270,7 @@ public class MainWindow extends UiPart<Region> {
      */
     public void setHotkeysListeners(Scene scene) {
         scene.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+            @Override
             public void handle(KeyEvent event) {
                 String command = HotKeysManager.getCommand(event);
                 if (!command.equals(HotKeysManager.NOT_HOTKEY)) {
@@ -276,5 +278,13 @@ public class MainWindow extends UiPart<Region> {
                 }
             }
         });
+    }
+
+    //@@author A0140036X
+    /**
+     * Sets the text in result display box.
+     */
+    public void setResultDisplayText(String text) {
+        raise(new NewResultAvailableEvent(text));
     }
 }
