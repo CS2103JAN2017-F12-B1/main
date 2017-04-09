@@ -14,8 +14,6 @@ import savvytodo.logic.commands.IncorrectCommand;
  * Parses input arguments and creates a new LoadCommand object
  */
 public class GenerateCommandParser {
-
-    //@@author @author A0140036X
     /**
      * Parses the given {@code String} of arguments in the context of the GenerateCommand
      * and returns an LoadCommand object for execution.

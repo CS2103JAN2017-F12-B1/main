@@ -14,7 +14,7 @@ import savvytodo.model.task.ReadOnlyTask;
 import savvytodo.model.task.Status;
 
 
-//@@author A0140016
+//@@author A0140016B
 /**
  * Provides a handle to a task card in the task list panel.
  */
