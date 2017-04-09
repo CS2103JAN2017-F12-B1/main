@@ -30,10 +30,10 @@ public class SaveCommandTest extends StorageTest {
      */
     @Test
     public void save_nonExistentFile() {
-        Task[] originalTasks = taskListPanel.getListView().getItems().toArray(new Task[0]);
+        Task[] originalTasks = eventTaskListPanel.getListView().getItems().toArray(new Task[0]);
         if (originalTasks.length == 0) {
             assertAddMany(new TestTask[] {});
-            originalTasks = taskListPanel.getListView().getItems().toArray(new Task[0]);
+            originalTasks = eventTaskListPanel.getListView().getItems().toArray(new Task[0]);
         }
         assertTrue(originalTasks.length > 0);
 
