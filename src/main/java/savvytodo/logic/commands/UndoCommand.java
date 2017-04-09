@@ -21,7 +21,7 @@ public class UndoCommand extends Command {
             model.undo();
             return new CommandResult(MESSAGE_SUCCESS);
         } catch (UndoFailureException e) {
-            throw new CommandException(MESSAGE_FAILURE);
+            throw new CommandException(MESSAGE_FAILURE + ", " + e.getMessage());
         }
     }
 
