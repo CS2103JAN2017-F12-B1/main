@@ -15,7 +15,6 @@ import savvytodo.model.task.ReadOnlyTask;
 import savvytodo.model.task.Recurrence;
 import savvytodo.model.task.Status;
 import savvytodo.model.task.Task;
-import savvytodo.model.task.TimeStamp;
 import savvytodo.model.task.UniqueTaskList;
 
 //@@author A0140016B
@@ -91,9 +90,9 @@ public class EditCommand extends Command {
         DateTime updatedDateTime = cmdTaskDescriptor.getDateTime().orElseGet(taskToEdit::getDateTime);
         Recurrence updatedRecurrence = cmdTaskDescriptor.getRecurrence().orElseGet(taskToEdit::getRecurrence);
         Status updatedStatus = cmdTaskDescriptor.getStatus().orElseGet(taskToEdit::isCompleted);
-        TimeStamp timeStamp = taskToEdit.getTimeStamp();
+
         return new Task(updatedName, updatedPriority, updatedDescription, updatedLocation, updatedCategories,
-                updatedDateTime, updatedRecurrence, updatedStatus, timeStamp);
+                updatedDateTime, updatedRecurrence, updatedStatus);
     }
 
 }
