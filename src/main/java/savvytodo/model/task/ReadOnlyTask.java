@@ -16,7 +16,7 @@ public interface ReadOnlyTask {
     DateTime getDateTime();
     Recurrence getRecurrence();
     Status isCompleted();
-    TaskType getType();
+    Type getType();
     TimeStamp getTimeStamp();
 
     /**
@@ -37,7 +37,8 @@ public interface ReadOnlyTask {
                 && other.getDescription().equals(this.getDescription())
                 && other.getDateTime().equals(this.getDateTime())
                 && other.getLocation().equals(this.getLocation()))
-                && other.isCompleted().equals(this.isCompleted());
+                && other.isCompleted().equals(this.isCompleted())
+                && other.getType().equals(this.getType());
     }
 
     /**

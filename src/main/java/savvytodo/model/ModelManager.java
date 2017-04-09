@@ -33,6 +33,7 @@ import savvytodo.model.task.ReadOnlyTask;
 import savvytodo.model.task.Status;
 import savvytodo.model.task.Task;
 import savvytodo.model.task.TaskType;
+import savvytodo.model.task.Type;
 import savvytodo.model.task.UniqueTaskList;
 import savvytodo.model.task.UniqueTaskList.DuplicateTaskException;
 import savvytodo.model.task.UniqueTaskList.TaskNotFoundException;
@@ -64,11 +65,14 @@ public class ModelManager extends ComponentManager implements Model {
 
         this.taskManager = new TaskManager(taskManager);
         this.undoRedoOpCentre = new UndoRedoOperationCentre();
-        filteredEventTasks = new FilteredList<>(this.taskManager.getEventTaskList());
-        filteredFloatingTasks = new FilteredList<>(this.taskManager.getFloatingTaskList());
+        filteredEventTasks = new FilteredList<>(this.taskManager.getTaskList());
+        filteredEventTasks.setPredicate(Type.getEventType().getPredicate());
+        filteredFloatingTasks = new FilteredList<>(this.taskManager.getTaskList());
+        filteredFloatingTasks.setPredicate(Type.getFloatingType().getPredicate()
+                .or(Type.getDeadlineType().getPredicate()));
 
     }
-
+    //@@author
 
     public ModelManager() {
         this(new TaskManager(), new UserPrefs());
@@ -227,7 +231,7 @@ public class ModelManager extends ComponentManager implements Model {
             DateTime dateTimeToCheck) throws DateTimeException, IllegalValueException {
         int conflictCount = 0;
         int conflictPosition = 1;
-        for (ReadOnlyTask task : taskManager.getEventTaskList()) {
+        for (ReadOnlyTask task : taskManager.getTaskList()) {
             if (task.isCompleted().value == Status.ONGOING
                     && DateTimeUtil.isDateTimeConflict(task.getDateTime(), dateTimeToCheck)) {
                 conflictingTasksStringBuilder
@@ -240,8 +244,13 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     //@@author A0147827U
-    private FilteredList<ReadOnlyTask> getFilteredTasks(TaskType type) {
-        switch (type) {
+    /**
+     * Returns the corresponding filter list view based on Task type
+     * @param type
+     * @return FilterList with predicate for the type already set.
+     */
+    private FilteredList<ReadOnlyTask> getFilteredTasks(Type type) {
+        switch (type.getType()) {
         case FLOATING:
             return filteredFloatingTasks;
         case EVENT:
@@ -273,18 +282,17 @@ public class ModelManager extends ComponentManager implements Model {
     public ObservableList<ReadOnlyTask> getFilteredFloatingTaskList() {
         return filteredFloatingTasks;
     }
-    /**
-     * Returns the current selected filtered task list
-     */
 
 
     /**
-     *  Reset the filters for all the lists
+     *  Reset the filters for all the lists. Adds the default filter (based on task type)
      */
     @Override
     public void updateFilteredListToShowAll() {
-        filteredFloatingTasks.setPredicate(null);
-        filteredEventTasks.setPredicate(null);
+        filteredFloatingTasks.setPredicate(Type.getFloatingType().getPredicate()
+                .or(Type.getDeadlineType().getPredicate()));
+        filteredEventTasks.setPredicate(Type.getEventType().getPredicate());
+
     }
 
     @Override
@@ -292,21 +300,23 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
     }
 
-    //@@author A0124863A
     public void updateFilteredTaskList(Predicate<ReadOnlyTask> predicate) {
-        filteredFloatingTasks.setPredicate(predicate);
-        filteredEventTasks.setPredicate(predicate);
+        filteredFloatingTasks.setPredicate(predicate.and(Type.getFloatingType().getPredicate()
+                .or(Type.getDeadlineType().getPredicate())));
+        filteredEventTasks.setPredicate(predicate.and(Type.getEventType().getPredicate()));
     }
 
     private void updateFilteredTaskList(Expression expression) {
-        filteredFloatingTasks.setPredicate(expression::satisfies);
-        filteredEventTasks.setPredicate(expression::satisfies);
+        filteredFloatingTasks.setPredicate(Type.getFloatingType().getPredicate()
+                .or(Type.getDeadlineType().getPredicate()).and(expression::satisfies));
+        filteredEventTasks.setPredicate(Type.getEventType().getPredicate().and(expression::satisfies));
     }
-
+    //@@author
     //@@author A0140016B
     public void updateFilteredTaskListByDateTime(DateTime dateTime) {
         updateFilteredTaskList(new PredicateExpression(new DateTimeQualifier(dateTime)));
     }
+    //@@author
 
     //========== Inner classes/interfaces used for filtering =================================================
 
