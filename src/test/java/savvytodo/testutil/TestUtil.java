@@ -76,11 +76,13 @@ public class TestUtil {
     private static Task[] getSampleTaskData() {
         try {
             //CHECKSTYLE.OFF: LineLength
-            //CHECKSTYLE:OFF
-            return new Task[] { new Task(new Name("Ali Muster"), new Priority("low"),
-                    new Description("hans@google.com"), new Location("4th street"),
-                    new UniqueCategoryList(), new DateTime("01/03/2017 1400", "02/03/2017 1400"),
-                    new Recurrence(Recurrence.DEFAULT_VALUES)),
+            //CHECKSTYLE.OFF: Indentation
+            return new Task[] {
+                    new Task(new Name("Ali Muster"), new Priority("low"),
+                            new Description("hans@google.com"), new Location("4th street"),
+                            new UniqueCategoryList(),
+                            new DateTime("01/03/2017 1400", "02/03/2017 1400"),
+                            new Recurrence(Recurrence.DEFAULT_VALUES)),
                     new Task(new Name("Boris Mueller"), new Priority("low"),
                             new Description("ruth@google.com"), new Location("81th street"),
                             new UniqueCategoryList(),
@@ -122,7 +124,7 @@ public class TestUtil {
                             new DateTime("08/03/2017 1400", "09/03/2017 1400"),
                             new Recurrence(Recurrence.DEFAULT_VALUES)), };
             //CHECKSTYLE.ON: LineLength
-            //CHECKSTYLE:ON
+            //CHECKSTYLE.ON: Indentation
         } catch (IllegalValueException e) {
             assert false;
             // not possible
