@@ -48,6 +48,28 @@ public class AddCommandTest extends TaskManagerGuiTest {
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
+    //@@author A0147827U
+    @Test
+    public void addFloatingTask() {
+        TestTask[] currentList = { };
+        //add one floating task
+        TestTask taskToAdd = td.floating1;
+        assertAddSuccess(taskToAdd, currentList);
+        System.out.println(taskToAdd.getAddCommand());
+        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
+        
+        //add duplicate floating task
+        commandBox.runCommand(td.floating1.getAddCommand());
+        assertResultMessage(AddCommand.MESSAGE_DUPLICATE_TASK);
+        assertTrue(floatingTaskListPanel.isListMatching(currentList));
+        
+        //add one more floating task
+        taskToAdd = td.floating2;
+        assertAddSuccess(taskToAdd, currentList);
+        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
+
+    }
+    //@@author A0140016B
     private void assertAddSuccess(TestTask taskToAdd, TestTask... currentList) {
         commandBox.runCommand(taskToAdd.getAddCommand());
         

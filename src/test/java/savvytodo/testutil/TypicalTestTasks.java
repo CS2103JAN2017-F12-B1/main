@@ -20,7 +20,8 @@ import savvytodo.model.task.UniqueTaskList;
  */
 public class TypicalTestTasks {
 
-    public TestTask assignment, appointment, birthday, meeting, test, presentation, project, discussion, interview, job;
+    public TestTask assignment, appointment, birthday, meeting, test, presentation, project,
+    discussion, interview, job, floating1, floating2, floating3;
 
     public TypicalTestTasks() {
         try {
@@ -66,6 +67,21 @@ public class TypicalTestTasks {
                     .withDescription("Call interview").withLocation("Marina Bay")
                     .withDateTime("10/03/2017 1000", "10/03/2017 1600").withRecurrence(Recurrence.DEFAULT_VALUES)
                     .withStatus(false).withTimeStamp().withType(Type.getEventType()).build();
+            //@@author A0147827U
+            //floating test tasks
+            floating1 = new TaskBuilder().withName("Floating Task 1").withPriority("medium")
+                    .withDescription("floating").withLocation("location")
+                    .withDateTime("", "").withRecurrence(Recurrence.DEFAULT_VALUES)
+                    .withStatus(false).withTimeStamp().withType(Type.getFloatingType()).build();
+            floating2 = new TaskBuilder().withName("Floating Task 2").withPriority("medium")
+                    .withDescription("floating").withLocation("location")
+                    .withDateTime("", "").withRecurrence(Recurrence.DEFAULT_VALUES)
+                    .withStatus(false).withTimeStamp().withType(Type.getFloatingType()).build();
+            floating3 = new TaskBuilder().withName("Floating Task 3").withPriority("medium")
+                    .withDescription("floating").withLocation("location")
+                    .withDateTime("", "").withRecurrence(Recurrence.DEFAULT_VALUES)
+                    .withStatus(false).withTimeStamp().withType(Type.getFloatingType()).build();
+            //@@author
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
