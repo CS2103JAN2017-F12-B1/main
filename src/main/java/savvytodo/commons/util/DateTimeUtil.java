@@ -60,7 +60,7 @@ public class DateTimeUtil {
      * @return String[] with first index being the start DateTime and second index being the end
      *         date Time
      */
-    public static String[] parseStringToDateTime(String dateTimeArgs) {
+    public static String[] parseStringToDateTime(String dateTimeArgs) throws IllegalValueException {
         return NattyDateTimeParserUtil.parseStringToDateTime(dateTimeArgs);
     }
 
@@ -103,10 +103,8 @@ public class DateTimeUtil {
      * i.e. dateTimeQuery start is equals to or before the dateTimeSource end
      * && dateTimeQuery end is equals to or after the dateTimeSource start
      * Return false if task is a deadline or floating task (i.e. no start or end)
-     * @param dateTimeSource
-     * @param dateTimeQuery
-     * @throws IllegalValueException
-     * @throws DateTimeException
+     * @param dateTimeSource is event compare to
+     * @param dateTimeQuery  is event compare with
      */
     public static boolean isDateTimeWithinRange(DateTime dateTimeSource, DateTime dateTimeQuery)
             throws DateTimeException, IllegalValueException {
@@ -126,8 +124,6 @@ public class DateTimeUtil {
      * i.e. dateTimeQuery end should occur after the dateTimeSource start
      * and dateTimeQuery start should occur before the dateTimeSource end
      * Return false if task is a deadline or floating task (i.e. no start or end)
-     * @throws IllegalValueException
-     * @throws DateTimeException
      */
     public static boolean isDateTimeConflict(DateTime dateTimeSource, DateTime dateTimeQuery)
             throws DateTimeException, IllegalValueException {
@@ -166,20 +162,12 @@ public class DateTimeUtil {
 
     /**
      * Check whether dateTimeSource and dateTimeQuery are events before they can be compared
-     * @param dateTimeSource
-     * @param dateTimeQuery
+     * @param dateTimeSource is the event compared to
+     * @param dateTimeQuery is the event to compare
      * @return whether the task compared to and with are events
      */
     private static boolean areEvents(DateTime dateTimeSource, DateTime dateTimeQuery) {
-        if (!isEvent(dateTimeSource)) {
-            return false;
-        }
-
-        if (!isEvent(dateTimeQuery)) {
-            return false;
-        }
-
-        return true;
+        return isEvent(dateTimeSource) && isEvent(dateTimeQuery);
     }
 
     /**
@@ -220,7 +208,9 @@ public class DateTimeUtil {
         return listOfFreeTimeSlots;
     }
 
-
+    /**
+     * @return String from normal DateTime Object
+     */
     public static String getDayAndDateString(DateTime dateTime) {
         StringBuilder sb = new StringBuilder();
 
@@ -290,7 +280,7 @@ public class DateTimeUtil {
      * Modifies the recurDate based on the frequency for recurring tasks.
      * freqType cannot be null or None
      */
-    private static String getRecurDate(String recurDate, String freqType) {
+    public static String getRecurDate(String recurDate, String freqType) {
         LocalDateTime date = LocalDateTime.parse(recurDate, DATE_FORMATTER);
 
         switch (freqType.toLowerCase()) {
@@ -314,8 +304,8 @@ public class DateTimeUtil {
 
     /**
      * @param recurDates usually is the start date of an event
-     * @param freqType is the frequency based on recurrance
-     * @param noOfRecurr is the number of recurrance
+     * @param freqType is the frequency based on recurrence
+     * @param noOfRecurr is the number of recurrence
      * Modifies the recurDates based on the frequency for recurring tasks.
      * freqType cannot be null or None
      */
@@ -323,12 +313,20 @@ public class DateTimeUtil {
         ArrayList<String> recurrDates = new ArrayList<String>();
 
         for (int i = 0; i < noOfRecurr; i++) {
+            recurDate = getRecurDate(recurDate, freqType);
             recurrDates.add(getRecurDate(recurDate, freqType));
         }
 
         return recurrDates;
     }
 
+    /**
+     * @param dateTime in LocalDateTime which has been initialized with a date
+     * @param hour in int that is to be changed in hour
+     * @param min in int that is to be changed in min
+     * @param sec in int that is to be changed in sec
+     * @return LocalDateTime which is modified with new time
+     */
     public static LocalDateTime setLocalTime(LocalDateTime dateTime, int hour, int min, int sec) {
         return LocalDateTime.of(dateTime.getYear(), dateTime.getMonth(), dateTime.getDayOfMonth(), hour, min, sec);
     }

@@ -133,6 +133,8 @@ public class TestTask implements ReadOnlyTask {
     }
 
     public String getAddCommand() {
+
+        System.out.println(this.getPriority().value);
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getName().name + " ");
         sb.append("l/" + this.getLocation().value + " ");

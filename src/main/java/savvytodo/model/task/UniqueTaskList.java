@@ -21,6 +21,14 @@ public class UniqueTaskList implements Iterable<Task> {
 
     private final ObservableList<Task> internalList = FXCollections.observableArrayList();
 
+    //@@author A0140016B
+    /**
+     * @return ObservableList<Task> for sorting purpose
+     */
+    public ObservableList<Task> getInternalList() {
+        return internalList;
+    }
+
     /**
      * Returns true if the list contains an equivalent task as the given argument.
      */
@@ -29,7 +37,6 @@ public class UniqueTaskList implements Iterable<Task> {
         return internalList.contains(toCheck);
     }
 
-    //@@author A0124863A
     /**
      * Adds a task to the list, list is then sorted by the data and time it was added
      *

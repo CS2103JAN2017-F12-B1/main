@@ -242,7 +242,7 @@ public class LogicManagerTest {
         List<? extends ReadOnlyTask> expectedList = expectedAB.getTaskList();
 
         // prepare task manager state
-        helper.addToModel(model, 2);
+        helper.addToModel2(model, expectedList);
 
         assertCommandSuccess("list", ListCommand.LIST_ALL_SUCCESS, expectedAB, expectedList);
     }
@@ -408,6 +408,7 @@ public class LogicManagerTest {
                     recurrence, timeStamp);
         }
 
+        //@@author A0140016B
         /**
          * Generates a valid task using the given seed.
          * Running this function with the same parameter values guarantees the returned task will have the same state.
@@ -429,6 +430,7 @@ public class LogicManagerTest {
                     new Recurrence(recurrenceSeedProperties[seed % 5], Math.abs(seed)),
                     new TimeStamp(TimeStamp.DEFAULT_DATE_TIME));
         }
+        //@@author
 
         /** Generates the correct add command based on the task given */
         String generateAddCommand(Task p) {
@@ -500,6 +502,17 @@ public class LogicManagerTest {
                 model.addTask(p);
             }
         }
+
+        //@@author A0140016B
+        /**
+         * Adds the given list of ReadOnlyTask to the given model
+         */
+        public void addToModel2(Model model, List<? extends ReadOnlyTask> tasksToAdd) throws Exception {
+            for (ReadOnlyTask p : tasksToAdd) {
+                model.addTask((Task) p);
+            }
+        }
+        //@@author
 
         /**
          * Generates a list of Tasks based on the flags.
