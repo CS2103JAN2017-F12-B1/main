@@ -14,6 +14,7 @@
             <type>None</type>
         </recurrence>
         <status>false</status>
+        <timeStamp/>
         <categorized>cs2103</categorized>
     </tasks>
     <tasks>
@@ -30,6 +31,7 @@
             <type>None</type>
         </recurrence>
         <status>false</status>
+        <timeStamp/>
         <categorized>cs2103</categorized>
     </tasks>
     <tasks>
@@ -46,6 +48,7 @@
             <type>None</type>
         </recurrence>
         <status>false</status>
+        <timeStamp/>
         <categorized>cs2103</categorized>
     </tasks>
     <tasks>
@@ -62,6 +65,7 @@
             <type>None</type>
         </recurrence>
         <status>false</status>
+        <timeStamp/>
         <categorized>cs2103</categorized>
     </tasks>
     <tasks>
@@ -78,6 +82,7 @@
             <type>None</type>
         </recurrence>
         <status>false</status>
+        <timeStamp/>
         <categorized>cs2103</categorized>
     </tasks>
     <tasks>
@@ -94,6 +99,7 @@
             <type>None</type>
         </recurrence>
         <status>false</status>
+        <timeStamp/>
         <categorized>cs2102</categorized>
     </tasks>
     <tasks>
@@ -110,6 +116,7 @@
             <type>None</type>
         </recurrence>
         <status>false</status>
+        <timeStamp/>
         <categorized>cs2102</categorized>
     </tasks>
     <tasks>
@@ -126,6 +133,7 @@
             <type>None</type>
         </recurrence>
         <status>false</status>
+        <timeStamp/>
         <categorized>cs2102</categorized>
     </tasks>
     <tasks>
@@ -142,6 +150,7 @@
             <type>None</type>
         </recurrence>
         <status>false</status>
+        <timeStamp/>
         <categorized>cs2102</categorized>
     </tasks>
     <tasks>
@@ -158,6 +167,7 @@
             <type>None</type>
         </recurrence>
         <status>false</status>
+        <timeStamp/>
         <categorized>cs3235</categorized>
     </tasks>
     <tasks>
@@ -174,6 +184,7 @@
             <type>None</type>
         </recurrence>
         <status>false</status>
+        <timeStamp/>
         <categorized>cs3235</categorized>
     </tasks>
     <tasks>
@@ -190,6 +201,7 @@
             <type>None</type>
         </recurrence>
         <status>false</status>
+        <timeStamp/>
         <categorized>cs2102</categorized>
     </tasks>
     <tasks>
@@ -206,6 +218,7 @@
             <type>None</type>
         </recurrence>
         <status>false</status>
+        <timeStamp/>
         <categorized>cs2103</categorized>
     </tasks>
     <tasks>
@@ -222,6 +235,7 @@
             <type>None</type>
         </recurrence>
         <status>false</status>
+        <timeStamp/>
         <categorized>cs2103</categorized>
     </tasks>
     <tasks>
@@ -238,6 +252,7 @@
             <type>None</type>
         </recurrence>
         <status>false</status>
+        <timeStamp/>
         <categorized>family</categorized>
     </tasks>
     <tasks>
@@ -254,6 +269,7 @@
             <type>None</type>
         </recurrence>
         <status>false</status>
+        <timeStamp/>
         <categorized>lifestyle</categorized>
     </tasks>
     <tasks>
@@ -270,6 +286,7 @@
             <type>None</type>
         </recurrence>
         <status>false</status>
+        <timeStamp/>
         <categorized>lifestyle</categorized>
     </tasks>
     <tasks>
@@ -286,6 +303,7 @@
             <type>None</type>
         </recurrence>
         <status>false</status>
+        <timeStamp/>
         <categorized>lifestyle</categorized>
     </tasks>
     <tasks>
@@ -302,6 +320,7 @@
             <type>None</type>
         </recurrence>
         <status>false</status>
+        <timeStamp/>
         <categorized>cs2103</categorized>
     </tasks>
     <categories>cs2103</categories>

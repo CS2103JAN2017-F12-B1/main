@@ -1,7 +1,6 @@
 package savvytodo.logic.commands;
 
 import java.time.DateTimeException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -71,6 +70,7 @@ public class AddCommand extends Command {
         int numTasks = 1;
         if (recurrence != null
                 && Integer.parseInt(recurrence[1]) > Integer.parseInt(Recurrence.DEFAULT_VALUES[1])) {
+            recurrence[0] = Recurrence.Type.valueOfIgnoreCase(recurrence[0]).name();
             numTasks += Integer.parseInt(recurrence[1]);
         }
 
@@ -91,8 +91,6 @@ public class AddCommand extends Command {
             );
 
             toAdd.setStatus(new Status());
-            toAdd.getDateTime().setAdd(LocalDateTime.now());
-
             toAddList.add(toAdd);
         }
     }
@@ -124,6 +122,8 @@ public class AddCommand extends Command {
             throw new CommandException(DateTimeUtil.MESSAGE_INCORRECT_SYNTAX);
         } catch (IllegalValueException e) {
             throw new CommandException(Messages.MESSAGE_INVALID_COMMAND_FORMAT);
+        } catch (IllegalArgumentException e) {
+            throw new CommandException(e.getMessage());
         }
     }
 
