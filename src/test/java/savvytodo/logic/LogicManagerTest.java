@@ -131,7 +131,7 @@ public class LogicManagerTest {
         assertCommandBehavior2(false, inputCommand, expectedMessage, expectedTaskManager, expectedShownList);
     }
     //@@author
-    
+
     /**
      * Executes the command, confirms that a CommandException is thrown and that the result message is correct.
      * Both the 'task manager' and the 'last shown list' are verified to be unchanged.

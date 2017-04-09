@@ -72,7 +72,7 @@ public class AddCommandTest extends TaskManagerGuiTest {
     //@@author A0140016B
     private void assertAddSuccess(TestTask taskToAdd, TestTask... currentList) {
         commandBox.runCommand(taskToAdd.getAddCommand());
-       
+
         TaskListPanelHandle targetList;
         if (taskToAdd.getType().getType() == TaskType.EVENT) {
             targetList = eventTaskListPanel;
