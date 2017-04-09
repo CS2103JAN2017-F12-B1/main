@@ -92,8 +92,8 @@ public class StorageTest extends TaskManagerGuiTest {
      */
     protected void assertLoad(String testTaskManagerFilePath, ReadOnlyTask[] tasks) {
         loadFromFilePath(testTaskManagerFilePath);
-        TestUtil.printTasks(taskListPanel.getListView().getItems().toArray(new Task[0]));
-        assertTrue(taskListPanel.isListMatchingIgnoreOrder(tasks));
+        TestUtil.printTasks(eventTaskListPanel.getListView().getItems().toArray(new Task[0]));
+        assertTrue(eventTaskListPanel.isListMatchingIgnoreOrder(tasks));
         assertResultMessage(LoadCommand.getSuccessMessage(testTaskManagerFilePath));
     }
 
@@ -113,7 +113,7 @@ public class StorageTest extends TaskManagerGuiTest {
             read = tmStorage.readTaskManager();
             assertTrue(read.isPresent());
             Task[] readTasks = read.get().getTaskList().toArray(new Task[0]);
-            assertTrue(taskListPanel.isListMatchingIgnoreOrder(readTasks));
+            assertTrue(eventTaskListPanel.isListMatchingIgnoreOrder(readTasks));
             assertResultMessage(LoadCommand.getSuccessMessage(testTaskManagerFilePath));
         } catch (DataConversionException | IOException e) {
             assertTrue(false);
@@ -138,7 +138,7 @@ public class StorageTest extends TaskManagerGuiTest {
         TestTask taskToAdd = td.getTypicalTasks()[0];
         TestTask[] expectedList = TestUtil.addTasksToList(currentList, taskToAdd);
         commandBox.runCommand(taskToAdd.getAddCommand());
-        assertTrue(taskListPanel.isListMatching(expectedList));
+        assertTrue(eventTaskListPanel.isListMatching(expectedList));
         return expectedList;
     }
 
@@ -155,7 +155,7 @@ public class StorageTest extends TaskManagerGuiTest {
             expectedList = TestUtil.addTasksToList(expectedList, testTask);
             commandBox.runCommand(testTask.getAddCommand());
         }
-        assertTrue(taskListPanel.isListMatching(expectedList));
+        assertTrue(eventTaskListPanel.isListMatching(expectedList));
         return expectedList;
     }
 
