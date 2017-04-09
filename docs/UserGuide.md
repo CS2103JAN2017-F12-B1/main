@@ -39,6 +39,16 @@ By : `Team F12-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbs
 
 
 ## 2. Features
+
+
+> **Task Types**
+>
+> * Tasks are labelled as 3 different types: 
+>   * Floating - tasks without date and time specification
+>   * Deadline - tasks with an `END_DATE`
+>   * Event - tasks with a specified duration (`START_DATE` and `END_DATE`)
+> * The tasks are seperated into two different views: `Floating Tasks and Deadlines` and `Events`.
+
 > **Command Format**
 >
 > * Words in `UPPER_CASE` are the parameters.
@@ -46,6 +56,7 @@ By : `Team F12-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbs
 > * Items with `...` after them can have multiple instances.
 > * Parameters can be in any order.
 
+### Commands
 ### 2.1. Viewing help : `help`
 
 Format: `help`
@@ -53,9 +64,18 @@ Format: `help`
 > Help is also shown if you enter an incorrect command e.g. `abcd`
 
 ### 2.2. Adding a task: `add`
-Adds a task to the Savvy To-Do<br>
+Adds a task to the task manager.
+
 Format: `add TASK_NAME [dt/START_DATE END_DATE] [l/LOCATION] [p/PRIORITY_LEVEL] [r/RECURRING_TYPE NUMBER_OF_RECURRENCE] [c/CATEGORY] [d/DESCRIPTION]`
 
+
+Examples:
+* `add Project Meeting dt/05/10/2017 1400 = 06/10/2017 1800 r/daily n/2 c/CS2103 d/Discuss about roles and milestones` <br>
+  Add task named, Project Meeting, under CS2103 category. The task is schedule to take place on 5th and 6th of October 2016 from 2pm to 6pm each day.
+* `add NUSSU Leadership Camp s/05-10-2016 2pm e/08-10-2016 6pm c/NUSSU`
+  Add task named, NUSSU Leadership Camp, under NUSSU category. The 4 day 3 night is schedule to take place from 5th October, 2pm to 8th of October 2016, 6pm.
+
+### Parameters 
 > Parameters | Description
 > -------- | :--------
 > TASK_NAME | `Mandatory` Specifies the name of the task.
@@ -68,25 +88,18 @@ Format: `add TASK_NAME [dt/START_DATE END_DATE] [l/LOCATION] [p/PRIORITY_LEVEL] 
 > CATEGORY | `Optional` Specifies a custom category for the task. This can be used for keeping track of similar tasks.
 > DESCRIPTION | `Optional` Describes the task.
 
-##### Date
+### Date
 
 > If only the DATE is specified, the TIME defaults to starting at 12am or ending at 11:59pm.<br>If only the TIME is specified, the DATE defaults to today.<br><br>If only `START_DATE` is supplied, the task will be a 1-day event starting from the specified `START_DATE` and ending on the same day at 11:59pm.<br>If only `END_DATE` is supplied, the task will start today at 12am.<br><br>The date and time can be entered in a formal format like <i>17-03-2016</i>, or a natural format like <i>next wednesday, 2pm</i>. The formal format follows the system's settings for whether <i>mm-dd-yyyy</i> or <i>dd-mm-yyyy</i> is used.
-
-Examples:
-* `add Project Meeting dt/05/10/2017 1400 = 06/10/2017 1800 r/daily n/2 c/CS2103 d/Discuss about roles and milestones` <br>
-  Add task named, Project Meeting, under CS2103 category. The task is schedule to take place on 5th and 6th of October 2016 from 2pm to 6pm each day.
-* `add NUSSU Leadership Camp s/05-10-2016 2pm e/08-10-2016 6pm c/NUSSU`
-  Add task named, NUSSU Leadership Camp, under NUSSU category. The 4 day 3 night is schedule to take place from 5th October, 2pm to 8th of October 2016, 6pm.
 
 [//]: # (@@author jingloon)
 
 ### 2.3. Listing all tasks : `list`
 
-Shows a list of tasks in the Savvy To-Do by category or by priority or everything.<br>
+Shows a list of tasks in Savvy To-Do by category or by priority or everything.<br>
 Examples:
-* `list c/CS2103`<br>
-* `list p/high`<br>
-* `list s/completed`<br>
+* `list c/CS2103`
+* `list p/high`
 * `list`<br>
 
 ### 2.4. Editing a task : `edit`
@@ -96,16 +109,19 @@ Format: `edit INDEX [t/TASK_NAME] [dt/START_DATE = END_DATE] [l/LOCATION] [p/PRI
 
 > * Edits the task at the specified `INDEX`.
     The index refers to the index number shown in the last task listing.<br>
-    The index **must be a positive integer** 1, 2, 3, ...
+>   * e.g. 1, 2, 3, F1, F2, ...
 > * At least one of the optional fields must be provided.
 > * Existing values will be updated to the input values.
 > * When editing tags, the existing tags of the task will be removed i.e adding of tags is not cumulative.
-> * You can remove all the task's tags by typing `t/` without specifying any tags after it.
+> * You can remove all the task's tags by typing `c/` without specifying any tags after it.
 
 Examples:
 
-* `edit 1 c/CS2103 d/Complete group project component`<br>
+* `edit F1 c/CS2103 d/Complete group project component`<br>
   Edits the specified task to be tagged under `CS2103` with the description `Complete group project component`.
+
+  * `edit 3 c/ d/Remember to pick up flowers`<br>
+  Edits the specified event with the description `Remember to pick up flowers` and clears all of its tags.
 
 
 ### 2.5. Finding all tasks containing any keyword in their name: `find`
@@ -113,7 +129,7 @@ Examples:
 Finds tasks whose names contain any of the given keywords.<br>
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-> * The search is case sensitive. e.g `hans` will not match `Hans`
+> * The search is case insensitive. e.g `hans` will match `Hans`
 > * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 > * Only the name is searched.
 > * Only full words will be matched e.g. `Han` will not match `Hans`
@@ -123,7 +139,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 Examples:
 
 * `find homework`<br>
-  Returns `do homework` but not `Homework`
+  Returns `do homework` and `Homework`
 * `find dinner lunch breakfast`<br>
   Returns Any task having `dinner`, `lunch`, or `breakfast` in their names.
 
@@ -134,16 +150,15 @@ Format: `delete INDEX`
 
 > Deletes the task at the specified `INDEX`. <br>
 > The index refers to the index number shown in the most recent listing.<br>
-> The index **must be a positive integer** 1, 2, 3, ...
 
 Examples:
 
 * `list`<br>
   `delete 2`<br>
-  Deletes the 2nd task in the Savvy To-Do.
+  Deletes the 2nd event in Savvy To-Do.
 * `find laundry`<br>
-  `delete 1`<br>
-  Deletes the 1st task in the results of the `find` command.
+  `delete F1`<br>
+  Deletes the 1st floating task in the results of the `find` command.
 
 ### 2.7. Select a task : `select`
 
@@ -152,16 +167,15 @@ Format: `select INDEX`
 
 > Selects the task at the specified `INDEX` and displays the details.<br>
 > The index refers to the index number shown in the most recent listing.<br>
-> The index **must be a positive integer** 1, 2, 3, ...
 
 Examples:
 
 * `list`<br>
   `select 2`<br>
-  Selects the 2nd task in the Savvy To-Do.
+  Selects the 2nd event in Savvy To-Do.
 * `find shopping` <br>
-  `select 1`<br>
-  Selects the 1st task in the results of the `find` command.
+  `select F1`<br>
+  Selects the 1st floating task in the results of the `find` command.
 
 ### 2.8. Undo an operation : `undo`
 
@@ -177,13 +191,15 @@ Format: `redo`
 
 ### 2.10. Marking a task as completed : `mark`
 
-Marks the specified task(s) from the Savvy To-Do.<br>
+Marks the specified task(s) from Savvy To-Do.<br>
 Format: `mark INDICES`
 
-> Marks the task at the specified `INDEX`. <br>
+> Marks the task at the specified `INDEX` as completed. <br>
 > The index refers to the index number shown in the most recent listing.<br>
-> The index **must be a positive integer** 1, 2, 3, ...
 > Number of indices must be at least 1
+
+Example:
+mark 1 2 F1
 
 ### 2.11. Umarking a task as not completed : `unmark`
 
@@ -192,7 +208,6 @@ Format: `unmark INDICES`
 
 > Unmarks the task at the specified `INDEX`. <br>
 > The index refers to the index number shown in the most recent listing.<br>
-> The index **must be a positive integer** 1, 2, 3, ...
 > Number of indices must be at least 1
 
 ### 2.12. Clearing all entries : `clear`
@@ -247,14 +262,9 @@ There is no need to save manually.
 Key Codes | Function | Command Box Input
 -------- | :--------  | :--------
 <kbd>Esc</kbd> | Toggle to show/hide a list of keyboard shortcuts | -
-<kbd>Ctrl</kbd> + <kbd>H</kbd> | [Help](#viewing-help--help) | `help`
+<kbd>Ctrl</kbd> + <kbd>H</kbd> <br /> or <br /> <kbd>F1</kbd> | [Help](#viewing-help--help) | `help`
 <kbd>Ctrl</kbd> + <kbd>Q</kbd> | [Exit](#exiting-the-program--exit) | `exit`
 <kbd>Ctrl</kbd> + <kbd>D</kbd> | [Clear](#clearing-all-entries--clear) all entries | `clear`
 <kbd>Ctrl</kbd> + <kbd>L</kbd> | [List](#listing-all-tasks-list) all unmarked task by date, earliest task first | `list`
 <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Z</kbd> | [Undo](#undo-the-most-recent-operation--undo) the most recent task | `undo`
 <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Y</kbd> | [Redo](#redo-the-most-recent-operation--redo) the previously undo-ed task | `redo`
-
-<!-- Not supported yet //jing loon
-<kbd>Ctrl</kbd> + <kbd>P</kbd> | [List](#listing-all-tasks-list) all unmarked task by priority level, highest to lowest | `list priorityLevel`
-<kbd>Ctrl</kbd> + <kbd>S</kbd> | [Storage](#storage-location) Popups a directory chooser dialog box to choose a new filepath | `storage NEW_FILEPATH`
--->

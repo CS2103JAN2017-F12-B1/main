@@ -19,6 +19,8 @@ We are a team based in the [School of Computing, National University of Singapor
 	* [Mark](UserGuide.md)
 	* [Unmark](UserGuide.md)
 * Code written:
+	* [main](../collated/main/A0140016B.md)
+	* [test](../collated/test/A0140016B.md)
 * Other major contributions:
   * Initial refactoring from AddressBook-Level-4 to SavvyTo-Do
   * Issue tracker and repo setup
@@ -33,11 +35,14 @@ We are a team based in the [School of Computing, National University of Singapor
 * Aspects/tools in charge of: UI Element designs
 * Components in charge of:
 * Features implemented:
-    * Hotkeys/shortcuts implementation
+    * [Hotkeys/shortcuts](UserGuide.md#5-keyboard-shortcuts)
     * Load command event trigger
     * Auto-complete textfield with command dictionary
-    * UI (in progress, to be updated)
+    * Split list views for different types of task
+	* [Task types](UserGuide.md#2-features)
 * Code written:
+	* [main](../collated/main/A0147827U.md)
+	* [test](../collated/test/A0147827U.md)
 * Other major contributions:
     * UI mockup and prototyping
     * Post initial refactoring system testings
@@ -52,6 +57,8 @@ We are a team based in the [School of Computing, National University of Singapor
 * Components in charge of: JUnit testings
 * Features implemented:
 * Code written:
+	* [main](../collated/main/A0140036X.md)
+	* [test](../collated/test/A0140036X.md)
 * Other major contributions:
     * Post initial refactoring system testings
 -----
@@ -69,6 +76,8 @@ We are a team based in the [School of Computing, National University of Singapor
 	* Redo command
 	* List command
 * Code written:
+	* [main](../collated/main/A0124863A.md)
+	* [test](../collated/test/A0124863A.md)
 * Other major contributions:
     * Initial refactoring from AddressBook-Level-4 to SavvyTo-Do
 
