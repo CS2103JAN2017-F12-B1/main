@@ -9,6 +9,9 @@ import savvytodo.model.task.Priority;
 import savvytodo.model.task.ReadOnlyTask;
 import savvytodo.model.task.Recurrence;
 import savvytodo.model.task.Status;
+import savvytodo.model.task.TaskType;
+import savvytodo.model.task.TimeStamp;
+import savvytodo.model.task.Type;
 
 /**
  * A mutable task object. For testing only.
@@ -23,6 +26,8 @@ public class TestTask implements ReadOnlyTask {
     private Recurrence recurrence;
     private UniqueCategoryList categories;
     private Status isCompleted;
+    private TimeStamp timeStamp;
+    private Type type;
 
     public TestTask() {
         categories = new UniqueCategoryList();
@@ -75,6 +80,10 @@ public class TestTask implements ReadOnlyTask {
         this.categories = categories;
     }
 
+    public void setTimeStamp() {
+        this.timeStamp = new TimeStamp();
+    }
+
     @Override
     public Name getName() {
         return name;
@@ -103,6 +112,11 @@ public class TestTask implements ReadOnlyTask {
     @Override
     public DateTime getDateTime() {
         return dateTime;
+    }
+
+    @Override
+    public TimeStamp getTimeStamp() {
+        return timeStamp;
     }
 
     public void setRecurrence(Recurrence recurrence) {
@@ -135,6 +149,8 @@ public class TestTask implements ReadOnlyTask {
     }
 
     public String getAddCommand() {
+
+        System.out.println(this.getPriority().value);
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getName().name + " ");
         sb.append("l/" + this.getLocation().value + " ");
@@ -142,8 +158,42 @@ public class TestTask implements ReadOnlyTask {
         sb.append("dt/" + this.getDateTime().startValue + DateTime.DATETIME_STRING_CONNECTOR
                 + this.getDateTime().endValue + " ");
         sb.append("d/" + this.getDescription().value + " ");
-        this.getCategories().asObservableList().stream().forEach(s -> sb.append("c/" + s.categoryName + " "));
+        this.getCategories().asObservableList().stream()
+                .forEach(s -> sb.append("c/" + s.categoryName + " "));
         return sb.toString();
+    }
+
+    //@@author A0147827U
+    private boolean isFloating() {
+        return getDateTime().getStartDate() == null && getDateTime().getEndDate() == null;
+    }
+
+    private boolean isEvent() {
+        return !(getDateTime().getStartDate() == null && getDateTime().getEndDate() == null);
+    }
+
+    private boolean isDeadline() {
+        return getDateTime().getStartDate() == null && !(getDateTime().getEndDate() == null);
+    }
+
+    @Override
+    public Type getType() {
+        updateType();
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
+
+    private void updateType() {
+        if (isEvent()) {
+            type.setType(TaskType.EVENT);
+        } else if (isFloating()) {
+            type.setType(TaskType.FLOATING);
+        } else if (isDeadline()) {
+            type.setType(TaskType.DEADLINE);
+        }
     }
 
     //@@author A0140036X

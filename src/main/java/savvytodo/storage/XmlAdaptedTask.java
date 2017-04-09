@@ -45,8 +45,8 @@ public class XmlAdaptedTask {
      * Constructs an XmlAdaptedTask.
      * This is the no-arg constructor that is required by JAXB.
      */
-    public XmlAdaptedTask() {}
-
+    public XmlAdaptedTask() {
+    }
 
     /**
      * Converts a given Task into this class for JAXB use.
@@ -84,9 +84,10 @@ public class XmlAdaptedTask {
         final UniqueCategoryList categories = new UniqueCategoryList(taskCategories);
         final DateTime dateTime = new DateTime(this.dateTime.startValue, this.dateTime.endValue);
         dateTime.timestamp = this.dateTime.timestamp;
-        final Recurrence recurrence = new Recurrence(this.recurrence.type.toString(), this.recurrence.occurences);
+        final Recurrence recurrence = new Recurrence(this.recurrence.type.toString(),
+                this.recurrence.occurences);
         final Status status = new Status(this.status);
 
-        return new Task(name, priority, description, location, categories, dateTime, recurrence, status);
+        return new Task(name, priority, description, location, categories, dateTime, recurrence);
     }
 }
