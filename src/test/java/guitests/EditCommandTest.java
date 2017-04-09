@@ -13,7 +13,6 @@ import savvytodo.model.task.Location;
 import savvytodo.model.task.Name;
 import savvytodo.model.task.Priority;
 import savvytodo.model.task.Recurrence;
-import savvytodo.model.task.TaskType;
 import savvytodo.model.task.Type;
 import savvytodo.testutil.TaskBuilder;
 import savvytodo.testutil.TestTask;

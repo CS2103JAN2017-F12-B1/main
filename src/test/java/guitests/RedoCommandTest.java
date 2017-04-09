@@ -43,32 +43,26 @@ public class RedoCommandTest extends TaskManagerGuiTest {
 
 
     }
-    
+
     @Test
     public void redoAfterUndoAfterDelete() {
         TestTask[] currentList = td.getTypicalTasks();
-        
         int targetIndex = 2;
         commandBox.runCommand("delete " + targetIndex);
         commandBox.runCommand("undo");
 
         assertRedoAfterUndoAfterDeleteSuccess(targetIndex, currentList);
-        
-
-
     }
 
 
     private void assertRedoAfterUndoAfterDeleteSuccess(int targetIndexOneIndexed, final TestTask[] currentList) {
         TestTask[] expectedRemainder = TestUtil.removeTaskFromList(currentList, targetIndexOneIndexed);
-        
         commandBox.runCommand("redo");
 
         assertTrue(eventTaskListPanel.isListMatching(expectedRemainder));
         assertResultMessage(RedoCommand.MESSAGE_SUCCESS);
 
     }
-    
     @Test
     public void redoAfterUndoAfterAdd() {
         TestTask[] currentList = td.getTypicalTasks();
@@ -76,7 +70,6 @@ public class RedoCommandTest extends TaskManagerGuiTest {
         TestTask taskToAdd = td.discussion;
         commandBox.runCommand(taskToAdd.getAddCommand());
         commandBox.runCommand("undo");
-        
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
         assertRedoAfterUndoAfterAddSuccess(currentList);
 
@@ -153,7 +146,7 @@ public class RedoCommandTest extends TaskManagerGuiTest {
         assertResultMessage(RedoCommand.MESSAGE_SUCCESS);
 
     }
-    
+
     @Test
     public void redoAfterUndoAfterMarkMultiple() {
         TestTask[] currentList = td.getTypicalTasks();
@@ -181,7 +174,6 @@ public class RedoCommandTest extends TaskManagerGuiTest {
         unmarkedTask3.setCompleted(new Status(true));
         targetIndices.add(targetIndex);
         unmarkedTasks.add(unmarkedTask3);
-        
         StringBuilder indices = new StringBuilder();
 
         for (Integer unmarkedTaskIndex : targetIndices) {
@@ -196,7 +188,6 @@ public class RedoCommandTest extends TaskManagerGuiTest {
 
 
     private void assertRedoAfterUndoAfterMarkMultipleSuccess(LinkedList<TestTask> unmarkedTasks) {
-       
         commandBox.runCommand("redo");
 
         for (TestTask unmarkedTask : unmarkedTasks) {
@@ -210,10 +201,6 @@ public class RedoCommandTest extends TaskManagerGuiTest {
 
 
     }
-
-    
-    
-    
 
     @Test
     public void redoAfterUndoAfterUnmarkMultiple() {
@@ -239,7 +226,6 @@ public class RedoCommandTest extends TaskManagerGuiTest {
         TestTask markedTask3 = currentList[targetIndex - 1];
         targetIndices.add(targetIndex);
         markedTasks.add(markedTask3);
-        
         StringBuilder indices = new StringBuilder();
 
         for (Integer markedTaskIndex : targetIndices) {
@@ -269,7 +255,6 @@ public class RedoCommandTest extends TaskManagerGuiTest {
         assertResultMessage(RedoCommand.MESSAGE_SUCCESS);
 
     }
-    
     @Test
     public void redoFailure() {
 
@@ -279,11 +264,8 @@ public class RedoCommandTest extends TaskManagerGuiTest {
 
         commandBox.runCommand("clear");
         assertRedoFailure();
-        
         commandBox.runCommand("redo");
         assertRedoFailure();
-        
-
     }
 
     private void assertRedoFailure() {

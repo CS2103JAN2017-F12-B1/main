@@ -32,7 +32,7 @@ public class UndoCommandTest extends TaskManagerGuiTest {
         assertTrue(eventTaskListPanel.isListMatching(currentList));
         assertResultMessage(UndoCommand.MESSAGE_SUCCESS);
     }
-    
+
 
     @Test
     public void undoAfterAdd() {
@@ -132,8 +132,6 @@ public class UndoCommandTest extends TaskManagerGuiTest {
         assertResultMessage(UndoCommand.MESSAGE_SUCCESS);
 
     }
-    
-    
 
     @Test
     public void undoMarkMultiple() {
@@ -159,7 +157,7 @@ public class UndoCommandTest extends TaskManagerGuiTest {
         TestTask markedTask3 = currentList[targetIndex - 1];
         targetIndices.add(targetIndex);
         markedTasks.add(markedTask3);
-        
+
         StringBuilder indices = new StringBuilder();
 
         for (Integer markedTaskIndex : targetIndices) {
@@ -187,7 +185,7 @@ public class UndoCommandTest extends TaskManagerGuiTest {
         assertResultMessage(UndoCommand.MESSAGE_SUCCESS);
 
     }
-    
+
     @Test
     public void undoUnmarkMultiple() {
         TestTask[] currentList = td.getTypicalTasks();
@@ -215,7 +213,7 @@ public class UndoCommandTest extends TaskManagerGuiTest {
         unmarkedTask3.setCompleted(new Status(true));
         targetIndices.add(targetIndex);
         unmarkedTasks.add(unmarkedTask3);
-        
+
         StringBuilder indices = new StringBuilder();
 
         for (Integer unmarkedTaskIndex : targetIndices) {
@@ -244,10 +242,9 @@ public class UndoCommandTest extends TaskManagerGuiTest {
 
 
     }
-    
+
     @Test
     public void undoFailure() {
-        
         commandBox.runCommand("undo");
         assertUndoFailure();
 
