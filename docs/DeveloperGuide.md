@@ -172,8 +172,8 @@ The `UI` component,
 * Responds to events raised from various parts of the App and updates the UI accordingly.
 * Responds to keyboard shortcuts and executes the corresponding user commands.
 
-The diagram below demonstrates the interaction between the UI and the Event Bus through the example of a user launching the exit shortcut
-<img src="images/UIHandleShortcutSequenceDiagram.png" width="800"><br>_Figure 2.2.2 : Sequence Diagram for handling a Exit shortcut event_
+The diagram below demonstrates the interaction between the UI and the Event Bus through the example of a user launching the exit shortcut: <br><br>
+<img src="images/UIHandleShortcutSequenceDiagram.png" width="800"><br><br>_Figure 2.2.2 : Sequence Diagram for handling a Exit shortcut event_
 
 ### 2.3. Logic component
 
