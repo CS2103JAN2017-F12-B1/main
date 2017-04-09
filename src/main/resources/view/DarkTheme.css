@@ -300,3 +300,9 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
+#nameLabel {
+	-fx-font-size: 1.2em;
+    -fx-text-fill: white !important;
+    -fx-opacity: 1;
+}
