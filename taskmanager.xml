@@ -1,66 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <taskmanager>
     <tasks>
-        <name>Watch CS2103 Webcast 8</name>
-        <priority>Low</priority>
-        <description>No description given.</description>
-        <location>Location has not been set.</location>
-        <dateTime>
-            <startValue></startValue>
-            <endValue></endValue>
-        </dateTime>
-        <recurrence>
-            <occurences>0</occurences>
-            <type>None</type>
-        </recurrence>
-        <status>false</status>
-        <timeStamp/>
-        <categorized>cs2103</categorized>
-    </tasks>
-    <tasks>
-        <name>Watch CS2103 Webcast 7</name>
-        <priority>Low</priority>
-        <description>No description given.</description>
-        <location>Location has not been set.</location>
-        <dateTime>
-            <startValue></startValue>
-            <endValue></endValue>
-        </dateTime>
-        <recurrence>
-            <occurences>0</occurences>
-            <type>None</type>
-        </recurrence>
-        <status>false</status>
-        <timeStamp/>
-        <categorized>cs2103</categorized>
-    </tasks>
-    <tasks>
-        <name>Watch CS2103 Webcast 9</name>
-        <priority>Low</priority>
-        <description>No description given.</description>
-        <location>Location has not been set.</location>
-        <dateTime>
-            <startValue></startValue>
-            <endValue>09/04/2017 0402</endValue>
-            <timestamp>2017-04-09T04:02:25.017</timestamp>
-        </dateTime>
-        <recurrence>
-            <occurences>0</occurences>
-            <type>None</type>
-        </recurrence>
-        <status>false</status>
-        <timeStamp/>
-        <categorized>cs2103</categorized>
-    </tasks>
-    <tasks>
-        <name>mytest1</name>
+        <name>my first event</name>
         <priority>Medium</priority>
         <description>No description given.</description>
         <location>Location has not been set.</location>
         <dateTime>
-            <startValue>07/04/2017 0510</startValue>
-            <endValue>08/04/2017 0510</endValue>
-            <timestamp>2017-04-09T02:09:13.759</timestamp>
+            <startValue>09/04/2017 1639</startValue>
+            <endValue>10/04/2017 1639</endValue>
         </dateTime>
         <recurrence>
             <occurences>0</occurences>
@@ -68,105 +15,15 @@
         </recurrence>
         <status>false</status>
         <timeStamp/>
-        <categorized>cs2103</categorized>
     </tasks>
     <tasks>
-        <name>Watch CS2103 Webcast 11</name>
-        <priority>Low</priority>
-        <description>No description given.</description>
-        <location>Location has not been set.</location>
-        <dateTime>
-            <startValue></startValue>
-            <endValue></endValue>
-        </dateTime>
-        <recurrence>
-            <occurences>0</occurences>
-            <type>None</type>
-        </recurrence>
-        <status>false</status>
-        <timeStamp/>
-        <categorized>cs2103</categorized>
-    </tasks>
-    <tasks>
-        <name>Watch CS2102 Webcast 8</name>
-        <priority>Low</priority>
-        <description>No description given.</description>
-        <location>Location has not been set.</location>
-        <dateTime>
-            <startValue></startValue>
-            <endValue></endValue>
-        </dateTime>
-        <recurrence>
-            <occurences>0</occurences>
-            <type>None</type>
-        </recurrence>
-        <status>false</status>
-        <timeStamp/>
-        <categorized>cs2102</categorized>
-    </tasks>
-    <tasks>
-        <name>Watch CS2102 Webcast 9</name>
-        <priority>Low</priority>
-        <description>No description given.</description>
-        <location>Location has not been set.</location>
-        <dateTime>
-            <startValue></startValue>
-            <endValue></endValue>
-            <timestamp>2017-04-09T02:09:13.740</timestamp>
-        </dateTime>
-        <recurrence>
-            <occurences>0</occurences>
-            <type>None</type>
-        </recurrence>
-        <status>false</status>
-        <timeStamp/>
-        <categorized>cs2102</categorized>
-    </tasks>
-    <tasks>
-        <name>Watch CS2102 Webcast 11</name>
-        <priority>Low</priority>
-        <description>No description given.</description>
-        <location>Location has not been set.</location>
-        <dateTime>
-            <startValue></startValue>
-            <endValue></endValue>
-            <timestamp>2017-04-09T02:09:13.741</timestamp>
-        </dateTime>
-        <recurrence>
-            <occurences>0</occurences>
-            <type>None</type>
-        </recurrence>
-        <status>false</status>
-        <timeStamp/>
-        <categorized>cs2102</categorized>
-    </tasks>
-    <tasks>
-        <name>Watch CS2102 Webcast 9</name>
-        <priority>Low</priority>
-        <description>No description given.</description>
-        <location>Location has not been set.</location>
-        <dateTime>
-            <startValue></startValue>
-            <endValue></endValue>
-            <timestamp>2017-04-09T02:09:13.740</timestamp>
-        </dateTime>
-        <recurrence>
-            <occurences>0</occurences>
-            <type>None</type>
-        </recurrence>
-        <status>false</status>
-        <timeStamp/>
-        <categorized>cs2102</categorized>
-    </tasks>
-    <tasks>
-        <name>CS3235 project writeup</name>
+        <name>my second event</name>
         <priority>Medium</priority>
         <description>No description given.</description>
         <location>Location has not been set.</location>
         <dateTime>
-            <startValue></startValue>
-            <endValue></endValue>
-            <timestamp>2017-04-09T02:09:13.742</timestamp>
+            <startValue>09/04/2017 1645</startValue>
+            <endValue>10/04/2017 1645</endValue>
         </dateTime>
         <recurrence>
             <occurences>0</occurences>
@@ -174,17 +31,15 @@
         </recurrence>
         <status>false</status>
         <timeStamp/>
-        <categorized>cs3235</categorized>
     </tasks>
     <tasks>
-        <name>CS3235 project submission</name>
+        <name>Driving lesson</name>
         <priority>Medium</priority>
-        <description>No description given.</description>
-        <location>Location has not been set.</location>
+        <description>Bring PDL and wear shoes</description>
+        <location>Ubi Crescent</location>
         <dateTime>
             <startValue></startValue>
             <endValue></endValue>
-            <timestamp>2017-04-09T02:09:13.743</timestamp>
         </dateTime>
         <recurrence>
             <occurences>0</occurences>
@@ -192,35 +47,16 @@
         </recurrence>
         <status>false</status>
         <timeStamp/>
-        <categorized>cs3235</categorized>
+        <categorized>Driving</categorized>
     </tasks>
     <tasks>
-        <name>cs2102 project presentation</name>
-        <priority>Medium</priority>
-        <description>No description given.</description>
-        <location>Location has not been set.</location>
-        <dateTime>
-            <startValue></startValue>
-            <endValue></endValue>
-            <timestamp>2017-04-09T02:09:13.745</timestamp>
-        </dateTime>
-        <recurrence>
-            <occurences>0</occurences>
-            <type>None</type>
-        </recurrence>
-        <status>false</status>
-        <timeStamp/>
-        <categorized>cs2102</categorized>
-    </tasks>
-    <tasks>
-        <name>v04 cs2103</name>
+        <name>CS8888 Test</name>
         <priority>High</priority>
-        <description>merge earlier!</description>
-        <location>Location has not been set.</location>
+        <description>3pm, Open Book</description>
+        <location>NUS, MPSH 4</location>
         <dateTime>
             <startValue></startValue>
             <endValue></endValue>
-            <timestamp>2017-04-09T02:09:13.745</timestamp>
         </dateTime>
         <recurrence>
             <occurences>0</occurences>
@@ -228,332 +64,27 @@
         </recurrence>
         <status>false</status>
         <timeStamp/>
-        <categorized>cs2103</categorized>
-    </tasks>
-    <tasks>
-        <name>v05 cs2103</name>
-        <priority>High</priority>
-        <description>presentation soon, can start preparing</description>
-        <location>Location has not been set.</location>
-        <dateTime>
-            <startValue></startValue>
-            <endValue></endValue>
-            <timestamp>2017-04-09T02:09:13.746</timestamp>
-        </dateTime>
-        <recurrence>
-            <occurences>0</occurences>
-            <type>None</type>
-        </recurrence>
-        <status>false</status>
-        <timeStamp/>
-        <categorized>cs2103</categorized>
-    </tasks>
-    <tasks>
-        <name>Grandma birthday dinner</name>
-        <priority>High</priority>
-        <description>No description given.</description>
-        <location>Din tai fung at NEX</location>
-        <dateTime>
-            <startValue></startValue>
-            <endValue></endValue>
-            <timestamp>2017-04-09T02:09:13.747</timestamp>
-        </dateTime>
-        <recurrence>
-            <occurences>0</occurences>
-            <type>None</type>
-        </recurrence>
-        <status>false</status>
-        <timeStamp/>
-        <categorized>family</categorized>
-    </tasks>
-    <tasks>
-        <name>top up tidbits</name>
-        <priority>Low</priority>
-        <description>No description given.</description>
-        <location>Location has not been set.</location>
-        <dateTime>
-            <startValue></startValue>
-            <endValue></endValue>
-            <timestamp>2017-04-09T02:09:13.748</timestamp>
-        </dateTime>
-        <recurrence>
-            <occurences>0</occurences>
-            <type>None</type>
-        </recurrence>
-        <status>false</status>
-        <timeStamp/>
-        <categorized>lifestyle</categorized>
-    </tasks>
-    <tasks>
-        <name>do some spring cleaning</name>
-        <priority>Low</priority>
-        <description>No description given.</description>
-        <location>Location has not been set.</location>
-        <dateTime>
-            <startValue></startValue>
-            <endValue></endValue>
-            <timestamp>2017-04-09T02:09:13.749</timestamp>
-        </dateTime>
-        <recurrence>
-            <occurences>0</occurences>
-            <type>None</type>
-        </recurrence>
-        <status>false</status>
-        <timeStamp/>
-        <categorized>lifestyle</categorized>
-    </tasks>
-    <tasks>
-        <name>schedule a haircut appointment</name>
-        <priority>Low</priority>
-        <description>No description given.</description>
-        <location>Location has not been set.</location>
-        <dateTime>
-            <startValue></startValue>
-            <endValue></endValue>
-            <timestamp>2017-04-09T02:09:13.749</timestamp>
-        </dateTime>
-        <recurrence>
-            <occurences>0</occurences>
-            <type>None</type>
-        </recurrence>
-        <status>false</status>
-        <timeStamp/>
-        <categorized>lifestyle</categorized>
-    </tasks>
-    <tasks>
-        <name>rehearse for 2103 mock presentation</name>
-        <priority>Medium</priority>
-        <description>No description given.</description>
-        <location>Location has not been set.</location>
-        <dateTime>
-            <startValue></startValue>
-            <endValue></endValue>
-            <timestamp>2017-04-09T02:09:13.754</timestamp>
-        </dateTime>
-        <recurrence>
-            <occurences>0</occurences>
-            <type>None</type>
-        </recurrence>
-        <status>false</status>
-        <timeStamp/>
-        <categorized>cs2103</categorized>
-    </tasks>
-    <tasks>
-        <name>test</name>
-        <priority>Medium</priority>
-        <description>No description given.</description>
-        <location>Location has not been set.</location>
-        <dateTime>
-            <startValue></startValue>
-            <endValue></endValue>
-            <timestamp>2017-04-09T02:09:13.757</timestamp>
-        </dateTime>
-        <recurrence>
-            <occurences>0</occurences>
-            <type>None</type>
-        </recurrence>
-        <status>false</status>
-    </tasks>
-    <tasks>
-        <name>testfloating</name>
-        <priority>Medium</priority>
-        <description>No description given.</description>
-        <location>Location has not been set.</location>
-        <dateTime>
-            <startValue></startValue>
-            <endValue></endValue>
-            <timestamp>2017-04-09T02:09:13.758</timestamp>
-        </dateTime>
-        <recurrence>
-            <occurences>0</occurences>
-            <type>None</type>
-        </recurrence>
-        <status>false</status>
-    </tasks>
-    <tasks>
-        <name>floating</name>
-        <priority>Medium</priority>
-        <description>No description given.</description>
-        <location>Location has not been set.</location>
-        <dateTime>
-            <startValue></startValue>
-            <endValue></endValue>
-            <timestamp>2017-04-09T02:09:13.756</timestamp>
-        </dateTime>
-        <recurrence>
-            <occurences>0</occurences>
-            <type>None</type>
-        </recurrence>
-        <status>false</status>
-    </tasks>
-    <tasks>
-        <name>mytest1</name>
-        <priority>Low</priority>
-        <description>No description given.</description>
-        <location>Location has not been set.</location>
-        <dateTime>
-            <startValue>07/04/2017 0510</startValue>
-            <endValue>08/04/2017 0510</endValue>
-            <timestamp>2017-04-09T02:09:13.759</timestamp>
-        </dateTime>
-        <recurrence>
-            <occurences>0</occurences>
-            <type>None</type>
-        </recurrence>
-        <status>false</status>
-    </tasks>
-    <tasks>
-        <name>Watch CS2103 Webcast 8</name>
-        <priority>Low</priority>
-        <description>No description given.</description>
-        <location>Location has not been set.</location>
-        <dateTime>
-            <startValue></startValue>
-            <endValue></endValue>
-            <timestamp>2017-04-09T02:09:13.760</timestamp>
-        </dateTime>
-        <recurrence>
-            <occurences>0</occurences>
-            <type>None</type>
-        </recurrence>
-        <status>false</status>
-        <categorized>cs2103</categorized>
-    </tasks>
-    <tasks>
-        <name>mytest3</name>
-        <priority>Medium</priority>
-        <description>No description given.</description>
-        <location>Location has not been set.</location>
-        <dateTime>
-            <startValue>07/04/2017 0538</startValue>
-            <endValue>08/04/2017 0538</endValue>
-            <timestamp>2017-04-09T02:09:13.761</timestamp>
-        </dateTime>
-        <recurrence>
-            <occurences>0</occurences>
-            <type>None</type>
-        </recurrence>
-        <status>false</status>
-    </tasks>
-    <tasks>
-        <name>Watch CS2103 Webcast 7</name>
-        <priority>Low</priority>
-        <description>No description given.</description>
-        <location>Location has not been set.</location>
-        <dateTime>
-            <startValue></startValue>
-            <endValue></endValue>
-            <timestamp>2017-04-09T02:09:13.762</timestamp>
-        </dateTime>
-        <recurrence>
-            <occurences>0</occurences>
-            <type>None</type>
-        </recurrence>
-        <status>false</status>
-        <categorized>cs2103</categorized>
-    </tasks>
-    <tasks>
-        <name>eat dinner</name>
-        <priority>Medium</priority>
-        <description>No description given.</description>
-        <location>Location has not been set.</location>
-        <dateTime>
-            <startValue></startValue>
-            <endValue></endValue>
-            <timestamp>2017-04-09T03:59:15.278</timestamp>
-        </dateTime>
-        <recurrence>
-            <occurences>0</occurences>
-            <type>None</type>
-        </recurrence>
-        <status>false</status>
-    </tasks>
-    <tasks>
-        <name>floating with category</name>
-        <priority>Medium</priority>
-        <description>No description given.</description>
-        <location>Location has not been set.</location>
-        <dateTime>
-            <startValue></startValue>
-            <endValue></endValue>
-            <timestamp>2017-04-09T02:09:13.763</timestamp>
-        </dateTime>
-        <recurrence>
-            <occurences>0</occurences>
-            <type>None</type>
-        </recurrence>
-        <status>false</status>
         <categorized>test</categorized>
     </tasks>
     <tasks>
-        <name>test7</name>
+        <name>my 2nd event</name>
         <priority>Medium</priority>
         <description>No description given.</description>
         <location>Location has not been set.</location>
         <dateTime>
-            <startValue></startValue>
-            <endValue></endValue>
-            <timestamp>2017-04-09T03:41:10.742</timestamp>
+            <startValue>09/04/2017 1645</startValue>
+            <endValue>10/04/2017 1645</endValue>
         </dateTime>
         <recurrence>
             <occurences>0</occurences>
             <type>None</type>
         </recurrence>
         <status>false</status>
+        <timeStamp/>
     </tasks>
-    <tasks>
-        <name>myevent</name>
-        <priority>Medium</priority>
-        <description>No description given.</description>
-        <location>Location has not been set.</location>
-        <dateTime>
-            <startValue>09/04/2017 0346</startValue>
-            <endValue>10/04/2017 0346</endValue>
-            <timestamp>2017-04-09T03:46:59.297</timestamp>
-        </dateTime>
-        <recurrence>
-            <occurences>0</occurences>
-            <type>None</type>
-        </recurrence>
-        <status>false</status>
-    </tasks>
-    <tasks>
-        <name>watch cs2104</name>
-        <priority>High</priority>
-        <description>No description given.</description>
-        <location>Location has not been set.</location>
-        <dateTime>
-            <startValue>09/04/2017 0353</startValue>
-            <endValue>10/04/2017 0353</endValue>
-            <timestamp>2017-04-09T03:53:09.729</timestamp>
-        </dateTime>
-        <recurrence>
-            <occurences>0</occurences>
-            <type>None</type>
-        </recurrence>
-        <status>false</status>
-        <categorized>cs2102</categorized>
-    </tasks>
-    <tasks>
-        <name>eat dinner</name>
-        <priority>Low</priority>
-        <description>No description given.</description>
-        <location>Location has not been set.</location>
-        <dateTime>
-            <startValue></startValue>
-            <endValue></endValue>
-            <timestamp>2017-04-09T03:59:15.278</timestamp>
-        </dateTime>
-        <recurrence>
-            <occurences>0</occurences>
-            <type>None</type>
-        </recurrence>
-        <status>false</status>
-    </tasks>
-    <categories>cs2103</categories>
-    <categories>cs2102</categories>
-    <categories>cs3235</categories>
+    <categories>project</categories>
     <categories>family</categories>
-    <categories>lifestyle</categories>
+    <categories>meetup</categories>
+    <categories>Driving</categories>
     <categories>test</categories>
 </taskmanager>

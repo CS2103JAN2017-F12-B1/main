@@ -34,8 +34,7 @@ public class TaskListPanelHandle extends GuiHandle {
     }
 
     public List<ReadOnlyTask> getSelectedTasks() {
-        ListView<ReadOnlyTask> taskList = getListView();
-        return taskList.getSelectionModel().getSelectedItems();
+        return getSelectedTasksFromBothListViews();
     }
 
     public ListView<ReadOnlyTask> getListView() {
@@ -68,7 +67,7 @@ public class TaskListPanelHandle extends GuiHandle {
             }
         }
 
-        return new ArrayList<ReadOnlyTask>();
+        return list;
     }
     //@@author A0140016B
 
