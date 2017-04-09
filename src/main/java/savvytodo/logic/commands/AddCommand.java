@@ -92,8 +92,6 @@ public class AddCommand extends Command {
             );
 
             toAdd.setStatus(new Status());
-            toAdd.getDateTime().setAdd(LocalDateTime.now());
-
             toAddList.add(toAdd);
         }
     }
