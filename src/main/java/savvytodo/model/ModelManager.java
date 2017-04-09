@@ -129,14 +129,28 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskManagerChanged();
     }
 
+    //@@author A0147827U
+    @Override
+    public void updateTask(int filteredTaskListIndex, ReadOnlyTask originalTask, ReadOnlyTask editedTask)
+            throws UniqueTaskList.DuplicateTaskException {
+        assert editedTask != null;
+
+        int taskManagerIndex = getFilteredTasks(originalTask.getType()).getSourceIndex(filteredTaskListIndex);
+        UndoEditOperation undoEdit = new UndoEditOperation(taskManagerIndex, originalTask, editedTask);
+        undoRedoOpCentre.storeUndoOperation(undoEdit);
+        undoRedoOpCentre.resetRedo();
+
+        taskManager.updateTask(taskManagerIndex, editedTask);
+        indicateTaskManagerChanged();
+    }
+
     //@@author A0124863A
     @Override
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException {
         assert editedTask != null;
-
-        int taskManagerIndex = getFilteredTasks(editedTask.getType()).getSourceIndex(filteredTaskListIndex);
         Task originalTask = new Task(getFilteredTasks(editedTask.getType()).get(filteredTaskListIndex));
+        int taskManagerIndex = getFilteredTasks(originalTask.getType()).getSourceIndex(filteredTaskListIndex);
         UndoEditOperation undoEdit = new UndoEditOperation(taskManagerIndex, originalTask, editedTask);
         undoRedoOpCentre.storeUndoOperation(undoEdit);
         undoRedoOpCentre.resetRedo();
