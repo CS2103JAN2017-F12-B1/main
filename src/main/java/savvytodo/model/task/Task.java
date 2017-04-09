@@ -56,6 +56,7 @@ public class Task implements ReadOnlyTask {
         this.dateTime = dateTime;
         this.recurrence = recurrence;
         this.isCompleted = new Status();
+        this.type = new Type(dateTime);
         this.timeStamp = new TimeStamp(timeStamp);
     }
 
