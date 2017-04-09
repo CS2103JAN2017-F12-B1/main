@@ -1,9 +1,11 @@
 package savvytodo.model.task;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 import savvytodo.commons.util.CollectionUtil;
 import savvytodo.model.category.UniqueCategoryList;
+import savvytodo.testutil.TestUtil;
 
 //@@author A0140016B
 /**
@@ -11,7 +13,7 @@ import savvytodo.model.category.UniqueCategoryList;
  * Represents a Task in the task manager.
  * Guarantees: details are present and not null, field values are validated.
  */
-public class Task implements ReadOnlyTask {
+public class Task implements ReadOnlyTask, Comparable<Task> {
 
     private Name name;
     private Priority priority;
@@ -26,8 +28,8 @@ public class Task implements ReadOnlyTask {
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, Priority priority, Description description, Location location,
-            UniqueCategoryList categories, DateTime dateTime, Recurrence recurrence) {
+    public Task(Name name, Priority priority, Description description, Location location, UniqueCategoryList categories,
+            DateTime dateTime, Recurrence recurrence) {
         assert !CollectionUtil.isAnyNull(name, priority, description, location, categories, dateTime, recurrence);
         this.name = name;
         this.priority = priority;
@@ -39,10 +41,10 @@ public class Task implements ReadOnlyTask {
         this.isCompleted = new Status();
     }
 
-    public Task(Name name, Priority priority, Description description, Location location,
-            UniqueCategoryList categories, DateTime dateTime, Recurrence recurrence, Status status) {
-        assert !CollectionUtil.isAnyNull(name, priority, description, location,
-                categories, dateTime, recurrence, status);
+    public Task(Name name, Priority priority, Description description, Location location, UniqueCategoryList categories,
+            DateTime dateTime, Recurrence recurrence, Status status) {
+        assert !CollectionUtil.isAnyNull(name, priority, description, location, categories, dateTime, recurrence,
+                status);
         this.name = name;
         this.priority = priority;
         this.description = description;
@@ -163,13 +165,13 @@ public class Task implements ReadOnlyTask {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof ReadOnlyTask // instanceof handles nulls
-                && this.isSameStateAs((ReadOnlyTask) other));
+                        && this.isSameStateAs((ReadOnlyTask) other));
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, priority, description, location, categories, dateTime, recurrence, isCompleted);
+        return Objects.hash(attributes());
     }
 
     @Override
@@ -177,4 +179,55 @@ public class Task implements ReadOnlyTask {
         return getAsText();
     }
 
+    //@@author A0140036X
+    /**
+     * Array of string representation of all the attributes of a Task.
+     */
+    @SuppressWarnings("rawtypes")
+    private Comparable[] attributes() {
+        return new Comparable[] { name, priority, description, location, categories, dateTime, recurrence,
+                isCompleted };
+    }
+
+    //@@author A0140036X
+    /**
+     * Generic comparison to another task using attributes of a Task.
+     */
+    @SuppressWarnings("rawtypes")
+    @Override
+    public int compareTo(Task o) {
+        Comparable[] thisAttributes = attributes();
+        Comparable[] thatAttributes = o.attributes();
+        int compareVal;
+        for (int i = 0; i < thisAttributes.length; i++) {
+            compareVal = thisAttributes[i].compareTo(thatAttributes[i]);
+            if (compareVal != 0) {
+                return compareVal;
+            }
+        }
+        return 0;
+    }
+
+    //@@author A0140036X
+    /**
+     * Checks if two lists of tasks are the same.
+     */
+    public static boolean areTasksSame(Task[] t1, Task[] t2) {
+        if (t1.length != t2.length) {
+            return false;
+        }
+        Arrays.sort(t1);
+        Arrays.sort(t2);
+
+        for (int i = 0; i < t1.length; i++) {
+            if (!t1[i].equals(t2[i])) {
+                System.out.println(t1[i].hashCode());
+                System.out.println("false");
+
+                TestUtil.printTasks(new Task[] { t1[i], t2[i] });
+                return false;
+            }
+        }
+        return true;
+    }
 }

@@ -6,10 +6,9 @@ import savvytodo.commons.exceptions.IllegalValueException;
  * Represents a Task's name in the task manager.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
-public class Name {
+public class Name implements Comparable<Name> {
 
-    public static final String MESSAGE_NAME_CONSTRAINTS =
-            "Task names should only contain alphanumeric characters and spaces, and it should not be blank";
+    public static final String MESSAGE_NAME_CONSTRAINTS = "Task names should only contain alphanumeric characters and spaces, and it should not be blank";
 
     /*
      * The first character of the name must not be a whitespace,
@@ -40,7 +39,6 @@ public class Name {
         return test.matches(NAME_VALIDATION_REGEX);
     }
 
-
     @Override
     public String toString() {
         return name;
@@ -50,12 +48,18 @@ public class Name {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Name // instanceof handles nulls
-                && this.name.equals(((Name) other).name)); // state check
+                        && this.name.equals(((Name) other).name)); // state check
     }
 
     @Override
     public int hashCode() {
         return name.hashCode();
+    }
+
+    //@@author A0140036X
+    @Override
+    public int compareTo(Name o) {
+        return toString().compareTo(o.toString());
     }
 
 }
