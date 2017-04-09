@@ -51,6 +51,7 @@ import savvytodo.model.task.Priority;
 import savvytodo.model.task.ReadOnlyTask;
 import savvytodo.model.task.Recurrence;
 import savvytodo.model.task.Task;
+import savvytodo.model.task.TimeStamp;
 import savvytodo.storage.StorageManager;
 
 public class LogicManagerTest {
@@ -402,7 +403,9 @@ public class LogicManagerTest {
             UniqueCategoryList categories = new UniqueCategoryList(category1, category2);
             DateTime dateTime = new DateTime(DateTime.DEFAULT_VALUES);
             Recurrence recurrence = new Recurrence(Recurrence.DEFAULT_VALUES);
-            return new Task(name, privatePriority, description, privateLocation, categories, dateTime, recurrence);
+            TimeStamp timeStamp = new TimeStamp(TimeStamp.DEFAULT_DATE_TIME);
+            return new Task(name, privatePriority, description, privateLocation, categories, dateTime,
+                    recurrence, timeStamp);
         }
 
         //@@author A0140016B
@@ -424,7 +427,8 @@ public class LogicManagerTest {
                     new UniqueCategoryList(new Category("category" + Math.abs(seed)),
                             new Category("category" + Math.abs(seed + 1))),
                     new DateTime("01/03/2017 1600", dateTimeSeedProperties + "/03/2017 1800"),
-                    new Recurrence(recurrenceSeedProperties[seed % 5], Math.abs(seed)));
+                    new Recurrence(recurrenceSeedProperties[seed % 5], Math.abs(seed)),
+                    new TimeStamp(TimeStamp.DEFAULT_DATE_TIME));
         }
         //@@author
 
@@ -531,7 +535,8 @@ public class LogicManagerTest {
         Task generateTaskWithName(String name) throws Exception {
             return new Task(new Name(name), new Priority("low"), new Description("1 description"),
                     new Location("House of 1"), new UniqueCategoryList(new Category("category")),
-                    new DateTime(DateTime.DEFAULT_VALUES), new Recurrence(Recurrence.DEFAULT_VALUES));
+                    new DateTime(DateTime.DEFAULT_VALUES), new Recurrence(Recurrence.DEFAULT_VALUES),
+                    new TimeStamp(TimeStamp.DEFAULT_DATE_TIME));
         }
     }
 }

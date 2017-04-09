@@ -121,8 +121,6 @@ public class ModelManager extends ComponentManager implements Model {
         undoRedoOpCentre.storeUndoOperation(undoAdd);
         undoRedoOpCentre.resetRedo();
 
-        taskManager.sortByDatetimeAdded();
-
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
     }
@@ -158,7 +156,6 @@ public class ModelManager extends ComponentManager implements Model {
             Operation undo = undoRedoOpCentre.getUndoOperation();
             if (undo.getClass().isAssignableFrom(UndoMarkOperation.class)) {
                 UndoMarkOperation undoMark = (UndoMarkOperation) undo;
-                taskManager.sortByDatetimeAdded();
                 undoMark.setTaskManager(taskManager);
                 undoMark.setUndoRedoOperationCentre(undoRedoOpCentre);
                 undoMark.execute();

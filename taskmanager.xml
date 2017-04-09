@@ -1,8 +1,42 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <taskmanager>
     <tasks>
-        <name>mytest5</name>
-        <priority>High</priority>
+        <name>Watch CS2103 Webcast 8</name>
+        <priority>Low</priority>
+        <description>No description given.</description>
+        <location>Location has not been set.</location>
+        <dateTime>
+            <startValue></startValue>
+            <endValue></endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <timeStamp/>
+        <categorized>cs2103</categorized>
+    </tasks>
+    <tasks>
+        <name>Watch CS2103 Webcast 7</name>
+        <priority>Low</priority>
+        <description>No description given.</description>
+        <location>Location has not been set.</location>
+        <dateTime>
+            <startValue></startValue>
+            <endValue></endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <timeStamp/>
+        <categorized>cs2103</categorized>
+    </tasks>
+    <tasks>
+        <name>Watch CS2103 Webcast 9</name>
+        <priority>Low</priority>
         <description>No description given.</description>
         <location>Location has not been set.</location>
         <dateTime>
@@ -14,6 +48,8 @@
             <type>None</type>
         </recurrence>
         <status>false</status>
+        <timeStamp/>
+        <categorized>cs2103</categorized>
     </tasks>
     <tasks>
         <name>mytest5</name>
@@ -29,6 +65,8 @@
             <type>None</type>
         </recurrence>
         <status>false</status>
+        <timeStamp/>
+        <categorized>cs2103</categorized>
     </tasks>
     <tasks>
         <name>Watch CS2103 Webcast 11</name>
@@ -44,6 +82,7 @@
             <type>None</type>
         </recurrence>
         <status>false</status>
+        <timeStamp/>
         <categorized>cs2103</categorized>
     </tasks>
     <tasks>
@@ -60,6 +99,7 @@
             <type>None</type>
         </recurrence>
         <status>false</status>
+        <timeStamp/>
         <categorized>cs2102</categorized>
     </tasks>
     <tasks>
@@ -76,6 +116,7 @@
             <type>None</type>
         </recurrence>
         <status>false</status>
+        <timeStamp/>
         <categorized>cs2102</categorized>
     </tasks>
     <tasks>
@@ -92,6 +133,7 @@
             <type>None</type>
         </recurrence>
         <status>false</status>
+        <timeStamp/>
         <categorized>cs2102</categorized>
     </tasks>
     <tasks>
@@ -108,6 +150,7 @@
             <type>None</type>
         </recurrence>
         <status>false</status>
+        <timeStamp/>
         <categorized>cs2102</categorized>
     </tasks>
     <tasks>
@@ -124,6 +167,7 @@
             <type>None</type>
         </recurrence>
         <status>false</status>
+        <timeStamp/>
         <categorized>cs3235</categorized>
     </tasks>
     <tasks>
@@ -140,6 +184,7 @@
             <type>None</type>
         </recurrence>
         <status>false</status>
+        <timeStamp/>
         <categorized>cs3235</categorized>
     </tasks>
     <tasks>
@@ -156,6 +201,7 @@
             <type>None</type>
         </recurrence>
         <status>false</status>
+        <timeStamp/>
         <categorized>cs2102</categorized>
     </tasks>
     <tasks>
@@ -172,6 +218,7 @@
             <type>None</type>
         </recurrence>
         <status>false</status>
+        <timeStamp/>
         <categorized>cs2103</categorized>
     </tasks>
     <tasks>
@@ -188,6 +235,7 @@
             <type>None</type>
         </recurrence>
         <status>false</status>
+        <timeStamp/>
         <categorized>cs2103</categorized>
     </tasks>
     <tasks>
@@ -204,6 +252,7 @@
             <type>None</type>
         </recurrence>
         <status>false</status>
+        <timeStamp/>
         <categorized>family</categorized>
     </tasks>
     <tasks>
@@ -220,6 +269,7 @@
             <type>None</type>
         </recurrence>
         <status>false</status>
+        <timeStamp/>
         <categorized>lifestyle</categorized>
     </tasks>
     <tasks>
@@ -236,6 +286,7 @@
             <type>None</type>
         </recurrence>
         <status>false</status>
+        <timeStamp/>
         <categorized>lifestyle</categorized>
     </tasks>
     <tasks>
@@ -252,6 +303,7 @@
             <type>None</type>
         </recurrence>
         <status>false</status>
+        <timeStamp/>
         <categorized>lifestyle</categorized>
     </tasks>
     <tasks>
@@ -268,6 +320,7 @@
             <type>None</type>
         </recurrence>
         <status>false</status>
+        <timeStamp/>
         <categorized>cs2103</categorized>
     </tasks>
     <tasks>
