@@ -39,7 +39,7 @@ public class MainApp extends Application {
 
     public static final Version VERSION = new Version(1, 0, 0, true);
 
-    private static MainApp RUNNING_INSTANCE = null;
+    private static MainApp running_instance = null;
 
     protected Ui ui;
     protected Logic logic;
@@ -56,15 +56,16 @@ public class MainApp extends Application {
      * @return
      */
     public static MainApp getRunningInstance() {
-        return RUNNING_INSTANCE;
+        return running_instance;
     }
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing Task Manager ]===========================");
+        logger.info(
+                "=============================[ Initializing Task Manager ]===========================");
         super.init();
 
-        RUNNING_INSTANCE = this;
+        running_instance = this;
 
         initEventsCenter();
 
@@ -79,16 +80,19 @@ public class MainApp extends Application {
      * @param configFilePath File path of json file containing configurations
      * @param useSampleDataIfStorageFileNotFound
      */
-    public void initApplicationFromConfig(String configFilePath, boolean useSampleDataIfStorageFileNotFound) {
+    public void initApplicationFromConfig(String configFilePath,
+            boolean useSampleDataIfStorageFileNotFound) {
         config = initConfig(configFilePath);
 
-        storage = new StorageManager(config.getTaskManagerFilePath(), config.getUserPrefsFilePath());
+        storage = new StorageManager(config.getTaskManagerFilePath(),
+                config.getUserPrefsFilePath());
 
         userPrefs = initPrefs(config);
 
         initLogging(config);
 
-        model = initModelManager(storage, userPrefs, useSampleDataIfStorageFileNotFound ? null : new TaskManager());
+        model = initModelManager(storage, userPrefs,
+                useSampleDataIfStorageFileNotFound ? null : new TaskManager());
         logic = new LogicManager(model, storage);
         ui = new UiManager(logic, config, userPrefs);
     }
@@ -108,15 +112,18 @@ public class MainApp extends Application {
      * @param defaultTaskManager see method description
      * @return initialized Model
      */
-    private Model initModelManager(Storage storage, UserPrefs userPrefs, TaskManager defaultTaskManager) {
+    private Model initModelManager(Storage storage, UserPrefs userPrefs,
+            TaskManager defaultTaskManager) {
         ReadOnlyTaskManager initialData;
         try {
             initialData = getTaskManagerFromStorage(storage, defaultTaskManager);
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty TaskManager");
+            logger.warning(
+                    "Data file not in the correct format. Will be starting with an empty TaskManager");
             initialData = new TaskManager();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty TaskManager");
+            logger.warning(
+                    "Problem while reading from the file. Will be starting with an empty TaskManager");
             initialData = new TaskManager();
         }
 
@@ -124,16 +131,16 @@ public class MainApp extends Application {
     }
 
     //@@author A0140036X
-    private ReadOnlyTaskManager getTaskManagerFromStorage(Storage storage2, ReadOnlyTaskManager defaultTaskManager)
-            throws DataConversionException, IOException {
+    private ReadOnlyTaskManager getTaskManagerFromStorage(Storage storage2,
+            ReadOnlyTaskManager defaultTaskManager) throws DataConversionException, IOException {
         Optional<ReadOnlyTaskManager> taskManagerOptional = storage.readTaskManager();
         if (!taskManagerOptional.isPresent()) {
             logger.info("Data file not found. Will be starting with "
                     + ((defaultTaskManager == null ? "a sample " : "provided ") + "TaskManager"));
         }
         logger.info("Data file found " + storage.getTaskManagerFilePath());
-        ReadOnlyTaskManager initialData = taskManagerOptional
-                .orElseGet(defaultTaskManager == null ? SampleDataUtil::getSampleTaskManager : () -> new TaskManager());
+        ReadOnlyTaskManager initialData = taskManagerOptional.orElseGet(defaultTaskManager == null
+                ? SampleDataUtil::getSampleTaskManager : () -> new TaskManager());
         return initialData;
     }
 
@@ -210,7 +217,8 @@ public class MainApp extends Application {
                     + "Using default user prefs");
             initializedPrefs = new UserPrefs();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty TaskManager");
+            logger.warning(
+                    "Problem while reading from the file. Will be starting with an empty TaskManager");
             initializedPrefs = new UserPrefs();
         }
         return initializedPrefs;
@@ -244,7 +252,8 @@ public class MainApp extends Application {
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping Task Manager ] =============================");
+        logger.info(
+                "============================ [ Stopping Task Manager ] =============================");
         ui.stop();
         try {
             storage.saveUserPrefs(userPrefs);

@@ -27,9 +27,10 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, Priority priority, Description description, Location location, UniqueCategoryList categories,
-            DateTime dateTime, Recurrence recurrence) {
-        assert !CollectionUtil.isAnyNull(name, priority, description, location, categories, dateTime, recurrence);
+    public Task(Name name, Priority priority, Description description, Location location,
+            UniqueCategoryList categories, DateTime dateTime, Recurrence recurrence) {
+        assert !CollectionUtil.isAnyNull(name, priority, description, location, categories,
+                dateTime, recurrence);
         this.name = name;
         this.priority = priority;
         this.description = description;
@@ -40,10 +41,11 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         this.isCompleted = new Status();
     }
 
-    public Task(Name name, Priority priority, Description description, Location location, UniqueCategoryList categories,
-            DateTime dateTime, Recurrence recurrence, Status status) {
-        assert !CollectionUtil.isAnyNull(name, priority, description, location, categories, dateTime, recurrence,
-                status);
+    public Task(Name name, Priority priority, Description description, Location location,
+            UniqueCategoryList categories, DateTime dateTime, Recurrence recurrence,
+            Status status) {
+        assert !CollectionUtil.isAnyNull(name, priority, description, location, categories,
+                dateTime, recurrence, status);
         this.name = name;
         this.priority = priority;
         this.description = description;
@@ -59,7 +61,8 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
      */
     public Task(ReadOnlyTask source) {
         this(source.getName(), source.getPriority(), source.getDescription(), source.getLocation(),
-                source.getCategories(), source.getDateTime(), source.getRecurrence(), source.isCompleted());
+                source.getCategories(), source.getDateTime(), source.getRecurrence(),
+                source.isCompleted());
     }
 
     public void setName(Name name) {
@@ -184,8 +187,9 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
      */
     @SuppressWarnings("rawtypes")
     private Comparable[] attributes() {
-        return new Comparable[] { name, priority, description, location, categories, dateTime, recurrence,
-                isCompleted };
+        Comparable[] attributes = new Comparable[] { name, priority, description, location,
+                categories, dateTime, recurrence, isCompleted };
+        return attributes;
     }
 
     //@@author A0140036X

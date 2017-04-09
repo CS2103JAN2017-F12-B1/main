@@ -203,9 +203,9 @@ public class DateTime implements Comparable<DateTime> {
      * Set method for add
      * @param LocalDateTime
      */
-    public void setAdd(LocalDateTime DateTimeAdded) {
-        timestamp = DateTimeAdded.toString();
-        this.add = DateTimeAdded;
+    public void setAdd(LocalDateTime dateTimeAdded) {
+        timestamp = dateTimeAdded.toString();
+        this.add = dateTimeAdded;
     }
 
 }

@@ -8,7 +8,8 @@ import savvytodo.commons.exceptions.IllegalValueException;
  */
 public class Name implements Comparable<Name> {
 
-    public static final String MESSAGE_NAME_CONSTRAINTS = "Task names should only contain alphanumeric characters and spaces, and it should not be blank";
+    public static final String MESSAGE_NAME_CONSTRAINTS = "Task names should only "
+            + " contain alphanumeric characters and spaces, and it should not be blank";
 
     /*
      * The first character of the name must not be a whitespace,

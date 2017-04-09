@@ -8,7 +8,8 @@ import savvytodo.commons.exceptions.IllegalValueException;
  */
 public class Location implements Comparable<Location> {
 
-    public static final String MESSAGE_LOCATION_CONSTRAINTS = "Task location can take any values, and it should not be blank";
+    public static final String MESSAGE_LOCATION_CONSTRAINTS = "Task location can take any values "
+            + ", and it should not be blank";
     public static final String LOCATION_DEFAULT_VALUES = "Location has not been set.";
 
     /*
