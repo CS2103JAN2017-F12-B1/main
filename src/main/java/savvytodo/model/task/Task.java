@@ -5,7 +5,6 @@ import java.util.Objects;
 
 import savvytodo.commons.util.CollectionUtil;
 import savvytodo.model.category.UniqueCategoryList;
-import savvytodo.testutil.TestUtil;
 
 //@@author A0140016B
 /**
@@ -221,10 +220,6 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
 
         for (int i = 0; i < t1.length; i++) {
             if (!t1[i].equals(t2[i])) {
-                System.out.println(t1[i].hashCode());
-                System.out.println("false");
-
-                TestUtil.printTasks(new Task[] { t1[i], t2[i] });
                 return false;
             }
         }
