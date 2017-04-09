@@ -4,6 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import java.net.URL?>
+<!-- @@author A0147827U -->
 <VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <stylesheets>
       <URL value="@DarkTheme.css" />
@@ -31,13 +32,13 @@
       </AnchorPane>
        <AnchorPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="anchor-pane-with-border" minHeight="100" prefHeight="100" maxHeight="100">
            <padding>
-               <Insets top="5.0" bottom="5.0" left="10.0" right="10.0"/>
+               <Insets top="10.0" bottom="10.0" left="10.0" right="10.0"/>
            </padding>
        </AnchorPane>
       <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.4" VBox.vgrow="ALWAYS">
          <items>
-            <VBox fx:id="floatingTaskList" minWidth="340" prefWidth="340">
-            	<Label fx:id="taskListLabel" styleClass="label-bright">FLOATING TASKS AND DEADLINES</Label>
+            <VBox fx:id="floatingTaskList" minWidth="340" prefWidth="340" styleClass="floatingTaskList">
+            	<Label fx:id="taskListLabel" styleClass="label-task-type">TASKS AND DEADLINES</Label>
                 <padding>
                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
                 </padding>
@@ -45,8 +46,8 @@
                   <AnchorPane fx:id="floatingTaskListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
                </children>
             </VBox>
-            <VBox fx:id="eventTaskList" minWidth="340" prefWidth="340">
-            	<Label fx:id="taskListLabel" styleClass="label-bright">EVENTS</Label>
+            <VBox fx:id="eventTaskList" minWidth="340" prefWidth="340" maxWidth="340" styleClass="eventTaskList">
+            	<Label fx:id="taskListLabel" styleClass="label-task-type">EVENTS</Label>
                 <padding>
                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
                 </padding>
@@ -55,7 +56,7 @@
                </children>
             </VBox>
             
-            <AnchorPane fx:id="browserPlaceholder" prefWidth="340" >
+            <AnchorPane fx:id="browserPlaceholder" prefWidth="340" styleClass="browser-pane">
                 <padding>
                     <Insets top="10" bottom="10" left="10" right="10"/>
                 </padding>

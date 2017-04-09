@@ -7,6 +7,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import guitests.GuiRobot;
+
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.control.ListView;
@@ -15,19 +16,24 @@ import savvytodo.TestApp;
 import savvytodo.model.task.ReadOnlyTask;
 import savvytodo.model.task.Task;
 import savvytodo.testutil.TestUtil;
-
+//@@author A0147827U
 /**
- * Provides a handle for the panel containing the task list.
+ * Provides a handle for the panel containing the specified task list.
  */
 public class TaskListPanelHandle extends GuiHandle {
 
     public static final int NOT_FOUND = -1;
     public static final String CARD_PANE_ID = "#cardPane";
 
-    private static final String TASK_LIST_VIEW_ID = "#taskListView";
+    //to identify the right task list view
+    public static final String FLOATING_TASK_LIST_VIEW_ID = "#taskListView";
+    public static final String EVENT_TASK_LIST_VIEW_ID = "#eventTaskListView";
 
-    public TaskListPanelHandle(GuiRobot guiRobot, Stage primaryStage) {
+    private String viewId;
+
+    public TaskListPanelHandle(GuiRobot guiRobot, Stage primaryStage, String viewId) {
         super(guiRobot, primaryStage, TestApp.APP_TITLE);
+        this.viewId = viewId;
     }
 
     public List<ReadOnlyTask> getSelectedTasks() {
@@ -36,7 +42,7 @@ public class TaskListPanelHandle extends GuiHandle {
     }
 
     public ListView<ReadOnlyTask> getListView() {
-        return getNode(TASK_LIST_VIEW_ID);
+        return getNode(viewId);
     }
 
     /**
@@ -52,6 +58,7 @@ public class TaskListPanelHandle extends GuiHandle {
      * @param startPosition The starting position of the sub list.
      * @param tasks A list of task in the correct order.
      */
+
     public boolean isListMatching(int startPosition, boolean ignoreOrder, ReadOnlyTask... tasks)
             throws IllegalArgumentException {
         if (tasks.length + startPosition != getListView().getItems().size()) {
@@ -123,7 +130,9 @@ public class TaskListPanelHandle extends GuiHandle {
     }
 
     public TaskCardHandle navigateToTask(String name) {
-        guiRobot.sleep(100); //Allow a bit of time for the list to be updated
+
+        guiRobot.sleep(2000); //Allow a bit of time for the list to be updated
+
         final Optional<ReadOnlyTask> task = getListView().getItems().stream().filter(p -> p.getName().name.equals(name))
                 .findAny();
         if (!task.isPresent()) {

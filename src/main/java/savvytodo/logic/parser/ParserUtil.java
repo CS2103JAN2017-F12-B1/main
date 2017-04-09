@@ -31,7 +31,6 @@ import savvytodo.model.task.TaskType;
 public class ParserUtil {
 
     private static final int CHAR_POS_0 = 0;
-    private static final int CHAR_POS_1 = 1;
     private static final int SIZE_OF_DATE_TIME_INPUT = 1;
     private static final int ARRAY_FIELD_2 = 1;
     private static final int ARRAY_FIELD_1 = 0;
@@ -231,8 +230,18 @@ public class ParserUtil {
         assert recurrence != null;
         if (recurrence.isPresent()) {
             String [] recurValues = recurrence.get().split(StringUtil.WHITESPACE_REGEX);
-            return Optional
-                    .of(new Recurrence(recurValues[ARRAY_FIELD_1], Integer.parseInt(recurValues[ARRAY_FIELD_2])));
+            if (recurValues.length == 2) {
+                if (!StringUtil.isUnsignedInteger(recurValues[ARRAY_FIELD_2])) {
+                    throw new IllegalValueException(Recurrence.MESSAGE_INVALID_RECUR_NUM);
+                }
+                return Optional
+                        .of(new Recurrence(recurValues[ARRAY_FIELD_1], Integer.parseInt(recurValues[ARRAY_FIELD_2])));
+            } else if (recurValues.length == 1) {
+                return Optional
+                        .of(new Recurrence(recurValues[ARRAY_FIELD_1],
+                                Integer.parseInt(Recurrence.DEFAULT_VALUES[ARRAY_FIELD_2])));
+            }
+            throw new IllegalValueException(Recurrence.MESSAGE_RECURR_CONSTRAINTS);
         } else {
             return Optional.empty();
         }

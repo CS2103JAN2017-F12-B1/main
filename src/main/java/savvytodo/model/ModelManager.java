@@ -129,15 +129,29 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskManagerChanged();
     }
 
+    //@@author A0147827U
+    @Override
+    public void updateTask(int filteredTaskListIndex, ReadOnlyTask originalTask, ReadOnlyTask editedTask)
+            throws UniqueTaskList.DuplicateTaskException {
+        assert editedTask != null;
+
+        int taskManagerIndex = getFilteredTasks(originalTask.getType()).getSourceIndex(filteredTaskListIndex);
+        UndoEditOperation undoEdit = new UndoEditOperation(taskManagerIndex, originalTask, editedTask);
+        undoRedoOpCentre.storeUndoOperation(undoEdit);
+        undoRedoOpCentre.resetRedo();
+
+        taskManager.updateTask(taskManagerIndex, editedTask);
+        indicateTaskManagerChanged();
+    }
+
     //@@author A0124863A
     @Override
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException {
         assert editedTask != null;
-
-        int taskManagerIndex = getFilteredTasks(editedTask.getType()).getSourceIndex(filteredTaskListIndex);
         Task originalTask = new Task(getFilteredTasks(editedTask.getType()).get(filteredTaskListIndex));
-        UndoEditOperation undoEdit = new UndoEditOperation(filteredTaskListIndex, originalTask, editedTask);
+        int taskManagerIndex = getFilteredTasks(originalTask.getType()).getSourceIndex(filteredTaskListIndex);
+        UndoEditOperation undoEdit = new UndoEditOperation(taskManagerIndex, originalTask, editedTask);
         undoRedoOpCentre.storeUndoOperation(undoEdit);
         undoRedoOpCentre.resetRedo();
 
@@ -171,7 +185,7 @@ public class ModelManager extends ComponentManager implements Model {
                 indicateTaskManagerChanged();
             }
         } catch (EmptyStackException e) {
-            throw new UndoFailureException(e.getMessage());
+            throw new UndoFailureException("empty stack");
         } catch (CommandException e) {
             throw new UndoFailureException(e.getMessage());
         }
@@ -195,7 +209,7 @@ public class ModelManager extends ComponentManager implements Model {
                 indicateTaskManagerChanged();
             }
         } catch (EmptyStackException e) {
-            throw new RedoFailureException(e.getMessage());
+            throw new RedoFailureException("empty stack");
         } catch (CommandException e) {
             throw new RedoFailureException(e.getMessage());
         }
@@ -251,11 +265,12 @@ public class ModelManager extends ComponentManager implements Model {
      */
     private FilteredList<ReadOnlyTask> getFilteredTasks(Type type) {
         switch (type.getType()) {
-        case FLOATING:
-            return filteredFloatingTasks;
         case EVENT:
-        default:
             return filteredEventTasks;
+        case FLOATING:
+        case DEADLINE:
+        default:
+            return filteredFloatingTasks;
         }
     }
 
@@ -271,6 +286,7 @@ public class ModelManager extends ComponentManager implements Model {
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList(TaskType taskType) {
         switch(taskType) {
         case FLOATING:
+        case DEADLINE:
             return new UnmodifiableObservableList<>(getFilteredFloatingTaskList());
         case EVENT:
         default:
@@ -298,7 +314,6 @@ public class ModelManager extends ComponentManager implements Model {
         filteredFloatingTasks.setPredicate(Type.getFloatingType().getPredicate()
                 .or(Type.getDeadlineType().getPredicate()));
         filteredEventTasks.setPredicate(Type.getEventType().getPredicate());
-
     }
 
     @Override

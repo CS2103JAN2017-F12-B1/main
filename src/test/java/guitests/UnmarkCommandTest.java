@@ -107,14 +107,14 @@ public class UnmarkCommandTest extends TaskManagerGuiTest {
 
         for (TestTask unmarkedTask : unmarkedTasks) {
             // confirm the new card contains the right data
-            TaskCardHandle editedCard = taskListPanel.navigateToTask(unmarkedTask.getName().name);
+            TaskCardHandle editedCard = eventTaskListPanel.navigateToTask(unmarkedTask.getName().name);
             assertMatching(unmarkedTask, editedCard);
 
             expectedTasksList[targetIndices.peek() - 1] = unmarkedTask;
             resultSb.append(String.format(MESSAGE_UNMARK_TASK_SUCCESS, targetIndices.pop()));
         }
 
-        assertTrue(taskListPanel.isListMatching(expectedTasksList));
+        assertTrue(eventTaskListPanel.isListMatching(expectedTasksList));
         assertResultMessage(resultSb.toString());
     }
 
@@ -136,13 +136,13 @@ public class UnmarkCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand("unmark " + filteredTaskListIndex);
 
         // confirm the new card contains the right data
-        TaskCardHandle editedCard = taskListPanel.navigateToTask(umarkedTask.getName().name);
+        TaskCardHandle editedCard = eventTaskListPanel.navigateToTask(umarkedTask.getName().name);
         assertMatching(umarkedTask, editedCard);
 
         // confirm the list now contains all previous tasks plus the task with
         // updated details
         expectedTasksList[umarkedTaskIndex - 1] = umarkedTask;
-        assertTrue(taskListPanel.isListMatching(expectedTasksList));
+        assertTrue(eventTaskListPanel.isListMatching(expectedTasksList));
         assertResultMessage(String.format(MESSAGE_UNMARK_TASK_SUCCESS, umarkedTaskIndex));
     }
 

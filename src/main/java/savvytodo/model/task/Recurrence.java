@@ -70,10 +70,14 @@ public class Recurrence implements Comparable<Recurrence> {
     public int occurences;
     public Type type;
 
-    public static final String MESSAGE_RECURR_CONSTRAINTS = "If recurrence type is NONE, occurences can only be 0";
-    public static final String MESSAGE_RECURR_NOT_MATCH = "Task recurrence type should be "
-            + "'none', 'daily', 'weekly', 'monthly' or 'yearly'";
-    public static final String[] DEFAULT_VALUES = { Type.None.toString(), "0" };
+    public static final String MESSAGE_RECURR_CONSTRAINTS = "Recurrence Parameters accepted: r/TYPE [NUM OF TIMES] \n"
+            + "with [NUM OF TIMES] = 0 if not specified AND If recurrence type is NONE, occurences can only be 0!\n"
+            + "Else for other type, if occurences is 0 => forever recurring!\n"
+            + "Some examples: r/w 2, r/daily 3, r/n 0";
+    public static final String MESSAGE_RECURR_NOT_MATCH =
+            "Task recurrence type should be 'none', 'daily', 'weekly', 'monthly' or 'yearly'";
+    public static final String MESSAGE_INVALID_RECUR_NUM = "Number of recurrence provided is invalid!";
+    public static final String[] DEFAULT_VALUES = {Type.None.toString(), "0"};
 
     /**
      * Default constructor

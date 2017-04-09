@@ -19,7 +19,6 @@ import savvytodo.commons.util.FxViewUtil;
 import savvytodo.logic.Logic;
 import savvytodo.model.UserPrefs;
 import savvytodo.model.task.ReadOnlyTask;
-import savvytodo.model.task.TaskType;
 import savvytodo.ui.hotkeys.HotKeysManager;
 
 //@@author A0147827U
@@ -39,7 +38,7 @@ public class MainWindow extends UiPart<Region> {
 
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
-    private TaskListPanel eventTaskListPanel;
+    private EventTaskListPanel eventTaskListPanel;
     private TaskListPanel floatingTaskListPanel;
     private Config config;
 
@@ -135,7 +134,8 @@ public class MainWindow extends UiPart<Region> {
         browserPanel = new BrowserPanel(browserPlaceholder);
 
         if (eventTaskListPanel == null) {
-            eventTaskListPanel = new TaskListPanel(getEventTaskListPlaceholder(), logic.getFilteredEventTaskList());
+            eventTaskListPanel = new EventTaskListPanel(getEventTaskListPlaceholder(),
+                    logic.getFilteredEventTaskList());
         } else {
             eventTaskListPanel.setConnections(logic.getFilteredEventTaskList());
         }
@@ -162,6 +162,7 @@ public class MainWindow extends UiPart<Region> {
         } else {
             commandBox.setLogic(logic);
         }
+
     }
 
     private AnchorPane getCommandBoxPlaceholder() {
@@ -241,16 +242,12 @@ public class MainWindow extends UiPart<Region> {
         raise(new ExitAppRequestEvent());
     }
 
-    public TaskListPanel getTaskListPanel(TaskType targetTaskList) {
-        switch(targetTaskList) {
-        case FLOATING:
-            return this.floatingTaskListPanel;
-        case EVENT:
-        default:
-            return this.eventTaskListPanel;
-        }
+    public TaskListPanel getTaskListPanel() {
+        return this.floatingTaskListPanel;
     }
-
+    public EventTaskListPanel getEventTaskListPanel() {
+        return this.eventTaskListPanel;
+    }
     void loadTaskPage(ReadOnlyTask task) {
         browserPanel.loadTaskPage(task);
     }
