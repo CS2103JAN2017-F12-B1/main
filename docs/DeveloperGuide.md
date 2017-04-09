@@ -156,7 +156,7 @@ _Figure 2.2.1 : Structure of the UI Component_
 
 **API** : [`Ui.java`](../src/main/java/savvytodo/ui/Ui.java)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `TaskListPanel`,
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `TaskListPanels`,
 `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
@@ -168,8 +168,12 @@ The `UI` component,
 
 * Executes user commands using the `Logic` component.
 * Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
+    * For example, the UI holds two `UnmodifiableObservableList<ReadOnlyTask>` lists for displaying the tasks based on their types. The lists will refresh automatically based on the predicates set on them by `Model`.
 * Responds to events raised from various parts of the App and updates the UI accordingly.
 * Responds to keyboard shortcuts and executes the corresponding user commands.
+
+The diagram below demonstrates the interaction between the UI and the Event Bus through the example of a user launching the exit shortcut
+<img src="images/UIHandleShortcutSequenceDiagram.png" width="800"><br>_Figure 2.2.2 : Sequence Diagram for handling a Exit shortcut event_
 
 ### 2.3. Logic component
 
@@ -211,13 +215,13 @@ the user, undoRedoOperationCentre will pop the undoAddOperation and execute it t
 of undoAddOperation will be stored in the redo stack of UndoRedoOperationCentre after the undo stack pop, so that redo can be called after undo. 
 Redo works the same way as undo.
 
-* exposes a `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed' e.g. the UI can be bound to this list
-  so that the UI automatically updates when the data in the list change.
+* exposes two `UnmodifiableObservableList<ReadOnlyTask>` (for *Floating Tasks & Deadlines* and *Events*) that can be 'observed' e.g. the UI can be bound to these two lists
+  so that the UI automatically updates when the data in the list change. (author: Jing Loon)
 * does not depend on any of the other three components.
 
 ### 2.5. Storage component
 
-Author: Darius Foong
+Author: Joel Lim
 
 <img src="images/StorageClassDiagram.png" width="800"><br>
 _Figure 2.5.1 : Structure of the Storage Component_
@@ -376,16 +380,13 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | sort ongoing tasks by due date or priority | know what has been completed and upcoming schedule
 `* * *` | user | change storage location | potentially move the storage to a folder that I can access from the cloud and use it on other devices
 `* *` | user | undo the recent command | revert the changes quickly
-`* *` | user | view the calendar view | better plan my tasks
-`* *` | user | view selected day summary of tasks | know what tasks need to be done for that day
 `* *` | advanced user | use keyboards commands/hot keys | quickly achieve what I want without typing
-`* *` | advanced user | have [alias](#alias) for keywords | quickly type what I want
 `*` | user | set recurring task | not add a similar task each time
 `*` | user | have smart autocomplete suggestions as I enter my task | speed up the process of creating a task
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `SavvyToDo` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `SavvyToDo` task manager and the **Actor** is the `user`, unless specified otherwise)
 
 ### Use case: Add task
 
@@ -447,7 +448,7 @@ Use case ends.
 > 2a1. System shows a 'no task found' alert message.<br>
 > Use case ends
 
-### Use case: Modify task
+### Use case: Update task
 
 **MSS**
 
@@ -555,41 +556,6 @@ Use case ends.
 > 3a1. System shows an error message
 > Use case ends
 
-### Use case: Alias keyword
-
-**MSS**
-
-1. User requests to alias a keyword (can be a command or any other frequently used word)
-2. System store the shorten keyword associated with the keyword in its database
-3. User request a command
-4. System check if the command contain any shorten keyword, if it does, replace the shorten keyword with the associated keyword from its database
-5. System carry out the command <br>
-Use case ends.
-
-**Extensions**
-
-1a. The alias keyword contains only 1 character
-> 1a1. System shows a error message
-> Use case resumes at step 1 <br>
-
-1b. The alias keyword has already been associated with other keywords
-> 1b1. System shows a error message and the alias keyword's original associated keyword
-> Use case resumes at step 1 <br>
-
-### Use case: Unalias keyword
-
-**MSS**
-
-1. User requests to unalias a keyword
-2. System remove the alias keyword associated with the keyword in its database <br>
-Use case ends.
-
-**Extensions**
-
-1a. The shorten keyword could not be found in System database
-> 1a1. System shows a 'not found' error message
-> Use case resumes at step 1 <br>
-
 ### Use case: Undo previous command
 
 **MSS**
@@ -603,6 +569,16 @@ Use case ends.
 1a. There is no previously executed command to undo
 > 1a1. System shows a 'last command does not exist' error message <br>
 > Use case ends
+
+### Use case: Use hot keys (for example: Ctrl+L for `list`)
+
+**MSS**
+
+1. User presses <kbd>Ctrl</kbd>+<kbd>L</kbd> on his keyboard
+2. System picks up the hotkey combination and runs the `list` command
+3. System displays all the tasks
+Use case ends.
+
 
 ## Appendix C : Non Functional Requirements
 
@@ -636,9 +612,6 @@ Use case ends.
 > * Deadline: Task that has to be done before a specific deadline
 > * Floating Task: Task without specific times
 
-##### Alias
-
-> For instance, 'ppt' stands for 'presentation'
 
 ## Appendix E : Product Survey
 
