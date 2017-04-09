@@ -37,6 +37,7 @@ public class UniqueTaskList implements Iterable<Task> {
         return internalList.contains(toCheck);
     }
 
+    //@@author A0124863A
     /**
      * Adds a task to the list, list is then sorted by the data and time it was added
      *
@@ -51,6 +52,7 @@ public class UniqueTaskList implements Iterable<Task> {
         internalList.sort((ReadOnlyTask task1, ReadOnlyTask task2) -> task1.getTimeStamp().getDateTimeAdded().compareTo(
                 task2.getTimeStamp().getDateTimeAdded()));
     }
+    //@@author
 
     /**
      * Updates the task in the list at position {@code index} with {@code editedTask}.
