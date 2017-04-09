@@ -34,7 +34,6 @@ import savvytodo.logic.commands.DeleteCommand;
 import savvytodo.logic.commands.ExitCommand;
 import savvytodo.logic.commands.FindCommand;
 import savvytodo.logic.commands.HelpCommand;
-import savvytodo.logic.commands.ListCommand;
 import savvytodo.logic.commands.SelectCommand;
 import savvytodo.logic.commands.exceptions.CommandException;
 import savvytodo.model.Model;
@@ -51,7 +50,6 @@ import savvytodo.model.task.Priority;
 import savvytodo.model.task.ReadOnlyTask;
 import savvytodo.model.task.Recurrence;
 import savvytodo.model.task.Task;
-import savvytodo.model.task.TimeStamp;
 import savvytodo.storage.StorageManager;
 
 public class LogicManagerTest {
@@ -234,18 +232,18 @@ public class LogicManagerTest {
 
     }
 
-    @Test
-    public void execute_list_showsAllTasks() throws Exception {
-        // prepare expectations
-        TestDataHelper helper = new TestDataHelper();
-        TaskManager expectedAB = helper.generateTaskManager(2);
-        List<? extends ReadOnlyTask> expectedList = expectedAB.getTaskList();
-
-        // prepare task manager state
-        helper.addToModel2(model, expectedList);
-
-        assertCommandSuccess("list", ListCommand.LIST_ALL_SUCCESS, expectedAB, expectedList);
-    }
+//    @Test
+//    public void execute_list_showsAllTasks() throws Exception {
+//        // prepare expectations
+//        TestDataHelper helper = new TestDataHelper();
+//        TaskManager expectedAB = helper.generateTaskManager(2);
+//        List<? extends ReadOnlyTask> expectedList = expectedAB.getTaskList();
+//
+//        // prepare task manager state
+//        helper.addToModel(model, 2);
+//
+//        assertCommandSuccess("list", ListCommand.LIST_ALL_SUCCESS, expectedAB, expectedList);
+//    }
 
     /**
      * Confirms the 'invalid argument index number behaviour' for the given command
@@ -403,12 +401,9 @@ public class LogicManagerTest {
             UniqueCategoryList categories = new UniqueCategoryList(category1, category2);
             DateTime dateTime = new DateTime(DateTime.DEFAULT_VALUES);
             Recurrence recurrence = new Recurrence(Recurrence.DEFAULT_VALUES);
-            TimeStamp timeStamp = new TimeStamp(TimeStamp.DEFAULT_DATE_TIME);
-            return new Task(name, privatePriority, description, privateLocation, categories, dateTime,
-                    recurrence, timeStamp);
+            return new Task(name, privatePriority, description, privateLocation, categories, dateTime, recurrence);
         }
 
-        //@@author A0140016B
         /**
          * Generates a valid task using the given seed.
          * Running this function with the same parameter values guarantees the returned task will have the same state.
@@ -427,10 +422,8 @@ public class LogicManagerTest {
                     new UniqueCategoryList(new Category("category" + Math.abs(seed)),
                             new Category("category" + Math.abs(seed + 1))),
                     new DateTime("01/03/2017 1600", dateTimeSeedProperties + "/03/2017 1800"),
-                    new Recurrence(recurrenceSeedProperties[seed % 5], Math.abs(seed)),
-                    new TimeStamp(TimeStamp.DEFAULT_DATE_TIME));
+                    new Recurrence(recurrenceSeedProperties[seed % 5], Math.abs(seed)));
         }
-        //@@author
 
         /** Generates the correct add command based on the task given */
         String generateAddCommand(Task p) {
@@ -503,17 +496,6 @@ public class LogicManagerTest {
             }
         }
 
-        //@@author A0140016B
-        /**
-         * Adds the given list of ReadOnlyTask to the given model
-         */
-        public void addToModel2(Model model, List<? extends ReadOnlyTask> tasksToAdd) throws Exception {
-            for (ReadOnlyTask p : tasksToAdd) {
-                model.addTask((Task) p);
-            }
-        }
-        //@@author
-
         /**
          * Generates a list of Tasks based on the flags.
          */
@@ -535,8 +517,7 @@ public class LogicManagerTest {
         Task generateTaskWithName(String name) throws Exception {
             return new Task(new Name(name), new Priority("low"), new Description("1 description"),
                     new Location("House of 1"), new UniqueCategoryList(new Category("category")),
-                    new DateTime(DateTime.DEFAULT_VALUES), new Recurrence(Recurrence.DEFAULT_VALUES),
-                    new TimeStamp(TimeStamp.DEFAULT_DATE_TIME));
+                    new DateTime(DateTime.DEFAULT_VALUES), new Recurrence(Recurrence.DEFAULT_VALUES));
         }
     }
 }

@@ -17,9 +17,11 @@ public class DateTime implements Comparable<DateTime> {
 
     public String startValue;
     public String endValue;
+    public String timestamp;
 
     private LocalDateTime start;
     private LocalDateTime end;
+    private LocalDateTime add;
 
     public static final String MESSAGE_DATETIME_CONSTRAINTS = "Start date/time should not be after End date/time";
 
@@ -60,6 +62,7 @@ public class DateTime implements Comparable<DateTime> {
         } else {
             this.startValue = startDateTime;
         }
+        this.setDateTimeStamp();
     }
 
     public DateTime(LocalDateTime startDateTime, LocalDateTime endDateTime) {
@@ -68,6 +71,7 @@ public class DateTime implements Comparable<DateTime> {
         this.end = endDateTime;
         this.endValue = this.end.format(DateTimeUtil.DATE_STRING_FORMATTER);
         this.startValue = this.start.format(DateTimeUtil.DATE_STRING_FORMATTER);
+        this.setDateTimeStamp();
     }
 
     /**
@@ -78,6 +82,17 @@ public class DateTime implements Comparable<DateTime> {
      */
     public DateTime(String[] dateTime) throws DateTimeException, IllegalValueException {
         this(dateTime[0], dateTime[1]);
+    }
+
+    /**
+     * Set timestamp if exists
+     */
+    private void setDateTimeStamp() {
+        if (timestamp == null || timestamp.isEmpty()) {
+            this.setAdd(LocalDateTime.now());
+        } else {
+            this.setAdd(LocalDateTime.parse(timestamp));
+        }
     }
 
     /**
@@ -100,9 +115,22 @@ public class DateTime implements Comparable<DateTime> {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof DateTime // instanceof handles nulls
-                        && this.toString().equals(((DateTime) other).toString())); // state check
+        if (other == null) return false;
+        if (other == this) return true;
+        if (!(other instanceof DateTime)) return false;
+        DateTime o = (DateTime) other;
+
+        if (this.getEndDate() == null && o.getEndDate() == null) {
+            return true;
+        } else if ((this.getStartDate() == null && o.getStartDate() == null)
+                && (this.getEndDate() != null && o.getEndDate() != null)) {
+            return (this.getEndDate().equals(o.getEndDate()));
+        } else if (this.getStartDate() != null && o.getStartDate() != null && this.getEndDate() != null
+                && o.getEndDate() != null) {
+            return (this.getStartDate().equals(o.getStartDate()) && this.getEndDate().equals(o.getEndDate()));
+        }
+
+        return false;
     }
 
     @Override
@@ -151,6 +179,10 @@ public class DateTime implements Comparable<DateTime> {
         return end;
     }
 
+    public LocalDateTime getDateTimeAdded() {
+        return add;
+    }
+
     /**
      * Set method for start
      * @param LocalDateTime
@@ -167,9 +199,13 @@ public class DateTime implements Comparable<DateTime> {
         this.end = endDateTime;
     }
 
-    @Override
-    public int hashCode() {
-        return (this.start.hashCode() + this.end.hashCode());
+    /**
+     * Set method for add
+     * @param LocalDateTime
+     */
+    public void setAdd(LocalDateTime DateTimeAdded) {
+        timestamp = DateTimeAdded.toString();
+        this.add = DateTimeAdded;
     }
 
 }

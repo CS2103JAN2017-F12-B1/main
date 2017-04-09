@@ -48,8 +48,8 @@ public class UniqueTaskList implements Iterable<Task> {
             throw new DuplicateTaskException();
         }
         internalList.add(toAdd);
-        internalList.sort((ReadOnlyTask task1, ReadOnlyTask task2) -> task1.getTimeStamp().getDateTimeAdded().compareTo(
-                task2.getTimeStamp().getDateTimeAdded()));
+        internalList.sort((Task task1, Task task2) -> task1.getDateTime().getDateTimeAdded().compareTo(
+                task2.getDateTime().getDateTimeAdded()));
     }
 
     /**
