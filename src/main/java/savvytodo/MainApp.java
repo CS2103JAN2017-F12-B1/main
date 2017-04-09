@@ -140,7 +140,7 @@ public class MainApp extends Application {
         }
         logger.info("Data file found " + storage.getTaskManagerFilePath());
         ReadOnlyTaskManager initialData = taskManagerOptional.orElseGet(defaultTaskManager == null
-                ? SampleDataUtil::getSampleTaskManager : () -> new TaskManager());
+                ? new SampleDataUtil()::getSampleTaskManager : () -> new TaskManager());
         return initialData;
     }
 
