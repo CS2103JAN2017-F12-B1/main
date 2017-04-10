@@ -64,22 +64,22 @@ public class MoreSampleDataUtil extends SampleDataUtil {
             DateTime romanticDate = DateTimeUtil.generateDateTimeFromDuration(calendar.getTime(),
                     Calendar.DAY_OF_YEAR, 4);
 
-            sampleData[i++] = new Task(new Name("Date with Jerome"), new Priority("high"),
+            sampleData[i++] = new Task(new Name("Casual Date with Candy"), new Priority("high"),
                     new Description("Smart Casual"), new Location("Botanic Gardens"),
                     new UniqueCategoryList("romance"), romanticDate,
                     new Recurrence(Recurrence.DEFAULT_VALUES));
 
             romanticDate = DateTimeUtil.generateDateTimeFromDuration(calendar.getTime(),
                     Calendar.DAY_OF_YEAR, 14);
-            sampleData[i++] = new Task(new Name("Date with Jerome 2"), new Priority("high"),
-                    new Description("Smart Casual"), new Location("Botanic Gardens"),
+            sampleData[i++] = new Task(new Name("Movie Date with Candy"), new Priority("high"),
+                    new Description("Smart Casual"), new Location("Suntec GV"),
                     new UniqueCategoryList("romance"), romanticDate,
                     new Recurrence(Recurrence.DEFAULT_VALUES));
 
             romanticDate = DateTimeUtil.generateDateTimeFromDuration(calendar.getTime(),
                     Calendar.DAY_OF_YEAR, 20);
-            sampleData[i++] = new Task(new Name("Date with Jerome 3"), new Priority("high"),
-                    new Description("Smart Casual"), new Location("Botanic Gardens"),
+            sampleData[i++] = new Task(new Name("Date with Candy"), new Priority("high"),
+                    new Description("Smart Casual"), new Location("Vivo city"),
                     new UniqueCategoryList("romance"), romanticDate,
                     new Recurrence(Recurrence.DEFAULT_VALUES));
 

@@ -1,0 +1,864 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<taskmanager>
+    <tasks>
+        <name>Project Security</name>
+        <priority>Low</priority>
+        <description>milestone 3</description>
+        <location>Blk 30 NUS Street 29, #06-40</location>
+        <dateTime>
+            <startValue></startValue>
+            <endValue></endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <timeStamp/>
+        <categorized>project</categorized>
+    </tasks>
+    <tasks>
+        <name>Meet up with aunty</name>
+        <priority>Medium</priority>
+        <description>2pm, Rmb to bring gifts</description>
+        <location>Blk 30 Lorong 3 Serangoon Gardens, #07-18</location>
+        <dateTime>
+            <startValue></startValue>
+            <endValue></endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <timeStamp/>
+        <categorized>family</categorized>
+        <categorized>meetup</categorized>
+    </tasks>
+    <tasks>
+        <name>Skype Meeting 3</name>
+        <priority>High</priority>
+        <description>Skype meeting with project team 2</description>
+        <location>None</location>
+        <dateTime>
+            <startValue></startValue>
+            <endValue></endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <timeStamp/>
+        <categorized>project</categorized>
+    </tasks>
+    <tasks>
+        <name>David Li BDay</name>
+        <priority>Low</priority>
+        <description>6pm, rmb to buy present</description>
+        <location>Blk 436 Botanic Gardens 26, #16-43</location>
+        <dateTime>
+            <startValue></startValue>
+            <endValue></endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <timeStamp/>
+        <categorized>family</categorized>
+    </tasks>
+    <tasks>
+        <name>Driving lesson</name>
+        <priority>Medium</priority>
+        <description>Bring PDL and wear shoes</description>
+        <location>Ubi Crescent</location>
+        <dateTime>
+            <startValue></startValue>
+            <endValue></endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <timeStamp/>
+        <categorized>Driving</categorized>
+    </tasks>
+    <tasks>
+        <name>CS8888 Test</name>
+        <priority>High</priority>
+        <description>3pm, Open Book</description>
+        <location>NUS, MPSH 4</location>
+        <dateTime>
+            <startValue></startValue>
+            <endValue></endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <timeStamp/>
+        <categorized>test</categorized>
+    </tasks>
+    <tasks>
+        <name>Project Security 2</name>
+        <priority>Low</priority>
+        <description>milestone 3</description>
+        <location>Blk 30 NUS Street 29, #06-40</location>
+        <dateTime>
+            <startValue></startValue>
+            <endValue></endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <timeStamp/>
+        <categorized>project</categorized>
+    </tasks>
+    <tasks>
+        <name>Dinner at Nandos</name>
+        <priority>Medium</priority>
+        <description>makan</description>
+        <location>White Sands</location>
+        <dateTime>
+            <startValue></startValue>
+            <endValue></endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <timeStamp/>
+        <categorized>meal</categorized>
+    </tasks>
+    <tasks>
+        <name>Meet up with aunty Jane</name>
+        <priority>Low</priority>
+        <description>2pm, Rmb to bring gifts</description>
+        <location>Blk 30 Lorong 3 Serangoon Gardens, #07-18</location>
+        <dateTime>
+            <startValue></startValue>
+            <endValue></endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <timeStamp/>
+        <categorized>family</categorized>
+        <categorized>meetup</categorized>
+    </tasks>
+    <tasks>
+        <name>Skype Meeting 4</name>
+        <priority>High</priority>
+        <description>Skype meeting with project team 2</description>
+        <location>None</location>
+        <dateTime>
+            <startValue></startValue>
+            <endValue></endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <timeStamp/>
+        <categorized>project</categorized>
+    </tasks>
+    <tasks>
+        <name>David Li Brother BDay</name>
+        <priority>Low</priority>
+        <description>6pm, rmb to buy present</description>
+        <location>Blk 436 Botanic Gardens 26, #16-43</location>
+        <dateTime>
+            <startValue></startValue>
+            <endValue></endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <timeStamp/>
+        <categorized>family</categorized>
+    </tasks>
+    <tasks>
+        <name>Casual Date with Candy</name>
+        <priority>Low</priority>
+        <description>Smart Casual</description>
+        <location>Botanic Gardens</location>
+        <dateTime>
+            <startValue>17/04/2017 1907</startValue>
+            <endValue>21/04/2017 1907</endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <timeStamp/>
+        <categorized>romance</categorized>
+    </tasks>
+    <tasks>
+        <name>Movie Date with Candy</name>
+        <priority>High</priority>
+        <description>Smart Casual</description>
+        <location>Suntec GV</location>
+        <dateTime>
+            <startValue>17/04/2017 1907</startValue>
+            <endValue>01/05/2017 1907</endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <timeStamp/>
+        <categorized>romance</categorized>
+    </tasks>
+    <tasks>
+        <name>Date with Candy</name>
+        <priority>Medium</priority>
+        <description>Smart Casual</description>
+        <location>Vivo city</location>
+        <dateTime>
+            <startValue>17/04/2017 1907</startValue>
+            <endValue>07/05/2017 1907</endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <timeStamp/>
+        <categorized>romance</categorized>
+    </tasks>
+    <tasks>
+        <name>Driving Lesson 1</name>
+        <priority>High</priority>
+        <description>WEW</description>
+        <location>Bukit Batok</location>
+        <dateTime>
+            <startValue>17/04/2017 1000</startValue>
+            <endValue>17/04/2017 1300</endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <timeStamp/>
+        <categorized>driving</categorized>
+    </tasks>
+    <tasks>
+        <name>Driving Lesson 2</name>
+        <priority>High</priority>
+        <description>WEW</description>
+        <location>Bukit Batok</location>
+        <dateTime>
+            <startValue>17/04/2017 1000</startValue>
+            <endValue>17/04/2017 1300</endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <timeStamp/>
+        <categorized>driving</categorized>
+    </tasks>
+    <tasks>
+        <name>Driving Lesson 3</name>
+        <priority>High</priority>
+        <description>WEW</description>
+        <location>Bukit Batok</location>
+        <dateTime>
+            <startValue>17/04/2017 1000</startValue>
+            <endValue>17/04/2017 1300</endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <timeStamp/>
+        <categorized>driving</categorized>
+    </tasks>
+    <tasks>
+        <name>Driving Lesson 4</name>
+        <priority>High</priority>
+        <description>WEW</description>
+        <location>Bukit Batok</location>
+        <dateTime>
+            <startValue>17/04/2017 1000</startValue>
+            <endValue>17/04/2017 1300</endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <timeStamp/>
+        <categorized>driving</categorized>
+    </tasks>
+    <tasks>
+        <name>Driving Lesson 5</name>
+        <priority>High</priority>
+        <description>WEW</description>
+        <location>Bukit Batok</location>
+        <dateTime>
+            <startValue>17/04/2017 1000</startValue>
+            <endValue>17/04/2017 1300</endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <timeStamp/>
+        <categorized>driving</categorized>
+    </tasks>
+    <tasks>
+        <name>Driving Lesson 6</name>
+        <priority>High</priority>
+        <description>WEW</description>
+        <location>Bukit Batok</location>
+        <dateTime>
+            <startValue>17/04/2017 1000</startValue>
+            <endValue>17/04/2017 1300</endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <timeStamp/>
+        <categorized>driving</categorized>
+    </tasks>
+    <tasks>
+        <name>CS8888 Tutorial 1</name>
+        <priority>High</priority>
+        <description>Need to do</description>
+        <location>SR1</location>
+        <dateTime>
+            <startValue>10/04/2017 1600</startValue>
+            <endValue>10/04/2017 1900</endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <timeStamp/>
+        <categorized>lesson</categorized>
+    </tasks>
+    <tasks>
+        <name>CS8888 Lecture 1</name>
+        <priority>Medium</priority>
+        <description>webcasted</description>
+        <location>SR1</location>
+        <dateTime>
+            <startValue>13/04/2017 1900</startValue>
+            <endValue>13/04/2017 2200</endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <timeStamp/>
+        <categorized>lesson</categorized>
+    </tasks>
+    <tasks>
+        <name>CS8888 Tutorial 2</name>
+        <priority>High</priority>
+        <description>Need to do</description>
+        <location>SR1</location>
+        <dateTime>
+            <startValue>17/04/2017 1600</startValue>
+            <endValue>17/04/2017 1900</endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <timeStamp/>
+        <categorized>lesson</categorized>
+    </tasks>
+    <tasks>
+        <name>CS8888 Lecture 2</name>
+        <priority>Medium</priority>
+        <description>webcasted</description>
+        <location>SR1</location>
+        <dateTime>
+            <startValue>20/04/2017 1900</startValue>
+            <endValue>20/04/2017 2200</endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <timeStamp/>
+        <categorized>lesson</categorized>
+    </tasks>
+    <tasks>
+        <name>CS8888 Tutorial 3</name>
+        <priority>High</priority>
+        <description>Need to do</description>
+        <location>SR1</location>
+        <dateTime>
+            <startValue>24/04/2017 1600</startValue>
+            <endValue>24/04/2017 1900</endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <timeStamp/>
+        <categorized>lesson</categorized>
+    </tasks>
+    <tasks>
+        <name>CS8888 Lecture 3</name>
+        <priority>Medium</priority>
+        <description>webcasted</description>
+        <location>SR1</location>
+        <dateTime>
+            <startValue>27/04/2017 1900</startValue>
+            <endValue>27/04/2017 2200</endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <timeStamp/>
+        <categorized>lesson</categorized>
+    </tasks>
+    <tasks>
+        <name>CS8888 Tutorial 4</name>
+        <priority>High</priority>
+        <description>Need to do</description>
+        <location>SR1</location>
+        <dateTime>
+            <startValue>01/05/2017 1600</startValue>
+            <endValue>01/05/2017 1900</endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <timeStamp/>
+        <categorized>lesson</categorized>
+    </tasks>
+    <tasks>
+        <name>CS8888 Lecture 4</name>
+        <priority>Medium</priority>
+        <description>webcasted</description>
+        <location>SR1</location>
+        <dateTime>
+            <startValue>04/05/2017 1900</startValue>
+            <endValue>04/05/2017 2200</endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <timeStamp/>
+        <categorized>lesson</categorized>
+    </tasks>
+    <tasks>
+        <name>CS8888 Tutorial 5</name>
+        <priority>High</priority>
+        <description>Need to do</description>
+        <location>SR1</location>
+        <dateTime>
+            <startValue>08/05/2017 1600</startValue>
+            <endValue>08/05/2017 1900</endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <timeStamp/>
+        <categorized>lesson</categorized>
+    </tasks>
+    <tasks>
+        <name>CS8888 Lecture 5</name>
+        <priority>Medium</priority>
+        <description>webcasted</description>
+        <location>SR1</location>
+        <dateTime>
+            <startValue>11/05/2017 1900</startValue>
+            <endValue>11/05/2017 2200</endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <timeStamp/>
+        <categorized>lesson</categorized>
+    </tasks>
+    <tasks>
+        <name>CS8888 Tutorial 6</name>
+        <priority>High</priority>
+        <description>Need to do</description>
+        <location>SR1</location>
+        <dateTime>
+            <startValue>15/05/2017 1600</startValue>
+            <endValue>15/05/2017 1900</endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <timeStamp/>
+        <categorized>lesson</categorized>
+    </tasks>
+    <tasks>
+        <name>CS8888 Lecture 6</name>
+        <priority>Medium</priority>
+        <description>webcasted</description>
+        <location>SR1</location>
+        <dateTime>
+            <startValue>18/05/2017 1900</startValue>
+            <endValue>18/05/2017 2200</endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <timeStamp/>
+        <categorized>lesson</categorized>
+    </tasks>
+    <tasks>
+        <name>CS8888 Tutorial 7</name>
+        <priority>High</priority>
+        <description>Need to do</description>
+        <location>SR1</location>
+        <dateTime>
+            <startValue>22/05/2017 1600</startValue>
+            <endValue>22/05/2017 1900</endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <timeStamp/>
+        <categorized>lesson</categorized>
+    </tasks>
+    <tasks>
+        <name>CS8888 Lecture 7</name>
+        <priority>Medium</priority>
+        <description>webcasted</description>
+        <location>SR1</location>
+        <dateTime>
+            <startValue>25/05/2017 1900</startValue>
+            <endValue>25/05/2017 2200</endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <timeStamp/>
+        <categorized>lesson</categorized>
+    </tasks>
+    <tasks>
+        <name>CS8888 Tutorial 8</name>
+        <priority>High</priority>
+        <description>Need to do</description>
+        <location>SR1</location>
+        <dateTime>
+            <startValue>29/05/2017 1600</startValue>
+            <endValue>29/05/2017 1900</endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <timeStamp/>
+        <categorized>lesson</categorized>
+    </tasks>
+    <tasks>
+        <name>CS8888 Lecture 8</name>
+        <priority>Medium</priority>
+        <description>webcasted</description>
+        <location>SR1</location>
+        <dateTime>
+            <startValue>01/06/2017 1900</startValue>
+            <endValue>01/06/2017 2200</endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <timeStamp/>
+        <categorized>lesson</categorized>
+    </tasks>
+    <tasks>
+        <name>CS8888 Tutorial 9</name>
+        <priority>High</priority>
+        <description>Need to do</description>
+        <location>SR1</location>
+        <dateTime>
+            <startValue>05/06/2017 1600</startValue>
+            <endValue>05/06/2017 1900</endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <timeStamp/>
+        <categorized>lesson</categorized>
+    </tasks>
+    <tasks>
+        <name>CS8888 Lecture 9</name>
+        <priority>Medium</priority>
+        <description>webcasted</description>
+        <location>SR1</location>
+        <dateTime>
+            <startValue>08/06/2017 1900</startValue>
+            <endValue>08/06/2017 2200</endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <timeStamp/>
+        <categorized>lesson</categorized>
+    </tasks>
+    <tasks>
+        <name>CS8888 Tutorial 10</name>
+        <priority>High</priority>
+        <description>Need to do</description>
+        <location>SR1</location>
+        <dateTime>
+            <startValue>12/06/2017 1600</startValue>
+            <endValue>12/06/2017 1900</endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <timeStamp/>
+        <categorized>lesson</categorized>
+    </tasks>
+    <tasks>
+        <name>CS8888 Lecture 10</name>
+        <priority>Medium</priority>
+        <description>webcasted</description>
+        <location>SR1</location>
+        <dateTime>
+            <startValue>15/06/2017 1900</startValue>
+            <endValue>15/06/2017 2200</endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <timeStamp/>
+        <categorized>lesson</categorized>
+    </tasks>
+    <tasks>
+        <name>CS8888 Tutorial 11</name>
+        <priority>High</priority>
+        <description>Need to do</description>
+        <location>SR1</location>
+        <dateTime>
+            <startValue>19/06/2017 1600</startValue>
+            <endValue>19/06/2017 1900</endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <timeStamp/>
+        <categorized>lesson</categorized>
+    </tasks>
+    <tasks>
+        <name>CS8888 Lecture 11</name>
+        <priority>Medium</priority>
+        <description>webcasted</description>
+        <location>SR1</location>
+        <dateTime>
+            <startValue>22/06/2017 1900</startValue>
+            <endValue>22/06/2017 2200</endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <timeStamp/>
+        <categorized>lesson</categorized>
+    </tasks>
+    <tasks>
+        <name>CS8888 Tutorial 12</name>
+        <priority>High</priority>
+        <description>Need to do</description>
+        <location>SR1</location>
+        <dateTime>
+            <startValue>26/06/2017 1600</startValue>
+            <endValue>26/06/2017 1900</endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <timeStamp/>
+        <categorized>lesson</categorized>
+    </tasks>
+    <tasks>
+        <name>CS8888 Lecture 12</name>
+        <priority>Medium</priority>
+        <description>webcasted</description>
+        <location>SR1</location>
+        <dateTime>
+            <startValue>29/06/2017 1900</startValue>
+            <endValue>29/06/2017 2200</endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <timeStamp/>
+        <categorized>lesson</categorized>
+    </tasks>
+    <tasks>
+        <name>CS8888 Tutorial 13</name>
+        <priority>High</priority>
+        <description>Need to do</description>
+        <location>SR1</location>
+        <dateTime>
+            <startValue>03/07/2017 1600</startValue>
+            <endValue>03/07/2017 1900</endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <timeStamp/>
+        <categorized>lesson</categorized>
+    </tasks>
+    <tasks>
+        <name>CS8888 Lecture 13</name>
+        <priority>Medium</priority>
+        <description>webcasted</description>
+        <location>SR1</location>
+        <dateTime>
+            <startValue>06/07/2017 1900</startValue>
+            <endValue>06/07/2017 2200</endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <timeStamp/>
+        <categorized>lesson</categorized>
+    </tasks>
+    <tasks>
+        <name>CS8888 Tutorial 14</name>
+        <priority>High</priority>
+        <description>Need to do</description>
+        <location>SR1</location>
+        <dateTime>
+            <startValue>10/07/2017 1600</startValue>
+            <endValue>10/07/2017 1900</endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <timeStamp/>
+        <categorized>lesson</categorized>
+    </tasks>
+    <tasks>
+        <name>CS8888 Lecture 14</name>
+        <priority>Medium</priority>
+        <description>webcasted</description>
+        <location>SR1</location>
+        <dateTime>
+            <startValue>13/07/2017 1900</startValue>
+            <endValue>13/07/2017 2200</endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <timeStamp/>
+        <categorized>lesson</categorized>
+    </tasks>
+    <tasks>
+        <name>CS8888 Tutorial 15</name>
+        <priority>High</priority>
+        <description>Need to do</description>
+        <location>SR1</location>
+        <dateTime>
+            <startValue>17/07/2017 1600</startValue>
+            <endValue>17/07/2017 1900</endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <timeStamp/>
+        <categorized>lesson</categorized>
+    </tasks>
+    <tasks>
+        <name>CS8888 Lecture 15</name>
+        <priority>Medium</priority>
+        <description>webcasted</description>
+        <location>SR1</location>
+        <dateTime>
+            <startValue>20/07/2017 1900</startValue>
+            <endValue>20/07/2017 2200</endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <timeStamp/>
+        <categorized>lesson</categorized>
+    </tasks>
+    <categories>project</categories>
+    <categories>family</categories>
+    <categories>meetup</categories>
+    <categories>Driving</categories>
+    <categories>test</categories>
+    <categories>meal</categories>
+    <categories>romance</categories>
+    <categories>driving</categories>
+    <categories>lesson</categories>
+</taskmanager>

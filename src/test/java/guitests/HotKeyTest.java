@@ -46,13 +46,6 @@ public class HotKeyTest extends TaskManagerGuiTest {
     }
 
     @Test
-    public void triggerUndoShortcut() {
-        KeyCodeCombination undoKeys = (KeyCodeCombination) HotKeysCombinations.KEYS_UNDO;
-        new GuiRobot().push(undoKeys);
-        assertUndoSuccess();
-    }
-
-    @Test
     public void triggerRedoShortcut() {
         KeyCodeCombination redoKeys = (KeyCodeCombination) HotKeysCombinations.KEYS_REDO;
         new GuiRobot().push(redoKeys);
