@@ -66,12 +66,12 @@ Format: `help`
 ### 2.2. Adding a task: `add`
 Adds a task to the task manager.
 
-Format: `add TASK_NAME [dt/START_DATE END_DATE] [l/LOCATION] [p/PRIORITY_LEVEL] [r/RECURRING_TYPE NUMBER_OF_RECURRENCE] [c/CATEGORY] [d/DESCRIPTION]`
+Format: `add TASK_NAME [dt/START_DATE to END_DATE] [l/LOCATION] [p/PRIORITY_LEVEL] [r/RECURRING_TYPE NUMBER_OF_RECURRENCE] [c/CATEGORY] [d/DESCRIPTION]`
 
 
 Examples:
-* `add Project Meeting dt/05/10/2017 1400 = 06/10/2017 1800 r/daily n/2 c/CS2103 d/Discuss about roles and milestones` <br>
-  Add task named, Project Meeting, under CS2103 category. The task is schedule to take place on 5th and 6th of October 2016 from 2pm to 6pm each day.
+* `add Project Meeting dt/05/10/2017 1400 to 06/10/2017 1800 r/daily n/2 c/CS2103 d/Discuss about roles and milestones` <br>
+  Add task named, Project Meeting, under CS2103 category. The task is schedule to take place on 5th and 6th of October 2017 from 2pm to 6pm each day.
 * `add NUSSU Leadership Camp s/05-10-2016 2pm e/08-10-2016 6pm c/NUSSU`
   Add task named, NUSSU Leadership Camp, under NUSSU category. The 4 day 3 night is schedule to take place from 5th October, 2pm to 8th of October 2016, 6pm.
 
@@ -199,7 +199,8 @@ Format: `mark INDICES`
 > Number of indices must be at least 1
 
 Example:
-mark 1 2 F1
+* `mark 1 2 F1`<br>
+  if INDEX 1 is a recurring event, it will mark as complete and display the next recurring task if any<br>
 
 ### 2.11. Umarking a task as not completed : `unmark`
 
@@ -233,9 +234,9 @@ There is no need to save manually.
 
 ## 4. Command Summary
 
-* **Add**  `add TASK_NAME [dt/START_DATE = END_DATE] [l/LOCATION] [p/PRIORITY_LEVEL] [r/RECURRING_TYPE NUMBER_OF_RECURRENCE] [c/CATEGORY] [d/DESCRIPTION]`
+* **Add**  `add TASK_NAME [dt/START_DATE to END_DATE] [l/LOCATION] [p/PRIORITY_LEVEL] [r/RECURRING_TYPE NUMBER_OF_RECURRENCE] [c/CATEGORY] [d/DESCRIPTION]`
 
-* **Edit**  `edit INDEX [TASK_NAME] [dt/START_DATE = END_DATE] [l/LOCATION] [p/PRIORITY_LEVEL] [r/RECURRING_TYPE NUMBER_OF_RECURRENCE] [c/CATEGORY] [d/DESCRIPTION]`
+* **Edit**  `edit INDEX [TASK_NAME] [dt/START_DATE to END_DATE] [l/LOCATION] [p/PRIORITY_LEVEL] [r/RECURRING_TYPE NUMBER_OF_RECURRENCE] [c/CATEGORY] [d/DESCRIPTION]`
 
 * **Clear** : `clear`
 
