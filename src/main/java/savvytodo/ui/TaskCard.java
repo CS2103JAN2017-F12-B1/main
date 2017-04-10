@@ -10,6 +10,7 @@ import javafx.scene.shape.Circle;
 import savvytodo.commons.util.StringUtil;
 import savvytodo.logic.parser.CliSyntax;
 import savvytodo.model.task.ReadOnlyTask;
+import savvytodo.model.task.Recurrence;
 import savvytodo.model.task.Status;
 import savvytodo.model.task.TaskType;
 
@@ -100,8 +101,14 @@ public class TaskCard extends UiPart<Region> {
         } else if (task.getType().getType() == TaskType.DEADLINE) {
             sb.append("Due By: " + task.getDateTime().toString());
         } else {
-            sb.append("From: " + task.getDateTime().toString());
-            sb.append(StringUtil.WHITESPACE + "(" + task.getRecurrence().toString() + ")");
+            sb.append(task.getDateTime().toString());
+            if (!task.getRecurrence().type.name().equalsIgnoreCase(Recurrence.Type.None.name())) {
+                if (task.getRecurrence().occurences > 0) {
+                    sb.append(StringUtil.WHITESPACE + "[" + task.getRecurrence().toString() + "]");
+                } else {
+                    sb.append(StringUtil.WHITESPACE + "[" + task.getRecurrence().type.name() + "]");
+                }
+            }
         }
 
         return sb.toString();

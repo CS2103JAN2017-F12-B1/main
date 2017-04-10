@@ -53,7 +53,7 @@
                         </HBox>
                         <FlowPane fx:id="categories" prefWrapLength="10.0" />
 						<Label fx:id="status" styleClass="cell_small_label" />
-                        <Label fx:id="dateTime" styleClass="cell_small_label" />
+                        <Label fx:id="dateTime" />
                         <Label fx:id="description" styleClass="cell_small_label" />
                     </children>
                 </VBox>
