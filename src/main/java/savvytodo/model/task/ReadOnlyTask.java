@@ -2,8 +2,9 @@ package savvytodo.model.task;
 
 import savvytodo.model.category.UniqueCategoryList;
 
+//@@author A0140016B
 /**
- * @author A0140016B (Contributer)
+ * @author A0140016B
  * A read-only immutable interface for a Task in the taskManager.
  * Implementations should guarantee: details are present and not null, field values are validated.
  */
@@ -47,7 +48,7 @@ public interface ReadOnlyTask {
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append("Type: ")
+                .append(" Type: ")
                 .append(getType())
                 .append(" Date Time: ")
                 .append(getDateTime())

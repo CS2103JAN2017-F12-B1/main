@@ -245,7 +245,7 @@ public class ModelManager extends ComponentManager implements Model {
             DateTime dateTimeToCheck) throws DateTimeException, IllegalValueException {
         int conflictCount = 0;
         int conflictPosition = 1;
-        for (ReadOnlyTask task : taskManager.getTaskList()) {
+        for (ReadOnlyTask task : filteredEventTasks) {
             if (task.isCompleted().value == Status.ONGOING
                     && DateTimeUtil.isDateTimeConflict(task.getDateTime(), dateTimeToCheck)) {
                 conflictingTasksStringBuilder

@@ -70,7 +70,8 @@ public class Priority implements Comparable<Priority> {
     private String mapValue(String priority) {
         String val = Level.Medium.toString();
         for (Level level : Level.values()) {
-            if (level.toString().substring(0, 1).equalsIgnoreCase(priority)) {
+            if (level.toString().substring(0, 1).equalsIgnoreCase(priority)
+                    || level.toString().equalsIgnoreCase(priority)) {
                 this.level = level.ordinal();
                 val = level.toString();
             }

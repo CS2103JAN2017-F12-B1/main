@@ -4,9 +4,14 @@ import java.util.LinkedList;
 import java.util.List;
 
 import savvytodo.commons.core.Messages;
+import savvytodo.commons.exceptions.IllegalValueException;
+import savvytodo.commons.util.DateTimeUtil;
+import savvytodo.commons.util.StringUtil;
 import savvytodo.logic.commands.exceptions.CommandException;
 import savvytodo.logic.parser.TaskIndex;
+import savvytodo.model.task.DateTime;
 import savvytodo.model.task.ReadOnlyTask;
+import savvytodo.model.task.Recurrence;
 import savvytodo.model.task.Status;
 import savvytodo.model.task.Task;
 import savvytodo.model.task.TaskType;
@@ -36,6 +41,8 @@ public class MarkCommand extends Command {
     private final LinkedList<Task> tasksToMark;
 
     private final StringBuilder resultSb = new StringBuilder();
+    private String addMessage = StringUtil.EMPTY_STRING;
+    private int numOfSuccessfulMark = 0;
 
     public MarkCommand(List<TaskIndex> indiceslist) {
         this.targetIndices = indiceslist;
@@ -74,7 +81,7 @@ public class MarkCommand extends Command {
     /**
      * mark tasks according to tasks or events
      */
-    private void markTasks() {
+    private void markTasks() throws CommandException {
         int numOfSuccessfulMark = 0;
         numOfSuccessfulMark += markTasks(tasksToMark, targettedTaskIndices);
         numOfSuccessfulMark += markTasks(eventsToMark, targettedEventIndices);
@@ -86,8 +93,7 @@ public class MarkCommand extends Command {
     /**
      * @return number of successful mark count
      */
-    private int markTasks(LinkedList<Task> tasksToMark, LinkedList<Integer> targettedIndices) {
-        int numOfSuccessfulMark = 0;
+    private int markTasks(LinkedList<Task> tasksToMark, LinkedList<Integer> targettedIndices) throws CommandException {
         try {
             for (Task taskToMark : tasksToMark) {
                 if (taskToMark.isCompleted().value) {
@@ -96,15 +102,77 @@ public class MarkCommand extends Command {
                     numOfSuccessfulMark++;
                     taskToMark = new Task(taskToMark);
                     taskToMark.setStatus(new Status(true));
+                    Recurrence recur = taskToMark.getRecurrence();
+                    taskToMark.setRecurrence(new Recurrence(Recurrence.DEFAULT_VALUES));
                     model.updateTask(targettedIndices.peekFirst() - 1, taskToMark);
+                    taskToMark = addNewRecurTask(taskToMark, recur);
                     resultSb.append(String.format(MESSAGE_MARK_TASK_SUCCESS, targettedIndices.peekFirst()));
                 }
                 targettedIndices.removeFirst();
             }
+
+            resultSb.append(addMessage);
         } catch (DuplicateTaskException e) {
             //ignore for completed
+        } catch (IllegalValueException e) {
+            throw new CommandException(Messages.MESSAGE_INVALID_COMMAND_FORMAT);
         }
         return numOfSuccessfulMark;
     }
 
+    /**
+     * add new Recurring Task
+     */
+    private Task addNewRecurTask(Task taskToMark, Recurrence recurrence) throws IllegalValueException {
+        Task toAdd;
+        int times = recurrence.occurences;
+
+        if (recurrence.type != Recurrence.Type.None && (times >= 0)) {
+            numOfSuccessfulMark++;
+            String start = DateTimeUtil.getRecurDate(taskToMark.getDateTime().startValue, recurrence.type.name());
+            String end = DateTimeUtil.getRecurDate(taskToMark.getDateTime().endValue, recurrence.type.name());
+
+            toAdd = new Task(
+                    taskToMark.getName(),
+                    taskToMark.getPriority(),
+                    taskToMark.getDescription(),
+                    taskToMark.getLocation(),
+                    taskToMark.getCategories(),
+                    new DateTime(start, end),
+                    new Recurrence(Recurrence.DEFAULT_VALUES));
+
+            toAdd.setStatus(new Status());
+
+            if (times == 1) {
+                toAdd.setRecurrence(new Recurrence(Recurrence.DEFAULT_VALUES));
+            } else if (times > 1) {
+                String[] newRecurValues = { recurrence.type.name(), Integer.toString(times - 1) };
+                toAdd.setRecurrence(new Recurrence(newRecurValues));
+            } else {
+                toAdd.setRecurrence(taskToMark.getRecurrence());
+            }
+
+            model.addTask(toAdd);
+
+            String conflictingTaskList = model.getTaskConflictingDateTimeWarningMessage(toAdd.getDateTime());
+            addMessage = String.format(messageSummary(conflictingTaskList), toAdd);
+        }
+
+        return taskToMark;
+    }
+
+    /**
+     * Method for conflicting tasks
+     * @param conflictingTaskList
+     * @return messageSummary
+     */
+    private String messageSummary(String conflictingTaskList) {
+        String summary = StringUtil.EMPTY_STRING;
+        if (!conflictingTaskList.isEmpty()) {
+            summary += StringUtil.SYSTEM_NEWLINE
+                    + Messages.MESSAGE_CONFLICTING_TASKS_WARNING
+                    + conflictingTaskList;
+        }
+        return summary;
+    }
 }

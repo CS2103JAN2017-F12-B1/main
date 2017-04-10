@@ -31,7 +31,8 @@ public class UndoMarkOperation extends Operation {
         try {
             for (int i = 0; i < numToUnmark; i++) {
                 Operation undo = undoRedoOpCentre.getUndoOperation();
-                assert undo.getClass().isAssignableFrom(UndoEditOperation.class);
+                assert undo.getClass().isAssignableFrom(UndoEditOperation.class)
+                        || undo.getClass().isAssignableFrom(UndoAddOperation.class);
                 undo.setTaskManager(taskManager);
                 undo.execute();
             }

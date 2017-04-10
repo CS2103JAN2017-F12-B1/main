@@ -84,7 +84,7 @@ public class Recurrence implements Comparable<Recurrence> {
      * @throws IllegalValueException
      * @throws NumberFormatException
      */
-    public Recurrence() throws NumberFormatException, IllegalValueException {
+    public Recurrence() throws IllegalValueException {
         this(DEFAULT_VALUES);
     }
 
@@ -132,7 +132,7 @@ public class Recurrence implements Comparable<Recurrence> {
 
     @Override
     public String toString() {
-        return this.type.toString() + "(" + this.occurences + ")";
+        return this.type.toString() + " (" + this.occurences + " more times)";
     }
 
     //@@author A0140036X
