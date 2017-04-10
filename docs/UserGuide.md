@@ -23,7 +23,6 @@ By : `Team F12-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbs
 
 3. Double-click the file to start the app. The GUI should appear in a few seconds.
    > <img src="images/Ui.png" width="600">
-   > (Mockup of Savvy To-Do app. Final design subject to changes.)
 
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.

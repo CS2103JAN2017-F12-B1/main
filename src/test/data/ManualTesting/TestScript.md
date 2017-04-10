@@ -33,6 +33,10 @@ We can edit the task to give it a description:
 
 We can also change it's priority:
 > edit F1 p/Low
+> edit F1 p/m
+> edit F1 p/3
+
+Where Low=(1/l), Medium=(2/m), High=(3/h)
 
 or change its name:
 > edit F1 My New Floating Task
@@ -47,7 +51,7 @@ We can also list by categories or priorities
 > list p/high
 
 This lists all the tasks with 'HIGH' priority
-> list c/lifestyle
+> list c/project
 
 This lists all the tasks with 'lifestyle' priority
 
@@ -69,6 +73,8 @@ Similarly, to unmark it:
 > unmark 1
 
 The same task should be reverted to as "ongoing".
+
+if INDEX 1 is a recurring event, it will mark as complete and display the next recurring task if any<br>
 
 We can also mark and unmark multiple tasks in a single command:
 >mark 1 2 3
